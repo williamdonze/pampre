@@ -608,10 +608,21 @@ function nextToast(){
   document.getElementById("toasts").appendChild(el);
   setTimeout(() => { el.remove(); nextToast(); }, TOASTQ.length ? 1700 : 2400);   // file plus rapide quand plusieurs toasts attendent
 }
+/* calques modaux (session, glossaire, modale) : tout ce qui est dessous devient inerte (ni focus ni clic) */
+function majCalques(){
+  const calques = [...document.querySelectorAll("body > .session, body > .drawer, body > .modal-bg")];
+  const haut = calques[calques.length - 1] || null;   // le dernier ajouté est au-dessus
+  for (const el of document.body.children) {
+    if (el.id === "toasts" || el.matches(".drawer-bg,.confetti,.drag-ghost,script,style,link,title")) continue;
+    el.inert = !!haut && el !== haut;
+  }
+}
 function confirmBox(title, text, okLabel, onOk, danger = true){
   const m = h(`<div class="modal-bg"><div class="modal" role="dialog" aria-modal="true"><h3>${esc(title)}</h3><p>${esc(text)}</p><div class="row-btns"><button class="btn ghost" data-a="no">Rester</button><button class="btn ${danger?"bad":""}" data-a="ok">${esc(okLabel)}</button></div></div></div>`);
-  m.addEventListener("click", e => { const a = e.target.closest("[data-a]")?.dataset.a; if (a === "ok") { m.remove(); onOk(); } else if (a === "no" || e.target === m) m.remove(); });
-  document.body.appendChild(m); m.querySelector('[data-a="no"]').focus();
+  const avant = document.activeElement;
+  const fermer = () => { m.remove(); majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
+  m.addEventListener("click", e => { const a = e.target.closest("[data-a]")?.dataset.a; if (a === "ok") { fermer(); onOk(); } else if (a === "no" || e.target === m) fermer(); });
+  document.body.appendChild(m); majCalques(); m.querySelector('[data-a="no"]').focus();
 }
 function confetti(){
   const box = h(`<div class="confetti"></div>`); const cols = ["var(--grape)","var(--gold)","var(--leaf)","var(--plum)","#ff8fab"];
@@ -648,13 +659,14 @@ function openGlossary(focus){
       : `<p style="color:var(--muted);padding:20px 0">Aucun mot trouvé. Essaie une autre orthographe.</p>`;
   };
   draw("");
-  const close = () => { bg.remove(); dr.remove(); };
+  const avant = document.activeElement, overflowAvant = document.body.style.overflow;
+  const close = () => { bg.remove(); dr.remove(); document.body.style.overflow = overflowAvant; majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
   bg.onclick = close; dr.querySelector("[data-close]").onclick = close;
   dr.querySelector("#gl-search").oninput = e => draw(e.target.value);
   dr.addEventListener("click", e => { const g = e.target.closest(".gl"); if (g) { e.stopPropagation(); const k = findTerm(g.dataset.term); if (k) { ST.gloss[k] = 1; save(); dr.querySelector("#gl-search").value = ""; draw(""); const el = list.querySelector(`#t-${CSS.escape(k.replace(/\s/g,"_"))}`); list.querySelectorAll(".focus").forEach(x=>x.classList.remove("focus")); if (el) { el.classList.add("focus"); el.scrollIntoView({block:"center", behavior:"smooth"}); } } } });
-  document.body.append(bg, dr);
+  document.body.append(bg, dr); document.body.style.overflow = "hidden"; majCalques();
+  dr.querySelector("#gl-search").focus({preventScroll:true});
   if (fkey) requestAnimationFrame(() => list.querySelector(".focus")?.scrollIntoView({block:"center"}));
-  else dr.querySelector("#gl-search").focus();
   document.addEventListener("keydown", function esc_(e){ if (e.key === "Escape") { close(); document.removeEventListener("keydown", esc_); } });
 }
 
@@ -963,7 +975,7 @@ function runSession(steps, opts){
     <div class="s-top"><div class="wrap"><button class="iconbtn" data-quit aria-label="Quitter">${I.x}</button><div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i></i></div><span class="s-count"></span></div></div>
     <div class="s-body"><div class="wrap" id="s-main"></div></div>
     <div class="s-foot"><div class="wrap"></div></div></div>`);
-  document.body.appendChild(ses); document.body.style.overflow = "hidden"; document.body.classList.add("en-session");
+  document.body.appendChild(ses); document.body.style.overflow = "hidden"; document.body.classList.add("en-session"); majCalques();
   const main = ses.querySelector("#s-main"), foot = ses.querySelector(".s-foot .wrap"), bar = ses.querySelector(".pbar i"), count = ses.querySelector(".s-count");
   const queue = steps.slice(); const total = steps.length;
   let tGarde = -1e9; // un double toucher ne doit pas valider deux écrans d'affilée : le 2e toucher à moins de 350 ms est ignoré (jamais le clavier)
@@ -1041,7 +1053,7 @@ function runSession(steps, opts){
   ses.tabIndex = -1; ses.focus();
   show();
 }
-function closeSession(){ document.querySelectorAll(".session,.sheet,.drag-ghost").forEach(x => x.remove()); document.body.style.overflow = ""; document.body.classList.remove("en-session"); }
+function closeSession(){ document.querySelectorAll(".session,.sheet,.drag-ghost").forEach(x => x.remove()); document.body.style.overflow = ""; document.body.classList.remove("en-session"); majCalques(); }
 
 /* ---------------- lancement des activités ---------------- */
 function findLesson(id){ for (const L of Object.values(LEVELS)) { const l = L.lecons.find(x => x.id === id); if (l) return { L, l }; } return null; }

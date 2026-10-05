@@ -445,16 +445,25 @@ def t_clavier(b):
     a.close()
     return ("OK" if sel == "1" and sheet and nxt[0] else "BUG"), f"touche 2 → choix {sel} ; Entrée → feuille {sheet} ; Entrée → question suivante {nxt} ; 3e question « {q3} »"
 
-@T("Clavier : focus visible et piège de focus dans la session")
+@T("Clavier : piège de focus (session, modale, glossaire) et retour du focus")
 def t_focus(b):
-    a = App(b); a.js("startQuiz(1)"); a.p.wait_for_timeout(200)
-    sorties = []
-    for i in range(14):
-        a.p.keyboard.press("Tab")
-        f = a.p.evaluate("(() => { const e = document.activeElement; return [e.closest('.session') ? 'session' : (e.closest('#topbar,.tabbar,main')?.className || e.tagName), e.textContent.trim().slice(0,20), getComputedStyle(e).outlineStyle]; })()")
-        if f[0] != "session": sorties.append(f)
+    a = App(b)
+    def sorties(racine, n=16):
+        out = []
+        for _ in range(n):
+            a.p.keyboard.press("Tab")
+            f = a.p.evaluate(f"(() => {{ const e = document.activeElement; return [!!e.closest('{racine}'), e.tagName, (e.textContent || '').trim().slice(0, 20)]; }})()")
+            if not f[0] and f[1] != "BODY": out.append(f[1:])   # BODY = passage vers l'interface du navigateur, normal
+        return out
+    a.js("startQuiz(1)"); a.p.wait_for_timeout(200); s1 = sorties(".session")
+    a.p.click("[data-quit]"); s2 = sorties(".modal"); a.p.click(".modal [data-a=no]")
+    retour = a.p.evaluate("document.activeElement.matches('[data-quit]')")
+    a.p.evaluate("closeSession(); render()"); a.p.focus(".tab[data-go=glossaire]"); a.p.keyboard.press("Enter"); a.p.wait_for_timeout(200)
+    s3 = sorties(".drawer"); a.p.keyboard.press("Escape"); a.p.wait_for_timeout(100)
+    retour2 = a.p.evaluate("document.activeElement.dataset.go")
     a.close()
-    return ("OK" if not sorties else "BUG"), f"Tab quitte la session (modale) pour atteindre des éléments cachés derrière : {sorties[:4]}"
+    ok = not s1 and not s2 and not s3 and retour and retour2 == "glossaire"
+    return ("OK" if ok else "BUG"), f"éléments atteints hors du calque : session {s1[:3]}, modale {s2[:3]}, glossaire {s3[:3]} ; focus rendu au X après « Rester » : {retour} ; focus rendu à l'onglet Lexique après Échap : {retour2 == 'glossaire'}"
 
 @T("Clavier : Échap ferme le glossaire, et la modale")
 def t_echap(b):
@@ -536,7 +545,7 @@ def t_scroll(b):
     a.js("startStep(1,'n1-l1')"); a.js("return await AUDIT.playThrough(true)"); a.p.click("[data-done]"); r.append(a.p.evaluate("document.body.style.overflow"))
     a.js("openGlossary()"); a.p.mouse.move(50, 300); y0 = a.p.evaluate("scrollY"); a.p.mouse.wheel(0, 800); a.p.wait_for_timeout(200); y1 = a.p.evaluate("scrollY")
     a.close()
-    return ("OK" if r == ["hidden", "", ""] else "BUG"), f"overflow du body : pendant {r[0]!r}, après X {r[1]!r}, après fin {r[2]!r} ; glossaire ouvert : la page derrière défile ({y0} → {y1})"
+    return ("OK" if r == ["hidden", "", ""] and y1 == y0 else "BUG"), f"overflow du body : pendant {r[0]!r}, après X {r[1]!r}, après fin {r[2]!r} ; glossaire ouvert : défilement de la page derrière {y0} → {y1}"
 
 @T("Robustesse : quitter une session « ne sera pas enregistré »")
 def t_quitter(b):
