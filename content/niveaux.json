@@ -31,7 +31,7 @@
       "sousTitre": "Régions et appellations",
       "objectif": "Situer les régions, puis les appellations.",
       "icone": "carte",
-      "contenu": null
+      "contenu": "content/niveau-4.json"
     },
     {
       "id": 5,
@@ -76,6 +76,9 @@
     { "id": "climatologue", "nom": "Climatologue", "desc": "7/8 ou plus au jeu « Climat chaud ou frais ? »", "icone": "thermo" },
     { "id": "maitre-de-chai", "nom": "Maître de chai", "desc": "7/8 ou plus au jeu « Dans le chai »", "icone": "cep" },
     { "id": "niveau-3", "nom": "De la vigne au verre, c'est fait", "desc": "Valider le quiz du niveau 3", "icone": "cep" },
+    { "id": "geographe", "nom": "Géographe du vin", "desc": "6/8 ou plus au « Tour de France des appellations »", "icone": "carte" },
+    { "id": "classements", "nom": "Expert des classements", "desc": "7/8 ou plus au jeu « Crus et classements »", "icone": "medaille" },
+    { "id": "niveau-4", "nom": "La France du vin, c'est fait", "desc": "Valider le quiz du niveau 4", "icone": "carte" },
     { "id": "sans-faute", "nom": "Sans faute", "desc": "100 % à un quiz de validation", "icone": "etoile" },
     { "id": "serie-3", "nom": "Trois jours de suite", "desc": "Une série de 3 jours", "icone": "flamme" },
     { "id": "serie-7", "nom": "Une semaine au chai", "desc": "Une série de 7 jours", "icone": "flamme" },
