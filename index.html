@@ -663,7 +663,7 @@ function openGlossary(focus){
   const close = () => { bg.remove(); dr.remove(); document.body.style.overflow = overflowAvant; majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
   bg.onclick = close; dr.querySelector("[data-close]").onclick = close;
   dr.querySelector("#gl-search").oninput = e => draw(e.target.value);
-  dr.addEventListener("click", e => { const g = e.target.closest(".gl"); if (g) { e.stopPropagation(); const k = findTerm(g.dataset.term); if (k) { ST.gloss[k] = 1; save(); dr.querySelector("#gl-search").value = ""; draw(""); const el = list.querySelector(`#t-${CSS.escape(k.replace(/\s/g,"_"))}`); list.querySelectorAll(".focus").forEach(x=>x.classList.remove("focus")); if (el) { el.classList.add("focus"); el.scrollIntoView({block:"center", behavior:"smooth"}); } } } });
+  dr.addEventListener("click", e => { const g = e.target.closest(".gl"); if (g) { e.stopPropagation(); const k = findTerm(g.dataset.term); if (k) { ST.gloss[k] = 1; checkBadges(); save(); dr.querySelector("#gl-search").value = ""; draw(""); const el = list.querySelector(`#t-${CSS.escape(k.replace(/\s/g,"_"))}`); list.querySelectorAll(".focus").forEach(x=>x.classList.remove("focus")); if (el) { el.classList.add("focus"); el.scrollIntoView({block:"center", behavior:"smooth"}); } } } });
   document.body.append(bg, dr); document.body.style.overflow = "hidden"; majCalques();
   dr.querySelector("#gl-search").focus({preventScroll:true});
   if (fkey) requestAnimationFrame(() => list.querySelector(".focus")?.scrollIntoView({block:"center"}));
