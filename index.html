@@ -272,6 +272,7 @@ main{padding-block:20px 110px}
 .sheet.ko h3{color:var(--bad-ink)}
 .sheet h3 svg{width:32px;height:32px}
 .sheet .expl{font-size:15px;max-height:32vh;overflow-y:auto}
+@media (max-height:540px){.sheet .wrap{padding-block:10px 10px;gap:8px}.sheet h3{font-size:20px}.sheet h3 svg{width:26px;height:26px}.sheet .expl{max-height:24vh}}
 .sheet .expl b{font-weight:800}
 .sheet .answer{font-weight:800;color:var(--bad-ink)}
 
@@ -334,6 +335,8 @@ main{padding-block:20px 110px}
 
 /* ---------- carte ---------- */
 .map-box{position:relative;background:var(--sea);border:2px solid var(--line);border-radius:20px;overflow:hidden;aspect-ratio:1/1;max-width:100%;touch-action:none;user-select:none}
+/* écran bas (téléphone en paysage) : la carte ne dépasse pas la hauteur utile, pour laisser voir et atteindre « Valider » */
+@media (max-height:540px){.map-box{max-height:max(220px,calc(100dvh - 170px));margin-inline:auto}.map-hint{display:none}}
 .map-box svg{width:100%;height:100%;display:block;cursor:crosshair}
 .map-box .dep{fill:var(--land);stroke:color-mix(in srgb,var(--muted) 35%,transparent);stroke-width:.6;vector-effect:non-scaling-stroke}
 .map-box .outline{fill:none;stroke:var(--muted);stroke-width:1.4;vector-effect:non-scaling-stroke}
