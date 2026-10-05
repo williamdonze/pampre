@@ -1336,7 +1336,7 @@ function viewProfil(){
     const a = e.target.closest("[data-a]")?.dataset.a;
     if (a === "copy") { const ta = sv.querySelector("#save-out"); navigator.clipboard?.writeText(code).then(() => { msg.textContent = "Code copié."; }, () => { ta.select(); msg.textContent = "Sélectionné : copie-le avec Ctrl+C ou un appui long."; }) ?? (ta.select(), msg.textContent = "Sélectionné : copie-le avec Ctrl+C."); }
     if (a === "import") { try { const raw = sv.querySelector("#save-in").value.trim(); const obj = JSON.parse(decodeURIComponent(escape(atob(raw)))); if (!obj || typeof obj.xp !== "number") throw 0; ST = normaliser(obj); save(); applyTheme(); render(); toast(I.check, "Sauvegarde importée", `${fmt(ST.xp)} XP récupérés.`); } catch(err) { msg.textContent = "Ce code n'est pas valide. Vérifie qu'il est complet, sans espace ajouté."; } }
-    if (a === "reset") confirmBox("Tout effacer ?", "XP, série, badges et niveaux validés seront perdus sur cet appareil. Pense à copier ton code avant.", "Tout effacer", () => { ST = freshState(); save(); MAPGAME = null; render(); toast(I.check, "Progression remise à zéro", "Nouveau départ, nouvelle cave."); });
+    if (a === "reset") confirmBox("Tout effacer ?", "XP, série, badges et niveaux validés seront perdus sur cet appareil. Pense à copier ton code avant.", "Tout effacer", () => { ST = freshState(); save(); MAPGAME = null; applyTheme(); render(); toast(I.check, "Progression remise à zéro", "Nouveau départ, nouvelle cave."); });
   });
   el.appendChild(sv);
   return el;
