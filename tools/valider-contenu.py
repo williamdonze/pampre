@@ -30,7 +30,7 @@ def charger(nom):
 HTML = (RACINE / "index.html").read_text(encoding="utf-8")
 def bloc(debut):
     i = HTML.index(debut); j = HTML.index("\n};", i); return HTML[i:j]
-ILLUS = set(re.findall(r'^\s*"?([\w-]+)"?\s*:\s*\(\)\s*=>', bloc("const IL = {"), re.M)) | set(re.findall(r'^IL\.(\w+)\s*=', HTML, re.M))
+ILLUS = set(re.findall(r'^\s*"?([\w-]+)"?\s*:\s*\(\)\s*=>', bloc("const IL = {"), re.M)) | set(re.findall(r'^IL\.(\w+)\s*=', HTML, re.M)) | set(re.findall(r'^IL\["([\w-]+)"\]\s*=', HTML, re.M))
 AXES_PROFIL = set(re.findall(r'\["(\w+)","', re.search(r"const PROFIL_AXES = (\[.*?\]);", HTML).group(1)))
 ICONES = set(re.findall(r'(\w+)\s*:\s*I\.\w+', re.search(r"const ICON_BY_NAME = \{([^}]*)\}", HTML).group(1)))
 MODELES = set(re.findall(r'^\s*(\w+)\s*:\s*\[', bloc("const LBL_ORDER = {"), re.M))
@@ -166,6 +166,18 @@ for n in (niveaux or {}).get("niveaux", []):
             lc = f"{lieu} carte {i+1}"
             if not c.get("titre"): err(lc, "titre manquant")
             if c.get("illu") not in ILLUS: err(lc, f"illustration inconnue : {c.get('illu')} (repli sur « raisin »)")
+            if c.get("illu") == "carte-region":
+                if c.get("region") not in REGIONS: err(lc, f"carte-region : région inconnue {c.get('region')}")
+                noms = {v["vin"] for v in (carte or {}).get("vins", [])} | {v["nom"] for v in (carte or {}).get("villes", [])}
+                for lx in c.get("lieux", []) + c.get("villes", []):
+                    nom = lx[0] if isinstance(lx, list) else lx
+                    if nom not in noms: err(lc, f"carte-region : « {nom} » absent de carte-vins.json (vins ou villes)")
+                    if isinstance(lx, list) and len(lx) > 1 and lx[1] not in ("d", "g", "h", "b", "hd", "hg", "bd", "bg"): err(lc, f"carte-region : côté « {lx[1]} » inconnu (d, g, h, b, hd, hg, bd, bg)")
+                if not c.get("lieux"): avert(lc, "carte-region sans lieux")
+            if c.get("illu") == "etages":
+                e = c.get("etages")
+                if not e or any(not isinstance(x, list) or not 1 <= len(x) <= 2 for x in e): err(lc, "etages : liste de [titre, sous-titre] attendue")
+                elif len(e) > 5: avert(lc, f"etages : {len(e)} étages, seules 5 couleurs")
             if c.get("illu") == "profil":
                 pr = c.get("profil") or {}
                 if set(pr) - AXES_PROFIL: err(lc, f"profil : axe(s) inconnu(s) {set(pr) - AXES_PROFIL}")

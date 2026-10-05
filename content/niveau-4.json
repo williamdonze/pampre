@@ -1,0 +1,524 @@
+{
+  "id": 4,
+  "titre": "La France du vin",
+  "parcours": ["n4-l1", "n4-l2", "n4-l3", "jeu:tour-de-france", "n4-l4", "n4-l5", "jeu:crus-classements", "n4-l6", "n4-l7", "jeu:quelle-region", "quiz"],
+  "intro": "Le cœur du mode carte : on comprend le système des appellations, puis on fait le tour des régions françaises, de Bordeaux à la Corse, avec leurs cépages, leurs hiérarchies et leurs noms phares.",
+  "lecons": [
+    {
+      "id": "n4-l1",
+      "titre": "Le système des appellations",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "1935 : naissance des AOC",
+          "illu": "loupe",
+          "texte": "Au début du XXe siècle, le vignoble se relève à peine du phylloxéra et les fraudes se multiplient : faux « Chablis », vins coupés, origines inventées. En **1935**, l'État crée les **appellations d'origine contrôlée** et le comité chargé de les gérer, l'ancêtre de l'[[INAO]].\n\nLes premières AOC sont reconnues dès 1936 : Arbois, Châteauneuf-du-Pape, Tavel, Cassis… La France en compte aujourd'hui **environ 360** pour le vin.",
+          "exemple": {
+            "vin": "Arbois, Domaine Stéphane Tissot",
+            "detail": "Arbois, dans le Jura, figure parmi les toutes premières AOC, reconnues en 1936."
+          },
+          "astuce": "Châteauneuf-du-Pape avait montré la voie : dès 1923, ses vignerons, menés par le baron Le Roy, s'imposaient eux-mêmes des règles sur l'aire, les cépages et le degré."
+        },
+        {
+          "titre": "La pyramide, version européenne",
+          "illu": "pyramide",
+          "texte": "Révision du niveau 1. En haut, l'[[AOP]] : c'est le nom européen de l'AOC, et les deux sigles coexistent sur les étiquettes françaises. Au milieu, l'[[IGP]], environ 75 en France, aux règles plus souples : **Pays d'Oc** est de loin la plus grande. En bas, le [[Vin de France]], sans indication géographique, où cépages et assemblages sont libres.\n\nLa pyramide classe des **règles**, pas des goûts : certains vins de légende sont en IGP ou en Vin de France.",
+          "exemple": {
+            "vin": "Mas de Daumas Gassac, IGP Pays d'Hérault",
+            "detail": "Un rouge du Languedoc devenu célèbre dans le monde entier, en IGP : son assemblage à base de cabernet sauvignon ne correspondait à aucune appellation locale."
+          }
+        },
+        {
+          "titre": "Ce que fixe un cahier des charges",
+          "illu": "liste",
+          "texte": "Chaque appellation a son [[cahier des charges]] : l'**aire** délimitée, parfois à la parcelle ; les **cépages** autorisés ; la densité de plantation ; le **rendement** maximal ; le degré minimal ; les méthodes de vinification et d'élevage ; la date de mise en vente…\n\nDes contrôles vérifient que les règles sont suivies, et des dégustations, que le vin ressemble à son appellation.",
+          "debat": "Ces dégustations écartent parfois des vins jugés « atypiques », y compris chez des vignerons réputés, qui passent alors en Vin de France. Pour les uns, c'est la garantie d'un style reconnaissable ; pour les autres, un frein à l'originalité."
+        },
+        {
+          "titre": "Du plus large au plus précis",
+          "illu": "etages",
+          "etages": [["Grand cru", "Chambertin"], ["Premier cru", "Gevrey-Chambertin 1er cru"], ["Village", "Gevrey-Chambertin"], ["Régionale", "Bourgogne"]],
+          "texte": "Les appellations s'emboîtent comme des poupées russes : **régionale** (Bordeaux, Bourgogne), **sous-régionale** (Haut-Médoc, Côtes du Rhône Villages), **communale** (Pauillac, Gevrey-Chambertin) et, en Bourgogne, jusqu'à la **parcelle** : le premier cru, puis le grand cru.\n\nEn règle générale, plus le nom est précis, plus les règles sont strictes et le vin rare… et cher.",
+          "exemple": {
+            "vin": "Chambertin, Domaine Armand Rousseau",
+            "detail": "Un grand cru : l'étiquette n'affiche que le nom de la parcelle, Chambertin, sans celui du village."
+          }
+        },
+        {
+          "titre": "Mêmes mots, sens différents",
+          "illu": "loupe",
+          "texte": "**Grand cru** : en Bourgogne, en Alsace et en Champagne, c'est un lieu (une parcelle, un village). À Saint-Émilion, « Saint-Émilion grand cru » est une appellation, distincte du classement des « grands crus classés ».\n\n**Premier cru** : une parcelle en Bourgogne, un village en Champagne, le sommet du classement à Bordeaux.\n\n**Cru classé** : un château classé, à Bordeaux ou en Provence. Et **château** désigne une exploitation… pas forcément un château !",
+          "astuce": "Ne te fie pas aux mots seuls : regarde toujours de quelle région parle l'étiquette."
+        }
+      ],
+      "verif": [
+        { "type": "ordre", "question": "Range ces appellations de la plus large à la plus précise.", "items": ["Bourgogne", "Gevrey-Chambertin", "Gevrey-Chambertin premier cru", "Chambertin"], "explication": "Régionale (Bourgogne), village (Gevrey-Chambertin), premier cru du village, puis grand cru (Chambertin), qui n'affiche que le nom de la parcelle." },
+        { "type": "qcm", "question": "En quelle année l'État français crée-t-il les appellations d'origine contrôlée ?", "choix": ["1855", "1935", "1975", "2009"], "bonne": 1, "explication": "En 1935. 1855 est l'année du classement des vins de Bordeaux ; 2009, celle des sigles européens AOP et IGP." }
+      ]
+    },
+    {
+      "id": "n4-l2",
+      "titre": "Bordeaux",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Deux rives et un estuaire",
+          "illu": "carte-region",
+          "region": "bordeaux",
+          "lieux": [["Pauillac", "g"], ["Margaux", "g"], ["Pessac-Léognan", "g"], ["Sauternes", "g"], ["Pomerol", "h"], "Saint-Émilion", ["Entre-Deux-Mers", "b"]],
+          "villes": ["Bordeaux"],
+          "texte": "Bordeaux s'étend autour de la **Gironde**, l'estuaire formé par la **Garonne** et la **Dordogne**. C'est le plus grand vignoble d'AOC de France.\n\n[[rive gauche|Rive gauche]] (Médoc, Graves) : des sols de graves, le royaume du **cabernet sauvignon**. [[rive droite|Rive droite]] (le Libournais : Saint-Émilion, Pomerol) : argiles et calcaires, le royaume du **merlot** et du cabernet franc. Entre les deux fleuves, l'**Entre-Deux-Mers**, surtout connu pour ses blancs secs.",
+          "astuce": "Révision du niveau 2 : à Bordeaux, on assemble. Le cabernet sauvignon apporte la structure, le merlot la rondeur, le cabernet franc la fraîcheur."
+        },
+        {
+          "titre": "Le Médoc, commune par commune",
+          "illu": "carte-region",
+          "region": "bordeaux",
+          "cadre": "lieux",
+          "lieux": ["Saint-Estèphe", "Pauillac", "Saint-Julien", "Margaux", ["Listrac-Médoc", "g"], ["Moulis", "g"]],
+          "texte": "Sur la rive gauche, le long de l'estuaire, quatre communes concentrent presque tous les crus classés. Du nord au sud : **Saint-Estèphe**, **Pauillac**, **Saint-Julien** et **Margaux**. Un peu en retrait de l'eau, **Listrac** et **Moulis**.\n\nCe sont des appellations communales. Autour d'elles s'étendent les appellations **Haut-Médoc** et, plus au nord, **Médoc**.",
+          "exemple": {
+            "vin": "Château Léoville Las Cases, Saint-Julien",
+            "detail": "Deuxième cru classé en 1855, dont le Grand Clos touche les vignes de Château Latour, à la limite de Pauillac."
+          }
+        },
+        {
+          "titre": "Le classement de 1855",
+          "illu": "etages",
+          "etages": [["Premiers crus", "5 châteaux"], ["Deuxièmes crus", "14"], ["Troisièmes crus", "14"], ["Quatrièmes crus", "10"], ["Cinquièmes crus", "18"]],
+          "texte": "Pour l'Exposition universelle de Paris, en **1855**, les courtiers de Bordeaux classent les vins… d'après leurs prix. Le [[classement de 1855]] compte aujourd'hui **61 châteaux rouges** en cinq rangs, tous du Médoc sauf Haut-Brion, dans les Graves.\n\nLes cinq premiers : **Lafite Rothschild**, **Latour**, **Margaux**, **Haut-Brion** et **Mouton Rothschild**, promu en **1973**, seul changement de rang depuis l'origine. Les liquoreux de Sauternes et Barsac ont leur propre classement de 1855, avec **Yquem** seul « premier cru supérieur ».",
+          "debat": "Figé depuis plus de 170 ans, le classement ignore les progrès et les déclins : certains cinquièmes crus se vendent plus cher que des deuxièmes, et des châteaux non classés rivalisent avec les classés. Monument historique pour les uns, photographie jaunie pour les autres."
+        },
+        {
+          "titre": "Graves, Pessac-Léognan, Sauternes",
+          "illu": "carte-region",
+          "region": "bordeaux",
+          "cadre": "lieux",
+          "lieux": [["Pessac-Léognan", "g"], ["Graves", "g"], "Barsac", ["Sauternes", "b"]],
+          "villes": ["Bordeaux"],
+          "texte": "Au sud de Bordeaux, les **Graves** doivent leur nom à leurs sols de cailloux. Leur partie nord, la plus réputée, a sa propre appellation depuis 1987 : **Pessac-Léognan**, en rouge comme en blanc (sauvignon et sémillon).\n\nPlus au sud, **Sauternes** et **Barsac** : les brumes de la petite rivière Ciron favorisent la pourriture noble, et le sémillon y donne de grands liquoreux (révision du niveau 1).",
+          "exemple": {
+            "vin": "Château Climens, Barsac",
+            "detail": "Premier cru classé en 1855, entièrement planté de sémillon."
+          }
+        },
+        {
+          "titre": "Saint-Émilion et Pomerol",
+          "illu": "carte-region",
+          "region": "bordeaux",
+          "cadre": "lieux",
+          "lieux": ["Saint-Émilion", ["Pomerol", "g"], "Lalande-de-Pomerol", ["Fronsac", "g"]],
+          "texte": "Sur la rive droite, autour de Libourne. **Saint-Émilion**, village médiéval inscrit à l'UNESCO avec son vignoble en 1999, a un classement révisé environ tous les dix ans. En 2022, Ausone, Cheval Blanc et Angélus l'ont quitté ; **Figeac** et **Pavie** sont désormais les deux « premiers grands crus classés A ».\n\n**Pomerol**, juste à côté, n'a **aucun classement**… et pourtant Petrus et Le Pin comptent parmi les vins les plus chers du monde.",
+          "exemple": {
+            "vin": "Château Figeac, Saint-Émilion",
+            "detail": "Promu premier grand cru classé A en 2022. Fait rare sur la rive droite, les cabernets y dominent le merlot."
+          },
+          "debat": "Révisable, le classement de Saint-Émilion se veut plus juste que celui de 1855. Mais il a connu des recours en justice, et certains critères (notoriété, accueil des visiteurs) ont poussé de grands noms à s'en retirer."
+        }
+      ],
+      "verif": [
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Pauillac", "detail": "Trois premiers crus classés : Lafite, Latour et Mouton", "region": "bordeaux", "lat": 45.199, "lon": -0.748 }, "explication": "Pauillac est sur la rive gauche de l'estuaire, entre Saint-Estèphe au nord et Saint-Julien au sud." },
+        { "type": "qcm", "question": "Lequel de ces châteaux est un premier cru du classement de 1855 ?", "choix": ["Petrus", "Château Cheval Blanc", "Château Latour", "Château Figeac"], "bonne": 2, "explication": "Château Latour, à Pauillac. Petrus (Pomerol), Cheval Blanc et Figeac (Saint-Émilion) sont sur la rive droite, que le classement de 1855 ne couvre pas." }
+      ]
+    },
+    {
+      "id": "n4-l3",
+      "titre": "La Bourgogne",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Un ruban de coteaux",
+          "illu": "carte-region",
+          "region": "bourgogne",
+          "lieux": ["Chablisien", ["Côte de Nuits", "d"], ["Côte de Beaune", "g"], ["Côte chalonnaise", "b"], ["Mâconnais", "g"]],
+          "texte": "La Bourgogne viticole s'étire sur plus de 200 km, de Chablis au Mâconnais. Cinq grandes parties : le **Chablisien**, la **Côte de Nuits** et la **Côte de Beaune** (qui forment la Côte-d'Or), la **Côte chalonnaise** et le **Mâconnais**.\n\nDeux cépages règnent, presque toujours seuls : le **pinot noir** et le **chardonnay**. L'aligoté et le gamay jouent les seconds rôles."
+        },
+        {
+          "titre": "La pyramide bourguignonne",
+          "illu": "etages",
+          "etages": [["Grands crus", "33 · environ 1 %"], ["Premiers crus", "environ 10 %"], ["Villages", "Meursault, Pommard…"], ["Régionales", "Bourgogne, Mâcon…"]],
+          "texte": "La Bourgogne compte **84 appellations** : 7 régionales, 44 villages et **33 grands crus**. Les **premiers crus** sont des parcelles classées à l'intérieur des appellations villages.\n\nAu sommet, les grands crus ne pèsent qu'environ **1 %** de la production ; les premiers crus, environ 10 %.",
+          "astuce": "Sur l'étiquette d'un grand cru, seul le nom de la parcelle apparaît : « Montrachet », « Musigny ». Pour un premier cru, on lit le village puis la parcelle : « Meursault 1er Cru Les Perrières »."
+        },
+        {
+          "titre": "Les climats et les villages à rallonge",
+          "illu": "carte-region",
+          "region": "bourgogne",
+          "cadre": "lieux",
+          "lieux": [["Gevrey-Chambertin", "g"], "Morey-Saint-Denis", ["Chambolle-Musigny", "g"], ["Clos de Vougeot", "d"], ["Vosne-Romanée", "g"], ["Nuits-Saint-Georges", "g"]],
+          "texte": "En Bourgogne, une parcelle délimitée et nommée s'appelle un [[climat]] : on en compte 1 247, inscrits au patrimoine mondial de l'UNESCO depuis 2015.\n\nPourquoi des noms de villages à rallonge ? Au XIXe siècle, les villages ont accolé à leur nom celui de leur cru le plus célèbre : Gevrey est devenu **Gevrey-Chambertin** en 1847. Ont suivi Chambolle-**Musigny**, Vosne-**Romanée**, Puligny-**Montrachet**…",
+          "exemple": {
+            "vin": "Clos de Vougeot",
+            "detail": "Un grand cru d'une cinquantaine d'hectares, entouré de murs par les moines de Cîteaux, aujourd'hui partagé entre plus de 80 propriétaires."
+          }
+        },
+        {
+          "titre": "Côte de Nuits, Côte de Beaune",
+          "illu": "carte-region",
+          "region": "bourgogne",
+          "cadre": "lieux",
+          "lieux": [["Nuits-Saint-Georges", "d"], ["Aloxe-Corton", "d"], ["Beaune", "g"], ["Volnay", "g"], ["Meursault", "d"], ["Chassagne-Montrachet", "g"]],
+          "texte": "La **Côte de Nuits**, au nord, est le pays des grands **rouges** : presque tous ses grands crus sont des pinots noirs (Chambertin, Musigny, Romanée-Conti, Clos de Vougeot).\n\nLa **Côte de Beaune**, au sud, fait de grands rouges (Pommard, Volnay) mais surtout des **blancs** de légende : Meursault, Puligny et Chassagne-Montrachet, avec les grands crus Montrachet et Corton-Charlemagne. Corton est le seul grand cru rouge de la Côte de Beaune.",
+          "exemple": {
+            "vin": "Vente des vins des Hospices de Beaune",
+            "detail": "Chaque troisième dimanche de novembre depuis 1859, la vente aux enchères de charité la plus célèbre du monde du vin."
+          }
+        },
+        {
+          "titre": "Chablis, Chalonnais, Mâconnais",
+          "illu": "sols",
+          "texte": "**Chablis**, isolé au nord, ne fait que du chardonnay, sur des marnes calcaires riches en fossiles : du Petit Chablis aux sept climats du Chablis Grand Cru.\n\nLa **Côte chalonnaise** (Rully, Mercurey, Givry, Montagny) offre de beaux rapports qualité-prix. Le **Mâconnais**, plus au sud, est surtout blanc : Saint-Véran, Mâcon-Villages, et **Pouilly-Fuissé**, qui a obtenu ses premiers crus en 2020.",
+          "exemple": {
+            "vin": "Pouilly-Fuissé, Château-Fuissé",
+            "detail": "Un domaine familial installé à Fuissé, au pied des roches de Solutré et de Vergisson."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "ordre", "question": "Range ces appellations de la plus large à la plus précise.", "items": ["Bourgogne", "Puligny-Montrachet", "Puligny-Montrachet premier cru", "Montrachet"], "explication": "Régionale, village, premier cru du village, puis grand cru : le Montrachet, à cheval sur Puligny et Chassagne." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Meursault", "detail": "Grands blancs de chardonnay de la Côte de Beaune", "region": "bourgogne", "lat": 46.977, "lon": 4.77 }, "explication": "Meursault est dans la Côte de Beaune, au sud de Beaune, entre Volnay et Puligny-Montrachet." }
+      ]
+    },
+    {
+      "id": "n4-l4",
+      "titre": "Beaujolais et Rhône",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Le Beaujolais, royaume du gamay",
+          "illu": "carte-region",
+          "region": "beaujolais",
+          "cadre": "lieux",
+          "lieux": [["Saint-Amour", "d"], ["Fleurie", "d"], ["Morgon", "d"]],
+          "villes": ["Lyon"],
+          "texte": "Entre Mâcon et Lyon, le Beaujolais vit du **gamay**. Au sud, sur argiles et calcaires, des **Beaujolais** gouleyants, dont le Beaujolais nouveau, mis en vente chaque troisième jeudi de novembre.\n\nAu nord, sur les **granites**, les **Beaujolais-Villages** et les **dix crus**, plus profonds, dont certains vieillissent très bien.",
+          "astuce": "Révision du niveau 3 : la macération (semi-)carbonique donne au Beaujolais ses arômes de fruits rouges, de bonbon et parfois de banane."
+        },
+        {
+          "titre": "Les dix crus",
+          "illu": "carte-region",
+          "region": "beaujolais",
+          "cadre": "lieux",
+          "lieux": [["Saint-Amour", "d"], ["Juliénas", "g"], ["Chénas", "g"], ["Romanèche-Thorins", "d", "Moulin-à-Vent"], ["Fleurie", "b"], ["Chiroubles", "g"], ["Morgon", "d"], ["Régnié", "g"], ["Côte de Brouilly, Château Thivin", "d", "Brouilly et Côte de Brouilly"]],
+          "texte": "Du nord au sud : **Saint-Amour**, **Juliénas**, **Chénas**, **Moulin-à-Vent**, **Fleurie**, **Chiroubles**, **Morgon**, **Régnié**, **Côte de Brouilly** et **Brouilly**.\n\nSur l'étiquette, le nom du cru suffit : le mot « Beaujolais » est souvent absent. Fleurie et Chiroubles sont réputés pour leur délicatesse, Morgon et Moulin-à-Vent pour leur charpente.",
+          "exemple": {
+            "vin": "Moulin-à-Vent, Château du Moulin-à-Vent",
+            "detail": "Le cru porte le nom d'un vieux moulin à vent. Ses vins, parmi les plus structurés du Beaujolais, peuvent vieillir dix ans et plus."
+          }
+        },
+        {
+          "titre": "Rhône nord : la syrah sur les pentes",
+          "illu": "carte-region",
+          "region": "rhone",
+          "cadre": "lieux",
+          "lieux": [["Côte-Rôtie", "d"], ["Condrieu", "g"], ["Hermitage", "d"], ["Crozes-Hermitage", "g"], ["Cornas", "g"], ["Saint-Péray", "d"]],
+          "texte": "De Vienne à Valence, des coteaux de granite très raides. Une seule variété rouge, la **syrah** ; en blanc, le **viognier** (Condrieu, Château-Grillet), la **marsanne** et la **roussanne** (Hermitage blanc, Saint-Joseph, Saint-Péray).\n\nDu nord au sud : Côte-Rôtie, Condrieu, Château-Grillet, Saint-Joseph, Hermitage, Crozes-Hermitage, Cornas et Saint-Péray.",
+          "exemple": {
+            "vin": "Cornas, Domaine Auguste Clape",
+            "detail": "Cornas n'admet que la syrah, sans aucun raisin blanc : un rouge sombre et puissant, de longue garde."
+          }
+        },
+        {
+          "titre": "Rhône sud : l'art de l'assemblage",
+          "illu": "carte-region",
+          "region": "rhone",
+          "cadre": "lieux",
+          "lieux": [["Vinsobres", "d"], ["Cairanne", "g"], ["Gigondas", "d"], ["Beaumes-de-Venise", "d"], ["Châteauneuf-du-Pape", "g"], ["Lirac", "g"], ["Tavel", "g"]],
+          "villes": ["Avignon"],
+          "texte": "Au sud de Montélimar, le paysage change : climat méditerranéen, galets, garrigue. Le **grenache** mène des assemblages avec la syrah, le mourvèdre, le cinsault…\n\nLes crus : Châteauneuf-du-Pape, Gigondas, Vacqueyras, Rasteau, Cairanne, Vinsobres, Beaumes-de-Venise, Lirac, et Tavel, tout en rosé.",
+          "exemple": {
+            "vin": "Gigondas, Château de Saint Cosme",
+            "detail": "Un domaine ancien de Gigondas, au pied des Dentelles de Montmirail, réputé pour ses grenaches."
+          }
+        },
+        {
+          "titre": "La pyramide du Rhône",
+          "illu": "etages",
+          "etages": [["Crus", "Hermitage, Gigondas…"], ["Villages + nom", "ex. Séguret, Visan"], ["Côtes du Rhône Villages", ""], ["Côtes du Rhône", "la base, très vaste"]],
+          "texte": "À la base, les **Côtes du Rhône**, de loin l'appellation la plus vaste, surtout dans le sud. Au-dessus, les **Côtes du Rhône Villages**, puis les Villages suivis d'un nom géographique (Séguret, Visan, Plan de Dieu…), enfin les **crus**.\n\nUn Côtes du Rhône Villages bien choisi est souvent une excellente affaire."
+        }
+      ],
+      "verif": [
+        { "type": "tri", "question": "Rhône nord ou Rhône sud ?", "categories": ["Rhône nord", "Rhône sud"], "items": [["Côte-Rôtie", 0], ["Hermitage", 0], ["Cornas", 0], ["Gigondas", 1], ["Vacqueyras", 1], ["Tavel", 1]], "explication": "Au nord, la syrah sur granite : Côte-Rôtie, Hermitage, Cornas. Au sud, les assemblages menés par le grenache : Gigondas, Vacqueyras, et Tavel pour le rosé." },
+        { "type": "carte", "question": "Touche l'emplacement de ce cru.", "entry": { "palier": 3, "vin": "Fleurie", "detail": "Cru du Beaujolais réputé pour sa délicatesse", "region": "beaujolais", "lat": 46.193, "lon": 4.698 }, "explication": "Fleurie est au cœur des crus du Beaujolais, entre Moulin-à-Vent au nord et Chiroubles au sud-ouest." }
+      ]
+    },
+    {
+      "id": "n4-l5",
+      "titre": "La Loire",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Le long du plus long fleuve",
+          "illu": "carte-region",
+          "region": "loire",
+          "lieux": [["Pays nantais", "b"], ["Anjou-Saumur", "h"], ["Touraine", "h"], ["Centre-Loire", "b"]],
+          "villes": ["Nantes", "Tours"],
+          "texte": "La Loire est le plus long fleuve de France, et ses vignobles s'égrènent de l'Atlantique jusqu'au centre du pays. Quatre grandes parties, d'ouest en est : le **Pays nantais**, l'**Anjou-Saumur**, la **Touraine** et le **Centre-Loire**.\n\nLe climat passe d'océanique à l'ouest à de plus en plus continental vers l'est. Les vins sont souvent frais et vifs.",
+          "astuce": "Le Val de Loire entre Sully-sur-Loire et Chalonnes est inscrit au patrimoine mondial de l'UNESCO depuis 2000, avec ses châteaux… et ses vignes."
+        },
+        {
+          "titre": "Pays nantais et Anjou",
+          "illu": "carte-region",
+          "region": "loire",
+          "cadre": "lieux",
+          "lieux": [["Muscadet Sèvre et Maine", "b"], ["Savennières", "h"], ["Coteaux du Layon", "b"], ["Saumur-Champigny", "h"]],
+          "villes": ["Nantes"],
+          "texte": "**Pays nantais** : le **melon de Bourgogne** fait le Muscadet, vif et salin, souvent élevé sur lie (révision du niveau 3).\n\n**Anjou-Saumur** : le **chenin** en majesté, sec à Savennières, liquoreux dans les Coteaux du Layon et à **Quarts de Chaume**, premier grand cru de la Loire (2011). Le **cabernet franc** donne les rouges de Saumur-Champigny ; l'Anjou est aussi une terre de rosés.",
+          "exemple": {
+            "vin": "Quarts de Chaume, Domaine des Baumard",
+            "detail": "Un liquoreux de chenin touché par la pourriture noble, sur une toute petite appellation des bords du Layon."
+          }
+        },
+        {
+          "titre": "La Touraine",
+          "illu": "carte-region",
+          "region": "loire",
+          "cadre": "lieux",
+          "lieux": [["Chinon", "b"], ["Bourgueil", "h"], ["Vouvray", "h"], ["Montlouis-sur-Loire", "b"]],
+          "texte": "Autour de Tours, deux cépages se partagent la vedette. Le **chenin** à **Vouvray** et à **Montlouis**, face à face de part et d'autre de la Loire, du sec au moelleux, et en bulles.\n\nLe **cabernet franc** à **Chinon**, **Bourgueil** et Saint-Nicolas-de-Bourgueil : des rouges frais, aux notes de framboise et de violette. Le sauvignon et le gamay font aussi des Touraine.",
+          "exemple": {
+            "vin": "Chinon, Domaine Bernard Baudry",
+            "detail": "Un domaine de référence, qui fait parler les différents sols de Chinon : graviers, argiles et tuffeau."
+          }
+        },
+        {
+          "titre": "Le Centre-Loire",
+          "illu": "carte-region",
+          "region": "loire",
+          "cadre": "lieux",
+          "lieux": [["Sancerre", "d"], ["Pouilly-Fumé", "d"], ["Menetou-Salon", "g"], ["Quincy", "g"]],
+          "texte": "À l'est, face à face sur la Loire : **Sancerre** et **Pouilly-Fumé**, les deux grands noms du **sauvignon blanc** (révision du niveau 2). Autour : Menetou-Salon, Quincy, Reuilly.\n\nSancerre fait aussi des rouges et des rosés de pinot noir. Et à Pouilly-sur-Loire, une petite appellation reste fidèle au chasselas.",
+          "exemple": {
+            "vin": "Sancerre, Domaine Vacheron",
+            "detail": "Un domaine de Sancerre en biodynamie, réputé pour des sauvignons qui distinguent sols de silex et de calcaire."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "tri", "question": "Quel cépage pour quelle appellation de la Loire ?", "categories": ["Melon", "Chenin", "Cabernet franc", "Sauvignon"], "items": [["Muscadet", 0], ["Vouvray", 1], ["Savennières", 1], ["Chinon", 2], ["Bourgueil", 2], ["Sancerre blanc", 3], ["Pouilly-Fumé", 3]], "explication": "Melon de Bourgogne à Nantes, chenin en Anjou et en Touraine, cabernet franc pour les rouges de Touraine et de Saumur, sauvignon dans le Centre-Loire." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Sancerre", "detail": "Sauvignon blanc sur un piton au-dessus de la Loire", "region": "loire", "lat": 47.332, "lon": 2.836 }, "explication": "Sancerre est tout à l'est du vignoble de la Loire, face à Pouilly-sur-Loire, de l'autre côté du fleuve." }
+      ]
+    },
+    {
+      "id": "n4-l6",
+      "titre": "Champagne, Alsace, Jura, Savoie",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "La Champagne",
+          "illu": "carte-region",
+          "region": "champagne",
+          "lieux": [["Montagne de Reims", "h"], ["Vallée de la Marne", "g"], ["Côte des Blancs", "b"], ["Côte des Bar", "d"]],
+          "texte": "Sur la **craie**, quatre grandes zones : la **Montagne de Reims** (pinot noir), la **Vallée de la Marne** (meunier), la **Côte des Blancs** (chardonnay) et, loin au sud dans l'Aube, la **Côte des Bar** (pinot noir).\n\nLes villages sont classés : **17 grands crus** et une quarantaine de **premiers crus**.",
+          "exemple": {
+            "vin": "Salon, Le Mesnil-sur-Oger",
+            "detail": "Un blanc de blancs issu d'un seul village grand cru de la Côte des Blancs, produit seulement les grandes années."
+          }
+        },
+        {
+          "titre": "Maisons, vignerons, coopératives",
+          "illu": "etiquette-anatomie",
+          "texte": "En Champagne, les grandes **maisons** achètent une grande partie de leurs raisins à des milliers de vignerons. Un petit code sur l'étiquette dit qui a élaboré le vin :\n\n**NM** : [[négociant-manipulant]], une maison qui peut acheter des raisins.\n**RM** : [[récoltant-manipulant]], un vigneron qui vinifie ses propres raisins.\n**CM** : une coopérative.",
+          "exemple": {
+            "vin": "Jacques Selosse, Avize",
+            "detail": "Un récoltant-manipulant devenu culte, qui a inspiré toute une génération de champagnes de vignerons."
+          },
+          "astuce": "Les champagnes de vignerons expriment souvent un village précis, quand les grandes maisons recherchent un style constant d'une année à l'autre."
+        },
+        {
+          "titre": "L'Alsace",
+          "illu": "alsace-vosges",
+          "texte": "Entre les **Vosges** et le **Rhin**, une étroite bande de coteaux. Les Vosges arrêtent les nuages venus de l'ouest : Colmar est l'une des villes les plus sèches de France.\n\nLes vins portent le nom du cépage (révision du niveau 2). Au sommet, **51 grands crus**, réservés pour l'essentiel au riesling, au gewurztraminer, au pinot gris et au muscat. Pour les vins doux, deux mentions : [[vendanges tardives]] et [[sélection de grains nobles]].",
+          "exemple": {
+            "vin": "Riesling Grand Cru Rangen, Domaine Zind-Humbrecht",
+            "detail": "Le plus méridional des grands crus d'Alsace, sur une pente volcanique très raide au-dessus de Thann."
+          }
+        },
+        {
+          "titre": "Le Jura",
+          "illu": "clavelin",
+          "texte": "Un petit vignoble à l'identité unique. Cinq cépages : **savagnin**, **chardonnay**, **poulsard**, **trousseau** et pinot noir.\n\nSes spécialités : le [[vin jaune]] (révision du niveau 3), le [[vin de paille]], fait de raisins séchés plusieurs mois, et le **macvin**, un moût muté au marc du Jura. Les appellations : Arbois, Château-Chalon, L'Étoile, Côtes du Jura.",
+          "exemple": {
+            "vin": "Arbois, Domaine Stéphane Tissot",
+            "detail": "Un vigneron d'Arbois en biodynamie, qui produit aussi bien des vins jaunes que des vins de paille."
+          }
+        },
+        {
+          "titre": "La Savoie",
+          "illu": "carte-region",
+          "region": "savoie",
+          "cadre": "lieux",
+          "lieux": [["Apremont", "g"], ["Chignin", "d"], ["Ayze, Domaine Belluard", "d", "Ayze"]],
+          "villes": ["Chambéry"],
+          "texte": "Des vignes de montagne, entre lacs et Alpes, avec des cépages qu'on ne trouve guère ailleurs : la **jacquère** (Apremont, Abymes), blanc léger et vif ; l'**altesse** (Roussette de Savoie) ; la **mondeuse**, rouge poivré ; et la roussanne, appelée **bergeron** à Chignin.",
+          "exemple": {
+            "vin": "Ayze, Domaine Belluard",
+            "detail": "Des bulles et des blancs de gringet, un cépage rare cultivé presque uniquement autour d'Ayze."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "assoc", "question": "Associe chaque vignoble à son cépage emblème.", "paires": [["Côte des Blancs", "Chardonnay"], ["Vallée de la Marne", "Meunier"], ["Jura", "Savagnin"], ["Savoie", "Jacquère"]], "explication": "Chardonnay en Côte des Blancs, meunier dans la Vallée de la Marne, savagnin pour le vin jaune du Jura, jacquère pour les blancs vifs de Savoie." },
+        { "type": "qcm", "question": "Que signifie le code « RM » sur une étiquette de champagne ?", "choix": ["Une maison qui achète des raisins", "Une coopérative", "Un vigneron qui vinifie ses propres raisins", "Un champagne rosé millésimé"], "bonne": 2, "explication": "RM : récoltant-manipulant, un vigneron qui élabore son champagne avec ses propres raisins. NM désigne une maison, CM une coopérative." }
+      ]
+    },
+    {
+      "id": "n4-l7",
+      "titre": "Le Sud",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "La Provence, terre de rosé",
+          "illu": "carte-region",
+          "region": "provence",
+          "lieux": [["Les Baux-de-Provence", "h"], ["Palette", "h"], ["Cassis", "b"], ["Bandol", "b"]],
+          "villes": ["Marseille", "Nice"],
+          "texte": "La Provence produit près de **90 % de rosé**, pâle et sec, surtout sous l'appellation Côtes de Provence. Ses joyaux sont ailleurs : **Bandol** et ses rouges de mourvèdre (révision du niveau 2), **Cassis** et ses blancs face à la mer, **Palette** près d'Aix, **Bellet** sur les hauteurs de Nice, **Les Baux-de-Provence** dans les Alpilles.",
+          "exemple": {
+            "vin": "Palette, Château Simone",
+            "detail": "Le domaine phare de Palette, l'une des plus petites appellations de France."
+          }
+        },
+        {
+          "titre": "Le Languedoc, le plus vaste vignoble",
+          "illu": "carte-region",
+          "region": "languedoc-roussillon",
+          "lieux": [["Pic Saint-Loup", "d"], ["Faugères", "g"], ["Saint-Chinian", "g"], ["Picpoul de Pinet", "d"], ["Limoux", "g"], ["Fitou", "d"]],
+          "villes": ["Montpellier"],
+          "texte": "Du Rhône aux Pyrénées, le Languedoc-Roussillon est le **plus vaste vignoble de France**. Longtemps synonyme de vin en vrac, il a vécu une révolution de la qualité depuis les années 1980.\n\nL'IGP **Pays d'Oc** y produit des vins de cépage vendus dans le monde entier. Les AOC (Languedoc, Pic Saint-Loup, Faugères, Saint-Chinian, Corbières, Minervois…) misent sur des assemblages de grenache, syrah, carignan et mourvèdre. En blanc : le **Picpoul de Pinet**, au bord de l'étang de Thau.",
+          "exemple": {
+            "vin": "Pic Saint-Loup, Domaine de l'Hortus",
+            "detail": "Au pied de la falaise de l'Hortus et du Pic Saint-Loup, dans l'un des secteurs les plus frais du Languedoc."
+          }
+        },
+        {
+          "titre": "Le Roussillon, vins doux et schistes",
+          "illu": "mutage",
+          "texte": "Tout au sud, entre Pyrénées et Méditerranée, le Roussillon est le pays des [[vin doux naturel|vins doux naturels]] (révision du niveau 1 : le mutage) : **Banyuls**, **Maury**, **Rivesaltes**, Muscat de Rivesaltes.\n\nSur les mêmes terrasses de schiste que Banyuls, **Collioure** donne des vins secs. Et les Côtes du Roussillon sont de plus en plus réputées pour leurs rouges.",
+          "exemple": {
+            "vin": "Banyuls, Domaine du Mas Blanc",
+            "detail": "Le domaine du docteur André Parcé, pionnier des grands Banyuls. Tu as peut-être croisé son étiquette au niveau 1."
+          }
+        },
+        {
+          "titre": "Le Sud-Ouest, une mosaïque",
+          "illu": "carte-region",
+          "region": "sud-ouest",
+          "lieux": [["Bergerac", "d"], ["Cahors", "d"], ["Gaillac", "d"], ["Fronton", "g"], ["Madiran", "d"], ["Jurançon", "g"], ["Irouléguy", "g"], ["Marcillac", "d"]],
+          "villes": ["Toulouse"],
+          "texte": "Le Sud-Ouest est une **mosaïque** de vignobles, riche en cépages locaux : le **côt** à Cahors, le **tannat** à Madiran (révision du niveau 2), le **petit** et le **gros manseng** à Jurançon, la **négrette** à Fronton, le **mauzac** à Gaillac, le **fer servadou** à Marcillac.\n\nPrès de Bordeaux, Bergerac et Monbazillac utilisent les cépages bordelais. Et au Pays basque, Irouléguy.",
+          "exemple": {
+            "vin": "Jurançon, Domaine Cauhapé",
+            "detail": "Des Jurançon secs et moelleux de petit et gros manseng, au pied des Pyrénées."
+          }
+        },
+        {
+          "titre": "La Corse, l'île aux cépages",
+          "illu": "carte-region",
+          "region": "corse",
+          "lieux": [["Patrimonio", "d"], ["Vin de Corse Calvi", "g", "Calvi"], ["Ajaccio, Domaine Comte Abbatucci", "g", "Ajaccio"], ["Vin de Corse Sartène", "d", "Sartène"]],
+          "texte": "Plus proche de l'Italie que du continent français, la Corse a ses propres cépages : le **niellucciu** (proche du sangiovese, révision du niveau 2), le **sciaccarellu**, poivré et léger, et le **vermentinu** en blanc.\n\n**Patrimonio**, au nord, sur calcaire ; **Ajaccio**, sur granite, royaume du sciaccarellu ; le **Muscat du Cap Corse**, doux naturel ; et l'AOC **Vin de Corse**, avec ses dénominations (Calvi, Sartène, Porto-Vecchio…).",
+          "exemple": {
+            "vin": "Ajaccio, Domaine Comte Abbatucci",
+            "detail": "Un domaine en biodynamie qui a sauvé de vieux cépages corses presque disparus."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "tri", "question": "Cépage du Sud-Ouest ou de Corse ?", "categories": ["Sud-Ouest", "Corse"], "items": [["Tannat", 0], ["Petit manseng", 0], ["Négrette", 0], ["Niellucciu", 1], ["Sciaccarellu", 1], ["Vermentinu", 1]], "explication": "Tannat (Madiran), manseng (Jurançon) et négrette (Fronton) sont du Sud-Ouest ; niellucciu, sciaccarellu et vermentinu sont les grands cépages corses." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Bandol", "detail": "Mourvèdre en terrasses face à la mer", "region": "provence", "lat": 43.19, "lon": 5.77 }, "explication": "Bandol est sur la côte varoise, entre Marseille et Toulon, en terrasses face à la Méditerranée." }
+      ]
+    }
+  ],
+  "jeux": [
+    {
+      "id": "tour-de-france",
+      "titre": "Le tour de France des appellations",
+      "description": "Une appellation s'affiche : touche son emplacement sur la carte. À moins d'une dizaine de kilomètres, c'est gagné.",
+      "tours": 8,
+      "badge": "geographe",
+      "seuilBadge": 6,
+      "questions": [
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Saint-Émilion", "detail": "Village médiéval de la rive droite", "region": "bordeaux", "lat": 44.894, "lon": -0.155 }, "explication": "Saint-Émilion est sur la rive droite de la Dordogne, à l'est de Libourne." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Margaux", "detail": "La plus méridionale des grandes communes du Médoc", "region": "bordeaux", "lat": 45.04, "lon": -0.674 }, "explication": "Margaux est la plus au sud des quatre grandes communes du Médoc, la plus proche de Bordeaux." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Gevrey-Chambertin", "detail": "Neuf grands crus de pinot noir", "region": "bourgogne", "lat": 47.226, "lon": 4.968 }, "explication": "Gevrey-Chambertin est au nord de la Côte de Nuits, à une douzaine de kilomètres au sud de Dijon." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Hermitage", "detail": "La colline de syrah au-dessus de Tain", "region": "rhone", "lat": 45.072, "lon": 4.84 }, "explication": "L'Hermitage domine Tain-l'Hermitage, sur la rive gauche du Rhône, face à Tournon." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Châteauneuf-du-Pape", "detail": "Galets roulés et 13 cépages autorisés", "region": "rhone", "lat": 44.056, "lon": 4.832 }, "explication": "Châteauneuf-du-Pape est au nord d'Avignon, sur la rive gauche du Rhône." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Chinon", "detail": "Cabernet franc sur les bords de la Vienne", "region": "loire", "lat": 47.167, "lon": 0.242 }, "explication": "Chinon est en Touraine, sur la Vienne, juste avant qu'elle ne rejoigne la Loire." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Cahors", "detail": "Le « vin noir » de côt, dans les méandres du Lot", "region": "sud-ouest", "lat": 44.448, "lon": 1.441 }, "explication": "Cahors est au nord de Toulouse, dans les méandres du Lot." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Jurançon", "detail": "Petit et gros manseng au pied des Pyrénées", "region": "sud-ouest", "lat": 43.3, "lon": -0.45 }, "explication": "Jurançon est juste au sud de Pau, face aux Pyrénées." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Château-Chalon", "detail": "Le vin jaune sur son éperon rocheux", "region": "jura", "lat": 46.754, "lon": 5.625 }, "explication": "Château-Chalon est au cœur du vignoble du Jura, entre Arbois et Lons-le-Saunier." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Patrimonio", "detail": "Niellucciu sur calcaire, au pied du Cap Corse", "region": "corse", "lat": 42.698, "lon": 9.363 }, "explication": "Patrimonio est au nord de la Corse, au fond du golfe de Saint-Florent, à la base du Cap Corse." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Faugères", "detail": "Rouges sur schistes, au pied du Massif central", "region": "languedoc-roussillon", "lat": 43.5692, "lon": 3.1835 }, "explication": "Faugères est dans l'Hérault, au nord de Béziers, sur les contreforts du Massif central." },
+        { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Apremont", "detail": "Jacquère sur les éboulis du mont Granier", "region": "savoie", "lat": 45.5011, "lon": 5.9371 }, "explication": "Apremont est juste au sud de Chambéry, au pied du mont Granier." }
+      ]
+    },
+    {
+      "id": "crus-classements",
+      "titre": "Crus et classements",
+      "description": "1855, grands crus, rives et codes : remets de l'ordre dans les hiérarchies du vin français.",
+      "tours": 8,
+      "badge": "classements",
+      "seuilBadge": 7,
+      "questions": [
+        { "type": "ordre", "question": "Du nord au sud, range ces communes du Médoc.", "items": ["Saint-Estèphe", "Pauillac", "Saint-Julien", "Margaux"], "explication": "Le long de l'estuaire, du nord au sud : Saint-Estèphe, Pauillac, Saint-Julien, Margaux, la plus proche de Bordeaux." },
+        { "type": "assoc", "question": "Associe chaque château à son appellation.", "paires": [["Château Latour", "Pauillac"], ["Château Margaux", "Margaux"], ["Château Haut-Brion", "Pessac-Léognan"], ["Petrus", "Pomerol"]], "explication": "Latour à Pauillac, Margaux dans l'appellation du même nom, Haut-Brion dans les Graves (Pessac-Léognan), Petrus sur la rive droite, à Pomerol." },
+        { "type": "qcm", "question": "Quel château est devenu premier cru classé en 1973 ?", "choix": ["Château Lafite Rothschild", "Petrus", "Château Mouton Rothschild", "Château Cheval Blanc"], "bonne": 2, "explication": "Mouton Rothschild, deuxième cru en 1855, a été promu premier cru en 1973 : le seul changement de rang du classement." },
+        { "type": "vf", "question": "Pomerol possède son propre classement officiel des châteaux.", "bonne": false, "explication": "Non : Pomerol n'a aucun classement, ce qui n'empêche pas Petrus ou Le Pin d'être parmi les vins les plus chers du monde." },
+        { "type": "tri", "question": "Rive gauche ou rive droite ?", "categories": ["Rive gauche", "Rive droite"], "items": [["Pauillac", 0], ["Margaux", 0], ["Pessac-Léognan", 0], ["Saint-Émilion", 1], ["Pomerol", 1], ["Fronsac", 1]], "explication": "Rive gauche : Médoc et Graves, dominés par le cabernet sauvignon. Rive droite : le Libournais, terre de merlot." },
+        { "type": "ordre", "question": "Range ces niveaux de la Bourgogne, du plus large au plus précis.", "items": ["Régionale", "Village", "Premier cru", "Grand cru"], "explication": "Régionale (Bourgogne), village (Meursault), premier cru (Meursault 1er cru Les Perrières), grand cru (Montrachet)." },
+        { "type": "qcm", "question": "Combien la Bourgogne compte-t-elle de grands crus ?", "choix": ["5", "17", "51", "33"], "bonne": 3, "explication": "33 grands crus en Bourgogne. 5, ce sont les premiers crus de 1855 ; 17, les villages grands crus de Champagne ; 51, les grands crus d'Alsace." },
+        { "type": "qcm", "question": "Sur l'étiquette d'un grand cru de Bourgogne, que lit-on ?", "choix": ["Le nom du village, puis « grand cru »", "Seulement le nom de la parcelle", "Le nom du château", "Le rang du classement de 1855"], "bonne": 1, "explication": "Un grand cru de Bourgogne n'affiche que le nom de sa parcelle : Chambertin, Musigny, Montrachet." },
+        { "type": "qcm", "question": "En Champagne, combien de villages sont classés grands crus ?", "choix": ["5", "17", "33", "51"], "bonne": 1, "explication": "17 villages grands crus, comme Aÿ, Avize, Le Mesnil-sur-Oger ou Verzenay ; une quarantaine sont premiers crus." },
+        { "type": "vf", "question": "L'Alsace compte 51 grands crus.", "bonne": true, "explication": "Oui : 51 lieux-dits classés, réservés pour l'essentiel au riesling, au gewurztraminer, au pinot gris et au muscat." },
+        { "type": "tri", "question": "Rhône nord ou Rhône sud ?", "categories": ["Rhône nord", "Rhône sud"], "items": [["Côte-Rôtie", 0], ["Condrieu", 0], ["Saint-Péray", 0], ["Châteauneuf-du-Pape", 1], ["Gigondas", 1], ["Lirac", 1]], "explication": "Au nord, syrah et viognier sur granite ; au sud, les assemblages menés par le grenache." },
+        { "type": "qcm", "question": "À Saint-Émilion, quels châteaux sont « premiers grands crus classés A » depuis 2022 ?", "choix": ["Ausone et Cheval Blanc", "Petrus et Le Pin", "Latour et Margaux", "Figeac et Pavie"], "bonne": 3, "explication": "Figeac et Pavie. Ausone, Cheval Blanc et Angélus ont quitté le classement ; Petrus et Le Pin sont à Pomerol, sans classement ; Latour et Margaux sont des premiers crus de 1855." }
+      ]
+    },
+    {
+      "id": "quelle-region",
+      "titre": "Quelle région ?",
+      "description": "Trois indices, une région : reconnais le vignoble avant que tout soit dévoilé.",
+      "tours": 8,
+      "questions": [
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Des assemblages de cabernet sauvignon et de merlot.", "Un estuaire et deux rives.", "Un classement célèbre depuis 1855."], "choix": ["Bourgogne", "Bordeaux", "Loire", "Rhône"], "bonne": 1, "explication": "Bordeaux : rive gauche de cabernet, rive droite de merlot, et le classement de 1855." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Pinot noir ou chardonnay, presque toujours seuls.", "Les parcelles s'appellent des climats.", "Gevrey, Vosne, Meursault, Puligny…"], "choix": ["Champagne", "Alsace", "Bourgogne", "Beaujolais"], "bonne": 2, "explication": "La Bourgogne, ses climats et ses villages à rallonge." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Du gamay sur granite.", "Dix crus.", "Un vin « nouveau » chaque mois de novembre."], "choix": ["Beaujolais", "Loire", "Savoie", "Bourgogne"], "bonne": 0, "explication": "Le Beaujolais, ses dix crus et son Beaujolais nouveau, le troisième jeudi de novembre." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Sous-sol de craie.", "Pinot noir, meunier, chardonnay.", "Une deuxième fermentation en bouteille."], "choix": ["Alsace", "Loire", "Bourgogne", "Champagne"], "bonne": 3, "explication": "La Champagne : craie, trois cépages et méthode traditionnelle." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Une bouteille élancée, la flûte.", "Le cépage écrit en grand sur l'étiquette.", "51 grands crus entre montagnes et fleuve."], "choix": ["Jura", "Alsace", "Savoie", "Champagne"], "bonne": 1, "explication": "L'Alsace, entre Vosges et Rhin, où l'on nomme les vins par leur cépage." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Melon, chenin, cabernet franc, sauvignon.", "D'ouest en est, le long d'un fleuve.", "Muscadet, Vouvray, Chinon, Sancerre."], "choix": ["Rhône", "Sud-Ouest", "Loire", "Bordeaux"], "bonne": 2, "explication": "La Loire, du Pays nantais au Centre-Loire." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Syrah au nord, grenache au sud.", "Coteaux de granite, puis galets roulés.", "Hermitage, Châteauneuf-du-Pape."], "choix": ["Provence", "Languedoc-Roussillon", "Beaujolais", "Rhône"], "bonne": 3, "explication": "La vallée du Rhône, nord et sud." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Savagnin, poulsard, trousseau.", "Un vin élevé sous voile.", "Arbois, Château-Chalon."], "choix": ["Jura", "Savoie", "Alsace", "Bourgogne"], "bonne": 0, "explication": "Le Jura et son vin jaune, vendu en clavelin." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Jacquère, altesse, mondeuse.", "Des vignes de montagne.", "Apremont, Chignin."], "choix": ["Jura", "Alsace", "Savoie", "Corse"], "bonne": 2, "explication": "La Savoie et ses cépages alpins." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Niellucciu, sciaccarellu, vermentinu.", "Une île.", "Patrimonio, Ajaccio."], "choix": ["Provence", "Corse", "Languedoc-Roussillon", "Sud-Ouest"], "bonne": 1, "explication": "La Corse et ses cépages bien à elle." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Près de 90 % de rosé.", "Du mourvèdre en terrasses face à la mer.", "Bandol, Cassis, Palette."], "choix": ["Corse", "Rhône", "Languedoc-Roussillon", "Provence"], "bonne": 3, "explication": "La Provence, capitale du rosé, et ses petites appellations côtières." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Tannat, côt, manseng, négrette.", "Une mosaïque de petits vignobles.", "Cahors, Madiran, Jurançon."], "choix": ["Sud-Ouest", "Bordeaux", "Languedoc-Roussillon", "Provence"], "bonne": 0, "explication": "Le Sud-Ouest, champion des cépages locaux." },
+        { "type": "indices", "question": "Quelle région ?", "indices": ["Le plus vaste vignoble de France.", "L'IGP Pays d'Oc.", "Faugères, Pic Saint-Loup, Banyuls."], "choix": ["Provence", "Languedoc-Roussillon", "Rhône", "Sud-Ouest"], "bonne": 1, "explication": "Le Languedoc-Roussillon, du Rhône aux Pyrénées." }
+      ]
+    }
+  ],
+  "quiz": {
+    "titre": "Quiz de validation · Niveau 4",
+    "questions": [
+      { "type": "qcm", "question": "Quel organisme gère les appellations d'origine en France ?", "choix": ["L'OIV", "L'INAO", "Le WSET", "L'UNESCO"], "bonne": 1, "explication": "L'INAO, Institut national de l'origine et de la qualité, héritier du comité créé en 1935." },
+      { "type": "ordre", "question": "Range ces appellations de la plus large à la plus précise.", "items": ["Bourgogne", "Chambolle-Musigny", "Chambolle-Musigny premier cru", "Musigny"], "explication": "Régionale, village, premier cru du village, puis grand cru (Musigny), qui n'affiche que le nom de sa parcelle." },
+      { "type": "etiquette", "etiquette": "daumas-gassac", "mode": "qcm", "question": "Ce vin célèbre est en IGP. Pourquoi pas en AOC ?", "choix": ["Il est produit hors de France", "Son assemblage ne correspondait à aucune appellation locale", "Il contient du sucre ajouté", "Il est trop récent pour être classé"], "bonne": 1, "explication": "Le Mas de Daumas Gassac assemble surtout du cabernet sauvignon, hors des règles des appellations du Languedoc : il est donc en IGP Pays d'Hérault." },
+      { "type": "tri", "question": "Rive gauche ou rive droite de Bordeaux ?", "categories": ["Rive gauche", "Rive droite"], "items": [["Margaux", 0], ["Sauternes", 0], ["Pomerol", 1], ["Saint-Émilion", 1]], "explication": "Rive gauche : Médoc, Graves et Sauternes. Rive droite : Saint-Émilion et Pomerol." },
+      { "type": "qcm", "question": "Quel château a été promu premier cru classé en 1973 ?", "choix": ["Petrus", "Château Cheval Blanc", "Château Lafite Rothschild", "Château Mouton Rothschild"], "bonne": 3, "explication": "Mouton Rothschild : le seul changement de rang du classement de 1855." },
+      { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Saint-Émilion", "detail": "Village médiéval de la rive droite", "region": "bordeaux", "lat": 44.894, "lon": -0.155 }, "explication": "Saint-Émilion est sur la rive droite de la Dordogne, à l'est de Libourne." },
+      { "type": "vf", "question": "Pomerol, patrie de Petrus, n'a aucun classement officiel.", "bonne": true, "explication": "Exact : Pomerol n'a jamais eu de classement, malgré la réputation de Petrus ou du Pin." },
+      { "type": "qcm", "question": "Combien la Bourgogne compte-t-elle de grands crus ?", "choix": ["33", "5", "51", "17"], "bonne": 0, "explication": "33 grands crus, environ 1 % de la production. 51, c'est l'Alsace ; 17, les villages grands crus de Champagne." },
+      { "type": "ordre", "question": "Du nord au sud, range ces crus du Beaujolais.", "items": ["Saint-Amour", "Fleurie", "Morgon", "Brouilly"], "explication": "Saint-Amour est le plus septentrional, Brouilly le plus méridional des dix crus." },
+      { "type": "tri", "question": "Rhône nord ou Rhône sud ?", "categories": ["Rhône nord", "Rhône sud"], "items": [["Côte-Rôtie", 0], ["Cornas", 0], ["Gigondas", 1], ["Tavel", 1]], "explication": "Au nord, la syrah sur granite ; au sud, les assemblages menés par le grenache, et le rosé de Tavel." },
+      { "type": "carte", "question": "Touche l'emplacement de cette appellation.", "entry": { "palier": 3, "vin": "Sancerre", "detail": "Sauvignon blanc sur un piton au-dessus de la Loire", "region": "loire", "lat": 47.332, "lon": 2.836 }, "explication": "Sancerre est tout à l'est du vignoble ligérien, face à Pouilly-sur-Loire." },
+      { "type": "assoc", "question": "Associe chaque appellation de la Loire à son cépage.", "paires": [["Muscadet", "Melon de Bourgogne"], ["Vouvray", "Chenin"], ["Chinon", "Cabernet franc"], ["Sancerre blanc", "Sauvignon blanc"]], "explication": "Melon à Nantes, chenin à Vouvray, cabernet franc à Chinon, sauvignon à Sancerre." },
+      { "type": "qcm", "question": "Que désigne le code « NM » sur une étiquette de champagne ?", "choix": ["Une coopérative", "Un vigneron qui vinifie ses raisins", "Un champagne non millésimé", "Une maison qui peut acheter des raisins"], "bonne": 3, "explication": "NM : négociant-manipulant, une maison qui peut acheter des raisins. RM désigne un vigneron, CM une coopérative." },
+      { "type": "qcm", "question": "Pourquoi l'Alsace est-elle l'une des régions les plus sèches de France ?", "choix": ["Le Rhin absorbe l'humidité", "Elle est proche de la Méditerranée", "Les Vosges arrêtent les nuages venus de l'ouest", "Le vent du sud chasse la pluie"], "bonne": 2, "explication": "Les Vosges forment un écran : la pluie tombe sur leur versant ouest, et les coteaux alsaciens restent secs et ensoleillés." },
+      { "type": "qcm", "question": "Quel cépage règne sur l'appellation Ajaccio ?", "choix": ["Le sciaccarellu", "Le tannat", "La jacquère", "Le savagnin"], "bonne": 0, "explication": "Le sciaccarellu, poivré et léger, sur les granites d'Ajaccio. Le tannat est du Sud-Ouest, la jacquère de Savoie, le savagnin du Jura." },
+      { "type": "etiquette", "etiquette": "lynch-bages", "mode": "toucher", "cible": "classement", "question": "Révision : touche la mention qui indique son classement.", "explication": "Révision du niveau 1 : « Grand Cru Classé en 1855 ». Lynch-Bages est un cinquième cru classé de Pauillac." },
+      { "type": "qcm", "question": "Révision : quelle méthode donne ses bulles à la Clairette de Die ?", "choix": ["La méthode traditionnelle", "La cuve close", "La méthode ancestrale", "L'ajout de gaz carbonique"], "bonne": 2, "explication": "Révision du niveau 3 : une seule fermentation, commencée en cuve et achevée en bouteille." },
+      { "type": "qcm", "question": "Révision : quel cépage domine à Cahors ?", "choix": ["Le tannat", "Le côt", "Le merlot", "La négrette"], "bonne": 1, "explication": "Révision du niveau 2 : le côt, au moins 70 % à Cahors, connu sous le nom de malbec en Argentine." }
+    ]
+  }
+}
