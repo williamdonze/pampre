@@ -348,6 +348,41 @@
       "style": "rouge",
       "cepages": "Mourvèdre et grenache en tête, avec les 13 cépages autorisés de l'appellation",
       "note": "Châteauneuf-du-Pape, dans le Rhône méridional, autorise 13 cépages (on en compte 18 si l'on distingue les variantes de couleur, d'où des chiffres différents selon les sources). Beaucastel est réputé pour assembler les 13. Rouge ici, mais l'appellation produit aussi des blancs."
+    },
+    {
+      "id": "pepiere",
+      "modele": "bourgogne",
+      "teinte": "vert",
+      "champs": {
+        "producteur": "Domaine de la Pépière",
+        "appellation": "Muscadet Sèvre et Maine sur lie",
+        "mention": "Appellation Muscadet Sèvre et Maine Contrôlée",
+        "millesime": "2023",
+        "embouteillage": "Mis en bouteille au domaine, Maisdon-sur-Sèvre",
+        "degre": "12 % vol",
+        "volume": "750 ml"
+      },
+      "region": "loire",
+      "style": "blanc sec",
+      "cepages": "Melon de Bourgogne",
+      "note": "Le Muscadet Sèvre et Maine vient du pays nantais, à l'ouest de la Loire. Son cépage, le melon de Bourgogne, n'est pas écrit : l'appellation suffit. La mention « sur lie » garantit que le vin est resté sur ses lies fines au moins jusqu'au 1er mars suivant la récolte, sans soutirage, et qu'il a été mis en bouteille dans la cave où il a été vinifié."
+    },
+    {
+      "id": "langlois",
+      "modele": "champagne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Langlois-Château",
+        "appellation": "Crémant de Loire",
+        "sucre": "Brut",
+        "embouteillage": "Élaboré par Langlois-Château, Saumur, France",
+        "degre": "12,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "loire",
+      "style": "effervescent",
+      "cepages": "Chenin blanc, chardonnay et cabernet franc",
+      "note": "Un crémant est élaboré en méthode traditionnelle, comme le champagne : deuxième fermentation en bouteille, puis au moins 9 mois sur lies. Le Crémant de Loire est produit surtout en Anjou-Saumur et en Touraine. « Brut » : moins de 12 g de sucre par litre."
     }
   ]
 }

@@ -48,6 +48,11 @@ with sync_playwright() as p:
     pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend2.png')
     pg.click('[data-done]'); pg.wait_for_timeout(300)
     if not pg.evaluate("ST.quiz[2] && ST.quiz[2].passed && !!ST.badges['niveau-2']"): print('WRONG niveau 2 non validé')
+    # niveau 3, débloqué par le quiz du niveau 2
+    faire_quiz(3)
+    pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend3.png')
+    pg.click('[data-done]'); pg.wait_for_timeout(300)
+    if not pg.evaluate("ST.quiz[3] && ST.quiz[3].passed && !!ST.badges['niveau-3']"): print('WRONG niveau 3 non validé')
     # map game tier 1
     pg.click('.tab[data-go="carte"]'); pg.wait_for_timeout(300); pg.screenshot(path=SP+'mapsetup.png')
     pg.click('text=Lancer une partie'); pg.wait_for_timeout(400)
