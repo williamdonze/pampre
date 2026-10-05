@@ -207,7 +207,6 @@ if etiq:
         if e.get("region") == "hors-france":
             if not e.get("pays"): err(lieu, "hors-france sans pays")
             elif e["pays"] not in PAYS_PROPOSES: err(lieu, f"pays « {e['pays']} » absent des choix proposés par le jeu {PAYS_PROPOSES} : question insoluble")
-            elif e["pays"][0].lower() in "aeiouéèêh": avert(lieu, f"« Produit du {e['pays']} » : élision attendue (« d'{e['pays']} »)")
         elif e.get("region") not in REGIONS: err(lieu, f"région inconnue : {e.get('region')}")
         if e.get("style") not in STYLES: err(lieu, f"style hors de STYLES : {e.get('style')}")
         for k in ("cepages", "note"):

@@ -688,10 +688,18 @@ const DECO = {
   jura:`<svg class="lbl-deco" viewBox="0 0 110 24" aria-hidden="true"><path d="M10 20l20-14 14 9 14-12 20 14 12-6 10 9" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>`
 };
 const PREG = `<svg class="lbl-preg" viewBox="0 0 24 24" aria-label="Logo femme enceinte"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="11" cy="6.5" r="1.6" fill="currentColor"/><path d="M10 9c-1 2 0 4 1 5l-.5 5h2l.5-4c2 0 3-2 2-4-1-1-3-1-5-2z" fill="currentColor"/><path d="M4 20L20 4" stroke="currentColor" stroke-width="1.6"/></svg>`;
+// « Produit du Portugal », « Produit d'Italie », « Produit des États-Unis », « Produit de France »
+const PAYS_MASCULINS = ["Portugal", "Chili", "Liban", "Canada", "Japon", "Brésil", "Luxembourg", "Maroc", "Mexique", "Danemark", "Royaume-Uni"];
+function provenance(l){
+  const p = l.pays || "France";
+  if (/^[EÉ]tats-Unis/.test(p)) return "Produit des États-Unis";
+  if (PAYS_MASCULINS.includes(p)) return `Produit du ${p}`;
+  return /^[AEIOUÉÈÊ]/i.test(p) ? `Produit d'${p}` : `Produit de ${p}`;
+}
 function renderLabel(l, tap = false){
   const c = Object.assign({}, l.champs);
   c.allergene = "Contient des sulfites";
-  c.provenance = l.pays ? `Produit du ${l.pays}` : "Produit de France";
+  c.provenance = provenance(l);
   const order = LBL_ORDER[l.modele] || LBL_ORDER.moderne;
   const F = k => c[k] ? `<span class="ch ch-${k}" data-champ="${k}"${tap ? ` tabindex="0" role="button" aria-pressed="false"` : ""}>${esc(c[k])}</span>` : "";
   return `<div class="lbl m-${l.modele} t-${l.teinte} ${tap?"tap":""}" aria-label="Étiquette de ${esc(c.producteur)}">
@@ -941,7 +949,7 @@ Q.etiquette = (q, onChange) => {
     lbl.addEventListener("keydown", e => { const c = e.target.closest(".ch"); if (!c || (e.key !== "Enter" && e.key !== " ")) return; e.preventDefault(); e.stopPropagation(); c.click(); });
     const good = k => k === q.cible || (q.cible === "appellation" && k === "mention");
     return { el:wrap, ready:() => sel !== null,
-      check(){ locked = true; lbl.classList.remove("tap"); lbl.querySelectorAll(".ch").forEach(c => { c.removeAttribute("tabindex"); c.removeAttribute("role"); c.removeAttribute("aria-pressed"); }); const ok = good(sel); lbl.querySelectorAll(".ch").forEach(c => { c.classList.remove("sel"); if (c.dataset.champ === q.cible || (ok && c.dataset.champ === sel)) c.classList.add("right"); else if (c.dataset.champ === sel) c.classList.add("wrong"); }); return { ok, answer: l.champs[q.cible] || (q.cible === "allergene" ? "Contient des sulfites" : q.cible === "provenance" ? "Produit de France" : "") }; } };
+      check(){ locked = true; lbl.classList.remove("tap"); lbl.querySelectorAll(".ch").forEach(c => { c.removeAttribute("tabindex"); c.removeAttribute("role"); c.removeAttribute("aria-pressed"); }); const ok = good(sel); lbl.querySelectorAll(".ch").forEach(c => { c.classList.remove("sel"); if (c.dataset.champ === q.cible || (ok && c.dataset.champ === sel)) c.classList.add("right"); else if (c.dataset.champ === sel) c.classList.add("wrong"); }); return { ok, answer: l.champs[q.cible] || (q.cible === "allergene" ? "Contient des sulfites" : q.cible === "provenance" ? provenance(l) : "") }; } };
   }
   const inner = Q.qcm(q, onChange); wrap.appendChild(inner.el);
   return { el:wrap, ready:inner.ready, check:inner.check, key:inner.key };
