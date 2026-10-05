@@ -196,6 +196,9 @@
     out.push(...res);
   }
   async function run(opts = {}){
+    // on mesure des états stables : les transitions (fonds des choix, colonnes…) sont coupées pendant la mesure,
+    // sinon un changement de thème juste avant donne des couleurs intermédiaires (vu sous WebKit)
+    if (!document.getElementById("audit-sans-transition")) { const st = document.createElement("style"); st.id = "audit-sans-transition"; st.textContent = "*,*::before,*::after{transition:none!important}"; document.head.appendChild(st); }
     const out = [];
     checkScroll(out); checkOverflow(out); checkSvgText(out);
     if (opts.contrast !== false) checkContrast(out);
