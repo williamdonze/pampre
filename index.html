@@ -807,7 +807,9 @@ function MapView(host, opts = {}){
     if (state.guess && state.truth) {
       const [gx, gy] = state.guess, [tx, ty] = state.truth;
       m += `<line class="map-line" x1="${gx}" y1="${gy}" x2="${tx}" y2="${ty}"/>`;
-      if (state.distLabel) m += `<text class="map-dist" x="${(gx+tx)/2}" y="${(gy+ty)/2 - 8*s}" text-anchor="middle" font-size="${15*s}" stroke-width="${4*s}">${esc(state.distLabel)}</text>`;
+      // épingles presque confondues : le libellé passe au-dessus d'elles au lieu de les recouvrir
+      const proches = Math.hypot(gx - tx, gy - ty) < 40*s, ly = proches ? Math.min(gy, ty) - 40*s : (gy+ty)/2 - 8*s;
+      if (state.distLabel) m += `<text class="map-dist" x="${(gx+tx)/2}" y="${ly}" text-anchor="middle" font-size="${15*s}" stroke-width="${4*s}">${esc(state.distLabel)}</text>`;
     }
     if (state.truth) m += pin(...state.truth, "pin-true");
     if (state.guess) m += pin(...state.guess, "pin-guess");

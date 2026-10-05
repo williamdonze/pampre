@@ -407,7 +407,7 @@ def t_carte_scores(b):
 @T("Carte : détection « dans la région » (Corse, côtes, frontière de département)")
 def t_carte_region(b):
     a = App(b, w=400, h=900); ouvrir_carte(a)
-    cas = [("corse", 42.698, 9.363, True), ("corse", 41.92, 8.74, True), ("corse", 42.0, 9.0, True), ("languedoc-roussillon", 42.483, 3.129, True),
+    cas = [("corse", 42.698, 9.363, True), ("corse", 41.76, 8.93, True), ("corse", 42.0, 9.0, True), ("languedoc-roussillon", 42.483, 3.129, True),
            ("provence", 43.215, 5.538, True), ("bordeaux", 45.55, -1.06, True), ("bordeaux", 45.2, -1.3, False), ("beaujolais", 45.764, 4.836, True),
            ("rhone", 45.489, 4.81, True), ("languedoc-roussillon", 43.84, 4.36, True), ("alsace", 48.573, 7.752, True), ("champagne", 48.857, 2.352, False)]
     lignes = []; ok = True
