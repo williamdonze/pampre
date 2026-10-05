@@ -966,6 +966,8 @@ function runSession(steps, opts){
   document.body.appendChild(ses); document.body.style.overflow = "hidden"; document.body.classList.add("en-session");
   const main = ses.querySelector("#s-main"), foot = ses.querySelector(".s-foot .wrap"), bar = ses.querySelector(".pbar i"), count = ses.querySelector(".s-count");
   const queue = steps.slice(); const total = steps.length;
+  let tGarde = -1e9; // un double toucher ne doit pas valider deux écrans d'affilée : le 2e toucher à moins de 350 ms est ignoré (jamais le clavier)
+  const garde = fn => e => { if (e?.detail > 0) { const t = performance.now(); if (t - tGarde < 350) return; tGarde = t; } fn(); };
   let idx = 0, answered = 0, correct = 0, bonus = 0, current = null, sheet = null, sheetObs = null, retried = new Set(), results = [];
   const qTotal = steps.filter(s => s.kind === "q").length;
 
@@ -985,8 +987,8 @@ function runSession(steps, opts){
         ${c.astuce?`<div class="aside tip">${I.bulb.replace("<svg",'<svg style="color:var(--gold-deep)"')}<div><b>Bon à savoir</b><div class="rich">${rich(c.astuce)}</div></div></div>`:""}
         ${c.debat?`<div class="aside deb">${I.scale.replace("<svg",'<svg style="color:var(--plum)"')}<div><b>Débat d'experts</b><div class="rich">${rich(c.debat)}</div></div></div>`:""}</article>`));
       foot.innerHTML = `${idx > 0 && queue[idx-1].kind === "carte" ? `<button class="btn ghost" data-prev aria-label="Carte précédente">←</button>` : ""}<button class="btn" data-next>Continuer</button>`;
-      foot.querySelector("[data-next]").onclick = () => { idx++; show(); };
-      foot.querySelector("[data-prev]")?.addEventListener("click", () => { idx--; show(); });
+      foot.querySelector("[data-next]").onclick = garde(() => { idx++; show(); });
+      foot.querySelector("[data-prev]")?.addEventListener("click", garde(() => { idx--; show(); }));
       current = null; foot.querySelector("[data-next]").focus({preventScroll:true});
       return;
     }
@@ -998,7 +1000,7 @@ function runSession(steps, opts){
     const btn = foot.querySelector("[data-check]");
     current = Q[q.type](q, () => { btn.disabled = !current.ready(); });
     box.appendChild(current.el);
-    btn.onclick = () => verify(q, st);
+    btn.onclick = garde(() => verify(q, st));
   }
   function verify(q, st){
     const r = current.check(); answered++;
@@ -1014,7 +1016,7 @@ function runSession(steps, opts){
     // la feuille recouvre le bas de la question : on réserve sa hauteur pour pouvoir tout faire défiler
     const body = ses.querySelector(".s-body"), reserve = () => { if (sheet) body.style.paddingBottom = sheet.offsetHeight + "px"; };
     reserve(); try { sheetObs = new ResizeObserver(reserve); sheetObs.observe(sheet); } catch(e) {}
-    sheet.querySelector("[data-cont]").onclick = () => { idx++; show(); };
+    sheet.querySelector("[data-cont]").onclick = garde(() => { idx++; show(); });
     sheet.querySelector("[data-cont]").focus({preventScroll:true});
   }
   function finish(){
