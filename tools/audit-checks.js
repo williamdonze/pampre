@@ -126,7 +126,7 @@
       const cx = r.left + r.width/2, cy = r.top + r.height/2;
       let fill = null;
       const svg = t.ownerSVGElement;
-      const stack = document.elementsFromPoint(cx, cy).filter(e => e !== t && svg.contains(e) && e.tagName !== "g" && e.tagName !== "text" && e !== svg);
+      const stack = document.elementsFromPoint(cx, cy).filter(e => e !== t && !t.contains(e) && svg.contains(e) && !["g", "text", "tspan"].includes(e.tagName) && e !== svg);
       for (const s of stack) { const f = getComputedStyle(s).fill; if (f && f !== "none" && !f.startsWith("url")) { fill = parseColor(f); fill = over([fill[0],fill[1],fill[2], (+getComputedStyle(s).fillOpacity||1)*opacityOf(s)], bgOf(svg).c); break; } }
       const bg = fill || bgOf(svg).c;
       let fg = parseColor(getComputedStyle(t).fill); fg = over(fg, bg);
