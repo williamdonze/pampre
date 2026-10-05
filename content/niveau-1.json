@@ -1,0 +1,497 @@
+{
+  "id": 1,
+  "titre": "Les bases",
+  "parcours": ["n1-l1", "n1-l2", "n1-l3", "jeu:lis-etiquette", "n1-l4", "jeu:bons-gestes", "quiz"],
+  "intro": "On commence par le commencement : d'où vient le vin, quelles grandes familles existent, comment déchiffrer une étiquette et comment servir une bouteille sans faire pâlir un sommelier.",
+  "lecons": [
+    {
+      "id": "n1-l1",
+      "titre": "Qu'est-ce que le vin ?",
+      "duree": 4,
+      "cartes": [
+        {
+          "titre": "Du raisin, et c'est (presque) tout",
+          "illu": "raisin",
+          "texte": "Le vin, c'est du jus de raisin qui a fermenté. La définition officielle européenne est presque aussi courte : un produit obtenu **exclusivement** par la [[fermentation alcoolique]] de raisins frais ou de leur [[moût]].\n\nPas de pommes (ça, c'est du cidre), pas d'orge (de la bière). Si ce n'est pas du raisin, ce n'est pas du vin.",
+          "astuce": "Presque tout le vin du monde vient d'une seule espèce de vigne : Vitis vinifera. Les milliers de [[cépage|cépages]] (chardonnay, merlot, syrah…) sont des variétés de cette même espèce, comme les races de chiens sont une seule espèce."
+        },
+        {
+          "titre": "Que trouve-t-on dans un grain ?",
+          "illu": "raisin-coupe",
+          "texte": "**La pulpe** : surtout de l'eau, des sucres et des acides. C'est elle qui donne le jus.\n\n**La peau** (ou pellicule) : les pigments de couleur, une grande partie des arômes et des [[tanins]].\n\n**Les pépins** : des tanins aussi, mais plus durs. On évite de les écraser.\n\nUn détail qui change tout : chez presque tous les cépages, **la pulpe est incolore**, même pour les raisins noirs. La couleur est dans la peau.",
+          "exemple": {
+            "vin": "Champagne « blanc de noirs »",
+            "detail": "Un champagne blanc fait uniquement avec des raisins noirs (pinot noir, meunier). Possible parce qu'on presse vite, sans laisser le jus au contact des peaux."
+          },
+          "astuce": "Exception : les cépages [[teinturier|teinturiers]], comme l'alicante bouschet, ont une pulpe rouge."
+        },
+        {
+          "titre": "La fermentation, cœur du miracle",
+          "illu": "fermentation",
+          "texte": "Des micro-organismes, les [[levure|levures]], mangent le sucre du raisin et le transforment en **alcool** et en **gaz carbonique** (CO₂). Elles produisent au passage de la chaleur et beaucoup d'arômes.\n\nOrdre de grandeur : il faut environ **17 g de sucre par litre** pour obtenir 1 % d'alcool. Un moût à 220 g/L de sucre donnera donc un vin autour de 13 % vol si la fermentation va jusqu'au bout.",
+          "astuce": "Le CO₂ s'échappe normalement dans l'air. Si on l'enferme dans la bouteille, on obtient… des bulles. On y revient juste après."
+        },
+        {
+          "titre": "Sec ou sucré : qui décide ?",
+          "illu": "sucre-echelle",
+          "texte": "Si les levures mangent tout le sucre, le vin est **sec**. S'il en reste, c'est le [[sucre résiduel]], et le vin est plus ou moins doux.\n\nPourquoi en resterait-il ? Parce que le raisin était très riche en sucre et que les levures s'arrêtent d'elles-mêmes, ou parce que le vigneron les arrête : par le froid, par filtration, ou en ajoutant de l'alcool (le [[mutage]]).\n\n« Sec » ne veut pas dire « acide » ou « qui assèche la bouche » : seulement **sans sucre perceptible**.",
+          "astuce": "Le goût de fruit mûr n'est pas du sucre. Beaucoup de vins secs du Sud « sentent » doux parce qu'ils sont très fruités."
+        },
+        {
+          "titre": "Un très vieux compagnon",
+          "illu": "amphore",
+          "texte": "Les plus anciennes traces de vinification connues ont été trouvées en **Géorgie**, dans le Caucase, vers 6 000 ans avant notre ère, dans de grandes jarres en terre. Les Géorgiens font toujours du vin en jarres enterrées, les qvevri.\n\nEn Gaule, les Grecs fondent Marseille vers 600 av. J.-C. et apportent la vigne avec eux. Les Romains l'étendent ensuite le long du Rhône et jusqu'à la Moselle.",
+          "debat": "La datation exacte des débuts du vin évolue avec les fouilles. Des traces de boisson fermentée à base de raisin, de riz et de miel ont été trouvées en Chine (Jiahu) vers 7 000 av. J.-C. Pour le vin de raisin au sens strict, la Géorgie tient le record actuel."
+        }
+      ],
+      "verif": [
+        {
+          "type": "qcm",
+          "question": "Où se trouvent les pigments qui colorent un vin rouge ?",
+          "choix": ["Dans la pulpe", "Dans la peau", "Dans les pépins", "Dans les levures"],
+          "bonne": 1,
+          "explication": "La couleur est dans la peau. La pulpe de presque tous les cépages est incolore : c'est pour ça qu'on peut faire du vin blanc avec des raisins noirs."
+        },
+        {
+          "type": "vf",
+          "question": "Un vin « sec » est un vin qui contient peu ou pas de sucre.",
+          "bonne": true,
+          "explication": "Exactement. « Sec » parle du sucre, pas de l'acidité ni des tanins. Un vin peut être sec et très fruité."
+        }
+      ]
+    },
+    {
+      "id": "n1-l2",
+      "titre": "Les couleurs et les styles",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Rouge, blanc, rosé : une affaire de peau",
+          "illu": "couleurs",
+          "texte": "**Le rouge** : raisins noirs, et le jus fermente **avec les peaux** pendant des jours ou des semaines. C'est la [[macération]] : elle extrait couleur et tanins.\n\n**Le blanc** : on [[pressurage|presse]] d'abord, puis seul le jus fermente. Raisins blancs le plus souvent, parfois noirs.\n\n**Le rosé** : raisins noirs, mais contact très court avec les peaux (quelques heures), ou pressurage direct de raisins noirs.",
+          "exemple": {
+            "vin": "Rosé de Bandol, Domaine Tempier",
+            "detail": "Mourvèdre, grenache et cinsault, pressurés tôt pour garder une robe pâle et un fruit éclatant."
+          },
+          "astuce": "En Europe, il est interdit de faire un rosé tranquille en mélangeant du vin rouge et du vin blanc. Exception : le champagne rosé, où l'assemblage est autorisé."
+        },
+        {
+          "titre": "Les effervescents : le gaz mis en bouteille",
+          "illu": "bulles",
+          "texte": "Un vin [[effervescent]] garde le CO₂ de la fermentation. Méthode la plus réputée : on fait un vin de base, puis une **deuxième fermentation dans la bouteille** même. C'est la [[méthode traditionnelle]] du Champagne, des Crémants, du Cava espagnol.\n\nD'autres font cette deuxième fermentation en grande cuve fermée (méthode Charmat), comme la plupart des Prosecco italiens. On détaillera les méthodes au niveau 3.",
+          "exemple": {
+            "vin": "Crémant de Loire, Crémant d'Alsace, Crémant de Bourgogne",
+            "detail": "Même méthode que le champagne, autres régions, autres cépages et souvent des prix bien plus doux."
+          }
+        },
+        {
+          "titre": "L'échelle du sucre",
+          "illu": "sucre-echelle",
+          "texte": "Pour les vins tranquilles, la loi européenne fixe des mentions selon le sucre restant :\n\n**Sec** : jusqu'à 4 g/L (jusqu'à 9 g/L si l'acidité est élevée).\n**Demi-sec** : jusqu'à 12 g/L (ou 18 g/L avec la même règle d'acidité).\n**Moelleux** : jusqu'à 45 g/L.\n**Doux** : au-delà de 45 g/L.\n\n« [[Liquoreux]] » n'est pas une mention légale : c'est un usage pour les vins très riches en sucre, comme les grands Sauternes, souvent plus de 100 g/L.",
+          "astuce": "Pour les effervescents, l'échelle est différente : de « brut nature » (moins de 3 g/L) à « doux » (plus de 50 g/L). Le [[brut]], le plus courant, est sous 12 g/L."
+        },
+        {
+          "titre": "Comment fait-on un vin doux ?",
+          "illu": "botrytis",
+          "texte": "Pour garder du sucre, il faut d'abord en avoir beaucoup dans le raisin. Trois grandes voies :\n\n**La [[pourriture noble]]** : un champignon, Botrytis cinerea, perce la peau et le grain se dessèche en concentrant son sucre. Sauternes, Barsac, Tokaji en Hongrie.\n\n**Le [[passerillage]]** : on laisse les raisins sécher sur pied ou sur des claies. Jurançon, vin de paille du Jura.\n\n**Le gel** : on récolte les raisins gelés (vin de glace, Eiswein en Allemagne).",
+          "exemple": {
+            "vin": "Château d'Yquem, Sauternes",
+            "detail": "Le liquoreux le plus célèbre du monde : sémillon et sauvignon blanc botrytisés, cueillis grain par grain en plusieurs passages."
+          }
+        },
+        {
+          "titre": "Les vins mutés",
+          "illu": "mutage",
+          "texte": "Ici, on arrête la fermentation en ajoutant de l'alcool neutre d'origine viticole : c'est le [[mutage]]. Les levures meurent, le sucre reste, et le vin titre entre 15 et 22 % vol.\n\nEn France, ce sont les [[vin doux naturel|vins doux naturels]] (VDN) : Banyuls, Maury et Rivesaltes en Roussillon, Muscat de Beaumes-de-Venise dans le Rhône.\n\nAu Portugal, c'est le [[porto]], dans la vallée du Douro. En Espagne, le xérès est aussi un vin fortifié, mais l'alcool est le plus souvent ajouté **après** la fermentation : il est donc souvent sec.",
+          "exemple": {
+            "vin": "Banyuls, Domaine du Mas Blanc",
+            "detail": "Grenache noir muté, élevé parfois des années à l'air : notes de fruits secs, cacao, café. Un classique avec le chocolat."
+          }
+        },
+        {
+          "titre": "Et les inclassables",
+          "illu": "clavelin",
+          "texte": "Certains vins ne rentrent dans aucune case. Le [[vin jaune]] du Jura est sec, mais vieilli des années en fût sous un voile de levures : il prend des arômes de noix et de curry uniques.\n\nOn parle aussi de vins **orange** : des raisins blancs vinifiés comme des rouges, avec macération sur les peaux. Une tradition géorgienne revenue à la mode.\n\nRetenir pour l'instant : **rouge, blanc, rosé, effervescent, moelleux/liquoreux, muté**. Les autres sont des bonus.",
+          "exemple": {
+            "vin": "Château-Chalon, Domaine Jean Macle",
+            "detail": "Le vin jaune de référence, dans sa bouteille de 62 cl, le clavelin."
+          }
+        }
+      ],
+      "verif": [
+        {
+          "type": "assoc",
+          "question": "Associe chaque style à un exemple.",
+          "paires": [
+            ["Effervescent", "Crémant d'Alsace"],
+            ["Liquoreux", "Sauternes"],
+            ["Muté", "Banyuls"],
+            ["Rosé", "Bandol rosé"]
+          ],
+          "explication": "Crémant : méthode traditionnelle. Sauternes : pourriture noble. Banyuls : vin doux naturel muté. Bandol : rosé de mourvèdre en Provence."
+        },
+        {
+          "type": "qcm",
+          "question": "Comment obtient-on un vin rouge ?",
+          "choix": [
+            "En mélangeant du vin blanc et du jus de cassis",
+            "En faisant fermenter le jus avec les peaux de raisins noirs",
+            "En utilisant des raisins à pulpe rouge uniquement",
+            "En ajoutant des colorants naturels"
+          ],
+          "bonne": 1,
+          "explication": "La macération du jus avec les peaux extrait la couleur et les tanins. La plupart des raisins noirs ont une pulpe incolore."
+        }
+      ]
+    },
+    {
+      "id": "n1-l3",
+      "titre": "Lire une étiquette",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Une étiquette, ça se lit comme une carte d'identité",
+          "illu": "etiquette-anatomie",
+          "texte": "Sur une étiquette française, cherche d'abord **trois choses** :\n\n**Le lieu** : l'[[appellation]] (Pauillac, Chablis, Sancerre…). En France, c'est souvent l'information principale.\n**Le producteur** : un [[domaine]], un château, une maison ou une cave coopérative.\n**L'année** : le [[millésime]], l'année de la récolte.\n\nLe reste précise ou complète : la cuvée, le classement, le sucre…",
+          "astuce": "Dans la plupart des régions françaises, le cépage n'est **pas** écrit. On écrit « Puligny-Montrachet », et c'est à toi de savoir que c'est du chardonnay. Le niveau 2 t'y aidera."
+        },
+        {
+          "titre": "Les mentions obligatoires",
+          "illu": "liste",
+          "texte": "La loi impose notamment :\n\n**La catégorie** : appellation d'origine ([[AOP]]/AOC), indication géographique ([[IGP]]) ou [[Vin de France]].\n**Le titre alcoométrique** : le degré, en % vol.\n**Le volume** : 75 cl le plus souvent.\n**Le nom et l'adresse de l'embouteilleur.**\n**La provenance** : « Produit de France », par exemple.\n**Les allergènes** : « contient des [[sulfites]] », très fréquent.\n**Le numéro de lot** et, en France, le **logo femme enceinte**.\n\nDepuis le 8 décembre 2023, les vins produits dans l'UE doivent aussi donner leur **liste d'ingrédients et leurs valeurs nutritionnelles**. L'énergie (kcal) est sur l'étiquette, le reste peut être accessible par un QR code.",
+          "astuce": "« Mis en bouteille au château » ou « à la propriété » signifie que le vin a été embouteillé là où il a été produit. C'est une information, pas une garantie de qualité."
+        },
+        {
+          "titre": "AOP, IGP, Vin de France : la pyramide",
+          "illu": "pyramide",
+          "texte": "**AOP / AOC** (appellation d'origine protégée / contrôlée) : zone délimitée, cépages, rendements et méthodes encadrés par un cahier des charges. Exemple : « Appellation Pauillac Contrôlée ».\n\n**IGP** (indication géographique protégée, ancien « vin de pays ») : zone plus large et règles plus souples, cépages plus libres. Exemple : IGP Pays d'Oc.\n\n**Vin de France** : pas d'origine plus précise que le pays. Cette catégorie, créée en 2010 pour remplacer le « vin de table », peut indiquer cépage et millésime.",
+          "exemple": {
+            "vin": "Mas de Daumas Gassac, IGP Pays d'Hérault",
+            "detail": "Un vin célèbre et cher… en IGP. La catégorie dit le cadre réglementaire, pas forcément la qualité."
+          },
+          "debat": "AOC et AOP désignent en pratique la même chose pour le vin : AOP est le terme européen, AOC le terme français historique, et les deux se voient sur les étiquettes."
+        },
+        {
+          "titre": "Le millésime et le degré",
+          "illu": "millesime",
+          "texte": "Le **millésime** indique l'année des vendanges, pas de la mise en bouteille. Pour l'écrire, au moins **85 %** des raisins doivent venir de cette année. Les champagnes sans millésime assemblent volontairement plusieurs années pour garder un style constant.\n\nLe **degré** (titre alcoométrique) va de 11 % pour certains blancs légers à 15 % et plus pour des rouges du Sud. Il renseigne sur le climat et la maturité : beaucoup de soleil, beaucoup de sucre, donc beaucoup d'alcool.",
+          "astuce": "Même règle des 85 % pour un cépage écrit sur l'étiquette : « Riesling » veut dire au moins 85 % de riesling."
+        },
+        {
+          "titre": "Les mots qui en disent long",
+          "illu": "loupe",
+          "texte": "**[[Grand cru]], [[premier cru]]** : en Bourgogne, ils désignent des parcelles (des [[climat|climats]]) ; à Bordeaux, « cru classé » désigne des **châteaux** classés. Même mot, deux logiques. On y reviendra au niveau 4.\n\n**Brut, extra-brut, demi-sec** : le sucre dans un effervescent.\n\n**Vieilles vignes** : aucune définition légale en France. Souvent sincère, parfois du marketing.\n\n**Réserve, Cuvée prestige** : pas de définition légale non plus, sauf exceptions locales.",
+          "exemple": {
+            "vin": "Marcel Lapierre, Morgon",
+            "detail": "Piège classique : le mot « Beaujolais » n'apparaît pas ! Les 10 crus du Beaujolais portent seulement leur nom."
+          }
+        }
+      ],
+      "verif": [
+        {
+          "type": "etiquette",
+          "etiquette": "lynch-bages",
+          "mode": "toucher",
+          "cible": "millesime",
+          "question": "Touche le millésime sur cette étiquette.",
+          "explication": "2016 est l'année des vendanges. Il faut au moins 85 % de raisins de cette année pour l'écrire."
+        },
+        {
+          "type": "qcm",
+          "question": "Quelle catégorie offre le plus de liberté sur les cépages ?",
+          "choix": ["AOP", "IGP", "Grand cru", "Premier cru"],
+          "bonne": 1,
+          "explication": "L'IGP a des règles plus souples que l'AOP, notamment sur les cépages. Grand cru et premier cru sont des niveaux à l'intérieur des AOP."
+        }
+      ]
+    },
+    {
+      "id": "n1-l4",
+      "titre": "Les bons gestes",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "La bonne température",
+          "illu": "thermometre",
+          "texte": "La température change tout : trop froid, le vin se ferme ; trop chaud, l'alcool écrase le reste.\n\n**Effervescents** : 6 à 8 °C.\n**Blancs secs légers et rosés** : 8 à 10 °C.\n**Grands blancs** (Meursault, Hermitage blanc) : 10 à 13 °C.\n**Liquoreux** : 8 à 10 °C ; un peu plus pour les très vieux.\n**Rouges légers** (Beaujolais, Loire) : 12 à 14 °C.\n**Rouges corsés** (Bordeaux, Rhône) : 15 à 18 °C.",
+          "astuce": "La « température ambiante » des anciens, c'était celle de maisons sans chauffage central : 16 à 18 °C. Pas les 22 °C d'un salon moderne. En été, 20 minutes de frigo ne font pas de mal à un rouge."
+        },
+        {
+          "titre": "Le verre",
+          "illu": "verres",
+          "texte": "Un bon verre à vin est **fin, transparent**, avec un **calice en forme de tulipe** qui se resserre vers le haut pour concentrer les arômes.\n\n**On le remplit au tiers** environ : il faut de la place pour faire tourner le vin et l'aérer.\n\n**On le tient par la jambe** : la main ne réchauffe pas le vin et ne laisse pas de traces sur le calice.\n\nPour les effervescents, une **flûte** garde les bulles, mais beaucoup de sommeliers préfèrent aujourd'hui un verre à vin blanc, plus généreux pour le nez.",
+          "debat": "Flûte ou verre à vin pour le champagne ? Les avis divergent. La flûte met en valeur le cordon de bulles ; un verre plus large exprime mieux les arômes. Les deux se défendent."
+        },
+        {
+          "titre": "Ouvrir une bouteille",
+          "illu": "tirebouchon",
+          "texte": "**Vin tranquille** : coupe la capsule sous la bague (le renflement du goulot), essuie le goulot, plante la mèche du [[limonadier]] au centre, visse sans traverser le bouchon, puis fais levier en deux temps.\n\n**Effervescent** : la pression dans une bouteille de champagne est d'environ 6 bars, deux à trois fois celle d'un pneu de voiture. Donc :\n**1.** Bouteille bien froide, jamais secouée.\n**2.** Pouce sur le bouchon, défais le [[muselet]] (environ six demi-tours).\n**3.** Incline la bouteille à 45°, pointée loin des gens.\n**4.** Tiens le bouchon et **tourne la bouteille**, pas le bouchon.\n**5.** Laisse sortir le gaz doucement : un léger soupir, pas une détonation."
+        },
+        {
+          "titre": "Carafer ou décanter ?",
+          "illu": "carafe",
+          "texte": "Deux gestes, deux buts :\n\n**[[Carafer]]** : verser un vin **jeune** dans une carafe pour l'aérer. Utile pour un rouge puissant et fermé, ou un grand blanc jeune.\n\n**[[Décanter]]** : séparer un vin **âgé** de son [[dépôt]]. On redresse la bouteille la veille, puis on verse lentement devant une source de lumière et on s'arrête quand le dépôt arrive au goulot.\n\nUn très vieux vin est fragile : on le décante juste avant de le servir, sans l'aérer longtemps.",
+          "debat": "L'intérêt d'aérer les vins jeunes divise les experts : certains y voient un vrai progrès, d'autres préfèrent suivre l'évolution du vin directement dans le verre. Dans le doute, goûte avant et après."
+        },
+        {
+          "titre": "Garder une bouteille",
+          "illu": "conservation",
+          "texte": "**Ouverte** : rebouche-la et mets-la **au réfrigérateur**, même un rouge (ressors-le une demi-heure avant). Compte 2 à 5 jours pour la plupart des vins tranquilles, 1 à 3 jours pour un effervescent avec un bouchon hermétique. Les vins mutés tiennent bien plus longtemps : des semaines pour un tawny.\n\n**Fermée** : à l'abri de la lumière, au calme, vers **12 °C** stables, avec une humidité autour de 70 %. Couchée si le bouchon est en liège, pour qu'il ne sèche pas.",
+          "debat": "La petite cuillère dans le goulot du champagne ? Les essais sérieux n'ont pas montré d'effet notable. Le froid et un bouchon hermétique font le vrai travail. Et l'obligation de coucher les bouteilles est discutée : l'humidité dans la bouteille suffirait à garder le bouchon souple. Coucher ne fait pas de mal, donc on continue."
+        }
+      ],
+      "verif": [
+        {
+          "type": "ordre",
+          "question": "Remets dans l'ordre l'ouverture d'un champagne.",
+          "items": [
+            "Mettre le pouce sur le bouchon",
+            "Défaire le muselet",
+            "Incliner la bouteille à 45°",
+            "Tourner la bouteille en tenant le bouchon",
+            "Laisser sortir le gaz doucement"
+          ],
+          "explication": "Le pouce reste sur le bouchon dès qu'on touche au muselet : la pression peut l'éjecter à tout moment. Ensuite, on tourne la bouteille et pas le bouchon, pour garder le contrôle."
+        },
+        {
+          "type": "qcm",
+          "question": "À quelle température servir un Morgon ?",
+          "choix": ["6 à 8 °C", "12 à 14 °C", "16 à 18 °C", "20 à 22 °C"],
+          "bonne": 1,
+          "explication": "Le gamay du Beaujolais est un rouge léger et fruité qui gagne à être servi frais, entre 12 et 14 °C."
+        }
+      ]
+    }
+  ],
+  "jeux": [
+    {
+      "id": "lis-etiquette",
+      "titre": "Lis l'étiquette",
+      "description": "10 étiquettes de vrais vins. Trouve la région, le style, ou l'information demandée.",
+      "generateur": "etiquettes",
+      "tours": 10,
+      "badge": "lecteur",
+      "seuilBadge": 8
+    },
+    {
+      "id": "bons-gestes",
+      "titre": "Les bons gestes",
+      "description": "Le thermomètre, la verrerie et la cave : mets tes réflexes à l'épreuve.",
+      "badge": "gestes",
+      "seuilBadge": 6,
+      "questions": [
+        {
+          "type": "tri",
+          "question": "Le thermomètre : range chaque vin à sa température de service.",
+          "categories": ["6 à 8 °C", "8 à 10 °C", "12 à 14 °C", "16 à 18 °C"],
+          "items": [
+            ["Champagne brut", 0],
+            ["Crémant de Bourgogne", 0],
+            ["Muscadet Sèvre et Maine", 1],
+            ["Rosé de Provence", 1],
+            ["Morgon", 2],
+            ["Meursault", 2],
+            ["Pauillac", 3],
+            ["Côte-Rôtie", 3]
+          ],
+          "explication": "Bulles bien fraîches, blancs vifs et rosés frais, rouges légers et grands blancs un peu moins froids (vers 12-14 °C), rouges structurés vers 16-18 °C."
+        },
+        {
+          "type": "assoc",
+          "question": "Associe chaque geste à son objectif.",
+          "paires": [
+            ["Carafer un vin jeune", "L'aérer"],
+            ["Décanter un vin âgé", "Retirer le dépôt"],
+            ["Tenir le verre par la jambe", "Ne pas réchauffer le vin"],
+            ["Remplir au tiers", "Pouvoir faire tourner le vin"]
+          ],
+          "explication": "Carafer aère, décanter sépare du dépôt. Tenir le verre par la jambe évite de chauffer le vin avec la main, et un verre rempli au tiers laisse la place d'aérer."
+        },
+        {
+          "type": "ordre",
+          "question": "Remets dans l'ordre l'ouverture d'un vin tranquille au limonadier.",
+          "items": [
+            "Couper la capsule sous la bague",
+            "Essuyer le goulot",
+            "Planter la mèche au centre du bouchon",
+            "Visser sans traverser le bouchon",
+            "Faire levier en deux temps"
+          ],
+          "explication": "On coupe sous la bague pour que le vin ne touche pas la capsule en coulant. Ne pas traverser le bouchon évite les miettes de liège dans le vin."
+        },
+        {
+          "type": "vf",
+          "question": "Servir un rouge « à température ambiante », c'est le servir vers 22 °C.",
+          "bonne": false,
+          "explication": "L'expression date d'avant le chauffage central : on parlait de 16 à 18 °C. À 22 °C, l'alcool domine et le vin paraît lourd."
+        },
+        {
+          "type": "qcm",
+          "question": "Tu as ouvert un Sancerre hier soir. Où le garder ?",
+          "choix": [
+            "Debout dans un placard, sans bouchon",
+            "Rebouché, au réfrigérateur",
+            "Couché dans la cave, débouché",
+            "Près du four pour qu'il ne refroidisse pas"
+          ],
+          "bonne": 1,
+          "explication": "Le froid ralentit l'oxydation. Rebouché au réfrigérateur, un blanc sec tiendra encore 2 à 5 jours."
+        },
+        {
+          "type": "tri",
+          "question": "La cave idéale : bonne ou mauvaise idée ?",
+          "categories": ["Bonne idée", "Mauvaise idée"],
+          "items": [
+            ["Une température stable vers 12 °C", 0],
+            ["Une humidité autour de 70 %", 0],
+            ["L'obscurité", 0],
+            ["Sur le frigo de la cuisine", 1],
+            ["Près de la chaudière", 1],
+            ["Une étagère en plein soleil", 1]
+          ],
+          "explication": "Le vin aime le calme, l'obscurité et une température fraîche et stable. Les vibrations, la chaleur et la lumière l'abîment."
+        }
+      ]
+    }
+  ],
+  "quiz": {
+    "titre": "Quiz de validation · Niveau 1",
+    "questions": [
+      {
+        "type": "qcm",
+        "question": "Quel micro-organisme transforme le sucre en alcool ?",
+        "choix": ["Une bactérie lactique", "Une levure", "Le botrytis", "Le phylloxéra"],
+        "bonne": 1,
+        "explication": "Les levures réalisent la fermentation alcoolique. Le botrytis est le champignon de la pourriture noble ; le phylloxéra est un puceron qui a ravagé les vignes au XIXe siècle."
+      },
+      {
+        "type": "vf",
+        "question": "On peut faire un vin blanc avec des raisins noirs.",
+        "bonne": true,
+        "explication": "Oui, car la pulpe est incolore : il suffit de presser rapidement. Exemple : le champagne blanc de noirs."
+      },
+      {
+        "type": "qcm",
+        "question": "Combien de sucre faut-il environ pour obtenir 1 % vol d'alcool ?",
+        "choix": ["2 g par litre", "17 g par litre", "50 g par litre", "100 g par litre"],
+        "bonne": 1,
+        "explication": "Environ 17 g de sucre par litre de moût donnent 1 % vol. Le chiffre varie un peu selon les levures et les conditions."
+      },
+      {
+        "type": "etiquette",
+        "etiquette": "bollinger",
+        "mode": "qcm",
+        "question": "Que signifie la mention « Brut » sur cette étiquette ?",
+        "choix": ["Un vin non filtré", "Un effervescent peu sucré", "Un vin très alcoolisé", "Un vin sans sulfites"],
+        "bonne": 1,
+        "explication": "Brut : moins de 12 g de sucre par litre. C'est le style de champagne le plus courant."
+      },
+      {
+        "type": "assoc",
+        "question": "Associe chaque méthode de vin doux à un exemple.",
+        "paires": [
+          ["Pourriture noble", "Sauternes"],
+          ["Passerillage", "Jurançon"],
+          ["Mutage", "Porto"],
+          ["Raisins gelés", "Eiswein"]
+        ],
+        "explication": "Sauternes doit sa richesse au botrytis, Jurançon aux raisins laissés sécher sur pied, le porto à l'ajout d'eau-de-vie, l'Eiswein aux raisins récoltés gelés."
+      },
+      {
+        "type": "etiquette",
+        "etiquette": "lapierre",
+        "mode": "qcm",
+        "question": "De quelle région vient ce vin ?",
+        "choix": ["Bourgogne", "Beaujolais", "Rhône", "Loire"],
+        "bonne": 1,
+        "explication": "Morgon est un des 10 crus du Beaujolais. Ces crus n'écrivent pas « Beaujolais » sur l'étiquette."
+      },
+      {
+        "type": "etiquette",
+        "etiquette": "macle",
+        "mode": "toucher",
+        "cible": "volume",
+        "question": "Une information est propre au vin jaune sur cette étiquette. Touche-la.",
+        "explication": "62 cl : c'est le clavelin, la bouteille réservée au vin jaune du Jura."
+      },
+      {
+        "type": "ordre",
+        "question": "Classe ces vins du plus sec au plus sucré.",
+        "items": ["Muscadet", "Vouvray demi-sec", "Vouvray moelleux", "Sauternes"],
+        "explication": "Le Muscadet est sec. Le Vouvray existe en demi-sec (jusqu'à 12 g/L, ou 18 g/L selon l'acidité) et en moelleux. Les Sauternes dépassent souvent 100 g/L."
+      },
+      {
+        "type": "qcm",
+        "question": "Quelle mention est obligatoire sur une étiquette de vin en France ?",
+        "choix": ["Le cépage", "Le millésime", "Le titre alcoométrique", "Le nom du vigneron"],
+        "bonne": 2,
+        "explication": "Le degré est obligatoire. Le cépage et le millésime sont facultatifs, et c'est l'embouteilleur (pas forcément le vigneron) qui doit être mentionné."
+      },
+      {
+        "type": "tri",
+        "question": "Classe ces vins selon leur catégorie.",
+        "categories": ["AOP / AOC", "IGP"],
+        "items": [
+          ["Pauillac", 0],
+          ["Sancerre", 0],
+          ["Pays d'Oc", 1],
+          ["Côtes de Gascogne", 1],
+          ["Chablis", 0],
+          ["Pays d'Hérault", 1]
+        ],
+        "explication": "Pauillac, Sancerre et Chablis sont des AOC. Pays d'Oc, Côtes de Gascogne et Pays d'Hérault sont des IGP, l'ancienne catégorie des « vins de pays »."
+      },
+      {
+        "type": "indices",
+        "question": "Dégustation à l'aveugle : de quel style de vin s'agit-il ?",
+        "indices": [
+          "Robe dorée, brillante.",
+          "Nez de brioche, de pomme et de noisette.",
+          "En bouche, une sensation de picotement très fine."
+        ],
+        "choix": ["Vin jaune", "Champagne", "Sauternes", "Rosé de Provence"],
+        "bonne": 1,
+        "explication": "Brioche et pâte : les arômes des longs vieillissements sur levures en bouteille. Le picotement, ce sont les bulles. Moins tu utilises d'indices, plus tu gagnes de points !"
+      },
+      {
+        "type": "qcm",
+        "question": "Quelle est la différence entre carafer et décanter ?",
+        "choix": [
+          "Aucune, ce sont deux mots pour le même geste",
+          "Carafer aère un vin jeune ; décanter sépare un vin âgé de son dépôt",
+          "Carafer refroidit le vin ; décanter le réchauffe",
+          "Carafer se fait pour les blancs ; décanter pour les rouges"
+        ],
+        "bonne": 1,
+        "explication": "Carafer : on aère un vin jeune. Décanter : on sépare un vin âgé de son dépôt, avec délicatesse."
+      },
+      {
+        "type": "vf",
+        "question": "En Europe, on peut faire un rosé tranquille en mélangeant du vin rouge et du vin blanc.",
+        "bonne": false,
+        "explication": "C'est interdit pour les rosés tranquilles. La seule grande exception est le champagne rosé, qui peut être fait par assemblage."
+      },
+      {
+        "type": "qcm",
+        "question": "Comment tenir son verre ?",
+        "choix": ["Par le calice, à pleine main", "Par la jambe", "Par le bord", "Peu importe"],
+        "bonne": 1,
+        "explication": "Par la jambe (ou le pied) : la main ne réchauffe pas le vin et le calice reste propre."
+      },
+      {
+        "type": "etiquette",
+        "etiquette": "daumas-gassac",
+        "mode": "qcm",
+        "question": "Ce vin est vendu cher. Que penser de sa mention IGP ?",
+        "choix": [
+          "C'est forcément un vin médiocre",
+          "La catégorie indique un cadre de règles, pas la qualité",
+          "C'est une erreur d'étiquette",
+          "IGP signifie « Indication de Grand Prestige »"
+        ],
+        "bonne": 1,
+        "explication": "Mas de Daumas Gassac a choisi des cépages qui n'entraient pas dans les règles des AOC locales. IGP veut dire Indication Géographique Protégée : des règles plus souples, pas un vin moins bon par principe."
+      }
+    ]
+  }
+}

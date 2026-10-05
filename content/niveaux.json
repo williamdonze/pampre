@@ -1,0 +1,84 @@
+{
+  "seuilValidation": 0.8,
+  "niveaux": [
+    {
+      "id": 1,
+      "titre": "Les bases",
+      "sousTitre": "Découverte",
+      "objectif": "Comprendre ce qu'est le vin et parler le vocabulaire de base.",
+      "icone": "verre",
+      "contenu": "content/niveau-1.json"
+    },
+    {
+      "id": 2,
+      "titre": "Les cépages",
+      "sousTitre": "Les raisins et leur caractère",
+      "objectif": "Connaître les principaux raisins et leur profil.",
+      "icone": "grappe",
+      "contenu": null
+    },
+    {
+      "id": 3,
+      "titre": "De la vigne au verre",
+      "sousTitre": "Terroir et vinification",
+      "objectif": "Comprendre pourquoi un vin a tel goût.",
+      "icone": "cep",
+      "contenu": null
+    },
+    {
+      "id": 4,
+      "titre": "La France du vin",
+      "sousTitre": "Régions et appellations",
+      "objectif": "Situer les régions, puis les appellations.",
+      "icone": "carte",
+      "contenu": null
+    },
+    {
+      "id": 5,
+      "titre": "Le vin dans le monde",
+      "sousTitre": "Ancien et Nouveau Monde",
+      "objectif": "Élargir aux autres pays producteurs.",
+      "icone": "globe",
+      "contenu": null
+    },
+    {
+      "id": 6,
+      "titre": "Déguster et marier",
+      "sousTitre": "Dégustation et accords",
+      "objectif": "Savoir analyser un vin et le marier à un plat.",
+      "icone": "nez",
+      "contenu": null
+    }
+  ],
+  "bonus": [
+    { "id": "histoire", "titre": "Histoire du vin", "resume": "Antiquité, monastères, phylloxéra, Jugement de Paris 1976" },
+    { "id": "economie", "titre": "Économie et marché", "resume": "Prix, vente en primeur, vin et placement" },
+    { "id": "cave", "titre": "Constituer sa cave", "resume": "Choisir, stocker, suivre ses bouteilles" },
+    { "id": "certifs", "titre": "Certifications", "resume": "WSET, diplômes de sommellerie" }
+  ],
+  "rangs": [
+    { "xp": 0, "nom": "Curieux" },
+    { "xp": 100, "nom": "Amateur" },
+    { "xp": 300, "nom": "Amateur éclairé" },
+    { "xp": 700, "nom": "Caviste en herbe" },
+    { "xp": 1500, "nom": "Sommelier apprenti" },
+    { "xp": 3000, "nom": "Sommelier" },
+    { "xp": 6000, "nom": "Grand sommelier" }
+  ],
+  "badges": [
+    { "id": "premier-verre", "nom": "Premier verre", "desc": "Terminer ta première leçon", "icone": "verre" },
+    { "id": "lecteur", "nom": "Lecteur d'étiquettes", "desc": "8/10 ou plus au jeu « Lis l'étiquette »", "icone": "etiquette" },
+    { "id": "gestes", "nom": "Main sûre", "desc": "Terminer le jeu « Les bons gestes » sans faute", "icone": "thermo" },
+    { "id": "niveau-1", "nom": "Les bases, c'est fait", "desc": "Valider le quiz du niveau 1", "icone": "medaille" },
+    { "id": "sans-faute", "nom": "Sans faute", "desc": "100 % à un quiz de validation", "icone": "etoile" },
+    { "id": "serie-3", "nom": "Trois jours de suite", "desc": "Une série de 3 jours", "icone": "flamme" },
+    { "id": "serie-7", "nom": "Une semaine au chai", "desc": "Une série de 7 jours", "icone": "flamme" },
+    { "id": "serie-30", "nom": "Un mois de vendanges", "desc": "Une série de 30 jours", "icone": "flamme" },
+    { "id": "explorateur", "nom": "Explorateur", "desc": "Jouer 3 parties de Carte libre", "icone": "carte" },
+    { "id": "oeil-de-lynx", "nom": "Œil de lynx", "desc": "Un placement à 4 900 points ou plus", "icone": "cible" },
+    { "id": "tour-de-france", "nom": "Tour de France", "desc": "Trouver les 13 régions au moins une fois", "icone": "carte" },
+    { "id": "expert-carte", "nom": "Fin connaisseur du terroir", "desc": "Finir une partie au niveau « Cru »", "icone": "cible" },
+    { "id": "lexique", "nom": "Lexicophile", "desc": "Ouvrir 20 définitions du glossaire", "icone": "livre" },
+    { "id": "defi", "nom": "Défi relevé", "desc": "Terminer un défi quotidien", "icone": "etoile" }
+  ]
+}

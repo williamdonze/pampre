@@ -1,0 +1,353 @@
+{
+  "avertissement": "Étiquettes redessinées pour le jeu : les vins, producteurs et appellations sont réels, mais la mise en page, le degré et le millésime sont indicatifs.",
+  "etiquettes": [
+    {
+      "id": "lynch-bages",
+      "modele": "chateau",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Château Lynch-Bages",
+        "classement": "Grand Cru Classé en 1855",
+        "appellation": "Pauillac",
+        "mention": "Appellation Pauillac Contrôlée",
+        "millesime": "2016",
+        "embouteillage": "Mis en bouteille au château",
+        "degre": "13,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "bordeaux",
+      "style": "rouge",
+      "cepages": "Cabernet sauvignon majoritaire, avec merlot, cabernet franc et petit verdot",
+      "note": "Pauillac est une appellation communale du Médoc, sur la rive gauche de la Gironde. « Grand Cru Classé en 1855 » renvoie au célèbre classement des vins du Médoc établi pour l'Exposition universelle de Paris. Lynch-Bages y est un cinquième cru, qui joue bien au-dessus de son rang, disent ses fans."
+    },
+    {
+      "id": "weinbach",
+      "modele": "alsace",
+      "teinte": "vert",
+      "champs": {
+        "producteur": "Domaine Weinbach",
+        "cepage": "Riesling",
+        "appellation": "Alsace Grand Cru Schlossberg",
+        "mention": "Appellation Alsace Grand Cru Contrôlée",
+        "millesime": "2020",
+        "degre": "13 % vol",
+        "volume": "750 ml",
+        "embouteillage": "Mis en bouteille à la propriété, Kaysersberg"
+      },
+      "region": "alsace",
+      "style": "blanc sec",
+      "cepages": "Riesling",
+      "note": "L'Alsace est la grande région française où le cépage figure presque toujours sur l'étiquette. Le Schlossberg est un des 51 grands crus d'Alsace, sur des sols granitiques au-dessus de Kaysersberg. La bouteille est une flûte d'Alsace, haute et fine."
+    },
+    {
+      "id": "bollinger",
+      "modele": "champagne",
+      "teinte": "noir",
+      "champs": {
+        "producteur": "Bollinger",
+        "cuvee": "Special Cuvée",
+        "appellation": "Champagne",
+        "sucre": "Brut",
+        "embouteillage": "Élaboré par Bollinger, Aÿ, France",
+        "degre": "12 % vol",
+        "volume": "750 ml"
+      },
+      "region": "champagne",
+      "style": "effervescent",
+      "cepages": "Pinot noir majoritaire, avec chardonnay et pinot meunier",
+      "note": "Pas de millésime : c'est un assemblage de plusieurs années, ce qu'on appelle un « sans année » (ou non millésimé). « Brut » indique un champagne peu sucré (moins de 12 g de sucre par litre). Détail rare : la Champagne est la seule AOC dispensée d'écrire « Appellation Contrôlée » sur l'étiquette ; le mot Champagne suffit."
+    },
+    {
+      "id": "yquem",
+      "modele": "chateau",
+      "teinte": "or",
+      "champs": {
+        "producteur": "Château d'Yquem",
+        "classement": "Premier Cru Supérieur",
+        "appellation": "Sauternes",
+        "mention": "Appellation Sauternes Contrôlée",
+        "millesime": "2015",
+        "embouteillage": "Mis en bouteille au château",
+        "degre": "14 % vol",
+        "volume": "750 ml"
+      },
+      "region": "bordeaux",
+      "style": "moelleux / liquoreux",
+      "cepages": "Sémillon majoritaire, avec sauvignon blanc",
+      "note": "Sauternes, au sud de Bordeaux, produit des liquoreux grâce à la pourriture noble (Botrytis cinerea), favorisée par les brumes du Ciron. Yquem est le seul « Premier Cru Supérieur » du classement de 1855 : une catégorie créée pour lui seul."
+    },
+    {
+      "id": "huet",
+      "modele": "moderne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Domaine Huet",
+        "cuvee": "Le Haut-Lieu",
+        "appellation": "Vouvray",
+        "mention": "Appellation Vouvray Contrôlée",
+        "sucre": "Moelleux",
+        "millesime": "2018",
+        "degre": "12,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "loire",
+      "style": "moelleux / liquoreux",
+      "cepages": "Chenin blanc",
+      "note": "Vouvray, en Touraine, ne produit que du chenin blanc, du sec au moelleux, et aussi en effervescent. La mention « Moelleux » est ici indispensable pour savoir ce qu'on achète : la même appellation, le même domaine et la même parcelle peuvent donner un vin sec, demi-sec ou moelleux selon l'année."
+    },
+    {
+      "id": "mas-blanc",
+      "modele": "moderne",
+      "teinte": "bordeaux",
+      "champs": {
+        "producteur": "Domaine du Mas Blanc",
+        "appellation": "Banyuls",
+        "mention": "Appellation Banyuls Contrôlée",
+        "cuvee": "Vin doux naturel",
+        "millesime": "2017",
+        "degre": "16,5 % vol",
+        "volume": "500 ml"
+      },
+      "region": "languedoc-roussillon",
+      "style": "muté",
+      "cepages": "Grenache noir majoritaire",
+      "note": "Banyuls, tout au sud du Roussillon, au bord de la Méditerranée, est un vin doux naturel (VDN) : on ajoute de l'alcool neutre pendant la fermentation (le mutage), ce qui stoppe les levures et garde le sucre du raisin. D'où un vin à la fois sucré et autour de 16 % vol. La bouteille de 50 cl est courante pour ces vins."
+    },
+    {
+      "id": "tempier",
+      "modele": "moderne",
+      "teinte": "rose",
+      "champs": {
+        "producteur": "Domaine Tempier",
+        "appellation": "Bandol",
+        "mention": "Appellation Bandol Contrôlée",
+        "cuvee": "Rosé",
+        "millesime": "2023",
+        "degre": "13,5 % vol",
+        "volume": "750 ml",
+        "embouteillage": "Mis en bouteille au domaine, Le Plan du Castellet"
+      },
+      "region": "provence",
+      "style": "rosé",
+      "cepages": "Mourvèdre, grenache, cinsault",
+      "note": "Bandol, près de Toulon, est l'appellation du mourvèdre, un cépage qui aime « voir la mer ». Ses rosés comptent parmi les plus réputés de France et ses rouges vieillissent très bien. Le domaine Tempier, de la famille Peyraud, a beaucoup fait pour la réputation de l'appellation."
+    },
+    {
+      "id": "lapierre",
+      "modele": "moderne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Marcel Lapierre",
+        "appellation": "Morgon",
+        "mention": "Appellation Morgon Contrôlée",
+        "millesime": "2022",
+        "degre": "13 % vol",
+        "volume": "750 ml"
+      },
+      "region": "beaujolais",
+      "style": "rouge",
+      "cepages": "Gamay",
+      "note": "Morgon est l'un des 10 crus du Beaujolais. Piège classique : l'étiquette ne dit pas « Beaujolais » ! Les crus portent seulement leur nom (Morgon, Fleurie, Moulin-à-Vent…). Marcel Lapierre (1950-2010) fut un pionnier des vins nature ; le domaine est aujourd'hui mené par ses enfants."
+    },
+    {
+      "id": "guigal",
+      "modele": "chateau",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "E. Guigal",
+        "cuvee": "Brune et Blonde de Guigal",
+        "appellation": "Côte-Rôtie",
+        "mention": "Appellation Côte-Rôtie Contrôlée",
+        "millesime": "2019",
+        "embouteillage": "Mis en bouteille par E. Guigal, Ampuis, France",
+        "degre": "13,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "rhone",
+      "style": "rouge",
+      "cepages": "Syrah, avec un peu de viognier",
+      "note": "Côte-Rôtie est la plus septentrionale des appellations du Rhône, sur des coteaux vertigineux près de Vienne. La « Côte Brune » et la « Côte Blonde » sont deux secteurs historiques de l'appellation. Guigal est une maison d'Ampuis, à la fois propriétaire de vignes et négociant."
+    },
+    {
+      "id": "macle",
+      "modele": "jura",
+      "teinte": "or",
+      "champs": {
+        "producteur": "Domaine Jean Macle",
+        "appellation": "Château-Chalon",
+        "mention": "Appellation Château-Chalon Contrôlée",
+        "cuvee": "Vin jaune",
+        "millesime": "2016",
+        "degre": "14 % vol",
+        "volume": "62 cl"
+      },
+      "region": "jura",
+      "style": "vin jaune (oxydatif)",
+      "cepages": "Savagnin",
+      "note": "Château-Chalon ne produit que du vin jaune : du savagnin élevé en fût au moins 60 mois sous un voile de levures, sans ouiller (sans refaire le niveau), et vendu au plus tôt six ans et trois mois après la vendange. Le volume de 62 cl n'est pas une erreur : c'est le clavelin, bouteille réservée au vin jaune, censée représenter ce qui reste d'un litre de vin après ce long élevage."
+    },
+    {
+      "id": "leflaive",
+      "modele": "bourgogne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Domaine Leflaive",
+        "appellation": "Puligny-Montrachet",
+        "mention": "Appellation Puligny-Montrachet Contrôlée",
+        "millesime": "2021",
+        "embouteillage": "Mis en bouteille au domaine",
+        "degre": "13 % vol",
+        "volume": "750 ml"
+      },
+      "region": "bourgogne",
+      "style": "blanc sec",
+      "cepages": "Chardonnay",
+      "note": "En Bourgogne, comme presque partout en France, le cépage n'est pas écrit : c'est le lieu qui parle. Puligny-Montrachet, en Côte de Beaune, est une appellation de village pour des blancs de chardonnay. Domaine Leflaive est une référence mondiale, en biodynamie depuis les années 1990."
+    },
+    {
+      "id": "dagueneau",
+      "modele": "moderne",
+      "teinte": "noir",
+      "champs": {
+        "producteur": "Didier Dagueneau",
+        "cuvee": "Silex",
+        "appellation": "Pouilly-Fumé",
+        "mention": "Appellation Pouilly-Fumé Contrôlée",
+        "millesime": "2020",
+        "degre": "13 % vol",
+        "volume": "750 ml"
+      },
+      "region": "loire",
+      "style": "blanc sec",
+      "cepages": "Sauvignon blanc",
+      "note": "Pouilly-Fumé (dite aussi « Blanc Fumé de Pouilly ») fait face à Sancerre, de l'autre côté de la Loire, dans le Centre-Loire. 100 % sauvignon blanc. Le « silex » du nom de cuvée désigne le type de sol de la parcelle, réputé donner des notes de pierre à fusil."
+    },
+    {
+      "id": "arena",
+      "modele": "moderne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Domaine Antoine Arena",
+        "appellation": "Patrimonio",
+        "mention": "Appellation Patrimonio Contrôlée",
+        "cuvee": "Rouge",
+        "millesime": "2021",
+        "degre": "14 % vol",
+        "volume": "750 ml"
+      },
+      "region": "corse",
+      "style": "rouge",
+      "cepages": "Niellucciu",
+      "note": "Patrimonio, au nord de la Corse près de Saint-Florent, est le fief du niellucciu en rouge et du vermentinu en blanc. Le niellucciu est génétiquement identique au sangiovese italien, arrivé sur l'île depuis la Toscane voisine."
+    },
+    {
+      "id": "montus",
+      "modele": "chateau",
+      "teinte": "bordeaux",
+      "champs": {
+        "producteur": "Château Montus",
+        "appellation": "Madiran",
+        "mention": "Appellation Madiran Contrôlée",
+        "millesime": "2018",
+        "embouteillage": "Mis en bouteille au château par Alain Brumont",
+        "degre": "14,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "sud-ouest",
+      "style": "rouge",
+      "cepages": "Tannat majoritaire",
+      "note": "Madiran, entre Gers et Hautes-Pyrénées, est la patrie du tannat, un des cépages les plus tanniques au monde (le nom ne ment pas). Alain Brumont a fait de Montus une référence à partir des années 1980."
+    },
+    {
+      "id": "taylors",
+      "modele": "porto",
+      "teinte": "noir",
+      "champs": {
+        "producteur": "Taylor's",
+        "cuvee": "Vintage Port",
+        "appellation": "Porto",
+        "mention": "Denominação de Origem Controlada",
+        "millesime": "2017",
+        "degre": "20 % vol",
+        "volume": "750 ml"
+      },
+      "region": "hors-france",
+      "pays": "Portugal",
+      "style": "muté",
+      "cepages": "Touriga nacional, touriga franca et autres cépages du Douro",
+      "note": "Le porto vient de la vallée du Douro, au Portugal. C'est un vin muté : on ajoute une eau-de-vie de vin pendant la fermentation. Les « Vintage » sont issus d'une seule grande année, « déclarée » par la maison, et vieillissent des décennies en bouteille."
+    },
+    {
+      "id": "magnin",
+      "modele": "alsace",
+      "teinte": "vert",
+      "champs": {
+        "producteur": "Domaine Louis Magnin",
+        "appellation": "Savoie Chignin-Bergeron",
+        "mention": "Appellation Savoie Protégée",
+        "millesime": "2022",
+        "degre": "13 % vol",
+        "volume": "750 ml",
+        "embouteillage": "Mis en bouteille au domaine, Arbin"
+      },
+      "region": "savoie",
+      "style": "blanc sec",
+      "cepages": "Roussanne (appelée bergeron localement)",
+      "note": "Chignin-Bergeron est un cru de l'AOC Savoie. « Bergeron » est le nom local de la roussanne, un cépage blanc venu du Rhône. Le nom de cru suffit à indiquer le cépage, ce qui est une vraie exception en France."
+    },
+    {
+      "id": "daumas-gassac",
+      "modele": "moderne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Mas de Daumas Gassac",
+        "cuvee": "Rouge",
+        "appellation": "Pays d'Hérault",
+        "mention": "Indication Géographique Protégée",
+        "millesime": "2020",
+        "degre": "13,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "languedoc-roussillon",
+      "style": "rouge",
+      "cepages": "Cabernet sauvignon majoritaire, avec de nombreux cépages complémentaires",
+      "note": "Voici une IGP qui se vend au prix de grands crus ! Mas de Daumas Gassac, près d'Aniane dans l'Hérault, a choisi dès les années 1970 un encépagement (surtout cabernet sauvignon) qui ne rentrait pas dans les règles des AOC locales. Preuve que la catégorie sur l'étiquette ne dit pas tout de la qualité."
+    },
+    {
+      "id": "fevre",
+      "modele": "bourgogne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "William Fèvre",
+        "appellation": "Chablis Grand Cru",
+        "cuvee": "Les Clos",
+        "mention": "Appellation Chablis Grand Cru Contrôlée",
+        "millesime": "2020",
+        "degre": "13 % vol",
+        "volume": "750 ml"
+      },
+      "region": "bourgogne",
+      "style": "blanc sec",
+      "cepages": "Chardonnay",
+      "note": "Chablis, dans l'Yonne, est l'avant-poste nord de la Bourgogne, plus proche de la Champagne que de Beaune. Les Clos est le plus vaste des 7 climats du Grand Cru de Chablis. Comme partout en Bourgogne, le chardonnay n'est pas mentionné : il est sous-entendu."
+    },
+    {
+      "id": "beaucastel",
+      "modele": "chateau",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Château de Beaucastel",
+        "appellation": "Châteauneuf-du-Pape",
+        "mention": "Appellation Châteauneuf-du-Pape Contrôlée",
+        "millesime": "2019",
+        "embouteillage": "Mis en bouteille au château, Famille Perrin",
+        "degre": "14,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "rhone",
+      "style": "rouge",
+      "cepages": "Mourvèdre et grenache en tête, avec les 13 cépages autorisés de l'appellation",
+      "note": "Châteauneuf-du-Pape, dans le Rhône méridional, autorise 13 cépages (on en compte 18 si l'on distingue les variantes de couleur, d'où des chiffres différents selon les sources). Beaucastel est réputé pour assembler les 13. Rouge ici, mais l'appellation produit aussi des blancs."
+    }
+  ]
+}
