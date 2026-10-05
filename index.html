@@ -145,6 +145,7 @@ main{padding-block:20px 110px}
 .daily h3{font-size:19px}
 .daily p{color:var(--muted);font-size:14px}
 .daily.done .ico{background:var(--leaf-soft);color:var(--leaf-deep)}
+@media (max-width:360px){.daily{flex-wrap:wrap}.daily .txt{flex:1 1 calc(100% - 66px)}.daily .btn{flex:1 1 100%}}   /* petit écran : le bouton passe sous le texte */
 
 .unit{margin-bottom:36px}
 .unit-head{--u:var(--grape-btn);--ud:var(--grape-deep);background:var(--u);color:#fff;border-radius:20px;padding:16px 18px;box-shadow:0 4px 0 var(--ud);display:flex;gap:12px;align-items:center}
