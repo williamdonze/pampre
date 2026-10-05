@@ -187,9 +187,10 @@
     // la feuille de correction cache-t-elle la fin de la question ?
     const sheet = document.querySelector(".sheet"), body = document.querySelector(".s-body");
     if (sheet && body) {
-      body.scrollTop = body.scrollHeight; await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      const prev = body.scrollTop; body.scrollTop = body.scrollHeight; await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
       const top = sheet.getBoundingClientRect().top; const items = [...document.querySelectorAll("#s-main *")].filter(e => visible(e) && !e.closest(".map-box svg") && (ownText(e) || e.matches("button,.chip,.choice,.map-box")));
       const hidden = items.filter(e => e.getBoundingClientRect().bottom > top + 2);
+      body.scrollTop = prev;
       if (hidden.length) res.push({ check:"masque-par-feuille", sel:sig(hidden[0]), text:txt(hidden[hidden.length-1]), detail:`${hidden.length} élément(s) de la question restent sous la feuille de correction même en défilant (haut de la feuille : ${Math.round(top)} px)` });
     }
     out.push(...res);
