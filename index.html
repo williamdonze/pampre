@@ -408,6 +408,8 @@ textarea.save{width:100%;min-height:110px;border:2px solid var(--line);border-ra
 
 /* ---------- toasts & modale ---------- */
 .toasts{pointer-events:none;position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:90;display:grid;gap:8px;width:min(92vw,380px)}
+/* pendant une session, en haut sous la barre de progression : ils ne cachent ni les choix ni les statistiques de fin */
+body.en-session .toasts{top:calc(70px + env(safe-area-inset-top,0px));bottom:auto}
 .toast{display:flex;gap:10px;align-items:center;background:var(--paper);border:2px solid var(--gold);border-radius:16px;padding:10px 14px;box-shadow:var(--shadow);font-weight:700;animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
 .toast svg{width:34px;height:34px;flex:none;color:var(--gold-deep)}
 .toast small{display:block;color:var(--muted);font-weight:600}
@@ -596,7 +598,7 @@ function nextToast(){
   const [icon, title, sub] = t;
   const el = h(`<div class="toast" role="status">${icon}<div>${esc(title)}${sub?`<small>${esc(sub)}</small>`:""}</div></div>`);
   document.getElementById("toasts").appendChild(el);
-  setTimeout(() => { el.remove(); nextToast(); }, 2400);
+  setTimeout(() => { el.remove(); nextToast(); }, TOASTQ.length ? 1700 : 2400);   // file plus rapide quand plusieurs toasts attendent
 }
 function confirmBox(title, text, okLabel, onOk, danger = true){
   const m = h(`<div class="modal-bg"><div class="modal" role="dialog" aria-modal="true"><h3>${esc(title)}</h3><p>${esc(text)}</p><div class="row-btns"><button class="btn ghost" data-a="no">Rester</button><button class="btn ${danger?"bad":""}" data-a="ok">${esc(okLabel)}</button></div></div></div>`);
@@ -953,7 +955,7 @@ function runSession(steps, opts){
     <div class="s-top"><div class="wrap"><button class="iconbtn" data-quit aria-label="Quitter">${I.x}</button><div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i></i></div><span class="s-count"></span></div></div>
     <div class="s-body"><div class="wrap" id="s-main"></div></div>
     <div class="s-foot"><div class="wrap"></div></div></div>`);
-  document.body.appendChild(ses); document.body.style.overflow = "hidden";
+  document.body.appendChild(ses); document.body.style.overflow = "hidden"; document.body.classList.add("en-session");
   const main = ses.querySelector("#s-main"), foot = ses.querySelector(".s-foot .wrap"), bar = ses.querySelector(".pbar i"), count = ses.querySelector(".s-count");
   const queue = steps.slice(); const total = steps.length;
   let idx = 0, answered = 0, correct = 0, bonus = 0, current = null, sheet = null, sheetObs = null, retried = new Set(), results = [];
@@ -1029,7 +1031,7 @@ function runSession(steps, opts){
   ses.tabIndex = -1; ses.focus();
   show();
 }
-function closeSession(){ document.querySelectorAll(".session,.sheet,.drag-ghost").forEach(x => x.remove()); document.body.style.overflow = ""; }
+function closeSession(){ document.querySelectorAll(".session,.sheet,.drag-ghost").forEach(x => x.remove()); document.body.style.overflow = ""; document.body.classList.remove("en-session"); }
 
 /* ---------------- lancement des activités ---------------- */
 function findLesson(id){ for (const L of Object.values(LEVELS)) { const l = L.lecons.find(x => x.id === id); if (l) return { L, l }; } return null; }
