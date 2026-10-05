@@ -512,8 +512,23 @@ const illu = k => (IL[k] || IL.raisin)();
 function freshState(){
   return { v:1, xp:0, streak:{count:0,last:null}, days:{}, done:{}, quiz:{}, games:{}, badges:{}, mistakes:[], daily:{}, map:{games:0, best:{}, regions:{}}, gloss:{}, theme:null };
 }
+// Répare une sauvegarde abîmée, d'une ancienne version ou mal importée : chaque champ retrouve le type attendu.
+function normaliser(o){
+  const s = freshState();
+  const obj = v => !!v && typeof v === "object" && !Array.isArray(v);
+  const num = (v, d) => Number.isFinite(v) ? v : d;
+  if (!obj(o)) return s;
+  s.xp = Math.max(0, num(o.xp, 0));
+  if (obj(o.streak)) s.streak = { count:Math.max(0, num(o.streak.count, 0)), last:typeof o.streak.last === "string" ? o.streak.last : null };
+  for (const k of ["days", "done", "games", "badges", "daily", "gloss"]) if (obj(o[k])) s[k] = o[k];
+  if (obj(o.quiz)) s.quiz = Object.fromEntries(Object.entries(o.quiz).filter(([, q]) => obj(q)));
+  if (Array.isArray(o.mistakes)) s.mistakes = o.mistakes.filter(x => typeof x === "string").slice(-60);
+  if (obj(o.map)) s.map = { ...o.map, games:num(o.map.games, 0), best:obj(o.map.best) ? o.map.best : {}, regions:obj(o.map.regions) ? o.map.regions : {} };
+  if (o.theme === "light" || o.theme === "dark") s.theme = o.theme;
+  return s;
+}
 function loadState(){
-  try { const raw = localStorage.getItem(SAVE_KEY); if (raw) return Object.assign(freshState(), JSON.parse(raw)); } catch(e) {}
+  try { const raw = localStorage.getItem(SAVE_KEY); if (raw) return normaliser(JSON.parse(raw)); } catch(e) {}
   return freshState();
 }
 function save(){ try { localStorage.setItem(SAVE_KEY, JSON.stringify(ST)); } catch(e) {} }
@@ -1245,7 +1260,7 @@ function viewProfil(){
   sv.addEventListener("click", e => {
     const a = e.target.closest("[data-a]")?.dataset.a;
     if (a === "copy") { const ta = sv.querySelector("#save-out"); navigator.clipboard?.writeText(code).then(() => { msg.textContent = "Code copié."; }, () => { ta.select(); msg.textContent = "Sélectionné : copie-le avec Ctrl+C ou un appui long."; }) ?? (ta.select(), msg.textContent = "Sélectionné : copie-le avec Ctrl+C."); }
-    if (a === "import") { try { const raw = sv.querySelector("#save-in").value.trim(); const obj = JSON.parse(decodeURIComponent(escape(atob(raw)))); if (typeof obj.xp !== "number") throw 0; ST = Object.assign(freshState(), obj); save(); applyTheme(); render(); toast(I.check, "Sauvegarde importée", `${fmt(ST.xp)} XP récupérés.`); } catch(err) { msg.textContent = "Ce code n'est pas valide. Vérifie qu'il est complet, sans espace ajouté."; } }
+    if (a === "import") { try { const raw = sv.querySelector("#save-in").value.trim(); const obj = JSON.parse(decodeURIComponent(escape(atob(raw)))); if (!obj || typeof obj.xp !== "number") throw 0; ST = normaliser(obj); save(); applyTheme(); render(); toast(I.check, "Sauvegarde importée", `${fmt(ST.xp)} XP récupérés.`); } catch(err) { msg.textContent = "Ce code n'est pas valide. Vérifie qu'il est complet, sans espace ajouté."; } }
     if (a === "reset") confirmBox("Tout effacer ?", "XP, série, badges et niveaux validés seront perdus sur cet appareil. Pense à copier ton code avant.", "Tout effacer", () => { ST = freshState(); save(); MAPGAME = null; render(); toast(I.check, "Progression remise à zéro", "Nouveau départ, nouvelle cave."); });
   });
   el.appendChild(sv);
@@ -1273,7 +1288,12 @@ async function boot(){
   }
   GL_INDEX = Object.fromEntries(Object.keys(D.glossaire.termes).map(k => [k.toLowerCase(), k]));
   ST = loadState(); applyTheme();
-  render();
+  try { render(); }
+  catch(err) {
+    // dernier filet : on ne laisse jamais le joueur bloqué sur l'écran de chargement
+    $app.innerHTML = `<main class="wrap" style="padding-top:60px"><h2>Ta sauvegarde n'a pas pu être lue</h2><p style="margin:8px 0 16px">Elle est peut-être abîmée. Tu peux repartir de zéro sur cet appareil.</p><button class="btn" data-reset>Repartir de zéro</button></main>`;
+    $app.querySelector("[data-reset]").onclick = () => { ST = freshState(); save(); applyTheme(); render(); };
+  }
 }
 boot();
 </script>
