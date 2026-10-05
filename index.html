@@ -980,6 +980,7 @@ Q.carte = (q, onChange) => {
 
 /* ---------------- runner de session ---------------- */
 /* steps : [{kind:"carte", carte}, {kind:"q", q}] ; opts : {title, mode, requeue, onEnd(result)} */
+let nettoyerSession = null;   // retire les écouteurs globaux de la question en cours, même si on quitte par le X
 function runSession(steps, opts){
   closeSession();
   const ses = h(`<div class="session" role="dialog" aria-modal="true" aria-label="${esc(opts.title)}">
@@ -993,6 +994,7 @@ function runSession(steps, opts){
   const garde = fn => e => { if (e?.detail > 0) { const t = performance.now(); if (t - tGarde < 350) return; tGarde = t; } fn(); };
   let idx = 0, answered = 0, correct = 0, bonus = 0, current = null, sheet = null, sheetObs = null, retried = new Set(), results = [];
   const qTotal = steps.filter(s => s.kind === "q").length;
+  nettoyerSession = () => { current?.cleanup?.(); current = null; sheetObs?.disconnect(); };
 
   ses.querySelector("[data-quit]").onclick = () => confirmBox("Quitter la session ?", "Les XP et la progression de cette session seront perdus. Tes erreurs restent dans ta pile, pour les revoir dans le défi du jour.", "Quitter", () => { closeSession(); render(); });
 
@@ -1065,7 +1067,7 @@ function runSession(steps, opts){
   ses.tabIndex = -1; ses.focus();
   show();
 }
-function closeSession(){ document.querySelectorAll(".session,.sheet,.drag-ghost").forEach(x => x.remove()); document.body.style.overflow = ""; document.body.classList.remove("en-session"); majCalques(); }
+function closeSession(){ nettoyerSession?.(); nettoyerSession = null; document.querySelectorAll(".session,.sheet,.drag-ghost").forEach(x => x.remove()); document.body.style.overflow = ""; document.body.classList.remove("en-session"); majCalques(); }
 
 /* ---------------- lancement des activités ---------------- */
 function findLesson(id){ for (const L of Object.values(LEVELS)) { const l = L.lecons.find(x => x.id === id); if (l) return { L, l }; } return null; }

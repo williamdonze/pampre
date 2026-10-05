@@ -265,10 +265,9 @@ def t_tri_ecouteurs(b):
     n0 = n(); ouvrir_tri(a); n1 = n()
     a.p.click("[data-quit]"); a.p.click(".modal [data-a=ok]"); a.p.wait_for_timeout(100); n2 = n()
     # fin normale (Vérifier → Continuer) : le nettoyage est appelé
-    ouvrir_tri(a); a.js("AUDIT.answer(true)"); a.p.click("[data-check]"); a.p.click(".sheet [data-cont]"); a.p.wait_for_timeout(100); n3 = n()
-    ov = a.p.evaluate("document.body.style.overflow")
+    ouvrir_tri(a); a.js("AUDIT.answer(true)"); a.p.click("[data-check]"); a.p.wait_for_timeout(400); a.p.click(".sheet [data-cont]"); a.p.wait_for_timeout(100); n3 = n()
     a.close()
-    return ("OK" if n2 == n0 else "BUG"), f"écouteurs pointermove/pointerup sur window : avant {n0}, pendant {n1}, après X {n2}, après une fin normale {n3 - (n2 - n0)} (+{n2-n0} restés du X)"
+    return ("OK" if n2 == n0 and n3 == n0 else "BUG"), f"écouteurs pointermove/pointerup sur window : avant {n0}, pendant {n1}, après le X {n2}, après une fin normale {n3}"
 
 @T("Tri : utilisable au clavier (question résolue sans souris)")
 def t_tri_clavier(b):
