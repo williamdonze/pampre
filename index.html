@@ -714,26 +714,26 @@ const CHAMP_PROMPT = {
 };
 const STYLES = ["rouge","blanc sec","rosé","effervescent","moelleux / liquoreux","muté","vin jaune (oxydatif)"];
 
-function genLabelQuestions(n){
+function genLabelQuestions(n, rnd = Math.random){   // rnd : tirage déterministe pour le défi du jour
   const regionsNom = Object.fromEntries(D.carteVins.regions.map(r => [r.id, r.nom]));
-  const labels = shuffle(D.etiquettes.etiquettes).slice(0, n);
+  const labels = shuffle(D.etiquettes.etiquettes, rnd).slice(0, n);
   return labels.map((l, i) => {
     const kinds = ["region","style","toucher"];
     const kind = kinds[i % 3];
     if (kind === "region") {
       if (l.region === "hors-france") {
-        return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"De quel pays vient ce vin ?", choix:shuffle(["Portugal","Espagne","Italie","France"]), bonneTexte:l.pays, explication:l.note, id:`gen-pays-${l.id}` };
+        return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"De quel pays vient ce vin ?", choix:shuffle(["Portugal","Espagne","Italie","France"], rnd), bonneTexte:l.pays, explication:l.note, id:`gen-pays-${l.id}` };
       }
-      const others = shuffle(Object.keys(regionsNom).filter(r => r !== l.region)).slice(0, 3).map(r => regionsNom[r]);
-      return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"De quelle région vient ce vin ?", choix:shuffle([regionsNom[l.region], ...others]), bonneTexte:regionsNom[l.region], explication:l.note, id:`gen-region-${l.id}` };
+      const others = shuffle(Object.keys(regionsNom).filter(r => r !== l.region), rnd).slice(0, 3).map(r => regionsNom[r]);
+      return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"De quelle région vient ce vin ?", choix:shuffle([regionsNom[l.region], ...others], rnd), bonneTexte:regionsNom[l.region], explication:l.note, id:`gen-region-${l.id}` };
     }
     if (kind === "style") {
-      const others = shuffle(STYLES.filter(s => s !== l.style)).slice(0, 3);
-      return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"Quel est le style de ce vin ?", choix:shuffle([l.style, ...others]).map(cap), bonneTexte:cap(l.style), explication:`${cap(l.style)}. Cépages : ${l.cepages}. ${l.note}`, id:`gen-style-${l.id}` };
+      const others = shuffle(STYLES.filter(s => s !== l.style), rnd).slice(0, 3);
+      return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"Quel est le style de ce vin ?", choix:shuffle([l.style, ...others], rnd).map(cap), bonneTexte:cap(l.style), explication:`${cap(l.style)}. Cépages : ${l.cepages}. ${l.note}`, id:`gen-style-${l.id}` };
     }
     const avail = Object.keys(CHAMP_PROMPT).filter(k => k === "allergene" || k === "provenance" || l.champs[k]);
     const rare = avail.filter(k => !["allergene","provenance","degre","volume"].includes(k));
-    const cible = pick(Math.random() < .7 && rare.length ? rare : avail);
+    const cible = pick(rnd() < .7 && rare.length ? rare : avail, rnd);
     return { type:"etiquette", etiquette:l.id, mode:"toucher", cible, question:CHAMP_PROMPT[cible][0], explication:`${CHAMP_PROMPT[cible][1]} ${l.note}`, id:`gen-tap-${l.id}-${cible}` };
   });
 }
@@ -1115,7 +1115,7 @@ function buildDaily(){
   if (pool.length < 3) pool = pool.concat(LEVELS[1].lecons[0].verif, LEVELS[1].lecons[1].verif);
   const fresh = shuffle(pool, rnd).filter((q, i, a) => a.indexOf(q) === i).slice(0, 4 - review.length);
   const qs = [...review, ...fresh];
-  const lbl = genLabelQuestions(1)[0];
+  const lbl = genLabelQuestions(1, rnd)[0];
   const ent = pick(D.carteVins.vins.filter(v => v.palier === 1), rnd);
   const mapQ = { type:"carte", id:`map-${ent.vin}`, question:"Où est produit ce vin ? Touche la carte.", entry:ent, explication:"" };
   return [...qs, lbl, mapQ];
