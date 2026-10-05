@@ -466,6 +466,7 @@ const todayStr = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1
 const dayDiff = (a, b) => Math.round((new Date(b + "T12:00") - new Date(a + "T12:00")) / 864e5);
 function seeded(str){ let x = 2166136261; for (const c of str) { x ^= c.charCodeAt(0); x = Math.imul(x, 16777619); } return () => { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return ((x >>> 0) % 1e9) / 1e9; }; }
 const fmt = n => n.toLocaleString("fr-FR");
+const defilement = () => matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";   // pas d'animation de défilement si le joueur l'a demandé
 // titres : « trouve-t-on », « fait-on »… ne se coupent pas sur le trait d'union
 const insecable = html => html.replace(/([\p{L}]+(?:-t)?-(?:on|il|elle|ils|elles|je|tu|nous|vous|ce))(?![\p{L}])/gu, `<span class="nowrap">$1</span>`);
 const fmtCourt = n => n >= 10000 ? `${(Math.floor(n / 100) / 10).toLocaleString("fr-FR")}\u202fk` : fmt(n);   // barre du haut : 123 456 → « 123,4 k »
@@ -675,7 +676,7 @@ function openGlossary(focus){
   const close = () => { document.removeEventListener("keydown", echap); bg.remove(); dr.remove(); document.body.style.overflow = overflowAvant; majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
   bg.onclick = close; dr.querySelector("[data-close]").onclick = close;
   dr.querySelector("#gl-search").oninput = e => draw(e.target.value);
-  dr.addEventListener("click", e => { const g = e.target.closest(".gl"); if (g) { e.stopPropagation(); const k = findTerm(g.dataset.term); if (k) { ST.gloss[k] = 1; checkBadges(); save(); dr.querySelector("#gl-search").value = ""; draw(""); const el = list.querySelector(`#t-${CSS.escape(k.replace(/\s/g,"_"))}`); list.querySelectorAll(".focus").forEach(x=>x.classList.remove("focus")); if (el) { el.classList.add("focus"); el.scrollIntoView({block:"center", behavior:"smooth"}); } } } });
+  dr.addEventListener("click", e => { const g = e.target.closest(".gl"); if (g) { e.stopPropagation(); const k = findTerm(g.dataset.term); if (k) { ST.gloss[k] = 1; checkBadges(); save(); dr.querySelector("#gl-search").value = ""; draw(""); const el = list.querySelector(`#t-${CSS.escape(k.replace(/\s/g,"_"))}`); list.querySelectorAll(".focus").forEach(x=>x.classList.remove("focus")); if (el) { el.classList.add("focus"); el.scrollIntoView({block:"center", behavior:defilement()}); } } } });
   document.body.append(bg, dr); document.body.style.overflow = "hidden"; majCalques();
   dr.querySelector("#gl-search").focus({preventScroll:true});
   if (fkey) requestAnimationFrame(() => list.querySelector(".focus")?.scrollIntoView({block:"center"}));
@@ -1292,7 +1293,7 @@ function mapRound(el){
     if (e.palier === 1 && r.score >= 4000) ST.map.regions[e.region] = 1;
     if (r.score >= 4900) award("oeil-de-lynx");
     afficher(r, true);
-    save(); res.scrollIntoView({ behavior:"smooth", block:"nearest" });
+    save(); res.scrollIntoView({ behavior:defilement(), block:"nearest" });
   };
   const quit = h(`<p style="text-align:center;margin-top:10px"><button class="linkbtn">Abandonner la partie</button></p>`);
   quit.querySelector("button").onclick = () => confirmBox("Abandonner ?", "La partie en cours ne sera pas comptée.", "Abandonner", () => { MAPGAME = null; render(); });

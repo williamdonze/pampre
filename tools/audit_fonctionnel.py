@@ -628,9 +628,9 @@ def t_reduced(b):
     op = a.p.evaluate("getComputedStyle(document.querySelector('.lcard')).opacity")
     a.js("confetti()"); conf = a.p.evaluate("[...document.querySelectorAll('.confetti i')].filter(i => i.getBoundingClientRect().bottom > 0).length")
     a.js("toast(I.star,'t','s')"); t = a.p.evaluate("getComputedStyle(document.querySelector('.toast')).opacity")
-    smooth = "behavior:\"smooth\"" in (RACINE / "index.html").read_text()
+    smooth = a.p.evaluate("defilement()") == "smooth"
     a.close()
-    return ("OK" if op == "1" and t == "1" else "BUG"), f"carte de leçon opacité {op}, toast {t}, confettis visibles {conf} ; scrollIntoView smooth codé en dur (non soumis à prefers-reduced-motion) : {smooth}"
+    return ("OK" if op == "1" and t == "1" and not smooth else "BUG"), f"carte de leçon opacité {op}, toast {t}, confettis visibles {conf} ; défilement animé malgré la préférence : {smooth}"
 
 @T("Accessibilité : régions live et noms des boutons")
 def t_a11y(b):
