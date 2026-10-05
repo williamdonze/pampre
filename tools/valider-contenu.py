@@ -193,6 +193,12 @@ for n in (niveaux or {}).get("niveaux", []):
             if tours > len(qs): err(lieu, f"{tours} tours pour {len(qs)} questions")
             if g.get("seuilBadge", 0) > min(tours, len(qs)): err(lieu, f"seuilBadge {g['seuilBadge']} > {min(tours, len(qs))} questions jouées : badge inatteignable")
             for i, q in enumerate(qs): verifier_question(f"{lieu} q{i}", q)
+    # le moteur n'interverti pas les choix : la bonne réponse ne doit pas toujours être au même rang
+    toutes = [q for l in L.get("lecons", []) for q in l.get("verif", [])] + [q for g in L.get("jeux", []) for q in g.get("questions") or []] + L.get("quiz", {}).get("questions", [])
+    rangs = [q["bonne"] for q in toutes if isinstance(q.get("bonne"), int) and len(q.get("choix") or []) > 2]
+    if len(rangs) >= 8:
+        top = max(set(rangs), key=rangs.count)
+        if rangs.count(top) > .5 * len(rangs): avert(nom, f"{rangs.count(top)}/{len(rangs)} bonnes réponses en position {top + 1} : varier la place de la bonne réponse")
     qz = L.get("quiz", {}).get("questions", [])
     if not 12 <= len(qz) <= 18: avert(f"{nom} › quiz", f"{len(qz)} questions (≈ 15 attendues)")
     types = {q.get("type") for q in qz}

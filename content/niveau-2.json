@@ -150,8 +150,8 @@
         {
           "type": "qcm",
           "question": "Quel cépage domine la rive droite de Bordeaux (Pomerol, Saint-Émilion) ?",
-          "choix": ["Le cabernet sauvignon", "Le merlot", "La syrah", "Le pinot noir"],
-          "bonne": 1,
+          "choix": ["Le merlot", "Le cabernet sauvignon", "La syrah", "Le pinot noir"],
+          "bonne": 0,
           "explication": "Le merlot règne sur la rive droite, sur des sols plus argileux et frais ; le cabernet sauvignon domine la rive gauche, sur les graves."
         }
       ]
@@ -315,8 +315,8 @@
             "Nez explosif de litchi et de rose.",
             "Bouche grasse, peu acide, un rien sucrée."
           ],
-          "choix": ["Riesling", "Gewurztraminer", "Sauvignon blanc", "Chardonnay"],
-          "bonne": 1,
+          "choix": ["Riesling", "Sauvignon blanc", "Chardonnay", "Gewurztraminer"],
+          "bonne": 3,
           "explication": "Litchi et rose, acidité basse, texture grasse : le gewurztraminer ne se cache pas. Le riesling serait bien plus vif."
         }
       ]
@@ -389,8 +389,8 @@
         {
           "type": "qcm",
           "question": "Quelle appellation impose au moins 50 % de mourvèdre dans ses rouges ?",
-          "choix": ["Cahors", "Bandol", "Madiran", "Chinon"],
-          "bonne": 1,
+          "choix": ["Cahors", "Madiran", "Bandol", "Chinon"],
+          "bonne": 2,
           "explication": "Bandol, en Provence, impose au moins 50 % de mourvèdre. Cahors est le fief du côt (malbec), Madiran celui du tannat, Chinon celui du cabernet franc."
         }
       ]
@@ -450,8 +450,8 @@
         {
           "type": "qcm",
           "question": "Une étiquette européenne indique « Syrah ». Que peux-tu en déduire ?",
-          "choix": ["Le vin contient 100 % de syrah", "Le vin contient au moins 85 % de syrah", "Le vin contient au moins 50 % de syrah", "Rien : la mention est libre"],
-          "bonne": 1,
+          "choix": ["Le vin contient au moins 85 % de syrah", "Le vin contient 100 % de syrah", "Le vin contient au moins 50 % de syrah", "Rien : la mention est libre"],
+          "bonne": 0,
           "explication": "Un seul cépage nommé = au moins 85 % de ce cépage. Le reste (15 % au plus) peut venir d'autres cépages."
         },
         {
@@ -492,8 +492,8 @@
           "type": "indices",
           "question": "Quel cépage rouge ?",
           "indices": ["Robe très sombre, presque noire.", "Nez de cassis et de cèdre, une pointe de poivron vert.", "Tanins fermes, acidité vive, longue garde."],
-          "choix": ["Merlot", "Cabernet sauvignon", "Gamay", "Grenache"],
-          "bonne": 1,
+          "choix": ["Merlot", "Gamay", "Grenache", "Cabernet sauvignon"],
+          "bonne": 3,
           "explication": "Cassis, cèdre, poivron vert et tanins fermes : le cabernet sauvignon. Le poivron vient des pyrazines, quand le raisin manque un peu de maturité."
         },
         {
@@ -516,8 +516,8 @@
           "type": "indices",
           "question": "Quel cépage rouge ?",
           "indices": ["Robe pâle, aux reflets déjà orangés.", "Nez de rose fanée, de cerise et de goudron.", "Tanins très fermes, acidité très élevée."],
-          "choix": ["Pinot noir", "Nebbiolo", "Merlot", "Gamay"],
-          "bonne": 1,
+          "choix": ["Pinot noir", "Merlot", "Nebbiolo", "Gamay"],
+          "bonne": 2,
           "explication": "Robe pâle mais tanins puissants, rose et goudron : le nebbiolo du Piémont. Le pinot noir aussi est pâle, mais bien moins tannique."
         },
         {
@@ -540,8 +540,8 @@
           "type": "indices",
           "question": "Quel cépage blanc ?",
           "indices": ["Robe or pâle.", "Nez d'abricot, de pêche et de fleurs blanches.", "Texture grasse, acidité basse, chaleur de l'alcool."],
-          "choix": ["Riesling", "Viognier", "Sauvignon blanc", "Chenin"],
-          "bonne": 1,
+          "choix": ["Viognier", "Riesling", "Sauvignon blanc", "Chenin"],
+          "bonne": 0,
           "explication": "Abricot, pêche, gras et peu d'acidité : le viognier, comme à Condrieu. Riesling, sauvignon et chenin sont tous trois très vifs."
         },
         {
@@ -646,8 +646,8 @@
         {
           "type": "qcm",
           "question": "Quel cépage a pour parents le cabernet franc et le sauvignon blanc ?",
-          "choix": ["Le merlot", "Le cabernet sauvignon", "Le malbec", "La syrah"],
-          "bonne": 1,
+          "choix": ["Le merlot", "Le malbec", "La syrah", "Le cabernet sauvignon"],
+          "bonne": 3,
           "explication": "Le cabernet sauvignon est né d'un croisement spontané entre cabernet franc et sauvignon blanc, découvert grâce à l'ADN en 1997. Le merlot est aussi un enfant du cabernet franc, mais avec la magdeleine noire des Charentes."
         }
       ]
