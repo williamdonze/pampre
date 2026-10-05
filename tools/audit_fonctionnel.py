@@ -173,7 +173,7 @@ def t_serie_tz(b):
     a = App(b, etat(xp=50, streak={"count": 10, "last": "2026-10-06"}), heure="2026-10-05T20:00:00-07:00", tz="America/Los_Angeles")
     avant = a.p.evaluate("streakNow()"); a.js("gainXP(1)"); apres = a.st()["streak"]
     a.close()
-    return ("OK" if apres["count"] >= 10 else "BUG"), f"série affichée avant : {avant} ; après un gain d'XP : {apres} (la série de 10 jours retombe à 1 car le dernier jour enregistré est « dans le futur »)"
+    return ("OK" if apres["count"] >= 10 else "BUG"), f"série affichée avant : {avant} ; après un gain d'XP : {apres}"
 
 
 # ===================================================================== défi quotidien

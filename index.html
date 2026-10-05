@@ -575,7 +575,9 @@ function gainXP(n, why){
   const t = todayStr();
   ST.days[t] = (ST.days[t] || 0) + n;
   const s = ST.streak;
-  if (s.last !== t) { s.count = (s.last && dayDiff(s.last, t) === 1) ? s.count + 1 : 1; s.last = t; if (s.count > 1) toast(I.flame, `Série de ${s.count} jours !`, "Reviens demain pour la prolonger."); }
+  const ecart = s.last ? dayDiff(s.last, t) : null;
+  // ecart ≤ 0 : même jour, ou dernier jour « dans le futur » après un voyage vers l'ouest → la série ne bouge pas
+  if (ecart === null || ecart > 0) { s.count = ecart === 1 ? s.count + 1 : 1; s.last = t; if (s.count > 1) toast(I.flame, `Série de ${s.count} jours !`, "Reviens demain pour la prolonger."); }
   const after = rankOf(ST.xp).cur;
   if (after.nom !== before.nom) toast(I.star, `Nouveau rang : ${after.nom}`, `${fmt(ST.xp)} XP au compteur.`);
   checkBadges(); save(); renderTop();
