@@ -159,6 +159,7 @@ main{padding-block:20px 110px}
 .node-wrap .start{position:absolute;top:-44px;background:var(--paper);color:var(--grape);border:2px solid var(--line);border-radius:12px;padding:4px 12px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;animation:bob 1.6s ease-in-out infinite}
 .node-wrap .start::after{content:"";position:absolute;left:50%;bottom:-8px;width:12px;height:12px;background:var(--paper);border-right:2px solid var(--line);border-bottom:2px solid var(--line);transform:translateX(-50%) rotate(45deg)}
 @keyframes bob{50%{transform:translateY(-4px)}}
+.node-wrap.has-start{margin-top:32px} /* place réservée à la bulle, qui sinon recouvre le libellé du nœud précédent */
 .bonus-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
 .bonus{padding:14px;border-radius:16px;border:2px dashed var(--line);color:var(--muted)}
 .bonus b{display:block;color:var(--ink);font-family:var(--f-display);font-size:17px}
@@ -1128,7 +1129,7 @@ function viewHome(){
       const sub = kind === "lecon" ? `${L.lecons.find(l => l.id === step).duree} min` : kind === "quiz" && ST.quiz[n.id] ? `meilleur : ${ST.quiz[n.id].best} %` : kind === "jeu" && ST.games[step.slice(4)] !== undefined ? `record : ${ST.games[step.slice(4)]}` : "";
       const offset = Math.round(Math.sin(i * 1.15) * 70);
       const icon = !open ? I.lock : kind === "quiz" ? I.trophy : kind === "jeu" ? I.game : done ? I.check.replace('fill="currentColor"','fill="rgba(0,0,0,.18)"') : I.lesson;
-      const w = h(`<div class="node-wrap ${open?"":"locked"}" style="transform:translateX(${offset}px)">
+      const w = h(`<div class="node-wrap ${open?"":"locked"} ${isCur?"has-start":""}" style="transform:translateX(${offset}px)">
         ${isCur ? `<span class="start">${ST.xp ? "Continuer" : "Commencer"}</span>` : ""}
         <button class="node ${kind==="quiz"?"quiz":""} ${done?"done":isCur?"current":open?"":"locked"}" ${open?"":"disabled"} aria-label="${esc(label)}${done?" (terminé)":open?"":" (verrouillé)"}">${icon}</button>
         <div class="node-label">${esc(label)}${sub?`<br><small style="color:var(--muted);font-weight:700">${esc(sub)}</small>`:""}</div></div>`);
