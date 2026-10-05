@@ -1366,7 +1366,12 @@ function viewProfil(){
 function applyTheme(){ if (ST.theme) document.documentElement.setAttribute("data-theme", ST.theme); else document.documentElement.removeAttribute("data-theme"); }
 
 /* ---------------- démarrage ---------------- */
-async function getJSON(u){ const r = await fetch(u); if (!r.ok) throw new Error(`${u} : ${r.status}`); return r.json(); }
+async function getJSON(u){
+  const echec = (raison, detail) => Object.assign(new Error(detail), { fichier:u, raison });
+  let r; try { r = await fetch(u); } catch(e) { throw echec("injoignable", e.message); }
+  if (!r.ok) throw echec(r.status === 404 ? "introuvable" : `inaccessible (erreur ${r.status})`, `${u} : HTTP ${r.status}`);
+  try { return await r.json(); } catch(e) { throw echec("mal formé (JSON invalide)", e.message); }
+}
 async function boot(){
   $app.innerHTML = `<main class="wrap" style="text-align:center;padding-top:80px">${mascot("happy")}<p style="font-weight:800;color:var(--muted)">On débouche les bouteilles…</p></main>`;
   try {
@@ -1374,7 +1379,11 @@ async function boot(){
     keys.forEach((k, i) => D[k] = vals[i]);
     await Promise.all(D.niveaux.niveaux.filter(n => n.contenu).map(async n => { LEVELS[n.id] = await getJSON(n.contenu); }));
   } catch(err) {
-    $app.innerHTML = `<main class="wrap" style="padding-top:60px"><h2>Le contenu n'a pas pu être chargé</h2><p style="margin-top:8px">${esc(err.message)}. Recharge la page ; si le problème continue, vérifie que le dossier <code>content</code> est publié avec la page.</p></main>`;
+    $app.innerHTML = `<main class="wrap" style="padding-top:60px"><h2>Le contenu n'a pas pu être chargé</h2>
+      <p style="margin:8px 0 16px">${err.fichier ? `Le fichier <code>${esc(err.fichier)}</code> est ${esc(err.raison)}.` : "Une erreur est survenue au démarrage."} Vérifie que le dossier <code>content</code> est publié avec la page, puis réessaie.</p>
+      <button class="btn" data-retry>Réessayer</button>
+      <details style="margin-top:16px;color:var(--muted);font-size:13px"><summary>Détail technique</summary><code>${esc(err.message)}</code></details></main>`;
+    $app.querySelector("[data-retry]").onclick = () => location.reload();
     return;
   }
   // identifiants stables pour les questions (pile d'erreurs, défi)
