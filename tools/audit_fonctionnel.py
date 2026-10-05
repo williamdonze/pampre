@@ -547,12 +547,16 @@ def t_scroll(b):
     a.close()
     return ("OK" if r == ["hidden", "", ""] and y1 == y0 else "BUG"), f"overflow du body : pendant {r[0]!r}, après X {r[1]!r}, après fin {r[2]!r} ; glossaire ouvert : défilement de la page derrière {y0} → {y1}"
 
-@T("Robustesse : quitter une session « ne sera pas enregistré »")
+@T("Robustesse : quitter une session, message fidèle ; X de l'écran de fin")
 def t_quitter(b):
     a = App(b); a.js("startQuiz(1)"); a.p.wait_for_timeout(100); a.js("AUDIT.answer(false)"); a.p.click("[data-check]")
-    a.p.click(".sheet [data-cont]"); a.p.click("[data-quit]"); a.p.click(".modal [data-a=ok]")
-    m = a.st()["mistakes"]; a.close()
-    return ("OK" if not m else "BUG"), f"pile d'erreurs après avoir quitté : {m} (le message promet que rien n'est enregistré)"
+    a.p.click(".sheet [data-cont]"); a.p.click("[data-quit]"); msg = a.p.evaluate("document.querySelector('.modal p').textContent")
+    a.p.click(".modal [data-a=ok]"); st = a.st()
+    a.js("startStep(1,'n1-l1')"); a.js("return await AUDIT.playThrough(true)"); a.p.click("[data-quit]"); a.p.wait_for_timeout(100)
+    fin = a.p.evaluate("[!!document.querySelector('.modal'), !!document.querySelector('.session')]")
+    a.close()
+    ok = st["mistakes"] == ["quiz1-0"] and st["xp"] == 0 and "erreurs restent" in msg and fin == [False, False]
+    return ("OK" if ok else "BUG"), f"message : « {msg} » ; après avoir quitté : XP {st['xp']}, pile {st['mistakes']} ; X sur l'écran de fin → modale {fin[0]}, session encore ouverte {fin[1]}"
 
 
 # ===================================================================== profil, glossaire, divers

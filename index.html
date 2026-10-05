@@ -983,7 +983,7 @@ function runSession(steps, opts){
   let idx = 0, answered = 0, correct = 0, bonus = 0, current = null, sheet = null, sheetObs = null, retried = new Set(), results = [];
   const qTotal = steps.filter(s => s.kind === "q").length;
 
-  ses.querySelector("[data-quit]").onclick = () => confirmBox("Quitter la session ?", "Ce que tu as fait dans cette session ne sera pas enregistré.", "Quitter", () => { closeSession(); render(); });
+  ses.querySelector("[data-quit]").onclick = () => confirmBox("Quitter la session ?", "Les XP et la progression de cette session seront perdus. Tes erreurs restent dans ta pile, pour les revoir dans le défi du jour.", "Quitter", () => { closeSession(); render(); });
 
   function progress(){ const p = Math.min(1, idx / Math.max(total, queue.length)); bar.style.width = (p * 100) + "%"; count.textContent = qTotal ? `${Math.min(answered, qTotal)}/${qTotal}` : ""; }
   function show(){
@@ -1037,6 +1037,7 @@ function runSession(steps, opts){
     current?.cleanup?.(); current = null;
     const res = { correct, total:qTotal, bonus, results };
     const out = opts.onEnd(res) || {};
+    ses.querySelector("[data-quit]").onclick = () => { closeSession(); render(); };   // tout est enregistré : on sort sans avertissement
     main.innerHTML = ""; foot.innerHTML = "";
     const pct = qTotal ? Math.round(correct / qTotal * 100) : 100;
     main.appendChild(h(`<div class="endcard">${mascot(out.mood || "happy")}<h2>${esc(out.title || "Session terminée !")}</h2>${out.text ? `<p style="max-width:44ch">${esc(out.text)}</p>` : ""}
