@@ -639,7 +639,8 @@ def t_a11y(b):
     noms = a.p.evaluate("[...document.querySelectorAll('#stats button')].map(b => [b.textContent.trim(), b.getAttribute('aria-label'), b.title])")
     lang_title = a.p.evaluate("[document.title, document.querySelector('title').parentElement.tagName]")
     a.close()
-    return "INFO", f"#app aria-live={live!r} (toute l'appli est relue à chaque rendu) ; boutons de stats (texte, aria-label, title) : {noms} ; <title> placé dans {lang_title[1]}"
+    ok = live is None and all(n[1] for n in noms)
+    return ("OK" if ok else "BUG"), f"#app aria-live={live!r} ; boutons de stats (texte, aria-label, title) : {noms} ; <title> placé dans {lang_title[1]}"
 
 
 def main(args):

@@ -39,6 +39,7 @@
   --bad-btn:#D3433A; --on-bad:#fff; --on-gold:#3a2600;
   --gold-ink:#8A5E00; --flame-ink:#B04F08;
   --grape-ink:#8B1E3F; --grape-btn:#8B1E3F; --on-plum:#fff; --muted-ink:#6B575C;
+  --focus:#5E0F28;   /* anneau de focus : ≥ 3:1 sur tous les fonds */
   --plum:#6B4FA0;
   --plum-soft:#ECE5F7;
   --locked:#D9CDC3;
@@ -60,7 +61,7 @@
     --gold:#F0B83A; --gold-deep:#B07C0E; --gold-soft:#3A2E14;
     --leaf:#79C82A; --leaf-deep:#4F8A12; --leaf-soft:#1F3014;
     --bad:#F06A60; --bad-deep:#A9372F; --bad-soft:#3C1A18; --leaf-ink:#8FD44F; --bad-ink:#FF8F86;
-    --leaf-btn:#79C82A; --leaf-btn-deep:#4F8A12; --on-leaf:#14210A; --bad-btn:#F06A60; --on-bad:#2A0F0C; --gold-ink:#F0B83A; --flame-ink:#E8730C; --grape-ink:#EC7398; --grape-btn:#A92F57; --on-plum:#1A1013; --muted-ink:#B8A2A7;
+    --leaf-btn:#79C82A; --leaf-btn-deep:#4F8A12; --on-leaf:#14210A; --bad-btn:#F06A60; --on-bad:#2A0F0C; --gold-ink:#F0B83A; --flame-ink:#E8730C; --grape-ink:#EC7398; --grape-btn:#A92F57; --on-plum:#1A1013; --muted-ink:#B8A2A7; --focus:#F0B83A;
     --plum:#A991D6; --plum-soft:#2C2340;
     --locked:#3E3237; --locked-deep:#2B2226;
     --sea:#15232B; --land:#2A2024;
@@ -74,7 +75,7 @@
   --gold:#F0B83A; --gold-deep:#B07C0E; --gold-soft:#3A2E14;
   --leaf:#79C82A; --leaf-deep:#4F8A12; --leaf-soft:#1F3014;
   --bad:#F06A60; --bad-deep:#A9372F; --bad-soft:#3C1A18; --leaf-ink:#8FD44F; --bad-ink:#FF8F86;
-    --leaf-btn:#79C82A; --leaf-btn-deep:#4F8A12; --on-leaf:#14210A; --bad-btn:#F06A60; --on-bad:#2A0F0C; --gold-ink:#F0B83A; --flame-ink:#E8730C; --grape-ink:#EC7398; --grape-btn:#A92F57; --on-plum:#1A1013; --muted-ink:#B8A2A7;
+    --leaf-btn:#79C82A; --leaf-btn-deep:#4F8A12; --on-leaf:#14210A; --bad-btn:#F06A60; --on-bad:#2A0F0C; --gold-ink:#F0B83A; --flame-ink:#E8730C; --grape-ink:#EC7398; --grape-btn:#A92F57; --on-plum:#1A1013; --muted-ink:#B8A2A7; --focus:#F0B83A;
   --plum:#A991D6; --plum-soft:#2C2340;
   --locked:#3E3237; --locked-deep:#2B2226;
   --sea:#15232B; --land:#2A2024;
@@ -85,7 +86,7 @@
 html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
 button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:8px}
 h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
 p{margin:0}
 .wrap{max-width:680px;margin:0 auto;padding-inline:16px}
@@ -429,7 +430,7 @@ textarea.save{width:100%;min-height:110px;border:2px solid var(--line);border-ra
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
-<div id="app" aria-live="polite"></div>
+<div id="app"></div>
 <div class="toasts" id="toasts"></div>
 
 <script>
@@ -1170,7 +1171,7 @@ function shell(){
 function renderTop(){
   const s = streakNow(); const { cur } = rankOf(ST.xp);
   const el = document.getElementById("stats"); if (!el) return;
-  el.innerHTML = `<span class="rank-chip">${esc(cur.nom)}</span><button class="stat flame ${s?"":"off"}" data-go="profil" title="Série de jours">${I.flame}${s}</button><button class="stat xp" data-go="profil" title="Points d'expérience">${I.gem}${fmtCourt(ST.xp)}</button>`;
+  el.innerHTML = `<span class="rank-chip">${esc(cur.nom)}</span><button class="stat flame ${s?"":"off"}" data-go="profil" title="Série de jours" aria-label="Série : ${s} jour${s>1?"s":""}">${I.flame}${s}</button><button class="stat xp" data-go="profil" title="Points d'expérience" aria-label="${fmt(ST.xp)} points d'expérience">${I.gem}${fmtCourt(ST.xp)}</button>`;
   document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-current", t.dataset.go === VIEW ? "page" : "false"));
 }
 function render(){
