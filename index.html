@@ -858,19 +858,34 @@ Q.assoc = (q, onChange) => {
 Q.tri = (q, onChange) => {
   const items = shuffle(q.items.map(([t, c], i) => ({t, c, i})));
   const place = {}; let sel = null, locked = false;
-  const el = h(`<div><div class="cats">${q.categories.map((c, k) => `<div class="cat" data-cat="${k}"><b>${esc(c)}</b></div>`).join("")}</div><div class="pool"></div><p class="lbl-note">Glisse chaque étiquette dans sa colonne, ou touche-la puis touche la colonne.</p></div>`);
+  const el = h(`<div><div class="cats">${q.categories.map((c, k) => `<div class="cat" data-cat="${k}" tabindex="0" role="button" aria-label="Ranger dans « ${esc(c)} »"><b>${esc(c)}</b></div>`).join("")}</div><div class="pool"></div><p class="lbl-note">Glisse chaque étiquette dans sa colonne, ou touche-la puis touche la colonne.</p></div>`);
   const poolEl = el.querySelector(".pool");
   const draw = () => {
     el.querySelectorAll(".cat").forEach(c => { c.querySelectorAll(".chip").forEach(x => x.remove()); });
     items.forEach((it, k) => { if (place[k] !== undefined) el.querySelector(`.cat[data-cat="${place[k]}"]`).insertAdjacentHTML("beforeend", `<button type="button" class="chip" data-it="${k}">${esc(it.t)}</button>`); });
-    poolEl.innerHTML = items.map((it, k) => place[k] === undefined ? `<button type="button" class="chip ${sel===k?"picked":""}" data-it="${k}">${esc(it.t)}</button>` : "").join("");
+    poolEl.innerHTML = items.map((it, k) => place[k] === undefined ? `<button type="button" class="chip ${sel===k?"picked":""}" aria-pressed="${sel===k}" data-it="${k}">${esc(it.t)}</button>` : "").join("");
+  };
+  // toucher (ou Entrée / Espace au clavier) : sélectionne l'étiquette, ou la renvoie dans la réserve si elle est déjà rangée
+  const tap = (k, clavier) => {
+    if (place[k] !== undefined) drop(k, null); else { sel = sel === k ? null : k; draw(); }
+    if (clavier) (sel !== null ? el.querySelector(".cat") : el.querySelector(".pool .chip"))?.focus();
   };
   const drop = (k, cat) => { if (cat === null) delete place[k]; else place[k] = cat; sel = null; draw(); onChange(); };
   let drag = null, onMove, onUp;
   el.addEventListener("pointerdown", e => { if (locked) return; const b = e.target.closest(".chip"); if (!b) return; drag = { k:+b.dataset.it, x:e.clientX, y:e.clientY, src:b, ghost:null }; });
   window.addEventListener("pointermove", onMove = e => { if (!drag) return; if (!drag.ghost && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 8) { drag.ghost = drag.src.cloneNode(true); drag.ghost.classList.add("drag-ghost","picked"); document.body.appendChild(drag.ghost); drag.src.style.opacity = ".3"; } if (drag.ghost) { e.preventDefault(); drag.ghost.style.left = e.clientX + "px"; drag.ghost.style.top = e.clientY + "px"; el.querySelectorAll(".cat").forEach(c => c.classList.remove("hot")); document.elementFromPoint(e.clientX, e.clientY)?.closest(".cat")?.classList.add("hot"); } }, { passive:false });
-  window.addEventListener("pointerup", onUp = e => { if (!drag) return; const d = drag; drag = null; if (d.ghost) { d.ghost.remove(); el.querySelectorAll(".cat").forEach(c => c.classList.remove("hot")); const cat = document.elementFromPoint(e.clientX, e.clientY)?.closest(".cat"); if (cat && el.contains(cat)) drop(d.k, +cat.dataset.cat); else { d.src.style.opacity = ""; } } else { if (place[d.k] !== undefined) drop(d.k, null); else { sel = sel === d.k ? null : d.k; draw(); } } });
-  el.addEventListener("click", e => { if (locked || sel === null) return; if (e.target.closest(".chip")) return; const cat = e.target.closest(".cat"); if (cat) drop(sel, +cat.dataset.cat); });
+  window.addEventListener("pointerup", onUp = e => { if (!drag) return; const d = drag; drag = null; if (d.ghost) { d.ghost.remove(); el.querySelectorAll(".cat").forEach(c => c.classList.remove("hot")); const cat = document.elementFromPoint(e.clientX, e.clientY)?.closest(".cat"); if (cat && el.contains(cat)) drop(d.k, +cat.dataset.cat); else { d.src.style.opacity = ""; } } else tap(d.k); });
+  el.addEventListener("click", e => {
+    if (locked) return;
+    const chip = e.target.closest(".chip");
+    if (chip) { if (e.detail === 0) tap(+chip.dataset.it, true); return; }   // detail 0 : activé au clavier
+    const cat = e.target.closest(".cat"); if (cat && sel !== null) drop(sel, +cat.dataset.cat);
+  });
+  el.addEventListener("keydown", e => {
+    const cat = e.target.closest?.(".cat"); if (!cat || e.target !== cat || locked || (e.key !== "Enter" && e.key !== " ")) return;
+    e.preventDefault(); e.stopPropagation();   // sinon Entrée déclencherait « Vérifier »
+    if (sel !== null) { drop(sel, +cat.dataset.cat); el.querySelector(".pool .chip")?.focus(); }
+  });
   draw();
   return { el, ready:() => Object.keys(place).length === items.length,
     cleanup(){ window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); },

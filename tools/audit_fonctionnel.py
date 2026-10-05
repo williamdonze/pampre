@@ -270,14 +270,25 @@ def t_tri_ecouteurs(b):
     a.close()
     return ("OK" if n2 == n0 else "BUG"), f"écouteurs pointermove/pointerup sur window : avant {n0}, pendant {n1}, après X {n2}, après une fin normale {n3 - (n2 - n0)} (+{n2-n0} restés du X)"
 
-@T("Tri : utilisable au clavier")
+@T("Tri : utilisable au clavier (question résolue sans souris)")
 def t_tri_clavier(b):
     a = App(b); ouvrir_tri(a)
-    a.p.focus(".pool .chip >> nth=0"); a.p.keyboard.press("Enter"); a.p.wait_for_timeout(50)
-    picked = a.p.evaluate("!!document.querySelector('.pool .chip.picked')")
-    cats_focusables = a.p.evaluate("[...document.querySelectorAll('.cat')].some(c => c.tabIndex >= 0)")
+    q = a.p.evaluate("LEVELS[1].jeux[1].questions[0]")
+    a.p.focus(".pool .chip >> nth=0")
+    for _ in range(len(q["items"])):
+        txt = a.p.evaluate("document.activeElement.textContent")
+        cat = next(c for t, c in q["items"] if t == txt)
+        a.p.keyboard.press("Enter")                                  # sélectionne → le focus passe sur la 1re colonne
+        if not a.p.evaluate("document.activeElement.classList.contains('cat')"): break
+        for _ in range(30):
+            if a.p.evaluate(f"document.activeElement.dataset.cat === '{cat}'"): break
+            a.p.keyboard.press("Tab")
+        a.p.keyboard.press("Enter")                                  # range → le focus revient sur la réserve
+    pret = a.p.evaluate("!document.querySelector('[data-check]').disabled")
+    a.p.focus("[data-check]"); a.p.keyboard.press("Enter"); a.p.wait_for_timeout(100)
+    ok = a.p.evaluate("!!document.querySelector('.sheet.ok')")
     a.close()
-    return ("OK" if picked and cats_focusables else "BUG"), f"Entrée sur une étiquette la sélectionne : {picked} ; colonnes atteignables au clavier : {cats_focusables}"
+    return ("OK" if pret and ok else "BUG"), f"toutes les étiquettes rangées au clavier : {pret} ; réponse juste : {ok}"
 
 
 # ===================================================================== association / ordre
