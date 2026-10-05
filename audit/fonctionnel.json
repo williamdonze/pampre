@@ -1,0 +1,296 @@
+[
+ {
+  "test": "Progression : déblocage des nœuds dans l'ordre",
+  "statut": "OK",
+  "detail": "avant : [False, True, True, True, True, True, True], après leçon 1 : [False, False, True, True, True, True, True] (disabled)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Progression : XP d'une leçon (première fois puis révision)",
+  "statut": "OK",
+  "detail": "1re fois +19 XP (attendu 19), révision +9 (attendu 9), toasts de badge : ['Badge débloqué : Premier verre']",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Progression : seuil de 80 % au quiz (11/15 refusé, 12/15 accepté)",
+  "statut": "OK",
+  "detail": "[(11, {'best': 73, 'passed': False}, True, False), (12, {'best': 80, 'passed': True}, False, True)]",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Progression : bonus de 40 XP du quiz une seule fois ; badges une seule fois",
+  "statut": "OK",
+  "detail": "1er passage +121 XP (attendu 121), 2e +81 (attendu 81) ; badges : ['Badge débloqué : Premier verre', \"Badge débloqué : Les bases, c'est fait\", 'Badge débloqué : Sans faute']",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Progression : rang qui change au bon seuil",
+  "statut": "OK",
+  "detail": "toasts ['Nouveau rang : Amateur'], rang affiché Amateur",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Progression : badge « Lecteur d'étiquettes » à 8/10",
+  "statut": "OK",
+  "detail": "[(7, False), (8, True)]",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Progression : badge « Lexicophile » (20 définitions) via « Voir aussi »",
+  "statut": "BUG",
+  "detail": "20 définitions consultées, badge attribué : False (le clic « Voir aussi » enregistre le mot mais n'appelle pas checkBadges)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Série : même jour, lendemain, trou de 2 jours, minuit, changements d'heure",
+  "statut": "OK",
+  "detail": "même jour : 3 (attendu 3) ; lendemain : 4 (attendu 4) ; trou de 2 jours : 1 (attendu 1) ; juste après minuit : 4 (attendu 4) ; passage à l'heure d'été (29/03) : 6 (attendu 6) ; passage à l'heure d'hiver (25/10) : 6 (attendu 6)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Série : affichage (flamme grisée à 0, série perdue après 2 jours)",
+  "statut": "OK",
+  "detail": "classe « stat flame off », valeur « 0 », bulle « Content de te revoir ! Une petite leçon pour relancer la série ? »",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Série : voyage vers l'ouest (fuseau horaire qui recule d'un jour)",
+  "statut": "BUG",
+  "detail": "série affichée avant : 10 ; après un gain d'XP : {'count': 1, 'last': '2026-10-05'} (la série de 10 jours retombe à 1 car le dernier jour enregistré est « dans le futur »)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Défi : mêmes questions toute la journée",
+  "statut": "BUG",
+  "detail": "1er tirage ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-tempier', 'map-Vouvray Le Haut-Lieu, Domaine Huet'] ; 2e tirage (même jour) ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-bollinger', 'map-Vouvray Le Haut-Lieu, Domaine Huet'] ; différences : [('gen-region-tempier', 'gen-region-bollinger')]",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Défi : questions différentes le lendemain, sans doublon",
+  "statut": "OK",
+  "detail": "10/05 ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1'] · 11/05 ['n1-l1-v1', 'n1-l4-v1', 'n1-l2-v0', 'n1-l1-v0'] · doublons : []",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Défi : nouveau joueur, et bonus de 30 XP une seule fois par jour",
+  "statut": "OK",
+  "detail": "questions : ['n1-l1-v1', 'n1-l2-v1', 'n1-l2-v0', 'n1-l1-v0', 'gen-region-montus', 'map-Château-Chalon, Domaine Jean Macle'] ; 1er défi +54 XP (attendu 54), 2e +24 (attendu 24) ; erreurs JS : []",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Tri : glisser-déposer à la souris, dépôt hors colonne, reprise d'une étiquette placée",
+  "statut": "OK",
+  "detail": "placé : 1 ; après dépôt hors colonne : [1, 7, ['', '', '', '', '', '', '']] ; déplacé vers colonne 0 : 1 ; fantômes restants : 0",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Tri : glisser-déposer au toucher (écran tactile émulé)",
+  "statut": "OK",
+  "detail": "après glisser tactile : 1 placée(s) ; après toucher-toucher : 2",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Tri : écouteurs globaux retirés après avoir quitté par le X",
+  "statut": "BUG",
+  "detail": "écouteurs pointermove/pointerup sur window : avant 1, pendant 3, après X 3, après une fin normale 1 (+2 restés du X)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Tri : utilisable au clavier",
+  "statut": "BUG",
+  "detail": "Entrée sur une étiquette la sélectionne : False ; colonnes atteignables au clavier : False",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Association : changer d'avis, défaire une paire, toutes les combinaisons de clics",
+  "statut": "OK",
+  "detail": "états successifs (paires gauche, droite, Vérifier désactivé) : [[1, 1, True], [1, 1, True], [1, 1, True], [2, 2, True], [2, 2, True], [4, 4, False]] ; erreurs []",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Remise en ordre : ajouter, retirer, réordonner",
+  "statut": "OK",
+  "detail": "complet→Vérifier actif True ; après 2 retraits [3, True, 3] ; double clic 4 étapes",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Carte : un clic n'est pas un déplacement et inversement",
+  "statut": "OK",
+  "detail": "clic (3 px de tremblement) → épingle True ; glissé de 70 px → épingle False, carte déplacée True",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Carte : molette, boutons + / − / recentrer et limites de zoom",
+  "statut": "OK",
+  "detail": "largeur vue : départ 1100, min 6, max 1500, recentrer 1100, +733.3333333333333, −1100 ; épingle posée par les boutons : False ; au dézoom maximal la France ne fait plus que 73 % de la boîte et peut sortir du cadre (-560 -500 1100 1100)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Carte : pincement à deux doigts",
+  "statut": "OK",
+  "detail": "largeur vue 1100 → 183.33333333333331 (écart des doigts ×6) ; épingle posée par erreur : False",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Carte : taille des épingles, villes et distance selon le zoom et l'écran",
+  "statut": "OK",
+  "detail": "hauteurs en px (épingle / texte de ville / distance) : [(320, 'fit', {'epingle': 31, 'ville': 15, 'distance': 24}), (320, 'in', {'epingle': 31, 'ville': 15, 'distance': 24}), (1280, 'fit', {'epingle': 31, 'ville': 15, 'distance': 24}), (1280, 'in', {'epingle': 31, 'ville': 15, 'distance': 24})]",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Carte : scores calculés à la main",
+  "statut": "OK",
+  "detail": "Sancerre (p3) à 7.54 km : 3695 vs 3695 à la main ; Romanée-Conti (p5) à 1.11 km : 4216 vs 4216 à la main ; Château Latour (p5) à 5.56 km : 957 vs 957 à la main ; Aÿ (p4) à 21.86 km : 273 vs 273 à la main ; Pauillac (p3) à 42.05 km : 370 vs 370 à la main ; Hermitage (p3) à 0.00 km : 5000 vs 5000 à la main",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Carte : détection « dans la région » (Corse, côtes, frontière de département)",
+  "statut": "BUG",
+  "detail": "corse (42.698, 9.363) → True ; corse (41.92, 8.74) → False ✗ attendu True ; corse (42.0, 9.0) → True ; languedoc-roussillon (42.483, 3.129) → True ; provence (43.215, 5.538) → True ; bordeaux (45.55, -1.06) → True ; bordeaux (45.2, -1.3) → False ; beaujolais (45.764, 4.836) → True ; rhone (45.489, 4.81) → False ✗ attendu True ; languedoc-roussillon (43.84, 4.36) → True ; alsace (48.573, 7.752) → True ; champagne (48.857, 2.352) → False",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Carte : changer d'onglet en pleine partie, puis revenir",
+  "statut": "INFO",
+  "detail": "après aller-retour avant validation : manche 1, épingle conservée False ; après aller-retour pendant la révélation : manche 2, 1 score(s), « Manche 2/5 · Région5 000 pts » (la révélation est sautée) ; erreurs []",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Clavier : touches 1-4 et Entrée dans une session",
+  "statut": "OK",
+  "detail": "touche 2 → choix 1 ; Entrée → feuille True ; Entrée → question suivante [True, 'Vrai ou faux'] ; 3e question « On peut faire un vin blanc avec des raisins noirs. »",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Clavier : focus visible et piège de focus dans la session",
+  "statut": "BUG",
+  "detail": "Tab quitte la session (modale) pour atteindre des éléments cachés derrière : [['BODY', 'Pampre\\n\\n\\n\\n\\n/* Mise e', 'none'], ['topbar', 'Pampre', 'solid'], ['topbar', '0', 'solid'], ['topbar', '0', 'solid']]",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Clavier : Échap ferme le glossaire, et la modale",
+  "statut": "BUG",
+  "detail": "glossaire fermé par Échap : True ; modale « Quitter ? » fermée par Échap : False",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Clavier : étiquette en mode « toucher » utilisable au clavier",
+  "statut": "BUG",
+  "detail": "tabIndex des champs de l'étiquette : [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1] (aucun n'est atteignable au clavier)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Robustesse : localStorage indisponible (navigation privée stricte)",
+  "statut": "OK",
+  "detail": "accueil affiché True, leçon jouable fin, erreurs []",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Robustesse : sauvegardes corrompues ou anciennes",
+  "statut": "BUG",
+  "detail": "pas du JSON → accueil True, leçon fin ; null → accueil True, leçon fin ; tableau → accueil True, leçon fin ; xp texte → accueil True, leçon fin ; streak null → accueil False, leçon exception : Page.evaluate: TypeError: Cannot read properties of null (reading 'last'), erreur : Cannot read properties of null (reading 'last') ; map sans regions (ancienne version) → accueil True, leçon exception : Page.evaluate: TypeError: Cannot read properties of undefined (reading 'bordeaux ; quiz null → accueil False, leçon exception : Page.evaluate: TypeError: Cannot convert undefined or null to object, erreur : Cannot read properties of null (reading '1') ; mistakes objet → accueil True, leçon max, erreur : ST.mistakes.indexOf is not a function",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Robustesse : fichier de contenu manquant ou invalide",
+  "statut": "INFO",
+  "detail": "404 : « Le contenu n'a pas pu être chargé content/glossaire.json : 404. Recharge la page ; si le problème continue, vérifie que le dossier content est publié avec la pa » ; JSON invalide : « Le contenu n'a pas pu être chargé Expected property name or '}' in JSON at position 2 (line 1 column 3). Recharge la page ; si le problème continue, vérifie que »",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Robustesse : double clic rapide sur Continuer / Vérifier",
+  "statut": "BUG",
+  "detail": "double clic sur Continuer (carte 1) → carte affichée « La fermentation, cœur du miracle » (attendu : carte 2 « Que trouve-t-on dans un grain ? ») ; double clic sur Vérifier → feuille visible True",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Robustesse : défilement de la page bloqué pendant la session et rétabli après",
+  "statut": "OK",
+  "detail": "overflow du body : pendant 'hidden', après X '', après fin '' ; glossaire ouvert : la page derrière défile (0 → 800)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Robustesse : quitter une session « ne sera pas enregistré »",
+  "statut": "BUG",
+  "detail": "pile d'erreurs après avoir quitté : ['quiz1-0'] (le message promet que rien n'est enregistré)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Profil : export puis import, code invalide, tout effacer",
+  "statut": "OK",
+  "detail": "import → 420 XP ; code tronqué → « Ce code n'est pas valide. Vérifie qu'il est complet, sans espace ajouté. » ; code minimal {xp:5} accepté → 5 XP ; thème avant effacement None, après : data-theme=None alors que ST.theme=None",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Profil : « Tout effacer » avec un thème forcé",
+  "statut": "BUG",
+  "detail": "avant : data-theme='dark' ; après « Tout effacer » : data-theme='dark', ST.theme=None, bouton actif « Auto » (l'appli reste sombre alors que le réglage affiché est Auto)",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Glossaire : recherche avec et sans accents, majuscules, « Voir aussi »",
+  "statut": "OK",
+  "detail": "résultats {'élevage': 3, 'elevage': 3, 'ELEVAGE': 3, 'aop': 2, 'moût': 2, 'mout': 2, 'œil': 1, 'zzz': 0} ; « Voir aussi » met en avant « appellation »",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Toasts : plusieurs à la suite",
+  "statut": "INFO",
+  "detail": "un toast à la fois, 2,4 s chacun : [['Una'], ['Una'], ['Una'], ['Deuxb'], ['Deuxb'], ['Deuxb'], ['Troisc'], ['Troisc']] — 3 toasts mettent 7,2 s à s'afficher",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Étiquettes : provenance des vins étrangers",
+  "statut": "BUG",
+  "detail": "étiquette : « Produit du Portugal » ; correction affichée : « Bonne réponse : Produit de France »",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Mouvement réduit : rien ne reste invisible",
+  "statut": "OK",
+  "detail": "carte de leçon opacité 1, toast 1, confettis visibles 0 ; scrollIntoView smooth codé en dur (non soumis à prefers-reduced-motion) : True",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "Accessibilité : régions live et noms des boutons",
+  "statut": "INFO",
+  "detail": "#app aria-live='polite' (toute l'appli est relue à chaque rendu) ; boutons de stats (texte, aria-label, title) : [['1', None, 'Série de jours'], ['64', None, \"Points d'expérience\"]] ; <title> placé dans BODY",
+  "navigateur": "chromium"
+ },
+ {
+  "test": "isPointInFill : détection « dans la région »",
+  "statut": "OK",
+  "detail": "corse (42.698, 9.363) → True ; corse (42.0, 9.0) → True ; languedoc-roussillon (42.483, 3.129) → True ; provence (43.215, 5.538) → True ; bordeaux (45.55, -1.06) → True ; bordeaux (45.2, -1.3) → False ; alsace (48.573, 7.752) → True ; champagne (48.857, 2.352) → False",
+  "navigateur": "webkit"
+ },
+ {
+  "test": "Carte : clic place l'épingle, glissé déplace la carte",
+  "statut": "OK",
+  "detail": "épingle après clic : True ; viewBox -560 -500 1100 1100 → -741.3186813186815 -589.6739130434786 1100 1100",
+  "navigateur": "webkit"
+ },
+ {
+  "test": "Tri : glisser-déposer à la souris",
+  "statut": "OK",
+  "detail": "étiquettes placées / fantômes restants : [1, 0]",
+  "navigateur": "webkit"
+ },
+ {
+  "test": "Glossaire : recherche sans accents (\\p{Diacritic})",
+  "statut": "OK",
+  "detail": "résultats élevage/elevage/mout/zzz : [3, 3, 2, 0]",
+  "navigateur": "webkit"
+ },
+ {
+  "test": "Parcours complet d'une leçon et du quiz",
+  "statut": "OK",
+  "detail": "leçon : fin, quiz : fin, erreurs JS : []",
+  "navigateur": "webkit"
+ },
+ {
+  "test": "Moteur testé",
+  "statut": "INFO",
+  "detail": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15",
+  "navigateur": "webkit"
+ }
+]
