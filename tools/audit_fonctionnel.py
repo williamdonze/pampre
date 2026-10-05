@@ -332,7 +332,7 @@ def t_carte_clic(b):
     vb0 = a.p.evaluate("document.querySelector('.map-box svg').getAttribute('viewBox')")
     m.move(200, 400); m.down(); m.move(203, 402); m.up()                       # petit tremblement : c'est un clic
     g1 = a.p.evaluate("!document.querySelector('main .btn.leaf').disabled")
-    a.js("render()"); a.p.wait_for_timeout(100)
+    a.js("MAPGAME.guess = null; render()"); a.p.wait_for_timeout(100)   # l'épingle survit à render() (A-26) : on l'efface
     m.move(200, 400); m.down(); m.move(260, 440, steps=10); m.up()             # vrai glissé : pas d'épingle
     g2 = a.p.evaluate("!document.querySelector('main .btn.leaf').disabled"); vb2 = a.p.evaluate("document.querySelector('.map-box svg').getAttribute('viewBox')")
     a.close()
@@ -422,14 +422,16 @@ def t_carte_onglet(b):
     a = App(b, w=400, h=900); ouvrir_carte(a)
     e = a.p.evaluate("MAPGAME.rounds[0]"); x, y = pt_ecran(a, e["lat"], e["lon"]); a.p.mouse.click(x, y)
     a.p.click(".tab[data-go=home]"); a.p.click(".tab[data-go=carte]"); a.p.wait_for_timeout(200)
-    garde = a.p.evaluate("[MAPGAME.i, !document.querySelector('main .btn.leaf').disabled]")
-    x, y = pt_ecran(a, e["lat"], e["lon"]); a.p.mouse.click(x, y); a.p.click("text=Valider ma position"); a.p.wait_for_timeout(300)
-    a.p.click(".tab[data-go=defi]"); a.p.click(".tab[data-go=carte]"); a.p.wait_for_timeout(200)
-    apres = a.p.evaluate("[MAPGAME.i, MAPGAME.scores.length, document.querySelector('.round-meta').textContent]")
-    # onglet du navigateur masqué puis visible
-    a.p.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+    garde = a.p.evaluate("[MAPGAME.i, !document.querySelector('main .btn.leaf').disabled, document.querySelectorAll('.g-marks .pin-guess').length]")
+    a.p.click("text=Valider ma position"); a.p.wait_for_timeout(300)
+    score = a.p.evaluate("document.querySelector('.score-big').textContent")
+    a.p.click(".tab[data-go=defi]"); a.p.click(".tab[data-go=carte]"); a.p.wait_for_timeout(300)
+    apres = a.p.evaluate("[MAPGAME.i, MAPGAME.scores.length, document.querySelector('.score-big')?.textContent, document.querySelector('main .btn.block:not(.ghost)').textContent]")
+    a.shot("carte-retour-onglet")
+    a.p.click("text=Manche suivante"); a.p.wait_for_timeout(200); suiv = a.p.evaluate("[MAPGAME.i, document.querySelectorAll('.g-marks .pin-guess').length]")
     errs = a.errs; a.close()
-    return ("INFO" if not errs else "BUG"), f"après aller-retour avant validation : manche {garde[0]+1}, épingle conservée {garde[1]} ; après aller-retour pendant la révélation : manche {apres[0]+1}, {apres[1]} score(s), « {apres[2]} » (la révélation est sautée) ; erreurs {errs}"
+    ok = garde == [0, True, 1] and apres[:3] == [0, 1, score] and suiv == [1, 0] and not errs
+    return ("OK" if ok else "BUG"), f"retour avant validation : manche {garde[0]+1}, Valider actif {garde[1]}, épingle affichée {garde[2]} ; retour pendant la révélation : manche {apres[0]+1}, {apres[1]} score, « {apres[2]} » (attendu « {score} »), bouton « {apres[3]} » ; manche suivante ensuite : {suiv[0]+1}, épingles {suiv[1]} ; erreurs {errs}"
 
 
 # ===================================================================== clavier, focus

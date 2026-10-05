@@ -1244,31 +1244,38 @@ function mapSetup(el){
 }
 function mapRound(el){
   const G = MAPGAME;
-  if (G.revealed) { G.revealed = false; G.i++; if (G.i >= G.rounds.length) return endMap(); } const e = G.rounds[G.i]; const P = D.carteVins.paliers.find(p => p.id === G.tier);
+  const e = G.rounds[G.i], P = D.carteVins.paliers.find(p => p.id === G.tier);   // l'épingle (G.guess) et le résultat (G.result) survivent à un changement d'onglet const P = D.carteVins.paliers.find(p => p.id === G.tier);
   const total = G.scores.reduce((a, b) => a + b, 0);
   el.appendChild(h(`<div class="round-meta"><span>Manche ${G.i+1}/${G.rounds.length} · ${esc(P.nom)}</span><span>${fmt(total)} pts</span></div>`));
   el.appendChild(h(`<div class="round-card">${I.bottle.replace("<svg",'<svg class="bottle" style="color:var(--grape-ink)"')}<div><div class="eyebrow">Où se trouve…</div><div class="vin">${esc(e.vin)}</div><div class="det">${esc(e.detail)}</div></div></div>`));
   const holder = h(`<div></div>`); el.appendChild(holder);
-  let guess = null;
+  let guess = G.guess || null;
   const showRegions = G.showRegions ?? G.tier >= 2;
-  const mv = MapView(holder, { cities: G.showCities ?? true, regions: showRegions, onPick:g => { guess = g; btn.disabled = false; } });
+  const mv = MapView(holder, { cities: G.showCities ?? true, regions: showRegions, onPick:g => { guess = g; G.guess = g; btn.disabled = false; } });
   const tog = h(`<div class="toggles"><label><input id="tg-cities" type="checkbox" ${(G.showCities ?? true)?"checked":""}> Villes repères</label><label><input id="tg-regions" type="checkbox" ${showRegions?"checked":""}> Couleurs des régions</label></div>`);
   tog.querySelector("#tg-cities").onchange = ev => { G.showCities = ev.target.checked; mv.set({ cities:ev.target.checked }); };
   tog.querySelector("#tg-regions").onchange = ev => { G.showRegions = ev.target.checked; mv.set({ regions:ev.target.checked }); };
   el.appendChild(tog);
   const res = h(`<div class="reveal"></div>`); el.appendChild(res);
   const btn = h(`<button class="btn leaf block" style="margin-top:14px" disabled>Valider ma position</button>`); el.appendChild(btn);
-  btn.onclick = () => {
-    if (G.revealed) { G.revealed = false; G.i++; if (G.i >= G.rounds.length) { $app.replaceChildren(endMap()); window.scrollTo(0,0); return; } render(); window.scrollTo(0,0); return; }
-    if (!guess) return;
-    const r = scoreMap(e, guess, mv); const reg = D.carteVins.regions.find(x => x.id === e.region);
-    G.scores.push(r.score); G.revealed = true;
-    if (e.palier === 1 && r.score >= 4000) ST.map.regions[e.region] = 1;
-    if (r.score >= 4900) award("oeil-de-lynx");
+  const reg = D.carteVins.regions.find(x => x.id === e.region);
+  const afficher = (r, anime) => {
     mv.reveal([e.lat, e.lon], guess, r.inside ? "dans la région !" : r.d < 1 ? `${Math.round(r.d*1000)} m` : `${Math.round(r.d)} km`, e.palier === 1 ? reg.deps : null);
     res.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:end;gap:10px"><div><div class="eyebrow">${r.inside ? "En plein dans la région" : `À ${r.d < 1 ? Math.round(r.d*1000) + " m" : fmt(Math.round(r.d)) + " km"}`}</div><div class="score-big">+${fmt(r.score)}</div></div><div class="eyebrow" style="text-align:right">${esc(reg.nom)}</div></div><div class="meter"><i style="width:0"></i></div><p style="font-size:15px"><b>${esc(e.vin)}</b> — ${esc(e.detail)}.</p><p style="font-size:15px;color:var(--muted)">${esc(reg.fiche)}</p>${reg.debat?`<div class="aside deb">${I.scale.replace("<svg",'<svg style="color:var(--plum)"')}<div><b>Débat d'experts</b>${esc(reg.debat)}</div></div>`:""}`;
-    requestAnimationFrame(() => res.querySelector(".meter i").style.width = (r.score / 50) + "%");
-    btn.textContent = G.i + 1 >= G.rounds.length ? "Voir le bilan" : "Manche suivante"; btn.classList.remove("leaf");
+    const barre = res.querySelector(".meter i");
+    if (anime) requestAnimationFrame(() => barre.style.width = (r.score / 50) + "%"); else barre.style.width = (r.score / 50) + "%";
+    btn.disabled = false; btn.textContent = G.i + 1 >= G.rounds.length ? "Voir le bilan" : "Manche suivante"; btn.classList.remove("leaf");
+  };
+  if (G.revealed) afficher(G.result, false);
+  else if (guess) { mv.set({ guess:proj(...guess) }); btn.disabled = false; }
+  btn.onclick = () => {
+    if (G.revealed) { G.revealed = false; G.guess = G.result = null; G.i++; if (G.i >= G.rounds.length) { $app.replaceChildren(endMap()); window.scrollTo(0,0); return; } render(); window.scrollTo(0,0); return; }
+    if (!guess) return;
+    const r = scoreMap(e, guess, mv);
+    G.scores.push(r.score); G.revealed = true; G.result = r;
+    if (e.palier === 1 && r.score >= 4000) ST.map.regions[e.region] = 1;
+    if (r.score >= 4900) award("oeil-de-lynx");
+    afficher(r, true);
     save(); res.scrollIntoView({ behavior:"smooth", block:"nearest" });
   };
   const quit = h(`<p style="text-align:center;margin-top:10px"><button class="linkbtn">Abandonner la partie</button></p>`);
