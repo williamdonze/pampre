@@ -3,39 +3,51 @@ import json, os
 os.makedirs('captures', exist_ok=True)
 errs=[]; SP='captures/'
 with sync_playwright() as p:
-    b=p.chromium.launch()
+    CHROME='/opt/pw-browsers/chromium-1194/chrome-linux/chrome'   # Chromium préinstallé (environnement cloud), sinon celui de Playwright
+    b=p.chromium.launch(**({'executable_path':CHROME} if os.path.exists(CHROME) else {}))
     pg=b.new_page(viewport={'width':400,'height':860})
     pg.on('pageerror', lambda e: errs.append(('pageerror',str(e))))
     pg.goto('http://localhost:8765/index.html'); pg.wait_for_timeout(800)
-    # quiz: answer correctly using data
-    data=pg.evaluate("LEVELS[1].quiz.questions")
-    pg.evaluate("startQuiz(1)"); pg.wait_for_timeout(300)
-    for i,q in enumerate(data):
-        t=q['type']
-        if t in('qcm','indices') or (t=='etiquette' and q['mode']=='qcm'):
-            if t=='indices': pg.click('.next-clue button'); 
-            pg.locator('.choice').nth(q['bonne']).click()
-            if t=='indices': pg.screenshot(path=SP+'indices.png')
-        elif t=='vf':
-            pg.click('.choice[data-v="%d"]'%(1 if q['bonne'] else 0))
-        elif t=='etiquette':
-            pg.click('.lbl .ch[data-champ="%s"]'%q['cible'])
-        elif t=='ordre':
-            for it in q['items']:
-                pg.locator('.pool .chip:not(.used)', has_text=it).first.click()
-        elif t=='assoc':
-            for a,bb in q['paires']:
-                pg.locator('.l .chip', has_text=a).first.click(); pg.locator('.r .chip', has_text=bb).first.click()
-        elif t=='tri':
-            for txt,c in q['items']:
-                pg.locator('.pool .chip', has_text=txt).first.click(); pg.locator('.cat').nth(c).click(position={'x':8,'y':8})
-        pg.click('[data-check]'); pg.wait_for_timeout(100)
-        ok=pg.locator('.sheet.ok').count()
-        if not ok: print('WRONG', i, t); pg.screenshot(path=SP+f'wrong{i}.png')
-        pg.click('[data-cont]'); pg.wait_for_timeout(100)
+    # quiz : on répond juste à tout, à partir des données (un WRONG = question ou corrigé incohérent)
+    def faire_quiz(lid):
+        data=pg.evaluate(f"LEVELS[{lid}].quiz.questions")
+        pg.evaluate(f"startQuiz({lid})"); pg.wait_for_timeout(300)
+        for i,q in enumerate(data):
+            t=q['type']
+            if t in('qcm','indices') or (t=='etiquette' and q['mode']=='qcm'):
+                if t=='indices': pg.click('.next-clue button')
+                pg.locator('.choice').nth(q['bonne']).click()
+                if t=='indices' and lid==1: pg.screenshot(path=SP+'indices.png')
+            elif t=='vf':
+                pg.click('.choice[data-v="%d"]'%(1 if q['bonne'] else 0))
+            elif t=='etiquette':
+                pg.click('.lbl .ch[data-champ="%s"]'%q['cible'])
+            elif t=='ordre':
+                for it in q['items']:
+                    pg.locator('.pool .chip:not(.used)', has_text=it).first.click()
+            elif t=='assoc':
+                for a,bb in q['paires']:
+                    pg.locator('.l .chip', has_text=a).first.click(); pg.locator('.r .chip', has_text=bb).first.click()
+            elif t=='tri':
+                for txt,c in q['items']:
+                    pg.locator('.pool .chip', has_text=txt).first.click(); pg.locator('.cat').nth(c).click(position={'x':8,'y':8})
+            elif t=='carte':
+                # toucher la carte à la position réelle du lieu
+                x,y=pg.evaluate("([la,lo])=>{const [x,y]=proj(la,lo);const s=document.querySelector('.session .map-box > svg');const pt=s.createSVGPoint();pt.x=x;pt.y=y;const q=pt.matrixTransform(s.getScreenCTM());return [q.x,q.y]}", [q['entry']['lat'],q['entry']['lon']])
+                pg.mouse.click(x,y); pg.wait_for_timeout(100)
+            pg.click('[data-check]'); pg.wait_for_timeout(100)
+            ok=pg.locator('.sheet.ok').count()
+            if not ok: print('WRONG', f'niveau {lid}', i, t); pg.screenshot(path=SP+f'wrong{lid}-{i}.png')
+            pg.click('[data-cont]'); pg.wait_for_timeout(100)
+    faire_quiz(1)
     pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend.png')
     pg.click('[data-done]'); pg.wait_for_timeout(300)
     pg.evaluate("window.scrollTo(0, 1200)"); pg.wait_for_timeout(200); pg.screenshot(path=SP+'unlocked.png')
+    # niveau 2, débloqué par le quiz du niveau 1
+    faire_quiz(2)
+    pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend2.png')
+    pg.click('[data-done]'); pg.wait_for_timeout(300)
+    if not pg.evaluate("ST.quiz[2] && ST.quiz[2].passed && !!ST.badges['niveau-2']"): print('WRONG niveau 2 non validé')
     # map game tier 1
     pg.click('.tab[data-go="carte"]'); pg.wait_for_timeout(300); pg.screenshot(path=SP+'mapsetup.png')
     pg.click('text=Lancer une partie'); pg.wait_for_timeout(400)
@@ -44,7 +56,9 @@ with sync_playwright() as p:
         e=pg.evaluate("MAPGAME.rounds[MAPGAME.i]")
         # click at projected truth position for r even, random for odd
         x,y=pg.evaluate("([la,lo])=>{const [x,y]=proj(la,lo);const s=document.querySelector('.map-box > svg');const pt=s.createSVGPoint();pt.x=x;pt.y=y;const q=pt.matrixTransform(s.getScreenCTM());return [q.x,q.y]}", [e['lat'],e['lon']])
-        if r%2: x+=40; y+=30
+        if r%2:   # manche volontairement imprécise : on se décale vers le centre de la carte, pour ne jamais en sortir
+            bx=pg.locator('.map-box > svg').first.bounding_box(); cx,cy=bx['x']+bx['width']/2,bx['y']+bx['height']/2
+            x+=40 if x<cx else -40; y+=30 if y<cy else -30
         pg.mouse.click(x,y); pg.wait_for_timeout(100)
         if r==0: pg.screenshot(path=SP+'mapround.png')
         pg.click('text=Valider ma position'); pg.wait_for_timeout(700)
