@@ -1,0 +1,798 @@
+{
+  "id": 2,
+  "titre": "Les cépages",
+  "parcours": ["n2-l1", "n2-l2", "n2-l3", "jeu:quel-cepage", "n2-l4", "n2-l5", "jeu:berceaux", "n2-l6", "jeu:profils", "quiz"],
+  "intro": "Chardonnay, syrah, nebbiolo : derrière chaque nom, un caractère. On apprend à décrire un cépage avec une grille simple, puis on fait connaissance avec les grands rouges, les grands blancs, les emblèmes régionaux, et on finit par l'art d'assembler.",
+  "lecons": [
+    {
+      "id": "n2-l1",
+      "titre": "Décrire un cépage",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Une grille pour tous les cépages",
+          "illu": "profil",
+          "profil": { "robe": 3, "acidite": 3, "tanins": 3, "corps": 3, "aromes": 3, "garde": 3 },
+          "texte": "Pour comparer des cépages, il faut toujours poser les mêmes questions. Voici la grille qu'on utilisera dans tout le niveau :\n\n**Robe** : la couleur est-elle pâle ou profonde ?\n**Arômes** : discrets ou exubérants, et lesquels ?\n**Acidité**, **tanins**, **corps** : la structure en bouche.\n**Garde** : le vin gagne-t-il à vieillir ?\n\nChaque critère se note de faible à élevé. Cinq crans suffisent : on cherche des repères, pas des décimales.",
+          "astuce": "Le [[cépage]] donne le caractère de base, mais le lieu et la main du vigneron le modulent. La grille décrit le profil le plus courant, pas une loi."
+        },
+        {
+          "titre": "Acidité et tanins : saliver ou assécher",
+          "illu": "peaux",
+          "texte": "Deux sensations à ne pas confondre :\n\n**L'[[acidité]]** fait **saliver**. Penche la tête après une gorgée : si l'eau te vient à la bouche, le vin est vif.\n\n**Les [[tanins]]** **assèchent** : ils accrochent les gencives comme un thé trop infusé. Ils viennent surtout de la peau et des pépins, donc presque uniquement des rouges.\n\nUn raisin à **peau épaisse** donne plus de couleur et de tanins qu'un raisin à peau fine. Retiens ce lien : il explique la moitié des profils de ce niveau.",
+          "exemple": {
+            "vin": "Madiran, Château Montus",
+            "detail": "Le tannat, raisin à peau épaisse, donne un des rouges les plus tanniques de France. Ça accroche, et c'est voulu."
+          }
+        },
+        {
+          "titre": "Le corps et la garde",
+          "illu": "verres",
+          "texte": "**Le [[corps]]**, c'est le poids du vin en bouche. Compare du lait écrémé et du lait entier : même couleur, pas le même poids. L'alcool, le sucre et l'extrait sec donnent du corps.\n\n**Le [[potentiel de garde]]**, c'est la capacité à s'améliorer en bouteille. Il repose sur des « conservateurs naturels » : une acidité élevée, des tanins abondants, parfois du sucre. Un vin léger et peu acide se boit jeune ; un vin tannique et vif peut attendre des décennies.",
+          "astuce": "Garde ne veut pas dire qualité : un beaujolais nouveau réussi est un grand plaisir… à boire dans l'année."
+        },
+        {
+          "titre": "Arômes du raisin, arômes de vinification",
+          "illu": "aromes-familles",
+          "texte": "On range les arômes selon leur origine :\n\n**[[arômes primaires|Primaires]]** : ils viennent du **raisin**. Fruits, fleurs, herbes, épices. C'est la signature du cépage : le poivre de la syrah, le litchi du gewurztraminer.\n\n**[[arômes secondaires|Secondaires]]** : ils naissent de la **fermentation**. Levure, mie de pain, parfois banane.\n\n**[[arômes tertiaires|Tertiaires]]** : ils apparaissent **avec le temps**, en fût puis en bouteille. Cuir, sous-bois, noix, miel.\n\nDans ce niveau, on s'intéresse surtout aux primaires : ce sont eux qui trahissent le cépage.",
+          "debat": "Les classifications ne concordent pas toujours. Dans la tradition française, les notes de fût (vanille, toasté) sont souvent rangées parmi les arômes tertiaires, ceux de l'élevage ; le WSET les classe en secondaires, avec tout ce qui vient de la vinification. Les deux se défendent : retiens surtout raisin / vinification / temps."
+        },
+        {
+          "titre": "Un cépage, plusieurs visages",
+          "illu": "climat-cepage",
+          "texte": "Le même cépage change selon le climat. Au frais, le raisin mûrit lentement : **plus d'acidité**, moins de sucre, des fruits acidulés. Au chaud, il mûrit vite : **plus de sucre, donc plus d'alcool**, des fruits mûrs, une acidité plus douce.\n\nLe chardonnay en est l'exemple parfait : citron et pomme verte à Chablis, pêche et ananas en Californie ou en Australie.",
+          "exemple": {
+            "vin": "Chablis Grand Cru Les Clos, William Fèvre",
+            "detail": "Du chardonnay sous un climat frais et sur calcaire : tendu, citronné, salin. Rien à voir avec un chardonnay du soleil."
+          },
+          "astuce": "Quand tu découvres un vin, demande-toi d'abord « quel cépage ? », puis « quel climat ? ». Ces deux questions reviendront au niveau 6, pour la dégustation à l'aveugle."
+        }
+      ],
+      "verif": [
+        {
+          "type": "tri",
+          "question": "Acidité ou tanins ? Range chaque sensation.",
+          "categories": ["Acidité", "Tanins"],
+          "items": [
+            ["Fait saliver", 0],
+            ["Donne une impression de fraîcheur", 0],
+            ["Assèche les gencives", 1],
+            ["Vient surtout de la peau et des pépins", 1]
+          ],
+          "explication": "L'acidité fait saliver et rafraîchit ; les tanins assèchent et viennent de la peau, des pépins (et du bois). Les deux aident un vin à vieillir."
+        },
+        {
+          "type": "qcm",
+          "question": "D'où viennent les arômes primaires d'un vin ?",
+          "choix": ["Du raisin", "De la fermentation", "Du vieillissement en bouteille", "Du bouchon"],
+          "bonne": 0,
+          "explication": "Les arômes primaires viennent du raisin : fruits, fleurs, épices. Les secondaires naissent de la fermentation, les tertiaires avec le temps."
+        }
+      ]
+    },
+    {
+      "id": "n2-l2",
+      "titre": "Les rouges internationaux",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Cabernet sauvignon, le bâtisseur",
+          "illu": "profil",
+          "profil": { "robe": 5, "acidite": 4, "tanins": 5, "corps": 4, "aromes": 4, "garde": 5 },
+          "texte": "Petites baies à **peau épaisse**, mûrissement tardif : le cabernet sauvignon donne des vins **sombres, tanniques et frais**, taillés pour la garde. Arômes de **cassis**, de cèdre, parfois de **poivron vert** quand il manque de soleil.\n\nC'est le cépage de cuve le plus planté au monde. En France, il règne sur la **rive gauche de Bordeaux** (Médoc, Graves) ; ailleurs, en Napa Valley, au Chili, à Bolgheri en Toscane.",
+          "exemple": {
+            "vin": "Château Latour, Pauillac",
+            "detail": "Premier cru classé en 1855, très majoritairement cabernet sauvignon. Il demande souvent dix ou vingt ans de cave."
+          },
+          "astuce": "Le cabernet sauvignon est né d'un [[croisement]] spontané entre cabernet franc et sauvignon blanc. On ne l'a découvert qu'en 1997, grâce à l'ADN."
+        },
+        {
+          "titre": "Merlot, le velours",
+          "illu": "profil",
+          "profil": { "robe": 4, "acidite": 3, "tanins": 3, "corps": 4, "aromes": 3, "garde": 4 },
+          "texte": "Plus précoce et plus charnu que le cabernet, le merlot donne des vins **ronds et souples** : prune, cerise noire, parfois chocolat. Tanins présents mais fondus, acidité moyenne.\n\nC'est le cépage le plus planté du Bordelais, roi de la **rive droite** : Pomerol, Saint-Émilion. On le trouve partout ailleurs, de l'Italie au Chili.",
+          "exemple": {
+            "vin": "Petrus, Pomerol",
+            "detail": "Quasiment 100 % merlot, sur une poche d'argile bleue. L'un des vins les plus chers du monde."
+          }
+        },
+        {
+          "titre": "Pinot noir, le capricieux",
+          "illu": "profil",
+          "profil": { "robe": 2, "acidite": 4, "tanins": 2, "corps": 2, "aromes": 4, "garde": 4 },
+          "texte": "**Peau fine**, grappe serrée en forme de pomme de pin (d'où son nom), sensible à tout : le pinot noir est difficile à cultiver. Mais quand il réussit, il donne des rouges **pâles, fins et parfumés** : cerise, framboise, puis sous-bois en vieillissant. Peu de tanins, belle acidité.\n\nSa patrie est la **Bourgogne**. Il fait aussi la Champagne, les rouges d'Alsace et de Sancerre, l'Oregon, la Nouvelle-Zélande. En Allemagne, il s'appelle **spätburgunder**.",
+          "exemple": {
+            "vin": "Volnay, Domaine Marquis d'Angerville",
+            "detail": "Un pinot noir de la Côte de Beaune, réputé pour sa finesse plus que pour sa puissance."
+          }
+        },
+        {
+          "titre": "Syrah, le poivre",
+          "illu": "profil",
+          "profil": { "robe": 5, "acidite": 3, "tanins": 4, "corps": 4, "aromes": 4, "garde": 4 },
+          "texte": "Robe très sombre, arômes de **mûre**, de **violette** et surtout de **poivre noir**, dû à une molécule, la [[rotundone]]. Tanins fermes, corps soutenu.\n\nEn France, la syrah est la reine du **Rhône nord** : Hermitage, Côte-Rôtie, Cornas. En Australie, sous le nom de **shiraz**, elle devient plus riche et chaleureuse : réglisse, chocolat, fruits très mûrs.",
+          "exemple": {
+            "vin": "Hermitage, Domaine Jean-Louis Chave",
+            "detail": "Syrah de la colline de l'Hermitage, au-dessus de Tain : poivre, fruits noirs, et une très longue garde."
+          },
+          "debat": "La légende fait venir la syrah de Shiraz, en Perse, ou de Syracuse, en Sicile. L'ADN raconte autre chose : en 1999, elle a été identifiée comme la fille de deux cépages oubliés du sud-est de la France, la dureza (Ardèche) et la mondeuse blanche (Savoie). Des analyses génomiques plus récentes suggèrent une filiation plus complexe ; l'origine française, elle, n'est plus guère contestée."
+        },
+        {
+          "titre": "Grenache, le solaire",
+          "illu": "profil",
+          "profil": { "robe": 3, "acidite": 2, "tanins": 3, "corps": 4, "aromes": 4, "garde": 3 },
+          "texte": "Le grenache aime la chaleur et accumule beaucoup de sucre : vins **généreux en alcool**, à la robe souvent moins foncée qu'on ne l'imagine. Arômes de **fraise mûre**, de framboise, d'épices et de garrigue. Acidité plutôt basse, tanins moyens.\n\nIl domine le **Rhône sud** (Châteauneuf-du-Pape, Gigondas) et le Roussillon, où il fait aussi les vins doux naturels de Banyuls. En Espagne, c'est la **garnacha** ; en Sardaigne, le **cannonau**.",
+          "exemple": {
+            "vin": "Châteauneuf-du-Pape, Château Rayas",
+            "detail": "Un rare Châteauneuf 100 % grenache, sur sables : fin, parfumé, presque bourguignon."
+          },
+          "debat": "Grenache espagnol ou sarde ? L'ADN confirme que garnacha et cannonau sont le même cépage, mais pas qui est né le premier. La thèse classique le fait naître en Aragon ; des chercheurs italiens défendent une origine sarde. La question reste ouverte."
+        },
+        {
+          "titre": "Les cinq rouges côte à côte",
+          "illu": "carte-rouges",
+          "texte": "Place-les sur deux axes et tout s'éclaire. Du plus **léger** au plus **corsé** : pinot noir, grenache, merlot, syrah, cabernet sauvignon.\n\nCôté tanins, le pinot noir reste le plus souple et le cabernet sauvignon le plus ferme. Le grenache est un cas à part : souvent plus d'alcool que de tanins.",
+          "astuce": "Moyen mnémotechnique : plus la peau est épaisse, plus le vin est sombre et tannique. Pinot noir : peau fine. Cabernet sauvignon : peau épaisse."
+        }
+      ],
+      "verif": [
+        {
+          "type": "assoc",
+          "question": "Associe chaque cépage à son trait le plus typique.",
+          "paires": [
+            ["Cabernet sauvignon", "Cassis et tanins fermes"],
+            ["Pinot noir", "Robe pâle, cerise, peau fine"],
+            ["Syrah", "Mûre, violette, poivre"],
+            ["Grenache", "Fraise mûre, beaucoup d'alcool"]
+          ],
+          "explication": "Le cabernet sauvignon bâtit des vins tanniques au cassis, le pinot noir des vins pâles et fins, la syrah des vins poivrés, le grenache des vins solaires et généreux."
+        },
+        {
+          "type": "qcm",
+          "question": "Quel cépage domine la rive droite de Bordeaux (Pomerol, Saint-Émilion) ?",
+          "choix": ["Le cabernet sauvignon", "Le merlot", "La syrah", "Le pinot noir"],
+          "bonne": 1,
+          "explication": "Le merlot règne sur la rive droite, sur des sols plus argileux et frais ; le cabernet sauvignon domine la rive gauche, sur les graves."
+        }
+      ]
+    },
+    {
+      "id": "n2-l3",
+      "titre": "Les blancs internationaux",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Chardonnay, le caméléon",
+          "illu": "profil",
+          "profil": { "robe": 3, "acidite": 3, "corps": 4, "aromes": 2, "garde": 4 },
+          "texte": "Le chardonnay a peu d'arômes à lui : il **reflète son climat et son vinificateur**. Citron et pomme verte au frais, fruits jaunes et exotiques au chaud ; beurre, noisette et vanille quand il est élevé en fût.\n\nIl règne sur la **Bourgogne** (Chablis, Meursault, Puligny-Montrachet), donne les blancs de blancs de **Champagne**, et s'est installé partout : Californie, Australie, Chili.",
+          "exemple": {
+            "vin": "Meursault, Domaine Roulot",
+            "detail": "Un chardonnay de la Côte de Beaune, réputé pour sa tension plutôt que pour son gras."
+          },
+          "astuce": "Le chardonnay porte le nom d'un vrai village du Mâconnais, Chardonnay, en Saône-et-Loire. Son ADN le dit né du pinot et du gouais blanc, un vieux cépage rustique."
+        },
+        {
+          "titre": "Sauvignon blanc, la vivacité",
+          "illu": "profil",
+          "profil": { "robe": 1, "acidite": 5, "corps": 2, "aromes": 5, "garde": 2 },
+          "texte": "Impossible de le rater : arômes **herbacés** (herbe coupée, buis, bourgeon de cassis), **agrumes** (pamplemousse), parfois fruit de la passion au chaud. Acidité **vive**, rarement boisé, souvent à boire jeune. Les notes végétales viennent de molécules appelées [[pyrazines]].\n\nEn France : **Sancerre et Pouilly-Fumé** dans le Centre-Loire, et Bordeaux, où il s'assemble au sémillon. À l'étranger : **Marlborough**, en Nouvelle-Zélande, a fait sa gloire mondiale.",
+          "exemple": {
+            "vin": "Pouilly-Fumé Silex, Didier Dagueneau",
+            "detail": "Le sauvignon le plus réputé de France, pur, minéral et capable de vieillir, ce qui est rare pour ce cépage."
+          }
+        },
+        {
+          "titre": "Riesling, la précision",
+          "illu": "profil",
+          "profil": { "robe": 2, "acidite": 5, "corps": 2, "aromes": 4, "garde": 5 },
+          "texte": "Le riesling a une **acidité éclatante** et des arômes de **citron vert**, de pomme, de fleurs blanches. Il se fait sec, demi-sec ou liquoreux, et vieillit superbement : il développe alors une note de **pétrole**, très recherchée par ses amateurs.\n\nEn France, il est le grand cépage de l'**Alsace**. Ailleurs : l'**Allemagne** (Moselle, Rheingau), l'Autriche et l'Australie (Clare Valley, Eden Valley).",
+          "exemple": {
+            "vin": "Riesling Clos Sainte-Hune, Trimbach",
+            "detail": "Un riesling sec d'Alsace, tendu comme un arc, qui demande une dizaine d'années pour s'ouvrir."
+          },
+          "astuce": "Les fleurs et les fruits très parfumés de certains cépages blancs viennent de molécules appelées [[terpènes]] : riesling, muscat, gewurztraminer en sont riches."
+        },
+        {
+          "titre": "Chenin, le tout-terrain",
+          "illu": "profil",
+          "profil": { "robe": 2, "acidite": 5, "corps": 3, "aromes": 3, "garde": 5 },
+          "texte": "Le chenin a une **acidité très élevée** et des arômes de **pomme, coing, miel**. Grâce à cette acidité, il fait de tout : des blancs secs, des demi-secs, des moelleux, des liquoreux et des bulles. Et il vieillit très longtemps.\n\nSa patrie est l'**Anjou-Touraine** : Vouvray, Savennières, Montlouis, Coteaux du Layon. Surprise : le pays qui en plante le plus est l'**Afrique du Sud**, où on l'appelait autrefois « steen ».",
+          "exemple": {
+            "vin": "Vouvray Le Haut-Lieu, Domaine Huet",
+            "detail": "Selon l'année, la même parcelle donne un vin sec, demi-sec ou moelleux. Tu as peut-être croisé son étiquette au niveau 1."
+          }
+        },
+        {
+          "titre": "Viognier, l'exubérant",
+          "illu": "profil",
+          "profil": { "robe": 3, "acidite": 1, "corps": 4, "aromes": 5, "garde": 2 },
+          "texte": "Arômes intenses d'**abricot**, de pêche et de fleurs blanches, texture grasse, **acidité basse**, alcool souvent élevé : le viognier ne fait rien à moitié.\n\nSon berceau est le **Rhône nord** : Condrieu et Château-Grillet. À la fin des années 1960, il ne restait qu'une quinzaine d'hectares dans le monde ; il a été sauvé par quelques vignerons obstinés, puis replanté dans le Languedoc, en Californie et en Australie.",
+          "exemple": {
+            "vin": "Condrieu, Domaine Georges Vernay",
+            "detail": "Georges Vernay est l'un des vignerons qui ont sauvé le viognier et l'appellation Condrieu."
+          },
+          "astuce": "En Côte-Rôtie, on peut ajouter jusqu'à 20 % de viognier, un raisin blanc, à la syrah : il adoucit et parfume le vin rouge."
+        },
+        {
+          "titre": "Les cinq blancs côte à côte",
+          "illu": "carte-blancs",
+          "texte": "Deux questions suffisent pour les distinguer : **l'acidité est-elle vive ou douce ?** **Les arômes sont-ils discrets ou exubérants ?**\n\nRiesling, chenin et sauvignon : acidité vive. Viognier : acidité douce et arômes débordants. Chardonnay : arômes discrets, il dépend de son climat et de sa vinification.",
+          "astuce": "Sauvignon et riesling sont tous deux vifs et aromatiques : le premier sent l'herbe et le pamplemousse, le second le citron vert et les fleurs."
+        }
+      ],
+      "verif": [
+        {
+          "type": "qcm",
+          "question": "Un blanc aux arômes de pamplemousse, d'herbe coupée et de buis, très vif. Quel cépage ?",
+          "choix": ["Viognier", "Chardonnay", "Sauvignon blanc", "Chenin"],
+          "bonne": 2,
+          "explication": "Herbe coupée, buis, pamplemousse et grande vivacité : c'est la signature du sauvignon blanc, de Sancerre à Marlborough."
+        },
+        {
+          "type": "vf",
+          "question": "Le viognier est réputé pour son acidité très élevée.",
+          "bonne": false,
+          "explication": "C'est l'inverse : le viognier a une acidité basse, une texture grasse et des arômes intenses d'abricot. Les champions de l'acidité sont le riesling et le chenin."
+        }
+      ]
+    },
+    {
+      "id": "n2-l4",
+      "titre": "Les emblèmes d'Europe",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Gamay, le fruit",
+          "illu": "profil",
+          "profil": { "robe": 2, "acidite": 4, "tanins": 2, "corps": 2, "aromes": 4, "garde": 2 },
+          "texte": "Le gamay donne des rouges **légers, fruités et gouleyants** : framboise, cerise, parfois banane quand il est vinifié jeune. Peu de tanins, une acidité qui rafraîchit.\n\nC'est le cépage du **Beaujolais**, des nouveaux aux dix crus. On le trouve aussi en Loire (Touraine) et en Suisse.",
+          "exemple": {
+            "vin": "Morgon, Marcel Lapierre",
+            "detail": "Un gamay de cru, plus charpenté qu'un beaujolais nouveau, que tu as déjà croisé au niveau 1."
+          },
+          "astuce": "Son nom complet est « gamay noir à jus blanc » : comme presque tous les raisins noirs, sa pulpe est incolore. Révision du niveau 1."
+        },
+        {
+          "titre": "Nebbiolo, les roses et le goudron",
+          "illu": "profil",
+          "profil": { "robe": 2, "acidite": 5, "tanins": 5, "corps": 4, "aromes": 5, "garde": 5 },
+          "texte": "Un paradoxe : une **robe pâle** qui vire vite au brique, mais des **tanins et une acidité très élevés**. Arômes de **rose**, de cerise, de goudron, de réglisse. Les Anglais le résument ainsi : « tar and roses ».\n\nIl règne dans le **Piémont**, en Italie : Barolo et Barbaresco. Il s'appelle spanna plus au nord, chiavennasca en Valteline.",
+          "exemple": {
+            "vin": "Barolo Monfortino, Giacomo Conterno",
+            "detail": "Un barolo légendaire, longuement élevé, qui peut vieillir un demi-siècle."
+          }
+        },
+        {
+          "titre": "Sangiovese, la cerise acidulée",
+          "illu": "profil",
+          "profil": { "robe": 3, "acidite": 5, "tanins": 4, "corps": 3, "aromes": 3, "garde": 4 },
+          "texte": "Le cépage le plus planté d'Italie. **Cerise acidulée**, tomate, herbes séchées ; **acidité élevée**, tanins marqués. Il se marie à merveille avec la cuisine italienne.\n\nIl fait les grands rouges de **Toscane** : Chianti, Brunello di Montalcino, Vino Nobile di Montepulciano.",
+          "exemple": {
+            "vin": "Brunello di Montalcino, Biondi-Santi",
+            "detail": "La famille Biondi-Santi est associée à la naissance du Brunello, 100 % sangiovese, au XIXe siècle."
+          },
+          "debat": "Le niellucciu de Corse et le sangiovese seraient le même cépage, apporté de Toscane. C'est l'avis le plus répandu, appuyé par des analyses génétiques, mais certains vignerons corses défendent l'originalité de leur niellucciu."
+        },
+        {
+          "titre": "Tempranillo, le précoce",
+          "illu": "profil",
+          "profil": { "robe": 4, "acidite": 3, "tanins": 3, "corps": 3, "aromes": 3, "garde": 4 },
+          "texte": "Son nom vient de « temprano », « tôt » : il mûrit précocement. Arômes de **fraise, cerise, figue**, puis de **tabac et de cuir** avec l'élevage. Acidité et tanins moyens, très bonne aptitude au bois.\n\nC'est le grand rouge d'**Espagne** : Rioja, Ribera del Duero (où on l'appelle tinto fino), Toro. Au Portugal, il devient tinta roriz.",
+          "exemple": {
+            "vin": "Rioja Viña Tondonia, López de Heredia",
+            "detail": "Un rioja de style traditionnel, longuement élevé en vieux fûts avant d'être vendu."
+          }
+        },
+        {
+          "titre": "Gewurztraminer, le litchi",
+          "illu": "profil",
+          "profil": { "robe": 4, "acidite": 1, "corps": 4, "aromes": 5, "garde": 3 },
+          "texte": "Le plus reconnaissable des blancs : **litchi, rose, épices** (« gewürz » veut dire « épicé » en allemand). Peau rosée, texture grasse, **acidité basse**, souvent un peu de sucre.\n\nC'est l'un des grands cépages de l'**Alsace**. Il est né d'une [[mutation]] d'un vieux cépage, le savagnin rose : c'en est une forme très parfumée.",
+          "exemple": {
+            "vin": "Gewurztraminer, Domaine Zind-Humbrecht",
+            "detail": "Un domaine de Turckheim réputé pour ses gewurztraminers riches et parfumés."
+          }
+        }
+      ],
+      "verif": [
+        {
+          "type": "assoc",
+          "question": "Associe chaque cépage à sa région emblématique.",
+          "paires": [
+            ["Nebbiolo", "Piémont"],
+            ["Sangiovese", "Toscane"],
+            ["Tempranillo", "Rioja"],
+            ["Gamay", "Beaujolais"]
+          ],
+          "explication": "Nebbiolo au Piémont (Barolo), sangiovese en Toscane (Chianti, Brunello), tempranillo en Rioja et Ribera del Duero, gamay en Beaujolais."
+        },
+        {
+          "type": "indices",
+          "question": "À l'aveugle : quel cépage ?",
+          "indices": [
+            "Robe dorée, assez soutenue.",
+            "Nez explosif de litchi et de rose.",
+            "Bouche grasse, peu acide, un rien sucrée."
+          ],
+          "choix": ["Riesling", "Gewurztraminer", "Sauvignon blanc", "Chardonnay"],
+          "bonne": 1,
+          "explication": "Litchi et rose, acidité basse, texture grasse : le gewurztraminer ne se cache pas. Le riesling serait bien plus vif."
+        }
+      ]
+    },
+    {
+      "id": "n2-l5",
+      "titre": "Côt, cabernet franc, mourvèdre, tannat",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Côt ou malbec, l'exilé devenu star",
+          "illu": "profil",
+          "profil": { "robe": 5, "acidite": 3, "tanins": 4, "corps": 4, "aromes": 4, "garde": 4 },
+          "texte": "Robe **presque noire**, arômes de **prune**, de mûre et de violette. À Cahors, sur les terrasses du Lot, il donne des vins fermes, faits pour la garde : l'appellation en exige au moins 70 %. On l'y appelle **côt**.\n\nSous le nom de **malbec**, il a trouvé une seconde patrie en **Argentine**, à Mendoza : des vins plus ronds et veloutés, devenus le symbole du pays.",
+          "exemple": {
+            "vin": "Cahors Le Cèdre, Château du Cèdre",
+            "detail": "Un côt de Cahors dense et profond, d'un domaine qui a beaucoup fait pour la réputation de l'appellation."
+          }
+        },
+        {
+          "titre": "Cabernet franc, la fraîcheur",
+          "illu": "profil",
+          "profil": { "robe": 3, "acidite": 4, "tanins": 3, "corps": 3, "aromes": 4, "garde": 4 },
+          "texte": "Plus léger et plus précoce que son fils, le cabernet sauvignon. Arômes de **framboise**, de **violette**, une note de **poivron** ou de crayon ; tanins plus fins, belle fraîcheur.\n\nEn **Loire**, où on l'appelle parfois **breton**, il fait seul les rouges de Chinon, Bourgueil et Saumur-Champigny. À **Saint-Émilion**, il complète le merlot, et domine même au Château Cheval Blanc.",
+          "exemple": {
+            "vin": "Chinon, Charles Joguet",
+            "detail": "Un cabernet franc de la Vienne, fruité jeune, plus profond sur les meilleures parcelles."
+          },
+          "debat": "Le cabernet franc serait originaire du Pays basque espagnol : l'ADN le relie à de vieux cépages basques. Mais le sens exact de ces liens de parenté n'est pas tranché, et les historiens discutent encore de son trajet jusqu'à Bordeaux puis la Loire."
+        },
+        {
+          "titre": "Mourvèdre, l'animal",
+          "illu": "profil",
+          "profil": { "robe": 5, "acidite": 3, "tanins": 5, "corps": 4, "aromes": 4, "garde": 5 },
+          "texte": "Le mourvèdre veut « **la tête au soleil et les pieds dans l'eau** » : il mûrit tard et seulement sous un climat très chaud. Arômes de **mûre**, de garrigue, de viande et de gibier en vieillissant ; tanins puissants.\n\nSon fief français est **Bandol**, où les rouges doivent en contenir au moins 50 %. En Espagne, c'est le **monastrell** ; en Australie, le **mataro**, dans les assemblages « GSM » avec grenache et syrah.",
+          "exemple": {
+            "vin": "Bandol rouge, Domaine Tempier",
+            "detail": "Le domaine qui a remis le mourvèdre à l'honneur à Bandol. Ses rouges vieillissent longtemps."
+          }
+        },
+        {
+          "titre": "Tannat, le bien nommé",
+          "illu": "profil",
+          "profil": { "robe": 5, "acidite": 4, "tanins": 5, "corps": 5, "aromes": 3, "garde": 5 },
+          "texte": "Le nom ne ment pas : le tannat est l'un des cépages les plus **tanniques** du monde. Robe noire, mûre, réglisse ; jeune, il peut être austère, mais il s'assouplit avec le temps.\n\nIl règne à **Madiran**, dans le Sud-Ouest, où il est majoritaire dans l'assemblage. Il est devenu le cépage emblème de l'**Uruguay**.",
+          "exemple": {
+            "vin": "Madiran, Château Montus",
+            "detail": "Le domaine d'Alain Brumont, qui a montré que le tannat pouvait donner de grands vins de garde."
+          }
+        },
+        {
+          "titre": "Un cépage, plusieurs noms",
+          "illu": "synonymes",
+          "texte": "Un même cépage change de nom en passant une frontière, parfois une vallée. Les connaître évite bien des confusions sur les étiquettes : **syrah** et **shiraz**, **grenache** et **garnacha**, **côt** et **malbec**, **mourvèdre** et **monastrell**, **pinot noir** et **spätburgunder**.\n\nCe sont des [[synonyme|synonymes]] : même ADN, même vigne, mais des styles parfois très différents selon le pays.",
+          "debat": "Le zinfandel californien et le primitivo des Pouilles sont le même cépage, confirmé par l'ADN, tout comme un vieux cépage croate, le tribidrag. Mais le zinfandel puissant de Californie et le primitivo des Pouilles ne se ressemblent guère : le lieu et le style comptent autant que la vigne."
+        }
+      ],
+      "verif": [
+        {
+          "type": "assoc",
+          "question": "Associe chaque cépage à son autre nom.",
+          "paires": [
+            ["Côt", "Malbec"],
+            ["Mourvèdre", "Monastrell"],
+            ["Syrah", "Shiraz"],
+            ["Grenache", "Garnacha"]
+          ],
+          "explication": "Côt = malbec (Cahors, Mendoza), mourvèdre = monastrell (Espagne), syrah = shiraz (Australie), grenache = garnacha (Espagne)."
+        },
+        {
+          "type": "qcm",
+          "question": "Quelle appellation impose au moins 50 % de mourvèdre dans ses rouges ?",
+          "choix": ["Cahors", "Bandol", "Madiran", "Chinon"],
+          "bonne": 1,
+          "explication": "Bandol, en Provence, impose au moins 50 % de mourvèdre. Cahors est le fief du côt (malbec), Madiran celui du tannat, Chinon celui du cabernet franc."
+        }
+      ]
+    },
+    {
+      "id": "n2-l6",
+      "titre": "Mono-cépage ou assemblage",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "La règle des 85 %",
+          "illu": "regle-85",
+          "texte": "Un vin peut être fait d'un seul cépage, un [[monocépage]], ou de plusieurs, un [[assemblage]].\n\nSur une étiquette européenne, si **un seul cépage** est nommé, il doit représenter **au moins 85 %** du vin. Si **plusieurs** sont nommés, ils doivent faire **100 %** du vin, cités du plus présent au moins présent.\n\nTu reconnais le chiffre : c'est aussi le seuil du millésime, vu au niveau 1.",
+          "astuce": "Dans la plupart des appellations françaises, le cépage n'est pas écrit du tout : c'est l'appellation qui l'indique. Un Puligny-Montrachet blanc est un chardonnay, même si l'étiquette ne le dit pas."
+        },
+        {
+          "titre": "Bordeaux : assembler pour équilibrer",
+          "illu": "assemblage-bordeaux",
+          "texte": "Pourquoi assembler ? Pour **compléter** les qualités des cépages, et **assurer** la récolte : si l'un souffre d'une mauvaise année, l'autre compense.\n\nÀ Bordeaux, le cabernet sauvignon apporte la structure et la garde, le merlot la chair et la rondeur, le cabernet franc la fraîcheur et le parfum. **Rive gauche**, le cabernet sauvignon domine ; **rive droite**, le merlot.",
+          "exemple": {
+            "vin": "Château Cheval Blanc, Saint-Émilion",
+            "detail": "Un assemblage où le cabernet franc dépasse souvent le merlot : une exception célèbre sur la rive droite."
+          }
+        },
+        {
+          "titre": "Châteauneuf-du-Pape : treize cépages possibles",
+          "illu": "chateauneuf-13",
+          "texte": "Le cahier des charges de Châteauneuf-du-Pape autorise **treize cépages**, rouges et blancs. Le **grenache** domine presque toujours, épaulé par la syrah et le mourvèdre.\n\nChaque domaine compose sa propre recette : certains n'en utilisent qu'un, d'autres les treize. Liberté maximale, sous un seul nom d'appellation.",
+          "exemple": {
+            "vin": "Châteauneuf-du-Pape, Château de Beaucastel",
+            "detail": "Réputé pour assembler les treize cépages, avec une forte part de mourvèdre."
+          },
+          "astuce": "On lit parfois « dix-huit cépages » : c'est le même compte, en distinguant les versions noire, blanche ou grise de certains d'entre eux."
+        },
+        {
+          "titre": "Champagne : trois cépages et des années",
+          "illu": "bulles",
+          "texte": "Le champagne classique assemble **trois cépages** : le **pinot noir** pour la structure, le **meunier** pour le fruit, le **chardonnay** pour la finesse. Quatre autres, très rares, restent autorisés.\n\nOn y assemble aussi les **années** : un champagne sans millésime mélange plusieurs récoltes pour garder un style constant. Et les crus, c'est-à-dire les villages.",
+          "exemple": {
+            "vin": "Krug Grande Cuvée",
+            "detail": "Un assemblage de plus de cent vins de nombreuses années : l'assemblage poussé à l'extrême."
+          },
+          "astuce": "Révision : un [[blanc de blancs]] est 100 % chardonnay ; un [[blanc de noirs]] n'utilise que pinot noir et meunier."
+        },
+        {
+          "titre": "Alsace : le cépage en vedette",
+          "illu": "alsace-flute",
+          "texte": "L'Alsace fait l'inverse du reste de la France : le **cépage est écrit en grand** sur l'étiquette, et la plupart des vins sont des monocépages : riesling, gewurztraminer, pinot gris, muscat, sylvaner, pinot blanc.\n\nL'assemblage existe pourtant : l'**[[Edelzwicker]]** mélange plusieurs cépages alsaciens, et quelques grands crus autorisent l'assemblage.",
+          "exemple": {
+            "vin": "Riesling Grand Cru Schlossberg, Domaine Weinbach",
+            "detail": "Un monocépage, comme la grande majorité des vins d'Alsace : le cépage et le lieu sont écrits sur l'étiquette."
+          },
+          "debat": "Monocépage ou assemblage, lequel exprime le mieux un lieu ? Pour les Bourguignons et les Alsaciens, un seul cépage laisse parler le terroir. Pour les Bordelais et les Champenois, l'assemblage compose un vin plus complet que chacun de ses éléments. Les deux écoles produisent des chefs-d'œuvre."
+        }
+      ],
+      "verif": [
+        {
+          "type": "qcm",
+          "question": "Une étiquette européenne indique « Syrah ». Que peux-tu en déduire ?",
+          "choix": ["Le vin contient 100 % de syrah", "Le vin contient au moins 85 % de syrah", "Le vin contient au moins 50 % de syrah", "Rien : la mention est libre"],
+          "bonne": 1,
+          "explication": "Un seul cépage nommé = au moins 85 % de ce cépage. Le reste (15 % au plus) peut venir d'autres cépages."
+        },
+        {
+          "type": "tri",
+          "question": "Plutôt monocépage ou plutôt assemblage ?",
+          "categories": ["Monocépage", "Assemblage"],
+          "items": [
+            ["Bourgogne rouge (pinot noir)", 0],
+            ["Riesling d'Alsace", 0],
+            ["Sancerre blanc", 0],
+            ["Bordeaux rouge", 1],
+            ["Champagne sans millésime", 1],
+            ["Châteauneuf-du-Pape", 1]
+          ],
+          "explication": "Bourgogne, Alsace et Sancerre misent sur un seul cépage ; Bordeaux, la Champagne et Châteauneuf-du-Pape assemblent. Il existe des exceptions des deux côtés."
+        }
+      ]
+    }
+  ],
+  "jeux": [
+    {
+      "id": "quel-cepage",
+      "titre": "Quel cépage ?",
+      "description": "Une description, révélée indice par indice. Trouve le cépage : moins tu demandes d'indices, plus tu gagnes de points.",
+      "tours": 6,
+      "badge": "nez-de-cepage",
+      "seuilBadge": 5,
+      "questions": [
+        {
+          "type": "indices",
+          "question": "Quel cépage rouge ?",
+          "indices": ["Robe pâle, rubis clair.", "Nez de cerise et de framboise, une touche de sous-bois.", "Peu de tanins, acidité fraîche, corps léger."],
+          "choix": ["Pinot noir", "Syrah", "Cabernet sauvignon", "Malbec"],
+          "bonne": 0,
+          "explication": "Robe pâle, fruits rouges, peu de tanins : le pinot noir, à la peau fine. Syrah, cabernet et malbec donnent des robes bien plus sombres."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage rouge ?",
+          "indices": ["Robe très sombre, presque noire.", "Nez de cassis et de cèdre, une pointe de poivron vert.", "Tanins fermes, acidité vive, longue garde."],
+          "choix": ["Merlot", "Cabernet sauvignon", "Gamay", "Grenache"],
+          "bonne": 1,
+          "explication": "Cassis, cèdre, poivron vert et tanins fermes : le cabernet sauvignon. Le poivron vient des pyrazines, quand le raisin manque un peu de maturité."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage rouge ?",
+          "indices": ["Robe violacée, très sombre.", "Nez de mûre, de violette et de poivre noir.", "Tanins fermes, corps soutenu."],
+          "choix": ["Pinot noir", "Gamay", "Syrah", "Grenache"],
+          "bonne": 2,
+          "explication": "Le poivre noir (la rotundone), la violette et la mûre signent la syrah, reine du Rhône nord."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage rouge ?",
+          "indices": ["Robe moyenne, pas très foncée.", "Nez de fraise très mûre, d'épices et de garrigue.", "Beaucoup d'alcool, acidité plutôt basse, tanins moyens."],
+          "choix": ["Grenache", "Nebbiolo", "Pinot noir", "Tannat"],
+          "bonne": 0,
+          "explication": "Fraise mûre, garrigue, alcool généreux : le grenache, cépage du soleil. Le nebbiolo et le tannat seraient bien plus tanniques."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage rouge ?",
+          "indices": ["Robe pâle, aux reflets déjà orangés.", "Nez de rose fanée, de cerise et de goudron.", "Tanins très fermes, acidité très élevée."],
+          "choix": ["Pinot noir", "Nebbiolo", "Merlot", "Gamay"],
+          "bonne": 1,
+          "explication": "Robe pâle mais tanins puissants, rose et goudron : le nebbiolo du Piémont. Le pinot noir aussi est pâle, mais bien moins tannique."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage rouge ?",
+          "indices": ["Robe claire, violacée.", "Nez de framboise, de bonbon, de banane.", "Fruité, très peu tannique, à boire frais et jeune."],
+          "choix": ["Gamay", "Cabernet franc", "Mourvèdre", "Sangiovese"],
+          "bonne": 0,
+          "explication": "Framboise, bonbon et banane, peu de tanins : le gamay, cépage du Beaujolais. La banane vient d'une vinification qu'on verra au niveau 3."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage blanc ?",
+          "indices": ["Robe très pâle, reflets verts.", "Nez de pamplemousse, de buis et d'herbe coupée.", "Acidité vive, corps léger, pas de bois."],
+          "choix": ["Viognier", "Gewurztraminer", "Sauvignon blanc", "Chardonnay"],
+          "bonne": 2,
+          "explication": "Herbe coupée, buis et pamplemousse : le sauvignon blanc. Le viognier et le gewurztraminer sont exubérants mais peu acides."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage blanc ?",
+          "indices": ["Robe or pâle.", "Nez d'abricot, de pêche et de fleurs blanches.", "Texture grasse, acidité basse, chaleur de l'alcool."],
+          "choix": ["Riesling", "Viognier", "Sauvignon blanc", "Chenin"],
+          "bonne": 1,
+          "explication": "Abricot, pêche, gras et peu d'acidité : le viognier, comme à Condrieu. Riesling, sauvignon et chenin sont tous trois très vifs."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage blanc ?",
+          "indices": ["Robe or vert.", "Nez de citron vert, de fleurs blanches ; avec l'âge, une note de pétrole.", "Acidité éclatante, peut être sec ou doux."],
+          "choix": ["Riesling", "Chardonnay", "Viognier", "Gewurztraminer"],
+          "bonne": 0,
+          "explication": "Citron vert, acidité éclatante et note de pétrole avec l'âge : le riesling, d'Alsace ou d'Allemagne."
+        },
+        {
+          "type": "indices",
+          "question": "Quel cépage blanc ?",
+          "indices": ["Robe dorée.", "Nez de coing, de pomme cuite et de miel.", "Acidité très élevée malgré une pointe de sucre."],
+          "choix": ["Chenin", "Viognier", "Sauvignon blanc", "Gewurztraminer"],
+          "bonne": 0,
+          "explication": "Coing, miel et une acidité qui tient tête au sucre : le chenin de Loire, comme dans un Vouvray demi-sec."
+        }
+      ]
+    },
+    {
+      "id": "berceaux",
+      "titre": "Le berceau des cépages",
+      "description": "Un cépage s'affiche : touche sur la carte la région française où il est emblématique.",
+      "tours": 6,
+      "badge": "racines",
+      "seuilBadge": 5,
+      "questions": [
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Cabernet sauvignon", "detail": "Le bâtisseur des grands vins de garde", "region": "bordeaux", "lat": 45.199, "lon": -0.748 }, "explication": "Le cabernet sauvignon règne sur la rive gauche de Bordeaux : Médoc et Graves, avec Pauillac comme symbole." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Merlot", "detail": "Le cépage le plus planté du Bordelais", "region": "bordeaux", "lat": 44.93, "lon": -0.2 }, "explication": "Le merlot domine la rive droite de Bordeaux : Pomerol et Saint-Émilion." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Pinot noir", "detail": "Le rouge fin et pâle", "region": "bourgogne", "lat": 47.161, "lon": 4.957 }, "explication": "La Bourgogne est la patrie du pinot noir, de la Côte de Nuits à la Côte de Beaune." },
+        { "type": "carte", "question": "Touche la région où ce cépage est né.", "entry": { "palier": 1, "vin": "Chardonnay", "detail": "Il porte le nom d'un village", "region": "bourgogne", "lat": 46.5103, "lon": 4.8633 }, "explication": "Le chardonnay porte le nom d'un village du Mâconnais, en Bourgogne. Il règne de Chablis au Mâconnais." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Syrah", "detail": "Mûre, violette et poivre", "region": "rhone", "lat": 45.072, "lon": 4.84 }, "explication": "La syrah règne sur le Rhône nord : Hermitage, Côte-Rôtie, Cornas. Elle est née dans le sud-est de la France." },
+        { "type": "carte", "question": "Touche la région française où ce cépage domine.", "entry": { "palier": 1, "vin": "Grenache", "detail": "Le cépage du soleil", "region": "rhone", "lat": 44.056, "lon": 4.832 }, "explication": "En France, le grenache domine le Rhône sud (Châteauneuf-du-Pape, Gigondas) et le Roussillon. Son origine se dispute entre l'Espagne et la Sardaigne." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Gamay", "detail": "Le fruit à l'état pur", "region": "beaujolais", "lat": 46.162, "lon": 4.68 }, "explication": "Le gamay fait presque tout le Beaujolais, des primeurs aux dix crus." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Chenin", "detail": "Du sec au liquoreux, et en bulles", "region": "loire", "lat": 47.411, "lon": 0.798 }, "explication": "Le chenin est le grand blanc de l'Anjou-Touraine : Vouvray, Savennières, Coteaux du Layon." },
+        { "type": "carte", "question": "Touche la région française où ce cépage est roi.", "entry": { "palier": 1, "vin": "Sauvignon blanc", "detail": "Herbe coupée et pamplemousse", "region": "loire", "lat": 47.332, "lon": 2.836 }, "explication": "Sancerre et Pouilly-Fumé, dans le Centre-Loire, sont les fiefs français du sauvignon blanc. On le trouve aussi à Bordeaux." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Riesling", "detail": "L'acidité éclatante", "region": "alsace", "lat": 48.166, "lon": 7.297 }, "explication": "En France, le riesling est le grand cépage de l'Alsace." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Gewurztraminer", "detail": "Litchi, rose et épices", "region": "alsace", "lat": 48.043, "lon": 7.307 }, "explication": "Le gewurztraminer est un des grands cépages d'Alsace." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Viognier", "detail": "Abricot et fleurs blanches", "region": "rhone", "lat": 45.462, "lon": 4.767 }, "explication": "Le berceau historique du viognier est le Rhône nord : Condrieu et Château-Grillet." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Côt (malbec)", "detail": "Le vin noir", "region": "sud-ouest", "lat": 44.448, "lon": 1.441 }, "explication": "Le côt est le cépage de Cahors, dans le Sud-Ouest, avant d'être la star de l'Argentine sous le nom de malbec." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Tannat", "detail": "Le champion des tanins", "region": "sud-ouest", "lat": 43.548, "lon": -0.054 }, "explication": "Le tannat règne à Madiran, dans le Sud-Ouest." },
+        { "type": "carte", "question": "Touche la région où ce cépage est roi.", "entry": { "palier": 1, "vin": "Mourvèdre", "detail": "La tête au soleil, les pieds dans l'eau", "region": "provence", "lat": 43.19, "lon": 5.77 }, "explication": "Le mourvèdre règne à Bandol, en Provence, au bord de la Méditerranée." },
+        { "type": "carte", "question": "Touche la région où ce cépage fait seul les rouges.", "entry": { "palier": 1, "vin": "Cabernet franc", "detail": "Framboise, violette et fraîcheur", "region": "loire", "lat": 47.167, "lon": 0.242 }, "explication": "En Loire, le cabernet franc fait seul les rouges de Chinon, Bourgueil et Saumur-Champigny." }
+      ]
+    },
+    {
+      "id": "profils",
+      "titre": "Profils et synonymes",
+      "description": "Léger ou corsé, tannique ou souple, et les autres noms des cépages : mets ta grille à l'épreuve.",
+      "questions": [
+        {
+          "type": "tri",
+          "question": "Rouge plutôt léger ou plutôt corsé ?",
+          "categories": ["Plutôt léger", "Plutôt corsé"],
+          "items": [
+            ["Pinot noir", 0],
+            ["Gamay", 0],
+            ["Cabernet sauvignon", 1],
+            ["Syrah", 1],
+            ["Tannat", 1],
+            ["Côt (malbec)", 1]
+          ],
+          "explication": "Pinot noir et gamay donnent des rouges légers, à la peau fine. Cabernet sauvignon, syrah, tannat et côt donnent des vins sombres et charpentés."
+        },
+        {
+          "type": "tri",
+          "question": "Blanc à l'acidité vive ou douce ?",
+          "categories": ["Acidité vive", "Acidité douce"],
+          "items": [
+            ["Riesling", 0],
+            ["Chenin", 0],
+            ["Sauvignon blanc", 0],
+            ["Viognier", 1],
+            ["Gewurztraminer", 1]
+          ],
+          "explication": "Riesling, chenin et sauvignon sont les champions de la vivacité. Viognier et gewurztraminer sont gras, parfumés et peu acides."
+        },
+        {
+          "type": "ordre",
+          "question": "Du rouge le moins tannique au plus tannique.",
+          "items": ["Pinot noir", "Merlot", "Cabernet sauvignon", "Tannat"],
+          "explication": "Le pinot noir, peau fine, est le plus souple ; le merlot est rond ; le cabernet sauvignon est ferme ; le tannat est le champion des tanins."
+        },
+        {
+          "type": "assoc",
+          "question": "Associe chaque cépage au nom qu'il porte ailleurs.",
+          "paires": [
+            ["Pinot noir", "Spätburgunder"],
+            ["Tempranillo", "Tinto fino"],
+            ["Côt", "Malbec"],
+            ["Grenache", "Cannonau"]
+          ],
+          "explication": "Pinot noir = spätburgunder (Allemagne), tempranillo = tinto fino (Ribera del Duero), côt = malbec (Argentine), grenache = cannonau (Sardaigne)."
+        },
+        {
+          "type": "vf",
+          "question": "Le zinfandel de Californie et le primitivo des Pouilles sont deux cépages différents.",
+          "bonne": false,
+          "explication": "C'est le même cépage, confirmé par l'ADN, également identique au tribidrag croate. Seuls le nom et le style changent."
+        },
+        {
+          "type": "qcm",
+          "question": "Quel cépage a pour parents le cabernet franc et le sauvignon blanc ?",
+          "choix": ["Le merlot", "Le cabernet sauvignon", "Le malbec", "La syrah"],
+          "bonne": 1,
+          "explication": "Le cabernet sauvignon est né d'un croisement spontané entre cabernet franc et sauvignon blanc, découvert grâce à l'ADN en 1997. Le merlot est aussi un enfant du cabernet franc, mais avec la magdeleine noire des Charentes."
+        }
+      ]
+    }
+  ],
+  "quiz": {
+    "titre": "Quiz de validation · Niveau 2",
+    "questions": [
+      {
+        "type": "qcm",
+        "question": "Quelle sensation trahit un vin tannique ?",
+        "choix": ["Il fait saliver", "Il assèche les gencives", "Il pique la langue", "Il laisse un goût sucré"],
+        "bonne": 1,
+        "explication": "Les tanins assèchent, comme un thé trop infusé. C'est l'acidité qui fait saliver."
+      },
+      {
+        "type": "tri",
+        "question": "D'où vient chaque arôme ?",
+        "categories": ["Du raisin (primaire)", "De la fermentation (secondaire)", "Du temps (tertiaire)"],
+        "items": [
+          ["Poivre de la syrah", 0],
+          ["Litchi du gewurztraminer", 0],
+          ["Mie de pain", 1],
+          ["Cuir", 2],
+          ["Sous-bois", 2]
+        ],
+        "explication": "Le poivre et le litchi viennent du raisin ; la mie de pain de la fermentation ; le cuir et le sous-bois apparaissent avec le temps."
+      },
+      {
+        "type": "vf",
+        "question": "Un même cépage donne un vin plus acide sous un climat frais que sous un climat chaud.",
+        "bonne": true,
+        "explication": "Au frais, le raisin mûrit lentement et garde son acidité ; au chaud, il accumule du sucre (donc de l'alcool) et perd de l'acidité."
+      },
+      {
+        "type": "indices",
+        "question": "À l'aveugle : quel cépage ?",
+        "indices": ["Robe très sombre.", "Nez de cassis et de cèdre.", "Tanins fermes, acidité vive ; il vient de la rive gauche de Bordeaux."],
+        "choix": ["Merlot", "Cabernet sauvignon", "Pinot noir", "Grenache"],
+        "bonne": 1,
+        "explication": "Cassis, cèdre, tanins fermes et rive gauche : le cabernet sauvignon. Le merlot domine la rive droite."
+      },
+      {
+        "type": "etiquette",
+        "etiquette": "guigal",
+        "mode": "qcm",
+        "question": "Quel est le cépage principal de ce vin ?",
+        "choix": ["Grenache", "Syrah", "Pinot noir", "Merlot"],
+        "bonne": 1,
+        "explication": "Côte-Rôtie, au Rhône nord : syrah, avec parfois un peu de viognier (jusqu'à 20 %)."
+      },
+      {
+        "type": "qcm",
+        "question": "Quel cépage rouge donne des vins pâles, peu tanniques, aux arômes de cerise et de sous-bois ?",
+        "choix": ["Syrah", "Tannat", "Pinot noir", "Mourvèdre"],
+        "bonne": 2,
+        "explication": "Le pinot noir, à la peau fine, donne des vins pâles et peu tanniques. Syrah, tannat et mourvèdre sont sombres et charpentés."
+      },
+      {
+        "type": "etiquette",
+        "etiquette": "leflaive",
+        "mode": "qcm",
+        "question": "Ce vin blanc ne cite aucun cépage. Lequel contient-il ?",
+        "choix": ["Sauvignon blanc", "Chardonnay", "Riesling", "Chenin"],
+        "bonne": 1,
+        "explication": "Puligny-Montrachet est une appellation de la Côte de Beaune, en Bourgogne : le blanc y est du chardonnay."
+      },
+      {
+        "type": "assoc",
+        "question": "Associe chaque blanc à son profil.",
+        "paires": [
+          ["Viognier", "Abricot, gras, peu acide"],
+          ["Riesling", "Citron vert, très vif, pétrole avec l'âge"],
+          ["Chardonnay", "Discret, reflet de son climat"],
+          ["Chenin", "Coing, miel, sec ou liquoreux"]
+        ],
+        "explication": "Viognier exubérant et peu acide, riesling vif et précis, chardonnay caméléon, chenin tout-terrain de la Loire."
+      },
+      {
+        "type": "qcm",
+        "question": "Dans quelle région d'Italie le nebbiolo donne-t-il le Barolo ?",
+        "choix": ["La Toscane", "Le Piémont", "La Sicile", "La Vénétie"],
+        "bonne": 1,
+        "explication": "Le nebbiolo règne dans le Piémont : Barolo et Barbaresco. La Toscane est le royaume du sangiovese."
+      },
+      {
+        "type": "qcm",
+        "question": "Que signifie le nom « tempranillo » ?",
+        "choix": ["Le petit tempétueux", "Le précoce", "Le tardif", "Le parfumé"],
+        "bonne": 1,
+        "explication": "Tempranillo vient de « temprano », tôt : ce cépage mûrit précocement."
+      },
+      {
+        "type": "etiquette",
+        "etiquette": "montus",
+        "mode": "qcm",
+        "question": "Quel cépage domine ce Madiran ?",
+        "choix": ["Le tannat", "Le côt", "Le mourvèdre", "Le cabernet franc"],
+        "bonne": 0,
+        "explication": "Madiran est le fief du tannat, l'un des cépages les plus tanniques du monde."
+      },
+      {
+        "type": "carte",
+        "question": "Touche la région où le côt est roi.",
+        "entry": { "palier": 1, "vin": "Côt (malbec)", "detail": "Le vin noir", "region": "sud-ouest", "lat": 44.448, "lon": 1.441 },
+        "explication": "Le côt règne à Cahors, dans le Sud-Ouest, où l'appellation en exige au moins 70 %."
+      },
+      {
+        "type": "qcm",
+        "question": "Un vin d'Alsace porte la mention « Riesling ». Quelle part minimale de riesling contient-il ?",
+        "choix": ["50 %", "75 %", "85 %", "100 %"],
+        "bonne": 2,
+        "explication": "Un cépage nommé seul sur l'étiquette = au moins 85 %, la règle européenne."
+      },
+      {
+        "type": "tri",
+        "question": "Ces vins sont-ils en général monocépages ou assemblés ?",
+        "categories": ["Monocépage", "Assemblage"],
+        "items": [
+          ["Chablis", 0],
+          ["Gewurztraminer d'Alsace", 0],
+          ["Pomerol", 1],
+          ["Champagne sans millésime", 1]
+        ],
+        "explication": "Chablis (chardonnay) et les vins d'Alsace sont des monocépages ; à Pomerol, merlot et cabernet franc s'assemblent ; le champagne classique assemble cépages, crus et années."
+      },
+      {
+        "type": "vf",
+        "question": "Le blanc de noirs est un champagne fait uniquement de chardonnay.",
+        "bonne": false,
+        "explication": "Révision du niveau 1 : le blanc de noirs vient de raisins noirs (pinot noir, meunier). Le 100 % chardonnay s'appelle blanc de blancs."
+      },
+      {
+        "type": "qcm",
+        "question": "Pourquoi le pinot noir donne-t-il des vins plus pâles que le cabernet sauvignon ?",
+        "choix": ["Sa pulpe est blanche, celle du cabernet est rouge", "Sa peau est plus fine", "On le vinifie sans les peaux", "Il est toujours récolté plus tôt"],
+        "bonne": 1,
+        "explication": "Révision du niveau 1 : la couleur est dans la peau, et la pulpe est incolore chez les deux. La peau fine du pinot noir donne moins de couleur et de tanins."
+      },
+      {
+        "type": "ordre",
+        "question": "Révision : classe ces vins du plus sec au plus sucré.",
+        "items": ["Riesling d'Alsace sec", "Vouvray demi-sec", "Vouvray moelleux", "Sauternes"],
+        "explication": "Sec, demi-sec (jusqu'à 12 g/L, ou 18 avec une acidité élevée), moelleux (jusqu'à 45 g/L), puis le Sauternes, un liquoreux qui dépasse souvent 100 g/L."
+      }
+    ]
+  }
+}
