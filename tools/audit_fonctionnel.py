@@ -542,11 +542,16 @@ def t_double(b):
     a.p.dblclick("[data-next]"); a.p.wait_for_timeout(100)
     titre = a.p.evaluate("document.querySelector('.lcard h2').textContent")
     a.close()
+    a = App(b, touch=True); a.js("startStep(1,'n1-l1')"); a.p.wait_for_timeout(200)
+    a.p.tap("[data-next]"); a.p.tap("[data-next]"); a.p.wait_for_timeout(100)       # double toucher au doigt
+    titre_doigt = a.p.evaluate("document.querySelector('.lcard h2').textContent")
+    a.close()
     a = App(b); a.js("startQuiz(1)"); a.p.wait_for_timeout(200); a.p.click(".choice >> nth=1")
     a.p.dblclick("[data-check]"); a.p.wait_for_timeout(400)
     etat_q = a.p.evaluate("[!!document.querySelector('.sheet'), document.querySelector('.qtitle')?.textContent]")
     a.close()
-    return ("OK" if titre == "Que trouve-t-on dans un grain ?" else "BUG"), f"double clic sur Continuer (carte 1) → carte affichée « {titre} » (attendu : carte 2 « Que trouve-t-on dans un grain ? ») ; double clic sur Vérifier → feuille visible {etat_q[0]}"
+    ok = titre == titre_doigt == "Que trouve-t-on dans un grain ?" and etat_q[0]
+    return ("OK" if ok else "BUG"), f"double clic sur Continuer (carte 1) → « {titre} » ; double toucher au doigt → « {titre_doigt} » (attendu : carte 2 « Que trouve-t-on dans un grain ? ») ; double clic sur Vérifier → feuille visible {etat_q[0]}"
 
 @T("Robustesse : défilement de la page bloqué pendant la session et rétabli après")
 def t_scroll(b):
