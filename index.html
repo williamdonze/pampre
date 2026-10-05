@@ -917,14 +917,14 @@ function runSession(steps, opts){
   document.body.appendChild(ses); document.body.style.overflow = "hidden";
   const main = ses.querySelector("#s-main"), foot = ses.querySelector(".s-foot .wrap"), bar = ses.querySelector(".pbar i"), count = ses.querySelector(".s-count");
   const queue = steps.slice(); const total = steps.length;
-  let idx = 0, answered = 0, correct = 0, bonus = 0, current = null, sheet = null, retried = new Set(), results = [];
+  let idx = 0, answered = 0, correct = 0, bonus = 0, current = null, sheet = null, sheetObs = null, retried = new Set(), results = [];
   const qTotal = steps.filter(s => s.kind === "q").length;
 
   ses.querySelector("[data-quit]").onclick = () => confirmBox("Quitter la session ?", "Ce que tu as fait dans cette session ne sera pas enregistré.", "Quitter", () => { closeSession(); render(); });
 
   function progress(){ const p = Math.min(1, idx / Math.max(total, queue.length)); bar.style.width = (p * 100) + "%"; count.textContent = qTotal ? `${Math.min(answered, qTotal)}/${qTotal}` : ""; }
   function show(){
-    current?.cleanup?.(); sheet?.remove(); sheet = null;
+    current?.cleanup?.(); sheet?.remove(); sheet = null; sheetObs?.disconnect(); sheetObs = null; ses.querySelector(".s-body").style.paddingBottom = "";
     if (idx >= queue.length) return finish();
     progress();
     const st = queue[idx];
@@ -962,6 +962,9 @@ function runSession(steps, opts){
       <div class="expl">${!r.ok && r.answer ? `<p class="answer">Bonne réponse : ${esc(r.answer)}</p>` : ""}${r.ok && r.answer && q.type === "carte" ? `<p><b>${esc(r.answer)}</b></p>` : ""}${r.bonus ? `<p><b>+${r.bonus} point${r.bonus>1?"s":""} bonus d'indices</b></p>` : ""}${q.explication ? `<p>${esc(q.explication)}</p>` : ""}${q.type==="carte" ? `<p>${esc(D.carteVins.regions.find(x=>x.id===q.entry.region).fiche)}</p>` : ""}</div>
       <button class="btn ${r.ok?"leaf":"bad"} block" data-cont>Continuer</button></div></div>`);
     foot.innerHTML = ""; ses.appendChild(sheet);
+    // la feuille recouvre le bas de la question : on réserve sa hauteur pour pouvoir tout faire défiler
+    const body = ses.querySelector(".s-body"), reserve = () => { if (sheet) body.style.paddingBottom = sheet.offsetHeight + "px"; };
+    reserve(); try { sheetObs = new ResizeObserver(reserve); sheetObs.observe(sheet); } catch(e) {}
     sheet.querySelector("[data-cont]").onclick = () => { idx++; show(); };
     sheet.querySelector("[data-cont]").focus({preventScroll:true});
   }

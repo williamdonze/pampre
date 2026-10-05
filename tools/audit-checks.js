@@ -177,7 +177,8 @@
   async function checkBottom(out){
     const res = [];
     const root = activeRoot();
-    const frames = [root === document.body ? document.scrollingElement : null, ...root.querySelectorAll(".s-body,.drawer-body,.sheet .expl")].filter(e => e && e.scrollHeight > e.clientHeight + 1 && (e === document.scrollingElement || visible(e)));
+    // l'explication défile à l'intérieur de la feuille : seul compte ce qui reste caché sous les couches du bas
+    const frames = [root === document.body ? document.scrollingElement : null, ...root.querySelectorAll(".s-body,.drawer-body")].filter(e => e && e.scrollHeight > e.clientHeight + 1 && (e === document.scrollingElement || visible(e)));
     for (const f of frames) {
       const prev = f.scrollTop; f.scrollTop = f.scrollHeight; await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
       const tmp = []; checkLayers(tmp, { only: ".tabbar,.sheet,.s-foot,.toasts,.modal-bg,.confetti" }); tmp.forEach(t => { t.check = "masque-en-bas"; t.detail += ` (zone ${f === document.scrollingElement ? "page" : sig(f)} défilée au maximum)`; res.push(t); });
@@ -187,7 +188,7 @@
     const sheet = document.querySelector(".sheet"), body = document.querySelector(".s-body");
     if (sheet && body) {
       body.scrollTop = body.scrollHeight; await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-      const top = sheet.getBoundingClientRect().top; const items = [...document.querySelectorAll("#s-main *")].filter(e => visible(e) && (ownText(e) || e.matches("button,.chip,.choice")));
+      const top = sheet.getBoundingClientRect().top; const items = [...document.querySelectorAll("#s-main *")].filter(e => visible(e) && !e.closest(".map-box svg") && (ownText(e) || e.matches("button,.chip,.choice,.map-box")));
       const hidden = items.filter(e => e.getBoundingClientRect().bottom > top + 2);
       if (hidden.length) res.push({ check:"masque-par-feuille", sel:sig(hidden[0]), text:txt(hidden[hidden.length-1]), detail:`${hidden.length} élément(s) de la question restent sous la feuille de correction même en défilant (haut de la feuille : ${Math.round(top)} px)` });
     }
