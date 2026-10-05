@@ -87,6 +87,7 @@ html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:8px}
+.nowrap{white-space:nowrap}
 h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
 p{margin:0}
 .wrap{max-width:680px;margin:0 auto;padding-inline:16px}
@@ -462,6 +463,8 @@ const todayStr = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1
 const dayDiff = (a, b) => Math.round((new Date(b + "T12:00") - new Date(a + "T12:00")) / 864e5);
 function seeded(str){ let x = 2166136261; for (const c of str) { x ^= c.charCodeAt(0); x = Math.imul(x, 16777619); } return () => { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return ((x >>> 0) % 1e9) / 1e9; }; }
 const fmt = n => n.toLocaleString("fr-FR");
+// titres : « trouve-t-on », « fait-on »… ne se coupent pas sur le trait d'union
+const insecable = html => html.replace(/([\p{L}]+(?:-t)?-(?:on|il|elle|ils|elles|je|tu|nous|vous|ce))(?![\p{L}])/gu, `<span class="nowrap">$1</span>`);
 const fmtCourt = n => n >= 10000 ? `${(Math.floor(n / 100) / 10).toLocaleString("fr-FR")}\u202fk` : fmt(n);   // barre du haut : 123 456 → « 123,4 k »
 
 /* ---------------- icônes ---------------- */
@@ -1017,7 +1020,7 @@ function runSession(steps, opts){
     main.innerHTML = ""; ses.querySelector(".s-body").scrollTop = 0;
     if (st.kind === "carte") {
       const c = st.carte;
-      main.appendChild(h(`<article class="lcard"><div class="illu">${illu(c.illu)}</div><h2>${esc(c.titre)}</h2><div class="rich">${rich(c.texte)}</div>
+      main.appendChild(h(`<article class="lcard"><div class="illu">${illu(c.illu)}</div><h2>${insecable(esc(c.titre))}</h2><div class="rich">${rich(c.texte)}</div>
         ${c.exemple?`<div class="aside ex">${I.bottle.replace("<svg",'<svg style="color:var(--grape-ink)"')}<div><b>Exemple</b><span class="vin">${esc(c.exemple.vin)}</span>${esc(c.exemple.detail)}</div></div>`:""}
         ${c.astuce?`<div class="aside tip">${I.bulb.replace("<svg",'<svg style="color:var(--gold-deep)"')}<div><b>Bon à savoir</b><div class="rich">${rich(c.astuce)}</div></div></div>`:""}
         ${c.debat?`<div class="aside deb">${I.scale.replace("<svg",'<svg style="color:var(--plum)"')}<div><b>Débat d'experts</b><div class="rich">${rich(c.debat)}</div></div></div>`:""}</article>`));
@@ -1029,7 +1032,7 @@ function runSession(steps, opts){
     }
     const q = st.q;
     const kindName = { qcm:"Choix multiple", vf:"Vrai ou faux", ordre:"Remets dans l'ordre", assoc:"Associe", tri:"Classe", etiquette:"Lis l'étiquette", indices:"À l'aveugle", carte:"Sur la carte" }[q.type] || "";
-    const box = h(`<div><div class="qkind">${kindName}${st.retry ? " · nouvelle chance" : ""}</div><h2 class="qtitle">${esc(q.question)}</h2></div>`);
+    const box = h(`<div><div class="qkind">${kindName}${st.retry ? " · nouvelle chance" : ""}</div><h2 class="qtitle">${insecable(esc(q.question))}</h2></div>`);
     main.appendChild(box);
     foot.innerHTML = `<button class="btn leaf" data-check disabled>Vérifier</button>`;
     const btn = foot.querySelector("[data-check]");
