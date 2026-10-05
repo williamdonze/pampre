@@ -1,7 +1,8 @@
 from playwright.sync_api import sync_playwright
-import json, os
+import json, os, re
 os.makedirs('captures', exist_ok=True)
 errs=[]; SP='captures/'
+exact = lambda t: re.compile(r'^\s*' + re.escape(t) + r'\s*$')   # texte exact (« Musigny » ne doit pas trouver « Chambolle-Musigny »)
 with sync_playwright() as p:
     CHROME='/opt/pw-browsers/chromium-1194/chrome-linux/chrome'   # Chromium préinstallé (environnement cloud), sinon celui de Playwright
     b=p.chromium.launch(**({'executable_path':CHROME} if os.path.exists(CHROME) else {}))
@@ -24,13 +25,13 @@ with sync_playwright() as p:
                 pg.click('.lbl .ch[data-champ="%s"]'%q['cible'])
             elif t=='ordre':
                 for it in q['items']:
-                    pg.locator('.pool .chip:not(.used)', has_text=it).first.click()
+                    pg.locator('.pool .chip:not(.used)', has_text=exact(it)).first.click()
             elif t=='assoc':
                 for a,bb in q['paires']:
-                    pg.locator('.l .chip', has_text=a).first.click(); pg.locator('.r .chip', has_text=bb).first.click()
+                    pg.locator('.l .chip', has_text=exact(a)).first.click(); pg.locator('.r .chip', has_text=exact(bb)).first.click()
             elif t=='tri':
                 for txt,c in q['items']:
-                    pg.locator('.pool .chip', has_text=txt).first.click(); pg.locator('.cat').nth(c).click(position={'x':8,'y':8})
+                    pg.locator('.pool .chip', has_text=exact(txt)).first.click(); pg.locator('.cat').nth(c).click(position={'x':8,'y':8})
             elif t=='carte':
                 # toucher la carte à la position réelle du lieu
                 x,y=pg.evaluate("([la,lo])=>{const [x,y]=proj(la,lo);const s=document.querySelector('.session .map-box > svg');const pt=s.createSVGPoint();pt.x=x;pt.y=y;const q=pt.matrixTransform(s.getScreenCTM());return [q.x,q.y]}", [q['entry']['lat'],q['entry']['lon']])
@@ -53,6 +54,11 @@ with sync_playwright() as p:
     pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend3.png')
     pg.click('[data-done]'); pg.wait_for_timeout(300)
     if not pg.evaluate("ST.quiz[3] && ST.quiz[3].passed && !!ST.badges['niveau-3']"): print('WRONG niveau 3 non validé')
+    # niveau 4, débloqué par le quiz du niveau 3
+    faire_quiz(4)
+    pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend4.png')
+    pg.click('[data-done]'); pg.wait_for_timeout(300)
+    if not pg.evaluate("ST.quiz[4] && ST.quiz[4].passed && !!ST.badges['niveau-4']"): print('WRONG niveau 4 non validé')
     # map game tier 1
     pg.click('.tab[data-go="carte"]'); pg.wait_for_timeout(300); pg.screenshot(path=SP+'mapsetup.png')
     pg.click('text=Lancer une partie'); pg.wait_for_timeout(400)

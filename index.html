@@ -590,6 +590,7 @@ const IL = {
     const et=[[30,0,"Tirage","sucre, levures",`<text x="30" y="90" text-anchor="middle" font-size="12" fill="#fff">+</text>`],[78,0,"Prise de mousse","2e fermentation",[0,1,2,3].map(i=>`<circle cx="${72+i*4}" cy="${70+(i%2)*10}" r="2" fill="#F3E9B5"/>`).join("")],[126,140,"Remuage","dépôt vers le col",""],[174,180,"Dégorgement","on expulse le dépôt",""],[222,0,"Dosage","sucre final",`<rect x="212" y="72" width="20" height="10" fill="var(--gold)"/>`]];
     return `<svg viewBox="0 0 250 166">${et.map(([x,r,t,s,e],i)=>b(x,r,e)+svgT(x,128+(i%2)*22,t,{a:"middle",s:10})+svgT(x,140+(i%2)*22,s,{a:"middle",s:8,w:700,c:"var(--muted-ink)"})).join("")}<circle cx="174" cy="114" r="4" fill="#C9B79C"/><path d="M174 108v-4" stroke="#C9B79C" stroke-width="2"/></svg>`},
   "duree-lies":()=>{const b=[["Crémant",9,"9 mois sur lies","var(--gold)"],["Champagne",15,"15 mois en cave","var(--grape-btn)"],["Champagne millésimé",36,"3 ans","var(--plum)"]];const X=m=>14+m*6;return `<svg viewBox="0 0 250 156">${b.map(([n,m,t,c],i)=>`${svgT(14,20+i*40,n,{s:12})}<rect x="14" y="${27+i*40}" width="${X(m)-14}" height="14" rx="7" fill="${c}"/>${svgT(X(m)+(m>30?-6:6),38+i*40,t,{a:m>30?"end":"start",s:10,w:800,c:m>30?"#fff":"var(--muted-ink)"})}`).join("")}<path d="M14 136H236" stroke="var(--line)" stroke-width="2"/>${[0,12,24,36].map(m=>`<path d="M${X(m)} 132v8" stroke="var(--muted-ink)" stroke-width="1.5"/>${svgT(X(m),150,m?m+" mois":"tirage",{a:m?"middle":"start",s:9,w:700,c:"var(--muted-ink)"})}`).join("")}</svg>`},
+  "alsace-vosges":()=>`<svg viewBox="0 0 250 150"><rect width="250" height="150" rx="12" fill="var(--sea)"/><path d="M0 130L40 46Q60 20 82 46L118 98Q150 118 250 122V150H0z" fill="#8FA3B3"/><path d="M82 46L118 98Q150 118 250 122V150H96z" fill="var(--leaf-soft)"/>${[0,1,2,3,4].map(i=>`<path d="M${100+i*9} ${76+i*7.4}v-8" stroke="var(--leaf-deep)" stroke-width="2.5" stroke-linecap="round"/><circle cx="${100+i*9}" cy="${66+i*7.4}" r="3.5" fill="var(--leaf)"/>`).join("")}<path d="M8 36a12 12 0 0 1 6-22a16 16 0 0 1 30-2a12 12 0 0 1 10 24z" fill="#9CB8CC"/>${[14,24,34,44].map(x=>`<path d="M${x} 42l-3 10" stroke="#5B9BC8" stroke-width="2" stroke-linecap="round"/>`).join("")}<circle cx="206" cy="30" r="12" fill="var(--gold)"/><path d="M200 136q10-4 20 0t20 0" stroke="#5B9BC8" stroke-width="3" fill="none"/>${svgT(52,112,"Vosges",{a:"middle",s:11,c:"#fff"})}${svgT(132,66,"vignes",{s:11,c:"var(--leaf-ink)"})}${svgT(162,112,"plaine",{s:10,w:700,c:"var(--muted-ink)"})}${svgT(244,132,"Rhin",{a:"end",s:10,c:"#3D7AA8"})}${svgT(56,14,"pluie à l'ouest",{s:9,w:700,c:"var(--muted-ink)"})}${svgT(244,54,"sec et ensoleillé",{a:"end",s:10,c:"var(--gold-ink)"})}</svg>`,
   "cuve-close":()=>`<svg viewBox="0 0 250 140"><rect x="16" y="12" width="96" height="106" rx="14" fill="#C9D3DA" stroke="var(--ink)" stroke-width="2"/><rect x="18" y="40" width="92" height="76" rx="12" fill="#F3E9B5"/>${[[34,100],[50,80],[66,96],[82,70],[94,92],[42,60],[74,52]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="#fff" stroke="#D8C77A"/>`).join("")}<path d="M112 80h36" stroke="var(--ink)" stroke-width="2"/><path d="M142 74l8 6-8 6" stroke="var(--ink)" stroke-width="2" fill="none"/>${[164,192,220].map(x=>`<path d="M${x-4} 44h8v12c6 4 8 9 8 15v38h-24V71c0-6 2-11 8-15z" fill="#4E7A3A"/>`).join("")}${svgT(64,134,"2e fermentation en cuve",{a:"middle",s:11})}${svgT(192,134,"mise sous pression",{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}${svgT(64,30,"cuve close",{a:"middle",s:12,c:"var(--grape-ink)"})}</svg>`,
   ancestrale:()=>`<svg viewBox="0 0 250 148"><rect x="16" y="30" width="70" height="80" rx="8" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><rect x="18" y="56" width="66" height="52" rx="6" fill="#F3E9B5"/>${svgT(51,128,"fermentation",{a:"middle",s:11})}${svgT(51,22,"elle commence…",{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}<path d="M90 70h50" stroke="var(--ink)" stroke-width="2"/><path d="M134 64l8 6-8 6" stroke="var(--ink)" stroke-width="2" fill="none"/>${svgT(115,60,"on met en",{a:"middle",s:9,w:700,c:"var(--muted-ink)"})}${svgT(115,92,"bouteille",{a:"middle",s:9,w:700,c:"var(--muted-ink)"})}<path d="M180 14h12v20c12 8 14 16 14 26v52h-40V60c0-10 2-18 14-26z" fill="#4E7A3A" stroke="var(--ink)" stroke-width="1"/>${[[178,90],[190,78],[184,66],[194,98],[180,104]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="#F3E9B5"/>`).join("")}${svgT(186,128,"…et finit ici",{a:"middle",s:11})}${svgT(186,140,"une seule fermentation",{a:"middle",s:9,w:700,c:"var(--grape-ink)"})}</svg>`,
   "fut-chene":()=>`<svg viewBox="0 0 250 140"><ellipse cx="70" cy="66" rx="56" ry="48" fill="#B98A57"/><path d="M14 66h112" stroke="#8A6236" stroke-width="1.5"/>${[-30,-14,14,30].map(d=>`<path d="M${70+d} 19q${d*.5} 47 0 94" stroke="#8A6236" stroke-width="1.5" fill="none"/>`).join("")}${[26,114].map(x=>`<path d="M${x} 24q${x<70?-14:14} 42 0 84" stroke="#3A2A1A" stroke-width="5" fill="none"/>`).join("")}<circle cx="70" cy="44" r="5" fill="#3A2A1A"/>${svgT(70,72,"225 L",{a:"middle",s:15,c:"#fff"})}${svgT(70,132,"barrique bordelaise",{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}${svgT(140,26,"Fût neuf",{s:12,c:"var(--grape-ink)"})}${svgT(140,40,"vanille, toasté, épices",{s:10,w:700,c:"var(--muted-ink)"})}${svgT(140,62,"Fût ancien",{s:12,c:"var(--grape-ink)"})}${svgT(140,76,"oxygène, peu de goût",{s:10,w:700,c:"var(--muted-ink)"})}${svgT(140,98,"Chêne américain",{s:12,c:"var(--grape-ink)"})}${svgT(140,112,"vanille, noix de coco",{s:10,w:700,c:"var(--muted-ink)"})}</svg>`,
@@ -610,6 +611,55 @@ IL.profil = c => {
     return `<text x="8" y="${y + 13}" font-family="var(--f-body)" font-weight="800" font-size="12" fill="var(--ink)">${n}</text>` +
       [0,1,2,3,4].map(j => `<rect x="${92 + j * 32}" y="${y + 2}" width="28" height="14" rx="7" fill="${j < p[k] ? couleur : "var(--paper)"}" stroke="${j < p[k] ? "none" : "var(--line)"}" stroke-width="1.5"/>`).join("");
   }).join("")}<text x="92" y="${H - 4}" font-family="var(--f-body)" font-weight="700" font-size="10" fill="var(--muted-ink)">faible</text><text x="248" y="${H - 4}" text-anchor="end" font-family="var(--f-body)" font-weight="700" font-size="10" fill="var(--muted-ink)">élevé</text></svg>`;
+};
+/* mini-carte d'une région, tracée avec les vrais contours (carte-france.json) et les lieux de carte-vins.json.
+   carte : { illu:"carte-region", region:"bordeaux", lieux:["Pauillac", ["Margaux","g"], ["Romanèche-Thorins","d","Moulin-à-Vent"], …], villes:["Bordeaux"] }
+   un lieu : nom dans carte-vins.json (vin ou ville), côté de l'étiquette ("d" droite par défaut, "g" gauche, "h" haut, "b" bas), nom affiché facultatif.
+   Cadre : toute la région, ou les lieux et villes si cadre:"lieux". */
+IL["carte-region"] = c => {
+  const reg = D.carteVins.regions.find(r => r.id === c.region); if (!reg) return IL.raisin();
+  const F = D.carteFrance, W = 250, H = 180, M = 8;
+  const pts = d => [...d.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)].map(m => [+m[1], +m[2]]);
+  const boite = ps => ps.reduce((b, [x, y]) => [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)], [1e9, 1e9, -1e9, -1e9]);
+  const trouve = nom => D.carteVins.vins.find(v => v.vin === nom) || D.carteVins.villes.find(v => v.nom === nom);
+  const lieux = (c.lieux || []).map(l => { const [nom, cote = "d", affiche = nom] = Array.isArray(l) ? l : [l]; const v = trouve(nom); return v && { nom: affiche, cote, p: proj(v.lat, v.lon) }; }).filter(Boolean);
+  const villes = (c.villes || []).map(nom => { const v = trouve(nom); return v && { nom, cote: "d", p: proj(v.lat, v.lon), ville: true }; }).filter(Boolean);
+  let b;
+  if (c.cadre === "lieux" && lieux.length) { b = boite([...lieux, ...villes].map(l => l.p)); const m = Math.max(4, .18 * Math.max(b[2] - b[0], b[3] - b[1])); b = [b[0] - m, b[1] - m, b[2] + m, b[3] + m]; }
+  else { b = boite(reg.deps.flatMap(d => pts(F.deps[d].d))); b = [b[0] - 4, b[1] - 4, b[2] + 4, b[3] + 4]; }
+  const s = Math.min((W - 2 * M) / (b[2] - b[0]), (H - 2 * M) / (b[3] - b[1]));
+  const tx = (W - s * (b[2] - b[0])) / 2 - s * b[0], ty = (H - s * (b[3] - b[1])) / 2 - s * b[1];
+  const X = p => +(p[0] * s + tx).toFixed(1), Y = p => +(p[1] * s + ty).toFixed(1);
+  const vue = [(0 - tx) / s, (0 - ty) / s, (W - tx) / s, (H - ty) / s];
+  const visibles = Object.entries(F.deps).filter(([, v]) => { const q = boite(pts(v.d)); return q[2] > vue[0] && q[0] < vue[2] && q[3] > vue[1] && q[1] < vue[3]; });
+  /* placement des étiquettes : chaque étiquette choisit, parmi 8 positions autour de son point, celle qui gêne le moins
+     (bord du cadre, points, autres étiquettes) ; plusieurs passes pour que les voisines s'ajustent entre elles */
+  const tous = [...lieux, ...villes];
+  const points = tous.map(l => [X(l.p) - 4.5, Y(l.p) - 4.5, X(l.p) + 4.5, Y(l.p) + 4.5]);
+  const croise = (r, o) => r[0] < o[2] && r[2] > o[0] && r[1] < o[3] && r[3] > o[1];
+  const POS = { d: [7, 3.5, "start"], g: [-7, 3.5, "end"], h: [0, -7, "middle"], b: [0, 13, "middle"], hd: [5, -5, "start"], hg: [-5, -5, "end"], bd: [5, 11, "start"], bg: [-5, 11, "end"] };
+  const rect = (l, cote) => { const taille = l.ville ? 9 : 10, larg = l.nom.length * taille * .6, x = X(l.p), y = Y(l.p), [dx, dy, a] = POS[cote];
+    const x0 = a === "start" ? x + dx : a === "end" ? x + dx - larg : x + dx - larg / 2; return [x0, y + dy - taille * .8, x0 + larg, y + dy + taille * .25]; };
+  const cotes = tous.map(l => l.cote);
+  const gene = (k, cote) => { const r = rect(tous[k], cote);
+    return (r[0] < 2 || r[1] < 2 || r[2] > W - 2 || r[3] > H - 2 ? 100 : 0) + points.filter((o, i) => i !== k && croise(r, o)).length * 3
+      + tous.filter((l, i) => i !== k && croise(r, rect(l, cotes[i]))).length * 3 + (cote === tous[k].cote ? 0 : cote.length); };   /* léger coût pour s'écarter du côté demandé, plus fort en diagonale */
+  for (let passe = 0; passe < 4; passe++) tous.forEach((l, k) => { cotes[k] = Object.keys(POS).reduce((m, cc) => gene(k, cc) < gene(k, m) ? cc : m, cotes[k]); });
+  const etiquettes = tous.map((l, k) => { const [dx, dy, a] = POS[cotes[k]], x = X(l.p), y = Y(l.p);
+    return `<text x="${x + dx}" y="${y + dy}" text-anchor="${a}" font-family="var(--f-body)" font-weight="800" font-size="${l.ville ? 9 : 10}" fill="${l.ville ? "var(--muted-ink)" : "var(--ink)"}" stroke="var(--land)" stroke-width="3" paint-order="stroke" stroke-linejoin="round">${esc(l.nom)}</text>`; });
+  return `<svg viewBox="0 0 ${W} ${H}"><defs><clipPath id="cr-${reg.id}"><rect width="${W}" height="${H}" rx="12"/></clipPath></defs><g clip-path="url(#cr-${reg.id})"><rect width="${W}" height="${H}" fill="var(--sea)"/>
+    <g transform="translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${s.toFixed(4)})">${visibles.map(([code, v]) => `<path d="${v.d}" fill="var(--land)" stroke="var(--line)" stroke-width="${(1 / s).toFixed(3)}"/>${reg.deps.includes(code) ? `<path d="${v.d}" fill="var(--gold)" fill-opacity=".22"/>` : ""}`).join("")}</g>
+    ${villes.map(v => `<rect x="${X(v.p) - 2.5}" y="${Y(v.p) - 2.5}" width="5" height="5" fill="var(--muted-ink)"/>`).join("")}
+    ${lieux.map(l => `<circle cx="${X(l.p)}" cy="${Y(l.p)}" r="4" fill="var(--grape-btn)" stroke="var(--land)" stroke-width="1.5"/>`).join("")}
+    ${etiquettes.join("")}</g></svg>`;
+};
+/* pyramide à étages, du sommet (le plus rare) à la base. carte : { illu:"etages", etages:[["Grands crus","1 %"], …] } */
+IL.etages = c => {
+  const e = c.etages || [], n = e.length || 1, W = 250, h = 30, g = 4, H = n * (h + g);
+  const cols = ["var(--grape-btn)", "var(--plum)", "#E3A41D", "#9CCB5A", "#D9CDC3"];   /* les 2 premiers étages en texte blanc, les suivants en encre foncée fixe (même rendu dans les deux thèmes) */
+  return `<svg viewBox="0 0 ${W} ${H}">${e.map(([t, sub], i) => { const w0 = 70 + i * (180 / n), w1 = 70 + (i + 1) * (180 / n), y = i * (h + g);
+    const fonce = i < 2;
+    return `<path d="M${(W - w0) / 2} ${y}H${(W + w0) / 2}L${(W + w1) / 2} ${y + h}H${(W - w1) / 2}z" fill="${cols[i % cols.length]}"/>${svgT(W / 2, y + (sub ? 13 : 19), esc(t), { a: "middle", s: 11, c: fonce ? "#fff" : "#2A161C" })}${sub ? svgT(W / 2, y + 25, esc(sub), { a: "middle", s: 9, w: 700, c: fonce ? "#fff" : "#2A161C" }) : ""}`; }).join("")}</svg>`;
 };
 const illu = (k, carte) => (IL[k] || IL.raisin)(carte);
 
@@ -1061,7 +1111,7 @@ Q.carte = (q, onChange) => {
   let guess = null;
   const mv = MapView(el.querySelector(".mapholder"), { cities:true, onPick:g => { guess = g; onChange(); } });
   return { el, ready:() => !!guess,
-    check(){ const r = scoreMap(q.entry, guess, mv); const reg = D.carteVins.regions.find(x => x.id === q.entry.region); mv.reveal([q.entry.lat, q.entry.lon], guess, r.inside ? "dans la région !" : `${Math.round(r.d)} km`, reg.deps); const ok = r.score >= 3000; if (q.entry.palier === 1 && r.score >= 4000) { ST.map.regions[q.entry.region] = 1; } return { ok, answer:`${reg.nom} — ${fmt(r.score)} points`, extra:r }; } };
+    check(){ const r = scoreMap(q.entry, guess, mv); const reg = D.carteVins.regions.find(x => x.id === q.entry.region); const p1 = q.entry.palier === 1; mv.reveal([q.entry.lat, q.entry.lon], guess, r.inside ? "dans la région !" : r.d < 1 ? `${Math.round(r.d * 1000)} m` : `${Math.round(r.d)} km`, p1 ? reg.deps : null); const ok = r.score >= 3000;   /* comme la Carte libre : région surlignée au seul palier 1 */ if (q.entry.palier === 1 && r.score >= 4000) { ST.map.regions[q.entry.region] = 1; } return { ok, answer:`${p1 ? reg.nom : `${q.entry.vin} (${reg.nom})`} — ${fmt(r.score)} points`, extra:r }; } };
 };
 
 /* ---------------- runner de session ---------------- */
