@@ -350,6 +350,7 @@ main{padding-block:20px 110px}
 
 .tiers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:12px 0 16px}
 .tier{border:2px solid var(--line);border-bottom-width:4px;background:var(--paper);border-radius:14px;padding:8px 2px;text-align:center;font-weight:800;font-size:12px;line-height:1.2}
+@media (max-width:420px){.tiers{grid-template-columns:repeat(6,minmax(0,1fr))}.tier{grid-column:span 2}.tier:nth-child(4){grid-column:2 / span 2}} /* 3 + 2 : « Appellation » tient dans sa case */
 .tier .lv{display:block;font-family:var(--f-display);font-size:20px;color:var(--grape-ink)}
 .tier[aria-pressed="true"]{border-color:var(--grape);background:var(--grape-soft);color:var(--grape-ink)}
 .seg{display:inline-flex;background:var(--line);border-radius:12px;padding:3px;gap:3px}
