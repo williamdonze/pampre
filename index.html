@@ -310,6 +310,14 @@ main{padding-block:20px 110px}
 .lbl-foot .ch-degre,.lbl-foot .ch-volume{font-size:13px}
 .lbl-deco{width:110px;height:auto;color:var(--a)}
 .lbl-preg{width:18px;height:18px;flex:none;color:var(--i)}
+/* au doigt : champs plus espacés et zone sensible prolongée (::after) pour viser sans se tromper ; dessin inchangé à la souris */
+@media (pointer:coarse){
+  .lbl.tap{gap:12px}
+  .lbl.tap .ch{position:relative;min-height:32px;display:flex;align-items:center;justify-content:center}
+  .lbl.tap .ch::after{content:"";position:absolute;inset:-6px -4px}
+  .lbl.tap .lbl-foot{gap:12px 10px;padding-top:10px}
+  .lbl.tap .lbl-foot .ch{padding:2px 6px}
+}
 .lbl-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;max-width:46ch;margin-inline:auto}
 
 /* ---------- carte ---------- */
