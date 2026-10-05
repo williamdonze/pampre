@@ -95,8 +95,9 @@ p{margin:0}
 .topbar .wrap{display:flex;align-items:center;gap:12px;height:60px}
 .brand{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:800;font-size:24px;color:var(--grape-ink);background:none;border:0;padding:0;letter-spacing:-.01em}
 .brand svg{width:30px;height:30px}
-.stats{margin-left:auto;display:flex;gap:6px;align-items:center}
-.stat{display:flex;align-items:center;gap:4px;font-weight:800;font-size:15px;padding:4px 8px;border-radius:12px;font-variant-numeric:tabular-nums;background:none;border:0}
+.stats{margin-left:auto;display:flex;gap:6px;align-items:center;min-width:0}
+@media (max-width:360px){.topbar .wrap{gap:6px}.stats{gap:2px}.stat{padding:4px 5px}.brand{font-size:20px;gap:6px}.brand svg{width:26px;height:26px}}
+.stat{display:flex;align-items:center;gap:4px;white-space:nowrap;font-weight:800;font-size:15px;padding:4px 8px;border-radius:12px;font-variant-numeric:tabular-nums;background:none;border:0}
 .stat svg{width:22px;height:22px}
 .stat.flame{color:var(--flame-ink)}
 .stat.flame svg{color:#E8730C}
@@ -454,6 +455,7 @@ const todayStr = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1
 const dayDiff = (a, b) => Math.round((new Date(b + "T12:00") - new Date(a + "T12:00")) / 864e5);
 function seeded(str){ let x = 2166136261; for (const c of str) { x ^= c.charCodeAt(0); x = Math.imul(x, 16777619); } return () => { x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return ((x >>> 0) % 1e9) / 1e9; }; }
 const fmt = n => n.toLocaleString("fr-FR");
+const fmtCourt = n => n >= 10000 ? `${(Math.floor(n / 100) / 10).toLocaleString("fr-FR")}\u202fk` : fmt(n);   // barre du haut : 123 456 → « 123,4 k »
 
 /* ---------------- icônes ---------------- */
 const I = {
@@ -1125,7 +1127,7 @@ function shell(){
 function renderTop(){
   const s = streakNow(); const { cur } = rankOf(ST.xp);
   const el = document.getElementById("stats"); if (!el) return;
-  el.innerHTML = `<span class="rank-chip">${esc(cur.nom)}</span><button class="stat flame ${s?"":"off"}" data-go="profil" title="Série de jours">${I.flame}${s}</button><button class="stat xp" data-go="profil" title="Points d'expérience">${I.gem}${fmt(ST.xp)}</button>`;
+  el.innerHTML = `<span class="rank-chip">${esc(cur.nom)}</span><button class="stat flame ${s?"":"off"}" data-go="profil" title="Série de jours">${I.flame}${s}</button><button class="stat xp" data-go="profil" title="Points d'expérience">${I.gem}${fmtCourt(ST.xp)}</button>`;
   document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-current", t.dataset.go === VIEW ? "page" : "false"));
 }
 function render(){
