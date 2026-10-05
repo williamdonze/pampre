@@ -1011,7 +1011,9 @@ function runSession(steps, opts){
 
   ses.querySelector("[data-quit]").onclick = () => confirmBox("Quitter la session ?", "Les XP et la progression de cette session seront perdus. Tes erreurs restent dans ta pile, pour les revoir dans le défi du jour.", "Quitter", () => { closeSession(); render(); });
 
-  function progress(){ const p = Math.min(1, idx / Math.max(total, queue.length)); bar.style.width = (p * 100) + "%"; count.textContent = qTotal ? `${Math.min(answered, qTotal)}/${qTotal}` : ""; }
+  // fait = 1 juste après « Vérifier » : la barre et le compteur avancent dès la correction
+  let pMax = 0;   // la barre ne recule jamais, même quand une question ratée est remise en file
+  function progress(fait = 0){ pMax = Math.max(pMax, Math.min(1, (idx + fait) / Math.max(total, queue.length))); bar.style.width = (pMax * 100) + "%"; count.textContent = !qTotal ? "" : queue[idx]?.retry ? "reprise" : `${Math.min(answered, qTotal)}/${qTotal}`; }
   function show(){
     current?.cleanup?.(); sheet?.remove(); sheet = null; sheetObs?.disconnect(); sheetObs = null; ses.querySelector(".s-body").style.paddingBottom = "";
     if (idx >= queue.length) return finish();
@@ -1041,7 +1043,7 @@ function runSession(steps, opts){
     btn.onclick = garde(() => verify(q, st));
   }
   function verify(q, st){
-    const r = current.check(); answered++;
+    const r = current.check(); if (!st.retry) answered++; progress(1);
     if (r.ok) { correct += st.retry ? 0 : 1; bonus += r.bonus || 0; }
     results.push({ q, ok:r.ok, retry:!!st.retry, extra:r.extra });
     if (q.id && !q.id.startsWith("gen-") && !q.id.startsWith("map-")) { const i = ST.mistakes.indexOf(q.id); if (r.ok && i >= 0) ST.mistakes.splice(i, 1); if (!r.ok && i < 0) ST.mistakes.push(q.id); if (ST.mistakes.length > 60) ST.mistakes.shift(); save(); }
