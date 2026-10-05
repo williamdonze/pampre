@@ -620,7 +620,9 @@ function majCalques(){
 function confirmBox(title, text, okLabel, onOk, danger = true){
   const m = h(`<div class="modal-bg"><div class="modal" role="dialog" aria-modal="true"><h3>${esc(title)}</h3><p>${esc(text)}</p><div class="row-btns"><button class="btn ghost" data-a="no">Rester</button><button class="btn ${danger?"bad":""}" data-a="ok">${esc(okLabel)}</button></div></div></div>`);
   const avant = document.activeElement;
-  const fermer = () => { m.remove(); majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
+  const echap = e => { if (e.key === "Escape") { e.stopPropagation(); fermer(); } };   // Échap = « Rester »
+  const fermer = () => { document.removeEventListener("keydown", echap, true); m.remove(); majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
+  document.addEventListener("keydown", echap, true);
   m.addEventListener("click", e => { const a = e.target.closest("[data-a]")?.dataset.a; if (a === "ok") { fermer(); onOk(); } else if (a === "no" || e.target === m) fermer(); });
   document.body.appendChild(m); majCalques(); m.querySelector('[data-a="no"]').focus();
 }
@@ -660,14 +662,15 @@ function openGlossary(focus){
   };
   draw("");
   const avant = document.activeElement, overflowAvant = document.body.style.overflow;
-  const close = () => { bg.remove(); dr.remove(); document.body.style.overflow = overflowAvant; majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
+  const echap = e => { if (e.key === "Escape") close(); };
+  const close = () => { document.removeEventListener("keydown", echap); bg.remove(); dr.remove(); document.body.style.overflow = overflowAvant; majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
   bg.onclick = close; dr.querySelector("[data-close]").onclick = close;
   dr.querySelector("#gl-search").oninput = e => draw(e.target.value);
   dr.addEventListener("click", e => { const g = e.target.closest(".gl"); if (g) { e.stopPropagation(); const k = findTerm(g.dataset.term); if (k) { ST.gloss[k] = 1; checkBadges(); save(); dr.querySelector("#gl-search").value = ""; draw(""); const el = list.querySelector(`#t-${CSS.escape(k.replace(/\s/g,"_"))}`); list.querySelectorAll(".focus").forEach(x=>x.classList.remove("focus")); if (el) { el.classList.add("focus"); el.scrollIntoView({block:"center", behavior:"smooth"}); } } } });
   document.body.append(bg, dr); document.body.style.overflow = "hidden"; majCalques();
   dr.querySelector("#gl-search").focus({preventScroll:true});
   if (fkey) requestAnimationFrame(() => list.querySelector(".focus")?.scrollIntoView({block:"center"}));
-  document.addEventListener("keydown", function esc_(e){ if (e.key === "Escape") { close(); document.removeEventListener("keydown", esc_); } });
+  document.addEventListener("keydown", echap);
 }
 
 /* ---------------- étiquettes ---------------- */

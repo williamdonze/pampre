@@ -465,13 +465,23 @@ def t_focus(b):
     ok = not s1 and not s2 and not s3 and retour and retour2 == "glossaire"
     return ("OK" if ok else "BUG"), f"éléments atteints hors du calque : session {s1[:3]}, modale {s2[:3]}, glossaire {s3[:3]} ; focus rendu au X après « Rester » : {retour} ; focus rendu à l'onglet Lexique après Échap : {retour2 == 'glossaire'}"
 
-@T("Clavier : Échap ferme le glossaire, et la modale")
+@T("Clavier : Échap ferme le glossaire et la modale, sans écouteurs qui s'accumulent")
 def t_echap(b):
-    a = App(b); a.js("openGlossary()"); a.p.wait_for_timeout(200); a.p.keyboard.press("Escape")
+    a = App(b); cdp = a.ctx.new_cdp_session(a.p)
+    def n():
+        obj = cdp.send("Runtime.evaluate", {"expression": "document"})["result"]["objectId"]
+        return sum(1 for l in cdp.send("DOMDebugger.getEventListeners", {"objectId": obj})["listeners"] if l["type"] == "keydown")
+    n0 = n()
+    for _ in range(3): a.js("openGlossary()"); a.p.click(".drawer [data-close]")      # fermé à la souris
+    n1 = n()
+    a.js("openGlossary()"); a.p.wait_for_timeout(200); a.p.keyboard.press("Escape")
     g = a.p.evaluate("!document.querySelector('.drawer')")
-    a.js("startQuiz(1)"); a.p.click("[data-quit]"); a.p.keyboard.press("Escape"); m = a.p.evaluate("!document.querySelector('.modal')")
-    a.close()
-    return ("OK" if g and m else "BUG"), f"glossaire fermé par Échap : {g} ; modale « Quitter ? » fermée par Échap : {m}"
+    a.js("startQuiz(1)"); a.p.click("[data-quit]"); a.p.keyboard.press("Escape"); a.p.wait_for_timeout(50)
+    m = a.p.evaluate("[!document.querySelector('.modal'), !!document.querySelector('.session')]")
+    n2 = n(); a.close()
+    ok = g and m == [True, True] and n1 == n0 and n2 == n0
+    return ("OK" if ok else "BUG"), f"glossaire fermé par Échap : {g} ; modale fermée par Échap (session conservée) : {m} ; écouteurs keydown sur document : {n0} au départ, {n1} après 3 glossaires fermés à la souris, {n2} à la fin"
+
 
 @T("Clavier : étiquette en mode « toucher » utilisable au clavier")
 def t_etiq_clavier(b):
