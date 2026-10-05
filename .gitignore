@@ -1,0 +1,8 @@
+# sorties régénérables de l'audit (python3 tools/audit.py)
+audit/captures/*
+audit/webkit/captures/*
+audit/**/resultats*.json
+audit/resultats*.json
+# captures de tools/test-parcours.py
+captures/
+__pycache__/
