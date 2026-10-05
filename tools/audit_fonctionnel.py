@@ -468,8 +468,16 @@ def t_echap(b):
 def t_etiq_clavier(b):
     a = App(b); a.js("runSession([{kind:'q', q:LEVELS[1].lecons[2].verif[0]}], {title:'t', onEnd:() => ({})})"); a.p.wait_for_timeout(200)
     f = a.p.evaluate("[...document.querySelectorAll('.lbl .ch')].map(c => c.tabIndex)")
+    # Tab jusqu'au millésime, Entrée pour le choisir, Entrée pour vérifier
+    for _ in range(25):
+        if a.p.evaluate("document.activeElement.dataset?.champ === 'millesime'"): break
+        a.p.keyboard.press("Tab")
+    a.p.keyboard.press("Enter"); sel = a.p.evaluate("document.querySelector('.ch.sel')?.dataset.champ")
+    sheet_tot = a.p.evaluate("!!document.querySelector('.sheet')")
+    a.p.focus("[data-check]"); a.p.keyboard.press("Enter"); a.p.wait_for_timeout(100)
+    ok = a.p.evaluate("!!document.querySelector('.sheet.ok')")
     a.close()
-    return ("OK" if any(x >= 0 for x in f) else "BUG"), f"tabIndex des champs de l'étiquette : {f} (aucun n'est atteignable au clavier)"
+    return ("OK" if sel == "millesime" and not sheet_tot and ok else "BUG"), f"tabIndex des champs : {f} ; Entrée sélectionne « {sel} » sans vérifier trop tôt ({not sheet_tot}) ; réponse juste : {ok}"
 
 
 # ===================================================================== robustesse

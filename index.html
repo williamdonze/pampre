@@ -653,7 +653,7 @@ function renderLabel(l, tap = false){
   c.allergene = "Contient des sulfites";
   c.provenance = l.pays ? `Produit du ${l.pays}` : "Produit de France";
   const order = LBL_ORDER[l.modele] || LBL_ORDER.moderne;
-  const F = k => c[k] ? `<span class="ch ch-${k}" data-champ="${k}">${esc(c[k])}</span>` : "";
+  const F = k => c[k] ? `<span class="ch ch-${k}" data-champ="${k}"${tap ? ` tabindex="0" role="button" aria-pressed="false"` : ""}>${esc(c[k])}</span>` : "";
   return `<div class="lbl m-${l.modele} t-${l.teinte} ${tap?"tap":""}" aria-label="Étiquette de ${esc(c.producteur)}">
     ${DECO[l.modele] || ""}
     ${order.map(F).join("")}
@@ -896,10 +896,12 @@ Q.etiquette = (q, onChange) => {
   const wrap = h(`<div><div class="lbl-stage">${renderLabel(l, q.mode === "toucher")}</div></div>`);
   if (q.mode === "toucher") {
     let sel = null; const lbl = wrap.querySelector(".lbl"); let locked = false;
-    lbl.addEventListener("click", e => { if (locked) return; const c = e.target.closest(".ch"); if (!c) return; lbl.querySelectorAll(".sel").forEach(x => x.classList.remove("sel")); c.classList.add("sel"); sel = c.dataset.champ; onChange(); });
+    lbl.addEventListener("click", e => { if (locked) return; const c = e.target.closest(".ch"); if (!c) return; lbl.querySelectorAll(".sel").forEach(x => { x.classList.remove("sel"); x.setAttribute("aria-pressed", "false"); }); c.classList.add("sel"); c.setAttribute("aria-pressed", "true"); sel = c.dataset.champ; onChange(); });
+    // au clavier : Entrée ou Espace sur un champ (sans déclencher « Vérifier »)
+    lbl.addEventListener("keydown", e => { const c = e.target.closest(".ch"); if (!c || (e.key !== "Enter" && e.key !== " ")) return; e.preventDefault(); e.stopPropagation(); c.click(); });
     const good = k => k === q.cible || (q.cible === "appellation" && k === "mention");
     return { el:wrap, ready:() => sel !== null,
-      check(){ locked = true; lbl.classList.remove("tap"); const ok = good(sel); lbl.querySelectorAll(".ch").forEach(c => { c.classList.remove("sel"); if (c.dataset.champ === q.cible || (ok && c.dataset.champ === sel)) c.classList.add("right"); else if (c.dataset.champ === sel) c.classList.add("wrong"); }); return { ok, answer: l.champs[q.cible] || (q.cible === "allergene" ? "Contient des sulfites" : q.cible === "provenance" ? "Produit de France" : "") }; } };
+      check(){ locked = true; lbl.classList.remove("tap"); lbl.querySelectorAll(".ch").forEach(c => { c.removeAttribute("tabindex"); c.removeAttribute("role"); c.removeAttribute("aria-pressed"); }); const ok = good(sel); lbl.querySelectorAll(".ch").forEach(c => { c.classList.remove("sel"); if (c.dataset.champ === q.cible || (ok && c.dataset.champ === sel)) c.classList.add("right"); else if (c.dataset.champ === sel) c.classList.add("wrong"); }); return { ok, answer: l.champs[q.cible] || (q.cible === "allergene" ? "Contient des sulfites" : q.cible === "provenance" ? "Produit de France" : "") }; } };
   }
   const inner = Q.qcm(q, onChange); wrap.appendChild(inner.el);
   return { el:wrap, ready:inner.ready, check:inner.check, key:inner.key };
