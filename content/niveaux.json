@@ -23,7 +23,7 @@
       "sousTitre": "Terroir et vinification",
       "objectif": "Comprendre pourquoi un vin a tel goût.",
       "icone": "cep",
-      "contenu": null
+      "contenu": "content/niveau-3.json"
     },
     {
       "id": 4,
@@ -73,6 +73,9 @@
     { "id": "nez-de-cepage", "nom": "Nez de cépage", "desc": "5/6 ou plus au jeu « Quel cépage ? »", "icone": "nez" },
     { "id": "racines", "nom": "Retour aux racines", "desc": "5/6 ou plus au jeu « Le berceau des cépages »", "icone": "carte" },
     { "id": "niveau-2", "nom": "Les cépages, c'est fait", "desc": "Valider le quiz du niveau 2", "icone": "grappe" },
+    { "id": "climatologue", "nom": "Climatologue", "desc": "7/8 ou plus au jeu « Climat chaud ou frais ? »", "icone": "thermo" },
+    { "id": "maitre-de-chai", "nom": "Maître de chai", "desc": "7/8 ou plus au jeu « Dans le chai »", "icone": "cep" },
+    { "id": "niveau-3", "nom": "De la vigne au verre, c'est fait", "desc": "Valider le quiz du niveau 3", "icone": "cep" },
     { "id": "sans-faute", "nom": "Sans faute", "desc": "100 % à un quiz de validation", "icone": "etoile" },
     { "id": "serie-3", "nom": "Trois jours de suite", "desc": "Une série de 3 jours", "icone": "flamme" },
     { "id": "serie-7", "nom": "Une semaine au chai", "desc": "Une série de 7 jours", "icone": "flamme" },

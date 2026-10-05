@@ -1,0 +1,435 @@
+{
+  "id": 3,
+  "titre": "De la vigne au verre",
+  "parcours": ["n3-l1", "n3-l2", "jeu:chaud-frais", "n3-l3", "n3-l4", "jeu:dans-le-chai", "n3-l5", "n3-l6", "jeu:bulles-barriques", "n3-l7", "quiz"],
+  "intro": "Pourquoi deux vins du même cépage ont-ils un goût si différent ? On suit le raisin du sol au verre : terroir, vie de la vigne, vinification des rouges, des blancs et des rosés, bulles, élevage, et enfin bio, biodynamie et vins nature.",
+  "lecons": [
+    {
+      "id": "n3-l1",
+      "titre": "Le terroir",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Bien plus que le sol",
+          "illu": "terroir",
+          "texte": "Le [[terroir]], c'est tout ce qui, dans un lieu, façonne le raisin : le **climat**, le **sol**, le **relief** (pente, exposition, altitude), la présence d'**eau**… et le **savoir-faire** des gens qui y travaillent depuis des générations.\n\nDeux vignes du même cépage, à quelques kilomètres l'une de l'autre, peuvent donner des vins très différents. C'est l'idée sur laquelle repose tout le système des appellations françaises.",
+          "exemple": {
+            "vin": "La Romanée-Conti, Vosne-Romanée",
+            "detail": "Une parcelle de 1,8 hectare de pinot noir. Ses voisines, du même cépage et soignées avec la même attention, ne donnent pas tout à fait le même vin : c'est tout le mystère du terroir."
+          },
+          "astuce": "En Bourgogne, une parcelle délimitée et nommée s'appelle un [[climat]]. Rien à voir avec la météo : on en reparlera au niveau 4."
+        },
+        {
+          "titre": "Trois climats pour la France",
+          "illu": "climats",
+          "texte": "**Océanique** (Bordeaux, ouest de la Loire) : hivers doux, pluies régulières, peu d'écarts de température. La météo varie beaucoup d'une année à l'autre.\n\n**Continental** (Bourgogne, Alsace) : hivers froids, étés chauds, gelées de printemps à craindre. La Champagne, tout au nord, combine les deux influences.\n\n**Méditerranéen** (Provence, Languedoc, Rhône sud, Corse) : chaud, sec et très ensoleillé. Les raisins mûrissent sans peine.",
+          "astuce": "Révision du niveau 2 : au frais, le raisin garde son **acidité** ; au chaud, il fait plus de sucre, donc plus d'alcool, et perd de l'acidité."
+        },
+        {
+          "titre": "Le sol, réservoir et radiateur",
+          "illu": "sols",
+          "texte": "Le sol compte surtout pour **l'eau**. Des cailloux qui drainent obligent la vigne à plonger ses racines profondément : c'est le cas des **graves** du Médoc, idéales pour le cabernet sauvignon. L'argile, elle, retient l'eau : le merlot de Pomerol l'adore.\n\nLe sol peut aussi garder la **chaleur** : les galets roulés de Châteauneuf-du-Pape la restituent la nuit. Et chaque roche a ses vins phares : calcaire à Chablis et en Champagne, schiste à Banyuls, granite dans les crus du Beaujolais.",
+          "exemple": {
+            "vin": "Château Haut-Brion, Pessac-Léognan",
+            "detail": "Premier cru classé en 1855, sur les graves qui ont donné leur nom à la région des Graves : un sol de cailloux qui draine et réchauffe."
+          },
+          "debat": "Un vin peut-il avoir le « goût de la pierre » ? On dit souvent d'un vin qu'il est « minéral ». Mais les racines puisent surtout de l'eau et des sels dissous en quantités infimes : la plupart des chercheurs pensent que la roche ne passe pas telle quelle dans le verre. La sensation viendrait plutôt de l'acidité ou de certains composés soufrés. Le mot reste très utilisé ; son origine, elle, est discutée."
+        },
+        {
+          "titre": "Pente, exposition, altitude, eau",
+          "illu": "climat-cepage",
+          "texte": "Dans les vignobles frais, on cherche le soleil : coteaux tournés vers le **sud ou le sud-est**, comme la Côte-d'Or ou l'Alsace. La pente évacue l'eau et l'air froid.\n\nL'**altitude** rafraîchit : on perd environ 0,6 °C tous les 100 mètres. Dans les pays chauds, on monte la vigne pour garder de l'acidité ; à Mendoza, en Argentine, beaucoup de vignes dépassent 900 mètres.\n\nL'**eau** des fleuves et des lacs adoucit les températures. Elle apporte aussi les brumes d'automne qui favorisent la [[pourriture noble]] à Sauternes (révision du niveau 1).",
+          "exemple": {
+            "vin": "Côte-Rôtie, E. Guigal",
+            "detail": "Des terrasses accrochées à des pentes très raides au-dessus du Rhône, face au sud-est : une côte « rôtie » par le soleil, comme son nom l'annonce."
+          }
+        },
+        {
+          "titre": "Le millésime, la météo de l'année",
+          "illu": "millesime",
+          "texte": "Même lieu, même vigne, mais chaque année le temps change : un printemps gelé, un été caniculaire, un automne pluvieux au moment de vendanger…\n\nC'est pour cela que le [[millésime]] compte, surtout là où la météo est capricieuse, comme à Bordeaux, en Bourgogne ou en Champagne. Dans les régions chaudes et régulières, les années se ressemblent davantage.",
+          "exemple": {
+            "vin": "Bollinger La Grande Année, Champagne",
+            "detail": "Un champagne millésimé, produit seulement les années jugées assez belles. Les autres années, les vins rejoignent l'assemblage sans année."
+          },
+          "astuce": "Un « grand millésime » n'est pas toujours le meilleur à boire tout de suite : les années riches et tanniques demandent souvent plus de patience."
+        }
+      ],
+      "verif": [
+        { "type": "qcm", "question": "Hivers froids, étés chauds, gelées de printemps : de quel climat s'agit-il ?", "choix": ["Océanique", "Méditerranéen", "Continental", "Tropical"], "bonne": 2, "explication": "C'est le climat continental, celui de la Bourgogne et de l'Alsace. L'océanique est doux et humide, le méditerranéen chaud et sec." },
+        { "type": "vf", "question": "Un sol de graves (cailloux) retient beaucoup d'eau.", "bonne": false, "explication": "C'est l'inverse : les graves drainent l'eau, ce qui pousse les racines à descendre profond. C'est l'argile qui retient l'eau." }
+      ]
+    },
+    {
+      "id": "n3-l2",
+      "titre": "La vie de la vigne",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Une année à la vigne",
+          "illu": "cycle-vigne",
+          "texte": "**Hiver** : on taille. **Mars** : les pleurs, la sève coule par les plaies de taille. **Avril** : le [[débourrement]], les bourgeons s'ouvrent.\n\n**Juin** : la floraison, discrète, puis la nouaison, quand les fleurs deviennent de minuscules baies vertes. **Août** : la [[véraison]], les raisins noirs se colorent, tous les raisins s'adoucissent. **Septembre-octobre** : les [[vendanges]].\n\nCes dates valent pour la France ; dans l'hémisphère sud, tout est décalé de six mois."
+        },
+        {
+          "titre": "Tailler pour choisir",
+          "illu": "raisin",
+          "texte": "La taille décide du nombre de bourgeons, donc de grappes. Moins de grappes par pied, c'est souvent des raisins plus concentrés. On mesure la récolte par le [[rendement]], en hectolitres par hectare ; chaque appellation fixe un plafond, plus bas pour les grands crus.\n\nAutre détail invisible : presque toutes les vignes d'Europe sont greffées sur un [[porte-greffe]] américain. C'est la parade trouvée à la fin du XIXe siècle contre le phylloxéra, un puceron qui détruisait les racines.",
+          "exemple": {
+            "vin": "Bollinger Vieilles Vignes Françaises, Champagne",
+            "detail": "Un champagne rarissime, issu de petites parcelles de pinot noir non greffées, qui ont échappé au phylloxéra."
+          }
+        },
+        {
+          "titre": "Les ennemis du vigneron",
+          "illu": "dangers-vigne",
+          "texte": "**Le gel de printemps** grille les jeunes bourgeons : en avril 2021, il a frappé presque tous les vignobles français. **La grêle** peut hacher une récolte en dix minutes.\n\n**Les maladies** : le mildiou et l'oïdium, deux champignons arrivés d'Amérique au XIXe siècle, attaquent feuilles et grappes par temps humide. **La sécheresse et la canicule** bloquent la maturité ou grillent les raisins.\n\nPour se défendre : bougies et éoliennes contre le gel, filets contre la grêle, traitements à base de cuivre et de soufre (autorisés en bio) ou de synthèse.",
+          "astuce": "À Chablis, on arrose parfois les vignes pendant les nuits de gel : en gelant, l'eau libère un peu de chaleur et enrobe le bourgeon d'une gaine de glace protectrice."
+        },
+        {
+          "titre": "Quand vendanger ?",
+          "illu": "vendanges",
+          "texte": "Repère classique : environ **cent jours après la floraison**. Le vigneron goûte les baies, mesure le sucre et l'acidité, regarde si les pépins ont bruni. Trop tôt, le vin est vert et acide ; trop tard, il est lourd et sans fraîcheur.\n\nLe réchauffement avance les dates : en Bourgogne, on vendange en moyenne près de deux semaines plus tôt qu'à la fin des années 1980.",
+          "astuce": "Autrefois, la commune fixait par arrêté le **ban des vendanges**, le jour où l'on avait le droit de commencer. La tradition survit dans certaines appellations."
+        },
+        {
+          "titre": "À la main ou à la machine ?",
+          "illu": "botrytis",
+          "texte": "La **machine** secoue les ceps et récolte les baies : c'est rapide, moins cher, et on peut vendanger la nuit, au frais.\n\nLa **main** permet de trier et de garder les grappes entières. Elle est obligatoire en **Champagne**, où l'on presse des grappes intactes, et indispensable pour les grands liquoreux : à Sauternes, on passe plusieurs fois dans les mêmes rangs, les **tries successives**, pour ne cueillir que les raisins touchés par la pourriture noble.",
+          "exemple": {
+            "vin": "Château d'Yquem, Sauternes",
+            "detail": "Les vendangeurs repassent plusieurs fois dans chaque rang, parfois pendant des semaines, et cueillent les grains botrytisés presque un par un."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "ordre", "question": "Remets la vie de la vigne dans l'ordre, du printemps à l'automne.", "items": ["Débourrement", "Floraison", "Nouaison", "Véraison", "Vendanges"], "explication": "Les bourgeons s'ouvrent (débourrement, avril), la vigne fleurit (juin), les fleurs deviennent baies (nouaison), les raisins changent de couleur (véraison, août), puis on vendange." },
+        { "type": "qcm", "question": "Pourquoi vendange-t-on à la main en Champagne ?", "choix": ["Les machines y sont trop chères", "La règle l'impose : on presse des grappes entières", "Les vignes sont trop hautes", "Pour vendanger la nuit"], "bonne": 1, "explication": "Le cahier des charges impose la vendange manuelle : le champagne naît du pressurage de grappes entières et intactes, ce que la machine ne permet pas." }
+      ]
+    },
+    {
+      "id": "n3-l3",
+      "titre": "Vinifier un rouge",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Du raisin à la cuve",
+          "illu": "raisin-coupe",
+          "texte": "À l'arrivée au chai, on trie les raisins. Puis vient l'[[éraflage]] : on retire la rafle, la charpente verte de la grappe, qui pourrait donner des tanins un peu durs. Le [[foulage]] éclate ensuite légèrement les baies pour libérer le jus.\n\nOn ajoute souvent un peu de [[sulfites]] pour protéger le moût des bactéries et de l'oxydation, puis tout part en cuve : jus, peaux et pépins ensemble.",
+          "exemple": {
+            "vin": "Morey-Saint-Denis, Domaine Dujac",
+            "detail": "Un domaine bourguignon réputé pour vinifier une grande partie de son pinot noir en grappes entières, sans éraflage."
+          },
+          "debat": "Érafler ou non ? La vendange entière (avec les rafles) apporte à certains vins de la fraîcheur, des épices, un parfum de fleurs. D'autres vignerons lui reprochent des notes végétales quand les rafles ne sont pas bien mûres. Chaque domaine tranche selon son cépage, son année et son goût."
+        },
+        {
+          "titre": "Macérer : couleur et tanins",
+          "illu": "cuve-rouge",
+          "texte": "Pendant la fermentation, le gaz carbonique pousse les peaux vers le haut : elles forment le [[chapeau de marc]]. Pour extraire couleur et tanins, il faut le mouiller.\n\nLe [[remontage]] : on pompe le jus du bas de la cuve et on l'arrose sur le chapeau. Le [[pigeage]] : on enfonce le chapeau dans le jus, autrefois avec les pieds, aujourd'hui avec un outil.\n\nLa [[macération]] dure de quelques jours pour un rouge léger à plus de trois semaines pour un vin de garde, souvent entre 25 et 30 °C."
+        },
+        {
+          "titre": "Écouler, puis presser",
+          "illu": "pressoir",
+          "texte": "Quand la macération est finie, on soutire le jus qui coule librement : c'est le [[vin de goutte]], le plus fin.\n\nLe marc qui reste (peaux et pépins gorgés de vin) passe au pressoir : il donne le [[vin de presse]], plus coloré et plus tannique. Le vigneron décide d'en ajouter un peu, beaucoup ou pas du tout, selon le vin qu'il veut.",
+          "exemple": {
+            "vin": "Château Lynch-Bages, Pauillac",
+            "detail": "Comme dans beaucoup de châteaux bordelais, la part de vin de presse ajoutée à l'assemblage se décide chaque année, à la dégustation."
+          }
+        },
+        {
+          "titre": "La malo, une fermentation de plus",
+          "illu": "malo",
+          "texte": "Après la fermentation alcoolique, des bactéries peuvent transformer l'acide malique (vif, celui de la pomme verte) en acide lactique (plus doux, celui du lait). C'est la [[fermentation malolactique]], qu'on surnomme « la malo ».\n\nPresque tous les rouges la font : ils y gagnent en souplesse et en stabilité. Chez les blancs, c'est un **choix** : beaucoup de chardonnays de Bourgogne la font (rondeur, notes de beurre), alors qu'on la bloque souvent pour garder la vivacité d'un riesling ou d'un sauvignon.",
+          "astuce": "La note de beurre vient d'une molécule produite pendant la malo, le diacétyle. Révision du niveau 2 : c'est un arôme secondaire."
+        },
+        {
+          "titre": "Le secret du Beaujolais",
+          "illu": "maceration-carbonique",
+          "texte": "La [[macération carbonique]] : on met les grappes **entières**, sans les fouler, dans une cuve remplie de gaz carbonique. Privé d'oxygène, chaque grain commence à fermenter de l'intérieur, avant d'éclater.\n\nRésultat : des rouges très fruités et peu tanniques, aux arômes de framboise, de bonbon, parfois de **banane**. Au niveau 2, on avait promis de t'expliquer la banane du gamay : la voilà. Le Beaujolais pratique surtout une version « semi-carbonique ».",
+          "exemple": {
+            "vin": "Morgon, Marcel Lapierre",
+            "detail": "Grappes entières, macération semi-carbonique, très peu de sulfites : une méthode héritée du chercheur et vigneron Jules Chauvet."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "ordre", "question": "Remets la vinification d'un rouge dans l'ordre.", "items": ["Éraflage et foulage", "Macération et fermentation", "Écoulage du vin de goutte", "Pressurage du marc", "Fermentation malolactique"], "explication": "On érafle et on foule, le jus fermente avec les peaux, on écoule le vin de goutte, on presse le marc, puis vient en général la malo." },
+        { "type": "assoc", "question": "Associe chaque geste à ce qu'il fait.", "paires": [["Remontage", "Arroser le chapeau avec le jus"], ["Pigeage", "Enfoncer le chapeau dans le jus"], ["Éraflage", "Retirer la rafle"], ["Malo", "Adoucir l'acidité"]], "explication": "Remontage et pigeage mouillent le chapeau de marc pour extraire couleur et tanins ; l'éraflage retire la partie verte de la grappe ; la malo transforme l'acide malique en acide lactique, plus doux." }
+      ]
+    },
+    {
+      "id": "n3-l4",
+      "titre": "Vinifier un blanc et un rosé",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Le blanc : presser d'abord",
+          "illu": "vinif-blanc",
+          "texte": "Pour un blanc, on presse les raisins **dès leur arrivée** : seul le jus fermentera. On le laisse reposer quelques heures au frais : les particules tombent au fond, c'est le [[débourbage]].\n\nLa fermentation se fait ensuite **au frais**, souvent entre 12 et 20 °C, pour garder les arômes de fruits et de fleurs. Puis viennent les choix du vigneron : malo ou pas, cuve ou fût.",
+          "astuce": "Révision du niveau 1 : comme la pulpe est presque toujours incolore, on peut faire du blanc avec des raisins noirs, à condition de presser vite. C'est le [[blanc de noirs]]."
+        },
+        {
+          "titre": "Le vin orange, un blanc fait comme un rouge",
+          "illu": "amphore",
+          "texte": "Et si on faisait macérer des raisins **blancs** avec leurs peaux, des jours voire des mois ? On obtient un [[vin orange]] : couleur ambrée, arômes de fruits secs et d'écorce, et même un peu de tanins.\n\nC'est une tradition millénaire en **Géorgie**, où l'on vinifie dans de grandes jarres enterrées, les qvevri, inscrites au patrimoine immatériel de l'UNESCO en 2013.",
+          "exemple": {
+            "vin": "Ribolla Gialla, Josko Gravner (Frioul)",
+            "detail": "Un vigneron italien qui fait macérer sa ribolla gialla pendant des mois dans des amphores géorgiennes enterrées."
+          }
+        },
+        {
+          "titre": "Le rosé : deux chemins",
+          "illu": "rose-voies",
+          "texte": "**Le [[pressurage direct]]** : on presse les raisins noirs dès leur arrivée ; le jus prend juste un peu de couleur. C'est la voie des rosés très pâles, comme en Provence.\n\n**La [[saignée]]** : on remplit une cuve comme pour un rouge et, après quelques heures, on tire une partie du jus. Ce rosé est plus soutenu, et le rouge qui reste dans la cuve devient plus concentré.\n\nRévision : en Europe, interdit de faire un rosé tranquille en mélangeant vin rouge et vin blanc. Seul le champagne rosé y a droit.",
+          "exemple": {
+            "vin": "Bandol rosé, Domaine Tempier",
+            "detail": "Un rosé de mourvèdre, grenache et cinsault, réputé pour bien vieillir, ce qui est rare pour un rosé."
+          }
+        },
+        {
+          "titre": "Plus ou moins rose",
+          "illu": "couleurs",
+          "texte": "La couleur d'un rosé dépend surtout de la **durée de contact** avec les peaux, et du cépage.\n\nLa Provence vise des teintes très pâles. **Tavel**, dans le Gard, est la seule appellation française qui ne produit que du rosé : plus foncé, plus vineux, fait pour la table. Et à Bordeaux, le **clairet** se situe entre le rosé et le rouge léger.",
+          "exemple": {
+            "vin": "Tavel, Château d'Aqueria",
+            "detail": "Un rosé de Tavel d'un rose profond, assez charpenté pour accompagner un repas entier."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "tri", "question": "Pressurage direct ou saignée ?", "categories": ["Pressurage direct", "Saignée"], "items": [["On presse les raisins noirs dès leur arrivée", 0], ["Couleur souvent très pâle", 0], ["On tire du jus d'une cuve de rouge", 1], ["Le rouge restant devient plus concentré", 1]], "explication": "Le pressurage direct donne des rosés pâles ; la saignée prélève du jus dans une cuve de rouge après quelques heures de contact, d'où un rosé plus soutenu et un rouge plus concentré." },
+        { "type": "qcm", "question": "Qu'est-ce qu'un vin orange ?", "choix": ["Un vin aromatisé à l'orange", "Un rosé très foncé", "Un vin rouge très oxydé", "Un vin de raisins blancs macéré avec ses peaux"], "bonne": 3, "explication": "Un vin orange est fait de raisins blancs vinifiés comme un rouge, avec une macération sur les peaux : d'où sa couleur ambrée et un peu de tanins." }
+      ]
+    },
+    {
+      "id": "n3-l5",
+      "titre": "Les bulles",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Une deuxième fermentation en bouteille",
+          "illu": "methode-trad",
+          "texte": "La [[méthode traditionnelle]] part d'un vin tranquille, souvent un assemblage. On le met en bouteille avec la [[liqueur de tirage]], un peu de sucre et des levures, et on ferme avec une capsule.\n\nDans la bouteille, une deuxième fermentation démarre : c'est la [[prise de mousse]]. Le gaz carbonique ne peut pas s'échapper et se dissout dans le vin, jusqu'à environ 6 bars de pression.\n\nLes levures meurent et forment un dépôt, les [[lies]]. Le vin vieillit à leur contact et prend des notes de brioche et de pain grillé."
+        },
+        {
+          "titre": "Remuer, dégorger, doser",
+          "illu": "bulles",
+          "texte": "Reste à se débarrasser du dépôt. Le [[remuage]] : on incline les bouteilles tête en bas et on les tourne peu à peu, autrefois à la main sur des pupitres, aujourd'hui surtout en machine, pour amener le dépôt dans le col.\n\nLe [[dégorgement]] : on gèle le col, on ouvre, et la pression expulse le petit glaçon de dépôt.\n\nLe [[dosage]] : on complète la bouteille avec la liqueur d'expédition, du vin plus ou moins sucré. C'est elle qui fait un brut nature, un extra-brut, un brut ou un demi-sec (révision du niveau 1)."
+        },
+        {
+          "titre": "Champagne et crémants : le temps sur lies",
+          "illu": "duree-lies",
+          "texte": "Le **Champagne** reste au moins **15 mois** en cave après le tirage, dont 12 sur lies ; un champagne millésimé, au moins **3 ans**.\n\nLes huit [[crémant|crémants]] AOC français (Alsace, Bordeaux, Bourgogne, Die, Jura, Limoux, Loire, Savoie) suivent la même méthode, avec au moins **9 mois** sur lies. À l'étranger : le Cava espagnol, le Franciacorta italien.",
+          "exemple": {
+            "vin": "Crémant de Loire, Langlois-Château",
+            "detail": "Une maison de Saumur, où les caves creusées dans le tuffeau gardent les bouteilles au frais pendant leur vieillissement sur lies."
+          }
+        },
+        {
+          "titre": "La cuve close, des bulles de fruit",
+          "illu": "cuve-close",
+          "texte": "Avec la [[cuve close]] (méthode Charmat), la deuxième fermentation a lieu dans une **grande cuve fermée** sous pression. Le vin est ensuite filtré et mis en bouteille sous pression.\n\nC'est plus rapide et moins cher, et surtout, le vin garde les arômes frais du raisin, fleurs, poire, pomme, sans le goût de brioche des lies. C'est la méthode de presque tous les **Prosecco**, à base de glera.",
+          "exemple": {
+            "vin": "Prosecco Superiore, Conegliano Valdobbiadene",
+            "detail": "Les collines entre Conegliano et Valdobbiadene, inscrites au patrimoine mondial de l'UNESCO en 2019, donnent les proseccos les plus réputés."
+          }
+        },
+        {
+          "titre": "La méthode ancestrale, une seule fermentation",
+          "illu": "ancestrale",
+          "texte": "La [[méthode ancestrale]] est la plus simple : on met le vin en bouteille **avant la fin** de sa première fermentation. Elle s'achève dans la bouteille et crée les bulles. Pas de liqueur de tirage, souvent un peu de sucre restant et peu d'alcool.\n\nOn la trouve à Die (la Clairette de Die, au moins 75 % de muscat), à Limoux, à Gaillac, dans le Bugey. Les « pét-nat » (pétillants naturels) en sont les cousins modernes.",
+          "exemple": {
+            "vin": "Bugey-Cerdon, Patrick Bottex",
+            "detail": "Un rosé pétillant et doux, de gamay et de poulsard, en méthode ancestrale, autour de 8 % d'alcool."
+          },
+          "debat": "Qui a inventé les bulles ? Pas vraiment Dom Pérignon : à la fin du XVIIe siècle, il a surtout perfectionné l'assemblage et le pressurage. En 1662, l'Anglais Christopher Merret décrivait déjà l'ajout de sucre pour faire mousser le vin. Et Limoux revendique des vins effervescents dès 1531, sur la foi d'un document dont l'interprétation est discutée."
+        }
+      ],
+      "verif": [
+        { "type": "ordre", "question": "Remets la méthode traditionnelle dans l'ordre.", "items": ["Tirage", "Prise de mousse", "Vieillissement sur lies", "Remuage", "Dégorgement", "Dosage"], "explication": "On ajoute sucre et levures (tirage), la deuxième fermentation crée les bulles (prise de mousse), le vin vieillit sur ses lies, on amène le dépôt dans le col (remuage), on l'expulse (dégorgement), puis on ajuste le sucre (dosage)." },
+        { "type": "qcm", "question": "Quelle méthode utilise la grande majorité des Prosecco ?", "choix": ["La cuve close", "La méthode traditionnelle", "La méthode ancestrale", "L'ajout de gaz carbonique"], "bonne": 0, "explication": "Le Prosecco est presque toujours fait en cuve close (méthode Charmat) : la deuxième fermentation a lieu en grande cuve, ce qui préserve le fruit de la glera." }
+      ]
+    },
+    {
+      "id": "n3-l6",
+      "titre": "L'élevage",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Cuve ou fût de chêne ?",
+          "illu": "fut-chene",
+          "texte": "L'[[élevage]], c'est la période entre la fermentation et la mise en bouteille. En **cuve** inox ou béton, le vin reste neutre et garde son fruit.\n\nEn **fût de chêne**, il respire un peu à travers le bois, ce qui assouplit les tanins. Un fût **neuf** donne en plus des arômes de vanille, de toasté, d'épices ; après quelques vins, il ne marque presque plus. La [[barrique]] bordelaise contient 225 litres, la pièce bourguignonne 228. Le chêne américain donne des notes plus marquées de vanille et de noix de coco que le chêne français.",
+          "exemple": {
+            "vin": "Rioja Viña Tondonia, López de Heredia",
+            "detail": "Une des rares maisons à fabriquer elle-même ses barriques, en chêne américain. Ses rouges passent des années en fût."
+          },
+          "debat": "Combien de bois neuf ? Dans les années 1990-2000, beaucoup de vins ont été élevés en fûts 100 % neufs, souvent applaudis par la critique. Leurs détracteurs parlaient de vins « maquillés », qui sentent la planche plus que le raisin. La mode est revenue à plus de retenue, mais le débat continue, vin par vin."
+        },
+        {
+          "titre": "Sur lies, le gras et la brioche",
+          "illu": "lies",
+          "texte": "Après la fermentation, les levures mortes forment les [[lies]]. Laisser le vin à leur contact lui donne du **gras**, des notes de **brioche** et le protège de l'oxydation. En Bourgogne, on remue parfois les lies dans le fût : c'est le [[bâtonnage]].\n\nLe **Muscadet sur lie** en a fait sa signature : il reste sur ses lies fines au moins jusqu'au 1er mars suivant la récolte, sans soutirage, et doit être mis en bouteille dans la cave où il a été vinifié.",
+          "exemple": {
+            "vin": "Muscadet Sèvre et Maine sur lie, Domaine de la Pépière",
+            "detail": "Du melon de Bourgogne, le cépage du pays nantais, gardé l'hiver sur ses lies : vif, salin, avec une pointe de levure."
+          }
+        },
+        {
+          "titre": "Ouiller, ou laisser le voile",
+          "illu": "voile",
+          "texte": "Dans un fût, le vin s'évapore peu à peu et laisse un vide où l'air s'installe. Pour éviter l'oxydation, on remet régulièrement du vin : c'est l'[[ouillage]].\n\nLe [[vin jaune]] fait exprès l'inverse : on ne l'ouille pas. Un **voile de levures** se forme à la surface, protège le vin et lui donne ses notes de noix et de curry. Il reste au moins 60 mois sous ce voile. Les xérès fino d'Andalousie vieillissent sous un voile semblable, la flor.",
+          "exemple": {
+            "vin": "Château-Chalon, Jean Macle",
+            "detail": "Du savagnin élevé sous voile, commercialisé plus de six ans après la vendange, dans son clavelin de 62 cl."
+          }
+        },
+        {
+          "titre": "Clarifier avant la bouteille",
+          "illu": "carafe",
+          "texte": "Avant la mise, on rend le vin limpide. Le [[soutirage]] : on le transvase pour laisser le dépôt au fond. Le [[collage]] : on ajoute un produit (blanc d'œuf, argile appelée bentonite…) qui entraîne les particules en tombant. Puis, souvent, une filtration.\n\nCertains vignerons s'en passent et l'écrivent sur l'étiquette : « non collé, non filtré ». Le vin garde plus de matière, mais peut déposer en bouteille.",
+          "astuce": "Révision du niveau 1 : si le collage utilise de l'œuf ou du lait et qu'il en reste une trace, l'étiquette doit le signaler parmi les allergènes."
+        }
+      ],
+      "verif": [
+        { "type": "qcm", "question": "Quelle est la contenance d'une barrique bordelaise ?", "choix": ["62 centilitres", "225 litres", "1 000 litres", "75 litres"], "bonne": 1, "explication": "La barrique bordelaise contient 225 litres, la pièce bourguignonne 228. Les 62 cl, c'est le clavelin du vin jaune." },
+        { "type": "vf", "question": "Le vin jaune est ouillé régulièrement pour éviter tout contact avec l'air.", "bonne": false, "explication": "Au contraire : on ne l'ouille pas. Un voile de levures se forme à la surface, le protège et lui donne ses arômes de noix, au moins 60 mois durant." }
+      ]
+    },
+    {
+      "id": "n3-l7",
+      "titre": "Bio, biodynamie, nature",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Le vin bio",
+          "illu": "bio",
+          "texte": "Depuis 2012, le règlement européen encadre le [[vin biologique]] de la vigne **jusqu'au chai** ; avant, seul le raisin était certifié.\n\nÀ la vigne : ni pesticides, ni herbicides, ni engrais de synthèse. Le cuivre et le soufre restent autorisés contre le mildiou et l'oïdium. Au chai : une liste réduite de produits, et des [[sulfites]] limités à **100 mg/L pour un rouge sec** et **150 mg/L pour un blanc ou un rosé sec**, contre 150 et 200 mg/L en conventionnel. Il faut trois ans de conversion.",
+          "exemple": {
+            "vin": "Château Pontet-Canet, Pauillac",
+            "detail": "Le premier grand cru classé du Médoc certifié en bio et en biodynamie, en 2010. Une partie des vignes y est labourée au cheval."
+          },
+          "debat": "Le cuivre, autorisé en bio, s'accumule dans les sols : l'UE l'a limité à 28 kg par hectare sur sept ans. Les critiques du bio y voient sa faiblesse ; ses défenseurs répondent que les fongicides de synthèse posent d'autres problèmes et que les doses baissent."
+        },
+        {
+          "titre": "La biodynamie",
+          "illu": "biodynamie",
+          "texte": "La [[biodynamie]] va plus loin que le bio, dont elle part. Elle voit le domaine comme un organisme vivant, d'après des conférences de **Rudolf Steiner** en 1924.\n\nElle utilise des préparations à doses minuscules, comme la **bouse de corne** (préparation 500) pour le sol et la **silice de corne** (501) pour le feuillage, et organise les travaux selon un calendrier lunaire et astral. Les labels s'appellent Demeter ou Biodyvin.",
+          "exemple": {
+            "vin": "Savennières Coulée de Serrant, Nicolas Joly",
+            "detail": "Un clos de chenin au bord de la Loire, conduit en biodynamie depuis le début des années 1980. Nicolas Joly en est l'un des grands défenseurs."
+          },
+          "debat": "Ça marche ? De grands domaines (Leflaive, Romanée-Conti, Zind-Humbrecht) l'ont adoptée et jugent leurs vignes plus saines. Mais l'effet propre des préparations et du calendrier n'a pas été démontré scientifiquement : les études comparatives trouvent peu de différence avec un bio bien conduit. L'attention constante qu'elle impose compte peut-être plus que la lune."
+        },
+        {
+          "titre": "Le vin nature",
+          "illu": "nature",
+          "texte": "Le « vin nature » n'a pas de définition légale. Depuis 2020, un cahier des charges, **Vin méthode nature**, en fixe une : raisins bio certifiés vendangés à la main, **levures indigènes**, aucun produit ajouté, aucun procédé brutal (comme l'osmose inverse ou la flash-pasteurisation).\n\nPas de sulfites ajoutés avant ni pendant la fermentation. Au plus **30 mg/L** à la mise en bouteille ; deux logos distinguent les vins sans aucun sulfite ajouté de ceux qui en ont reçu un peu.",
+          "exemple": {
+            "vin": "Côtes du Rhône, Domaine Gramenon",
+            "detail": "Un pionnier du vin nature dans la Drôme, avec des grenaches vinifiés sans intrants."
+          },
+          "debat": "Ses amateurs aiment des vins vivants, digestes, qui sentent le raisin. Ses critiques pointent des défauts plus fréquents : goût de « souris », acidité volatile, vins qui refermentent ou voyagent mal sans sulfites. Entre les deux, beaucoup de vignerons cherchent un juste milieu."
+        },
+        {
+          "titre": "Lire les logos",
+          "illu": "etiquette-anatomie",
+          "texte": "**La feuille étoilée européenne** : vin bio, obligatoire sur un vin bio préemballé. **AB** : marque française facultative, même règles.\n\n**Demeter**, **Biodyvin** : biodynamie, labels privés. **Vin méthode nature** : le cahier des charges des vins nature.\n\n**HVE** (Haute Valeur Environnementale) : une certification d'exploitation agricole. Elle encourage la biodiversité et la réduction des traitements, mais n'interdit pas les pesticides de synthèse : ce n'est pas du bio."
+        },
+        {
+          "titre": "Sulfites : faut-il en avoir peur ?",
+          "illu": "liste",
+          "texte": "Les [[sulfites]] protègent le vin de l'oxydation et des bactéries depuis l'Antiquité. La fermentation en produit naturellement un peu : un vin « sans sulfites ajoutés » en contient presque toujours quelques milligrammes.\n\nPour comparer : les abricots secs peuvent en contenir jusqu'à 2 000 mg/kg, bien plus qu'un vin. Certaines personnes y sont réellement sensibles, notamment des asthmatiques ; c'est pour elles que la mention « contient des sulfites » est obligatoire.",
+          "debat": "Les sulfites donnent-ils mal à la tête ? Les études ne le confirment pas pour la plupart des gens. D'autres pistes sont avancées : l'alcool lui-même, l'histamine, la déshydratation. La question reste ouverte."
+        }
+      ],
+      "verif": [
+        { "type": "tri", "question": "Bio, biodynamie ou nature ?", "categories": ["Bio", "Biodynamie", "Méthode nature"], "items": [["Feuille étoilée européenne", 0], ["Rouge sec : 100 mg/L de sulfites au plus", 0], ["Préparation « bouse de corne »", 1], ["Calendrier lunaire", 1], ["Levures indigènes obligatoires", 2], ["30 mg/L de sulfites au plus", 2]], "explication": "Le bio a son logo européen et ses plafonds de sulfites ; la biodynamie ajoute préparations et calendrier ; la méthode nature impose levures indigènes et 30 mg/L de sulfites au maximum." },
+        { "type": "vf", "question": "Un vin « sans sulfites ajoutés » ne contient aucun sulfite.", "bonne": false, "explication": "Les levures en produisent naturellement pendant la fermentation : un vin sans sulfites ajoutés en contient presque toujours quelques milligrammes par litre." }
+      ]
+    }
+  ],
+  "jeux": [
+    {
+      "id": "chaud-frais",
+      "titre": "Climat chaud ou frais ?",
+      "description": "Un vin se décrit, indice par indice : devine s'il a grandi au frais ou au chaud. Moins tu demandes d'indices, plus tu gagnes.",
+      "tours": 8,
+      "badge": "climatologue",
+      "seuilBadge": 7,
+      "questions": [
+        { "type": "indices", "question": "Ce chardonnay vient d'un climat…", "indices": ["Robe pâle, reflets verts.", "Nez de citron et de pomme verte.", "Acidité vive, 12 % d'alcool."], "choix": ["Frais", "Chaud"], "bonne": 0, "explication": "Fruits acidulés, acidité vive, alcool modéré : un chardonnay de climat frais, comme à Chablis." },
+        { "type": "indices", "question": "Ce chardonnay vient d'un climat…", "indices": ["Robe or soutenu.", "Nez d'ananas, de pêche mûre et de vanille.", "Bouche ample, 14,5 % d'alcool, acidité douce."], "choix": ["Frais", "Chaud"], "bonne": 1, "explication": "Fruits exotiques très mûrs, alcool élevé, acidité douce : un chardonnay de climat chaud. La vanille, elle, vient du fût." },
+        { "type": "indices", "question": "Cette syrah vient d'un climat…", "indices": ["Robe sombre, violacée.", "Nez de poivre noir, de violette, de mûre fraîche.", "Tanins fins, 12,5 % d'alcool."], "choix": ["Frais", "Chaud"], "bonne": 0, "explication": "Le poivre (la rotundone) se garde surtout au frais, avec un alcool modéré : une syrah de climat frais, comme dans le Rhône nord." },
+        { "type": "indices", "question": "Cette syrah vient d'un climat…", "indices": ["Robe presque noire.", "Nez de confiture de mûre, de réglisse, de chocolat.", "Bouche riche et chaleureuse, 15 % d'alcool."], "choix": ["Frais", "Chaud"], "bonne": 1, "explication": "Fruits confits, chocolat, 15 % : une syrah de climat chaud, comme une shiraz de la Barossa Valley en Australie." },
+        { "type": "indices", "question": "Ce cabernet sauvignon vient d'une année…", "indices": ["Nez de cassis et de poivron vert très marqué.", "Tanins un peu anguleux.", "Acidité vive, alcool modéré."], "choix": ["Fraîche", "Chaude"], "bonne": 0, "explication": "Le poivron vert (les pyrazines) persiste quand le raisin manque de soleil : une année ou un lieu frais." },
+        { "type": "indices", "question": "Ce riesling vient d'un climat…", "indices": ["Robe très pâle.", "Nez de citron vert et de fleurs blanches.", "Acidité tranchante, 8 % d'alcool, une touche de sucre."], "choix": ["Frais", "Chaud"], "bonne": 0, "explication": "Acidité tranchante et alcool très bas : un riesling de climat frais, comme ceux de la Moselle allemande." },
+        { "type": "indices", "question": "Ce grenache vient d'un climat…", "indices": ["Robe moyenne.", "Nez de fraise confite et de garrigue.", "15 % d'alcool, acidité basse."], "choix": ["Frais", "Chaud"], "bonne": 1, "explication": "Fruits confits, garrigue, alcool élevé, peu d'acidité : un grenache de climat méditerranéen." },
+        { "type": "qcm", "question": "Lequel de ces vignobles a un climat méditerranéen ?", "choix": ["Chablis", "Alsace", "Champagne", "Bandol"], "bonne": 3, "explication": "Bandol, en Provence, au bord de la Méditerranée. Chablis et l'Alsace sont continentaux, la Champagne mêle influences océanique et continentale." },
+        { "type": "qcm", "question": "Le même cépage, planté dans un climat plus chaud, donne en général…", "choix": ["Plus d'acidité et moins d'alcool", "Plus de notes de poivron vert", "Plus d'alcool et moins d'acidité", "Une robe plus pâle"], "bonne": 2, "explication": "Au chaud, le raisin accumule du sucre (donc de l'alcool) et perd de l'acidité. Le poivron vert est au contraire un signe de fraîcheur." },
+        { "type": "tri", "question": "Ce trait évoque plutôt un climat frais ou chaud ?", "categories": ["Plutôt frais", "Plutôt chaud"], "items": [["Acidité vive", 0], ["Fruits acidulés", 0], ["Notes de poivron vert", 0], ["Alcool élevé", 1], ["Fruits confits", 1], ["Acidité basse", 1]], "explication": "Fraîcheur : acidité, fruits acidulés, notes végétales. Chaleur : alcool, fruits confits, acidité douce." },
+        { "type": "vf", "question": "Dans les régions chaudes, on plante parfois la vigne en altitude pour garder de l'acidité.", "bonne": true, "explication": "On perd environ 0,6 °C tous les 100 mètres : à Mendoza, en Argentine, beaucoup de vignes sont plantées au-dessus de 900 mètres pour cette raison." },
+        { "type": "qcm", "question": "Quel climat a la Bourgogne ?", "choix": ["Plutôt continental", "Méditerranéen", "Tropical", "Désertique"], "bonne": 0, "explication": "La Bourgogne a un climat plutôt continental : hivers froids, étés chauds, gelées de printemps." }
+      ]
+    },
+    {
+      "id": "dans-le-chai",
+      "titre": "Dans le chai",
+      "description": "Rouge, blanc, rosé : remets les étapes dans l'ordre et retrouve le bon geste au bon moment.",
+      "tours": 8,
+      "badge": "maitre-de-chai",
+      "seuilBadge": 7,
+      "questions": [
+        { "type": "ordre", "question": "Remets la vinification d'un rouge dans l'ordre.", "items": ["Éraflage", "Macération et fermentation", "Écoulage", "Pressurage du marc", "Élevage"], "explication": "Pour un rouge, on érafle, on fait fermenter avec les peaux, on écoule le vin de goutte, on presse le marc, puis on élève le vin." },
+        { "type": "ordre", "question": "Remets la vinification d'un blanc dans l'ordre.", "items": ["Pressurage", "Débourbage", "Fermentation au frais", "Élevage", "Mise en bouteille"], "explication": "Pour un blanc, on presse d'abord, on laisse décanter le jus (débourbage), on fait fermenter au frais, on élève, puis on met en bouteille." },
+        { "type": "ordre", "question": "Remets l'année de la vigne dans l'ordre, de l'hiver à l'automne.", "items": ["Taille", "Débourrement", "Floraison", "Véraison", "Vendanges"], "explication": "Taille en hiver, débourrement en avril, floraison en juin, véraison en août, vendanges en septembre-octobre." },
+        { "type": "assoc", "question": "Associe chaque étape à son rôle.", "paires": [["Remontage", "Arroser le chapeau avec le jus"], ["Pigeage", "Enfoncer le chapeau"], ["Débourbage", "Laisser tomber les particules"], ["Éraflage", "Retirer la rafle"]], "explication": "Remontage et pigeage servent l'extraction des rouges ; le débourbage clarifie le jus des blancs ; l'éraflage retire la partie verte de la grappe." },
+        { "type": "tri", "question": "Vinification en rouge ou en blanc ?", "categories": ["Rouge", "Blanc"], "items": [["Macération avec les peaux", 0], ["Chapeau de marc", 0], ["Pigeage", 0], ["Pressurage avant la fermentation", 1], ["Débourbage", 1], ["Fermentation vers 15 °C", 1]], "explication": "Le rouge fermente avec ses peaux, sous un chapeau qu'on pige ; le blanc est pressé d'abord, débourbé, puis fermenté au frais." },
+        { "type": "qcm", "question": "Quel cépage le Beaujolais vinifie-t-il souvent en macération (semi-)carbonique ?", "choix": ["Le pinot noir", "La syrah", "Le merlot", "Le gamay"], "bonne": 3, "explication": "Le gamay, cépage du Beaujolais. La macération carbonique explique ses arômes de framboise, de bonbon et parfois de banane." },
+        { "type": "vf", "question": "Le vin de presse est plus tannique que le vin de goutte.", "bonne": true, "explication": "Le vin de presse, extrait du marc au pressoir, est plus coloré et plus tannique. Le vin de goutte, qui coule librement, est le plus fin." },
+        { "type": "qcm", "question": "Que fait la fermentation malolactique ?", "choix": ["Elle ajoute du sucre", "Elle adoucit l'acidité", "Elle crée les bulles", "Elle donne la couleur"], "bonne": 1, "explication": "Des bactéries transforment l'acide malique, vif, en acide lactique, plus doux : le vin gagne en souplesse." },
+        { "type": "vf", "question": "En France, on peut faire un rosé tranquille en mélangeant du vin rouge et du vin blanc.", "bonne": false, "explication": "C'est interdit en Europe pour les rosés tranquilles. Seul le champagne rosé peut être obtenu par assemblage de vin rouge et de vin blanc." },
+        { "type": "indices", "question": "Quelle technique ?", "indices": ["Les grappes entières sont mises dans une cuve fermée.", "La cuve est remplie de gaz carbonique.", "Le vin sent la framboise, le bonbon, la banane."], "choix": ["Saignée", "Débourbage", "Macération carbonique", "Pigeage"], "bonne": 2, "explication": "Grappes entières sous gaz carbonique, fermentation dans le grain, fruit explosif : la macération carbonique." }
+      ]
+    },
+    {
+      "id": "bulles-barriques",
+      "titre": "Bulles et barriques",
+      "description": "Méthodes d'effervescence et secrets d'élevage : à toi de faire le tri.",
+      "tours": 8,
+      "questions": [
+        { "type": "tri", "question": "Quelle méthode pour quel vin ?", "categories": ["Traditionnelle", "Cuve close", "Ancestrale"], "items": [["Champagne", 0], ["Crémant de Loire", 0], ["Cava", 0], ["Prosecco", 1], ["Clairette de Die", 2], ["Bugey-Cerdon", 2]], "explication": "Champagne, crémants et Cava : deuxième fermentation en bouteille. Prosecco : en cuve close. Clairette de Die et Cerdon : une seule fermentation, achevée en bouteille." },
+        { "type": "ordre", "question": "Du plus court au plus long : la durée minimale de vieillissement.", "items": ["Crémant", "Champagne sans année", "Champagne millésimé"], "explication": "Au moins 9 mois sur lies pour un crémant, 15 mois en cave pour un champagne sans année, 3 ans pour un millésimé." },
+        { "type": "assoc", "question": "Associe chaque étape de la méthode traditionnelle à son rôle.", "paires": [["Tirage", "Ajouter sucre et levures"], ["Remuage", "Amener le dépôt dans le col"], ["Dégorgement", "Expulser le dépôt"], ["Dosage", "Ajuster le sucre final"]], "explication": "Tirage, prise de mousse, remuage, dégorgement, dosage : chaque étape a son rôle, du sucre qui crée les bulles à celui qui fixe le style final." },
+        { "type": "qcm", "question": "Quelle mention désigne un champagne sans sucre ajouté au dosage ?", "choix": ["Brut", "Brut nature", "Demi-sec", "Doux"], "bonne": 1, "explication": "Brut nature : aucun sucre ajouté, moins de 3 g/L. Le brut peut en contenir jusqu'à 12 g/L." },
+        { "type": "vf", "question": "Un fût de chêne neuf marque davantage le vin qu'un fût qui a déjà servi plusieurs fois.", "bonne": true, "explication": "Le bois neuf donne vanille, toasté et épices ; après quelques vins, le fût n'apporte presque plus d'arômes, seulement un peu d'oxygène." },
+        { "type": "qcm", "question": "Quel élevage donne au vin jaune ses notes de noix ?", "choix": ["Sous un voile de levures, sans ouillage", "En cuve inox au froid", "En amphore avec les peaux", "Sur lies avec bâtonnage"], "bonne": 0, "explication": "Le vin jaune vieillit au moins 60 mois en fût sous un voile de levures, sans qu'on remplace le vin évaporé." },
+        { "type": "tri", "question": "Plutôt cuve inox ou fût de chêne neuf ?", "categories": ["Cuve inox", "Fût neuf"], "items": [["Garde le fruit croquant", 0], ["N'apporte aucun arôme", 0], ["Notes de vanille et de toasté", 1], ["Le vin respire un peu à travers le bois", 1]], "explication": "L'inox est neutre et préserve le fruit ; le fût neuf apporte des arômes et un léger échange d'oxygène." },
+        { "type": "qcm", "question": "Que signifie « sur lie » sur une bouteille de Muscadet ?", "choix": ["Le vin a vieilli en fût neuf", "On y a ajouté du sucre", "Il a été fait en cuve close", "Le vin a passé l'hiver sur ses lies, sans soutirage"], "bonne": 3, "explication": "Le Muscadet sur lie reste au contact de ses lies fines au moins jusqu'au 1er mars suivant la récolte : il y gagne gras et notes de levure." },
+        { "type": "etiquette", "etiquette": "bollinger", "mode": "qcm", "question": "Ce champagne sans année a vieilli en cave au minimum…", "choix": ["9 mois", "3 ans", "15 mois", "6 mois"], "bonne": 2, "explication": "Un champagne non millésimé reste au moins 15 mois en cave après le tirage, dont 12 sur lies. Les maisons dépassent souvent largement ce minimum." },
+        { "type": "vf", "question": "Le chêne américain donne des notes de vanille et de noix de coco plus marquées que le chêne français.", "bonne": true, "explication": "Le chêne américain est plus riche en molécules aux notes de noix de coco et de vanille ; le chêne français est plus discret et plus épicé." }
+      ]
+    }
+  ],
+  "quiz": {
+    "titre": "Quiz de validation · Niveau 3",
+    "questions": [
+      { "type": "qcm", "question": "Quel climat est chaud, sec et très ensoleillé ?", "choix": ["Océanique", "Continental", "Méditerranéen", "Montagnard"], "bonne": 2, "explication": "Le climat méditerranéen, celui de la Provence, du Languedoc, du Rhône sud et de la Corse." },
+      { "type": "qcm", "question": "Pourquoi les graves du Médoc conviennent-elles au cabernet sauvignon ?", "choix": ["Elles retiennent beaucoup d'eau", "Elles drainent l'eau et forcent les racines à descendre", "Elles sont très riches en engrais", "Elles protègent du gel"], "bonne": 1, "explication": "Ces sols de cailloux drainent et se réchauffent : le cabernet sauvignon, tardif, y mûrit bien. L'argile, qui retient l'eau, convient mieux au merlot." },
+      { "type": "ordre", "question": "Remets la vie de la vigne dans l'ordre.", "items": ["Taille", "Débourrement", "Floraison", "Véraison", "Vendanges"], "explication": "Taille en hiver, débourrement au printemps, floraison en juin, véraison en août, vendanges à l'automne." },
+      { "type": "qcm", "question": "Un cabernet sauvignon sent fortement le poivron vert. Que peux-tu en déduire ?", "choix": ["Il a été élevé en fût neuf", "Il a été fait en macération carbonique", "Il a vieilli très longtemps", "Le raisin a manqué un peu de soleil"], "bonne": 3, "explication": "Le poivron vert vient des pyrazines, qui persistent quand le raisin n'est pas pleinement mûr : une année ou un lieu frais." },
+      { "type": "assoc", "question": "Associe chaque terme du chai à sa définition.", "paires": [["Chapeau de marc", "Les peaux remontées en haut de la cuve"], ["Vin de goutte", "Le jus qui coule librement"], ["Vin de presse", "Le vin tiré du marc au pressoir"], ["Débourbage", "Laisser décanter le jus de blanc"]], "explication": "Le chapeau se forme pendant la fermentation des rouges ; le vin de goutte est écoulé, le vin de presse extrait du marc ; le débourbage clarifie le jus des blancs." },
+      { "type": "qcm", "question": "Qu'apporte la fermentation malolactique à un vin ?", "choix": ["Plus de souplesse, moins d'acidité vive", "Des bulles", "Du sucre", "Une couleur plus foncée"], "bonne": 0, "explication": "Elle transforme l'acide malique, vif, en acide lactique, plus doux. Les rouges la font presque toujours ; chez les blancs, c'est un choix." },
+      { "type": "qcm", "question": "Quelle technique explique les notes de banane de certains beaujolais ?", "choix": ["Le bâtonnage", "La macération carbonique", "La saignée", "Le dégorgement"], "bonne": 1, "explication": "Les grappes entières fermentent de l'intérieur, sous gaz carbonique : fruits rouges, bonbon et parfois banane." },
+      { "type": "tri", "question": "Comment ce rosé a-t-il été fait ?", "categories": ["Pressurage direct", "Saignée"], "items": [["Rosé très pâle de Provence", 0], ["Raisins noirs pressés dès l'arrivée", 0], ["Jus tiré d'une cuve de rouge", 1], ["Rosé plus soutenu, rouge restant concentré", 1]], "explication": "Le pressurage direct donne des rosés pâles ; la saignée, des rosés plus colorés, et concentre le rouge resté en cuve." },
+      { "type": "ordre", "question": "Remets la méthode traditionnelle dans l'ordre.", "items": ["Tirage", "Prise de mousse", "Remuage", "Dégorgement", "Dosage"], "explication": "Sucre et levures en bouteille, deuxième fermentation, dépôt amené dans le col, expulsé, puis dosage." },
+      { "type": "tri", "question": "Quelle méthode d'effervescence ?", "categories": ["Traditionnelle", "Cuve close", "Ancestrale"], "items": [["Champagne", 0], ["Cava", 0], ["Prosecco", 1], ["Clairette de Die", 2]], "explication": "Champagne et Cava : en bouteille. Prosecco : en cuve close. Clairette de Die : une seule fermentation, achevée en bouteille." },
+      { "type": "etiquette", "etiquette": "langlois", "mode": "qcm", "question": "Ce crémant a été fait comme un champagne. Combien de temps au minimum sur lies ?", "choix": ["3 mois", "3 ans", "15 jours", "9 mois"], "bonne": 3, "explication": "Les crémants AOC vieillissent au moins 9 mois sur lies, contre 15 mois en cave pour un champagne sans année." },
+      { "type": "etiquette", "etiquette": "macle", "mode": "qcm", "question": "Comment ce vin a-t-il été élevé ?", "choix": ["En cuve inox, quelques mois", "En amphore, avec les peaux", "Sous un voile de levures, sans ouillage", "Sur lies, avec remuage et dégorgement"], "bonne": 2, "explication": "Château-Chalon est un vin jaune : du savagnin élevé au moins 60 mois sous un voile de levures, sans ouillage." },
+      { "type": "etiquette", "etiquette": "pepiere", "mode": "qcm", "question": "Que garantit la mention « sur lie » de ce Muscadet ?", "choix": ["Un hiver au contact des lies, sans soutirage", "Un élevage en fût neuf", "Une vendange tardive", "Une deuxième fermentation en bouteille"], "bonne": 0, "explication": "Le Muscadet sur lie reste sur ses lies fines au moins jusqu'au 1er mars suivant la récolte, puis est mis en bouteille dans la cave où il a été vinifié." },
+      { "type": "tri", "question": "Bio, biodynamie ou méthode nature ?", "categories": ["Bio", "Biodynamie", "Méthode nature"], "items": [["Feuille étoilée européenne", 0], ["Silice de corne", 1], ["Levures indigènes obligatoires", 2], ["30 mg/L de sulfites au plus", 2]], "explication": "Le bio a son logo européen ; la biodynamie ses préparations ; la méthode nature impose levures indigènes et 30 mg/L de sulfites au maximum." },
+      { "type": "vf", "question": "La certification HVE garantit un vin bio.", "bonne": false, "explication": "Non : la Haute Valeur Environnementale certifie une exploitation agricole, mais n'interdit pas les pesticides de synthèse. Ce n'est pas du bio." },
+      { "type": "qcm", "question": "Révision : un moût contient 204 g/L de sucre. Fermenté jusqu'au bout, quel degré donnera-t-il environ ?", "choix": ["8 % vol", "16 % vol", "20 % vol", "12 % vol"], "bonne": 3, "explication": "Révision du niveau 1 : il faut environ 17 g/L de sucre pour 1 % d'alcool. 204 ÷ 17 = 12 % vol." },
+      { "type": "qcm", "question": "Révision : quel cépage doit ses notes de poivre noir à la rotundone ?", "choix": ["Le merlot", "La syrah", "Le chardonnay", "Le gamay"], "bonne": 1, "explication": "Révision du niveau 2 : la rotundone donne son poivre à la syrah, surtout sous climat frais." },
+      { "type": "vf", "question": "Révision : sous le nom de malbec, le côt est devenu le cépage emblème de l'Argentine.", "bonne": true, "explication": "Révision du niveau 2 : le côt de Cahors s'appelle malbec en Argentine, où il est devenu le symbole du pays." }
+    ]
+  }
+}
