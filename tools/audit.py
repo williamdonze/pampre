@@ -266,10 +266,11 @@ def jouer_etape(drv, step):
           if (C === 'paris') { lat = 48.857; lon = 2.352; } else { const e = window.__curQ?.entry || MAPGAME.rounds[MAPGAME.i]; lat = e.lat; lon = e.lon; }
           const [x, y] = proj(lat, lon); const pt = svg.createSVGPoint(); pt.x = x; pt.y = y; const q = pt.matrixTransform(svg.getScreenCTM());
           svg.scrollIntoView({block:'center'}); await new Promise(r => setTimeout(r, 50));
-          const q2 = pt.matrixTransform(svg.getScreenCTM()); return [q2.x, q2.y];""" % json.dumps(cible.split("+")[0])
-        x, y = drv.js(js)
+          const q2 = pt.matrixTransform(svg.getScreenCTM()); const r = svg.getBoundingClientRect(); return [q2.x, q2.y, r.left + r.width/2, r.top + r.height/2];""" % json.dumps(cible.split("+")[0])
+        x, y, cx, cy = drv.js(js)
         dx = int(cible.split("+")[1]) if "+" in cible else 0
-        drv.clic(x + dx, y + dx * .6); return
+        # décalage orienté vers le centre de la carte, pour ne jamais cliquer en dehors
+        drv.clic(x + (dx if cx >= x else -dx), y + (dx * .6 if cy >= y else -dx * .6)); return
     r = drv.js(step if step.startswith("await") or step.startswith("return") else f"return ({step});" if "\n" not in step and ";" not in step.strip().rstrip(";") else step)
     if isinstance(r, str) and r.startswith("ERREUR"):
         raise RuntimeError(f"{step[:60]} → {r}")

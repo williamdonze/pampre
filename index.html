@@ -188,8 +188,9 @@ main{padding-block:20px 110px}
 .s-body .wrap{padding-block:12px 28px}
 .s-foot{border-top:2px solid var(--line);background:var(--bg);padding-bottom:env(safe-area-inset-bottom,0px)}
 .s-foot .wrap{display:flex;gap:12px;padding-block:14px}
-.s-foot .btn{flex:1}
-.s-foot .btn.ghost{flex:0 0 auto}
+.s-foot .btn{flex:1;min-width:0}
+.s-foot .btn.ghost{flex:0 1 auto}
+@media (max-width:360px){.s-foot .btn{padding-inline:12px;letter-spacing:.01em}}
 
 .qtitle{font-size:24px;margin-bottom:18px}
 .qkind{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--plum);margin-bottom:6px}
@@ -282,7 +283,8 @@ main{padding-block:20px 110px}
 .end-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%}
 .es{border:2px solid var(--c,var(--gold));border-radius:16px;overflow:hidden}
 .es b{display:block;background:var(--c,var(--gold));color:var(--on,#fff);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding:4px}
-.es span{display:block;font-family:var(--f-display);font-size:24px;font-weight:800;padding:8px 4px;color:var(--t,var(--c,var(--gold-deep)));font-variant-numeric:tabular-nums}
+.es span{display:block;font-family:var(--f-display);font-size:24px;font-weight:800;padding:8px 4px;color:var(--t,var(--c,var(--gold-deep)));font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:360px){.es span{font-size:21px}}
 .confetti{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
 .confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:3px;animation:fall 2.4s linear forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
