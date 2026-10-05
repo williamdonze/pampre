@@ -135,7 +135,7 @@ def t_lexique(b):
     a.js("const k = Object.keys(D.glossaire.termes).find(k => !ST.gloss[k] && [...document.querySelectorAll('.see .gl')].some(b => b.dataset.term === k)); window.__k = k; [...document.querySelectorAll('.see .gl')].find(b => b.dataset.term === k).click();")
     n = a.p.evaluate("Object.keys(ST.gloss).length"); badge = a.p.evaluate("!!ST.badges.lexique")
     a.close()
-    return ("OK" if n >= 20 and badge else "BUG"), f"{n} définitions consultées, badge attribué : {badge} (le clic « Voir aussi » enregistre le mot mais n'appelle pas checkBadges)"
+    return ("OK" if n >= 20 and badge else "BUG"), f"{n} définitions consultées, badge attribué : {badge}"
 
 
 # ===================================================================== série
@@ -591,7 +591,7 @@ def t_effacer_theme(b):
     a.p.click("[data-a=reset]"); a.p.click(".modal [data-a=ok]"); a.p.wait_for_timeout(100)
     th1 = a.p.evaluate("[document.documentElement.dataset.theme ?? null, ST.theme, document.querySelector('[data-th][aria-pressed=true]').textContent]")
     a.shot("effacer-theme"); a.close()
-    return ("OK" if th1[0] is None else "BUG"), f"avant : data-theme={th0!r} ; après « Tout effacer » : data-theme={th1[0]!r}, ST.theme={th1[1]!r}, bouton actif « {th1[2]} » (l'appli reste sombre alors que le réglage affiché est Auto)"
+    return ("OK" if th1[0] is None else "BUG"), f"avant : data-theme={th0!r} ; après « Tout effacer » : data-theme={th1[0]!r}, ST.theme={th1[1]!r}, bouton actif « {th1[2]} »"
 
 @T("Glossaire : recherche avec et sans accents, majuscules, « Voir aussi »")
 def t_glossaire(b):
