@@ -415,9 +415,8 @@ textarea.save{width:100%;min-height:110px;border:2px solid var(--line);border-ra
 .row-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
 
 /* ---------- toasts & modale ---------- */
-.toasts{pointer-events:none;position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:90;display:grid;gap:8px;width:min(92vw,380px)}
-/* pendant une session, en haut sous la barre de progression : ils ne cachent ni les choix ni les statistiques de fin */
-body.en-session .toasts{top:calc(70px + env(safe-area-inset-top,0px));bottom:auto}
+.toasts{pointer-events:none;position:fixed;left:50%;top:calc(70px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:90;display:grid;gap:8px;width:min(92vw,380px)}
+/* les toasts s'affichent en haut, sous la barre du haut ou de progression : jamais sur un bouton d'action ni sur les statistiques de fin */
 .toast{display:flex;gap:10px;align-items:center;background:var(--paper);border:2px solid var(--gold);border-radius:16px;padding:10px 14px;box-shadow:var(--shadow);font-weight:700;animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
 .toast svg{width:34px;height:34px;flex:none;color:var(--gold-deep)}
 .toast small{display:block;color:var(--muted);font-weight:600}
