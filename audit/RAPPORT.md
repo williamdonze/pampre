@@ -1,6 +1,8 @@
 # Audit de Pampre : rapport
 
-Date : 5 octobre 2026 · Version auditée : commit `439e910` (import initial) · Aucune correction appliquée à ce stade.
+Date : 5 octobre 2026 · Version auditée : commit `439e910` (import initial).
+
+**Mise à jour après corrections** : les 37 bugs sont corrigés (un commit par bug, identifiant dans le message). Chaque bug porte son statut ci-dessous ; bilan chiffré en section 7, comparaisons avant/après dans `audit/captures/avant-apres-A-*.png`. Le contenu pédagogique n'a pas été modifié (section 4 : à ta décision).
 
 ## 1. Méthode
 
@@ -62,6 +64,7 @@ Gravité :
 Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 
 ### A-01 · Une sauvegarde mal formée bloque l'appli pour toujours — **bloquant**
+- **Statut** : ✅ corrigé — commit `2620d1e`. Avant/après : [A-01](captures/avant-apres-A-01.png). Test : « Robustesse : sauvegardes corrompues ou anciennes » (8 cas).
 - **Où** : démarrage, puis tous les écrans. Toutes largeurs, tous thèmes, tous navigateurs.
 - **Reproduire** :
   1. Profil › Importer le code d'un objet `{"xp":10,"streak":null}` (base64), ou de `{"xp":10,"quiz":null}`. Le seul contrôle de l'import est « `xp` est un nombre ».
@@ -82,6 +85,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
   - entourer le premier `render()` d'un `try/catch` qui propose « Réinitialiser ».
 
 ### A-02 · La feuille de correction cache la fin de la question corrigée, sans pouvoir défiler — **majeur**
+- **Statut** : ✅ corrigé — commit `4f07629`. La feuille réserve sa hauteur sous la question ; tout se fait défiler. Avant/après : [A-02](captures/avant-apres-A-02.png)
 - **Où** : toute session, après « Vérifier ».
   - qcm et indices : 4ᵉ choix ;
   - tri : colonnes du bas ;
@@ -100,6 +104,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : à l'ouverture de la feuille, donner à `.s-body` une marge basse égale à sa hauteur (mesurée, ou suivie avec un `ResizeObserver`), puis faire défiler pour garder la question visible. La feuille garde son animation et son style.
 
 ### A-03 · Thème sombre : la correction (« Pas tout à fait », bonne réponse, choix faux ou justes) est presque illisible — **majeur**
+- **Statut** : ✅ corrigé — commit `98c8483`. Jetons --leaf-ink / --bad-ink : 7,8:1 et 7,0:1 en sombre. Avant/après : [A-03](captures/avant-apres-A-03.png)
 - **Où** : feuille de correction, `.choice.ok/.ko`, `.chip.ok/.ko`, réponses du tri et de l'association. Sombre système et sombre forcé, toutes largeurs, tous navigateurs.
 - **Reproduire** : Profil › Apparence › Sombre, puis répondre faux à une question.
 - **Attendu** : contraste ≥ 4,5:1 (≥ 3:1 pour le titre de 24 px).
@@ -118,6 +123,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
   - les utiliser pour le texte de `.sheet`, `.choice.ok/.ko` et `.chip.ok/.ko`.
 
 ### A-04 · La bulle « Commencer / Continuer » recouvre le libellé du nœud précédent — **majeur**
+- **Statut** : ✅ corrigé — commit `48eb83a`. Avant/après : [A-04](captures/avant-apres-A-04.png)
 - **Où** : accueil, nœud en cours dès qu'il y a un nœud au-dessus. 320, 375 et 768 px mesurés (recouvrement ≈ 3 000 px²), tous thèmes, tous navigateurs.
 - **Reproduire** : terminer les leçons 1 et 2, puis revenir à l'accueil.
 - **Attendu** : « Les couleurs et les styles · 5 min » lisible.
@@ -127,6 +133,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : réserver la place de la bulle sur le nœud courant (`.node-wrap:has(.start){margin-top:34px}`, ou une classe ajoutée en JS).
 
 ### A-05 · Le tri (« Classe ») est inutilisable au clavier — **majeur** (accessibilité)
+- **Statut** : ✅ corrigé — commit `ff3f30e`. Avant/après : [A-05](captures/avant-apres-A-05.png). Test : « Tri : utilisable au clavier (question résolue sans souris) ».
 - **Où** : questions de type `tri` (quiz q10, jeu « Les bons gestes » q1 et q6). Tous navigateurs.
 - **Reproduire** : Tab jusqu'à une étiquette, Entrée.
 - **Attendu** : l'étiquette est sélectionnée, puis on choisit une colonne au clavier.
@@ -142,6 +149,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
   - garder le glisser-déposer tel quel.
 
 ### A-06 · « Touche l'étiquette » est inutilisable au clavier — **majeur** (accessibilité)
+- **Statut** : ✅ corrigé — commit `24f01a3`. Avant/après : [A-06](captures/avant-apres-A-06.png). Test : « Clavier : étiquette en mode toucher utilisable au clavier ».
 - **Où** : questions `etiquette` en mode `toucher` :
   - vérification de la leçon 3 ;
   - quiz q7 ;
@@ -153,6 +161,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : en mode `tap`, ajouter `tabindex="0" role="button"` et gérer Entrée/Espace sur `.ch`, ou rendre les champs en `<button>` stylés pareil. L'aspect « papier » ne change pas.
 
 ### A-07 · Champs d'étiquette trop petits au toucher — **majeur** (mobile)
+- **Statut** : ✅ corrigé — commit `cbbc036`. Au doigt, hauteur touchable ≥ 44 px pour les 176 champs (mesurée) ; rendu souris inchangé. Avant/après : [A-07](captures/avant-apres-A-07.png)
 - **Où** : mode `toucher`, toutes les étiquettes. Jusqu'à 768 px, tous navigateurs.
 - **Observé** : hauteurs mesurées et voisins collés (2 px d'écart), donc mauvais champ touché fréquent au doigt :
 
@@ -171,6 +180,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : en mode `.lbl.tap` seulement, agrandir la zone sensible sans changer le dessin : `.lbl.tap .ch{position:relative}` + `::after` avec `inset:-8px -4px`, et plus d'espace entre les éléments du pied (`gap:8px 10px`).
 
 ### A-08 · Contrastes insuffisants sur les boutons d'action et les chiffres clés — **majeur**
+- **Statut** : ✅ corrigé — commit `7bcc4be`. Jetons --leaf-btn, --bad-btn, --on-*, --gold-ink, --flame-ink. Vert des boutons : #458200 en clair (au lieu de #58A700). Avant/après : [A-08-clair](captures/avant-apres-A-08-clair.png) · [A-08-sombre](captures/avant-apres-A-08-sombre.png)
 - **Où** : tous navigateurs, toutes largeurs. Seuil AA : 4,5:1, ou 3:1 au-delà de 24 px (18,7 px en gras).
 - **Thème sombre, encore plus bas** :
 
@@ -214,6 +224,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
   Le vert Duolingo est un choix de marque : **à arbitrer avec toi**.
 
 ### A-09 · Thème sombre : bordeaux clair sur fonds sombres et en-têtes, sous le seuil — **mineur**
+- **Statut** : ✅ corrigé — commit `7483c98`. Étendu aux textes des illustrations et à l'or des étiquettes. Plus aucun texte HTML ou SVG sous AA sur les 113 écrans (hors boutons désactivés). Avant/après : [A-09-etiquette](captures/avant-apres-A-09-etiquette.png) · [A-09](captures/avant-apres-A-09.png)
 - **Où** : sombre système et forcé, tous navigateurs.
 
   | Élément | Contraste |
@@ -233,6 +244,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : en sombre, un `--grape` texte un peu plus clair (≈ `#E8668D`) et un fond de bouton un peu plus foncé (≈ `#B83560`) ; `.clue .n` en `--plum-soft` / `--plum`.
 
 ### A-10 · Textes coupés dans les illustrations SVG — **majeur** (contenu pédagogique tronqué)
+- **Statut** : ✅ corrigé — commits `6f1535a`, `850cbe1`. Libellés sur plusieurs lignes, taille d'origine conservée ; vérifié avec et sans Google Fonts. Avant/après : [A-10-etiquette](captures/avant-apres-A-10-etiquette.png) · [A-10](captures/avant-apres-A-10.png)
 - **Où** : toutes largeurs, tous thèmes, tous navigateurs.
   - Leçon 1, carte 2 (`raisin-coupe`) : « Peau : couleur, arômes, tanins », « Pulpe : eau, sucres, acides », « Pépins : tanins durs » sont coupés après ~8 caractères (texte de x = 162 à 300 dans un viewBox de 220).
   - Leçon 3, carte 1 (`etiquette-anatomie`) : « …roducteur », « …ppellation », « degré, vol… ».
@@ -249,6 +261,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
   Aucune modification du dessin lui-même.
 
 ### A-11 · Les toasts recouvrent le contenu (choix, statistiques de fin) — **mineur**
+- **Statut** : ✅ corrigé — commits `e2b4fdb`, `8195bd6`. Toasts affichés en haut, sur toutes les vues. Avant/après : [A-11-carte](captures/avant-apres-A-11-carte.png) · [A-11](captures/avant-apres-A-11.png)
 - **Où** : sessions et écrans de fin, 320 et 375 px surtout, tous navigateurs.
 - **Observé** :
   - pendant une question, un toast recouvre le 4ᵉ choix (288 × 45 px) ;
@@ -259,6 +272,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : pendant une session, afficher les toasts en haut, sous la barre de progression (classe sur `body`), et raccourcir la file (2 s, ou toasts groupés).
 
 ### A-12 · Barre du haut qui déborde à 320 px avec beaucoup d'XP — **mineur**
+- **Statut** : ✅ corrigé — commit `a5229e3`. Avant/après : [A-12](captures/avant-apres-A-12.png)
 - **Où** : toutes les vues, 320 px, joueur vétéran (365 jours, 123 456 XP), tous navigateurs.
 - **Observé** :
   - défilement horizontal de toute la page : 1,4 px avec les polices Google, 35 px avec les polices de repli ;
@@ -268,6 +282,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : format court au-delà de 10 000 (« 123 k »), `min-width:0` sur `.stats`, et masquer le texte « Pampre » de la marque sous 360 px.
 
 ### A-13 · Écran de fin : le bouton Continuer sort de l'écran avec les polices de repli — **mineur**
+- **Statut** : ✅ corrigé — commit `bb6c158`. Avant/après : [A-13](captures/avant-apres-A-13.png)
 - **Où** : fins de jeu et de quiz raté (boutons « Réessayer » + « Continuer »), 320 px, Google Fonts indisponible.
 - **Observé** : « Continuer » est coupé à droite (x jusqu'à 328 px) ; « 100 % » passe sur deux lignes dans la case Réussite.
 - **Capture** : [fin de jeu sans polices](captures/chromium-fin-jeu-320-clair-sans-polices.png).
@@ -275,6 +290,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : `.s-foot .btn{min-width:0}`, autoriser le retour à la ligne (`white-space:normal`) ou réduire le padding sous 360 px ; `white-space:nowrap` pour les chiffres.
 
 ### A-14 · Carte libre : « Appellation » déborde de sa case — **mineur**
+- **Statut** : ✅ corrigé — commit `537e782`. Avant/après : [A-14](captures/avant-apres-A-14.png)
 - **Où** : réglages de la carte, 320, 375 et 400 px, tous thèmes. Encore pire sans polices (80 px dans 49 px).
 - **Observé** : « Appellatio » est coupé par la case voisine.
 - **Capture** : [carte-reglages à 320 px](captures/chromium-carte-reglages-320-clair.png).
@@ -282,6 +298,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : `font-size:11px` et `hyphens:auto` sous 420 px, ou un trait d'union conditionnel dans l'affichage (le JSON ne change pas).
 
 ### A-15 · Téléphone en paysage : la carte prend plus que l'écran et capte tous les gestes — **mineur**
+- **Statut** : ✅ corrigé — commit `e6594d6`. Avant/après : [A-15](captures/avant-apres-A-15.png)
 - **Où** : Carte libre et question « carte », 667 × 375.
 - **Observé** :
   - la carte fait 635 × 635 px pour 375 px de haut ;
@@ -292,6 +309,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : `max-height: calc(100dvh - 200px)` sur `.map-box`, avec `width:auto` et `margin-inline:auto`.
 
 ### A-16 · Double toucher rapide sur « Continuer » : une carte de leçon est sautée — **mineur**
+- **Statut** : ✅ corrigé — commits `0f64821`, `0de9dd6`. Ignore le 2ᵉ clic d'un double clic (event.detail > 1) et, au doigt, un 2ᵉ toucher < 350 ms. Comportement réel d'iOS Safari non vérifiable ici. Test : « Robustesse : double clic rapide » (souris et doigt).
 - **Où** : leçons, tous navigateurs.
 - **Reproduire** : double-cliquer « Continuer » sur la carte 1 de la leçon 1.
 - **Attendu** : carte 2. **Observé** : carte 3, « La fermentation, cœur du miracle ».
@@ -300,6 +318,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : ignorer les clics pendant ~350 ms après chaque `show()` (horodatage), ou ignorer `e.detail > 1`.
 
 ### A-17 · Pas de piège de focus dans les sessions, la modale et le glossaire — **mineur** (accessibilité)
+- **Statut** : ✅ corrigé — commit `fd7852a`. Test : « Clavier : piège de focus (session, modale, glossaire) ».
 - **Où** : tous les calques déclarés `aria-modal="true"`.
 - **Observé** :
   - Tab sort de la session et atteint « Pampre », les compteurs et les onglets, invisibles derrière ;
@@ -310,6 +329,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : poser `inert` sur `#app`, `#topbar` et `.tabbar` tant qu'un calque est ouvert, puis rendre le focus à l'élément d'origine.
 
 ### A-18 · Défi du jour : l'étiquette change à chaque lancement — **mineur**
+- **Statut** : ✅ corrigé — commit `d6588a4`. Test : « Défi : mêmes questions toute la journée ».
 - **Où** : défi du jour.
 - **Observé** : deux tirages le même jour donnent `gen-region-guigal`, puis `gen-region-tempier`. Les 4 questions de révision et la carte restent stables.
 - **Preuve** : test « Défi : mêmes questions toute la journée ».
@@ -317,11 +337,13 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : passer `rnd` en paramètre à `genLabelQuestions` (et à ses `shuffle` / `pick`).
 
 ### A-19 · Le badge « Lexicophile » n'est pas donné quand le 20ᵉ mot est ouvert via « Voir aussi » — **mineur**
+- **Statut** : ✅ corrigé — commit `9b89fab`. Test : « Progression : badge Lexicophile via Voir aussi ».
 - **Preuve** : test dédié (20 mots enregistrés, pas de badge).
 - **Cause** : `openGlossary` › écouteur du tiroir : `ST.gloss[k] = 1; save();` sans `checkBadges()`.
 - **Correctif proposé** : appeler `checkBadges()`.
 
 ### A-20 · « Ce que tu as fait ne sera pas enregistré » est faux — **mineur**
+- **Statut** : ✅ corrigé — commit `1e4f7c8`. Choix fait : les erreurs restent enregistrées (utile au défi) ; le message le dit désormais. Avant/après : [A-20](captures/avant-apres-A-20.png)
 - **Observé** :
   - en quittant une session par le X, les erreurs sont **déjà** dans la pile d'erreurs (`quiz1-0` après une mauvaise réponse) ;
   - le X reste visible sur l'écran de fin et affiche le même avertissement alors que tout est déjà enregistré.
@@ -330,6 +352,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : soit garder les erreurs en mémoire jusqu'à `finish()`, soit reformuler le message (« Ta progression dans cette session sera perdue ; tes erreurs restent à revoir »). Masquer le X sur l'écran de fin.
 
 ### A-21 · Correction erronée pour la provenance d'un vin étranger — **mineur**
+- **Statut** : ✅ corrigé — commit `03bfb05`. Avant/après : [A-21](captures/avant-apres-A-21.png). Test : « Étiquettes : provenance des vins étrangers ».
 - **Reproduire** : étiquette Taylor's (porto), mode toucher, cible provenance, répondre faux.
 - **Observé** : l'étiquette affiche « Produit du Portugal », mais la correction dit « Bonne réponse : Produit de France ».
 - **Capture** : [preuve-provenance-portugal.png](captures/preuve-provenance-portugal.png).
@@ -337,27 +360,32 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : réutiliser le texte calculé par `renderLabel` (fonction commune). Le même code produirait « Produit du Italie » ou « Produit du Espagne » si on ajoutait ces pays : prévoir « d'Italie », « d'Espagne ».
 
 ### A-22 · « Tout effacer » laisse le thème sombre forcé alors que le réglage affiché est « Auto » — **mineur**
+- **Statut** : ✅ corrigé — commit `7fbd9b1`. Avant/après : [A-22](captures/avant-apres-A-22.png). Test : « Profil : Tout effacer avec un thème forcé ».
 - **Capture** : [preuve-effacer-theme.png](captures/preuve-effacer-theme.png) (`data-theme="dark"` alors que `ST.theme` vaut `null`).
 - **Cause** : `viewProfil` › reset : `applyTheme()` n'est pas appelé.
 - **Correctif proposé** : appeler `applyTheme()` après `ST = freshState()`.
 
 ### A-23 · Échap ne ferme pas la modale de confirmation — **mineur**
+- **Statut** : ✅ corrigé — commit `9a93abf`. Test : « Clavier : Échap ferme le glossaire et la modale ».
 - **Où** : « Quitter la session ? », « Abandonner ? », « Tout effacer ? ».
 - **Cause** : `confirmBox` n'écoute pas le clavier.
 - **Correctif proposé** : Échap = « Rester ». Par la même occasion, retirer l'écouteur Échap du glossaire quand on le ferme par clic : aujourd'hui les écouteurs s'accumulent.
 
 ### A-24 · Les écouteurs globaux du tri restent actifs après avoir quitté par le X — **mineur**
+- **Statut** : ✅ corrigé — commit `f91d27f`. Test : « Tri : écouteurs globaux retirés après le X ».
 - **Preuve** : écouteurs `pointermove` et `pointerup` sur `window` : 1 avant, 3 pendant, 3 après le X. Seule une fin normale les retire.
 - **Cause** : `closeSession()` n'appelle pas `current.cleanup()`.
 - **Correctif proposé** : `runSession` expose son nettoyage, et `closeSession` l'appelle.
 
 ### A-25 · Série remise à 1 quand on voyage vers l'ouest — **mineur**
+- **Statut** : ✅ corrigé — commit `2a5cada`. Test : « Série : voyage vers l'ouest ».
 - **Reproduire** : dernier jour enregistré le 6 octobre (Auckland), puis on joue le 5 octobre heure de Los Angeles.
 - **Observé** : la série de 10 jours retombe à 1.
 - **Cause** : `gainXP()` ne traite pas `dayDiff < 0`.
 - **Correctif proposé** : si `dayDiff(s.last, t) <= 0`, ne rien changer.
 
 ### A-26 · Changer d'onglet pendant une manche de carte — **mineur**
+- **Statut** : ✅ corrigé — commit `ce74767`. Test : « Carte : changer d'onglet en pleine partie » ([capture](captures/preuve-carte-retour-onglet.png)).
 - **Observé** :
   - avant validation, l'épingle posée est perdue ;
   - **pendant la révélation**, le retour sur l'onglet saute directement à la manche suivante : on perd le score affiché, la fiche et le débat.
@@ -366,6 +394,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : mémoriser `guess` et le résultat dans `MAPGAME`, et réafficher la révélation au retour.
 
 ### A-27 · Zones tactiles < 44 × 44 px hors étiquettes — **mineur**
+- **Statut** : ✅ corrigé — commits `575e946`, `a29a788`. Avant/après : [A-27](captures/avant-apres-A-27.png)
 - **Où** : largeurs ≤ 768 px.
 
   | Élément | Taille |
@@ -383,12 +412,14 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : `min-height:44px` (et `min-width`) sur ces éléments, sans changer leur apparence (padding ou zone sensible étendue).
 
 ### A-28 · Carte : villes repères coupées au bord, Ajaccio en mer — **cosmétique**
+- **Statut** : ✅ corrigé — commit `093f5b1`. Libellés à gauche près du bord droit. Le point d'Ajaccio garde ses vraies coordonnées (0,2 km du contour simplifié). Avant/après : [A-28](captures/avant-apres-A-28.png)
 - **Observé** : au zoom initial, « Strasbourg » et « Ajaccio » sont coupés par le bord droit. Le point d'Ajaccio tombe en mer sur le fond simplifié (aussi signalé par le validateur).
 - **Capture** : [carte au zoom initial](captures/preuve-carte-dezoom-max.png).
 - **Cause** : `drawOverlays()` écrit toujours le libellé à droite du point ; `FRANCE_VB` trop serré à droite ; `carte-vins.json` › `villes` › Ajaccio (41.919, 8.739).
 - **Correctif proposé** : libellé à gauche pour les villes proches du bord est (`text-anchor:end`), et élargir légèrement `FRANCE_VB`. Les coordonnées d'Ajaccio sont à ajuster **avec ton accord** (donnée).
 
 ### A-29 · Zones régionales : Côte-Rôtie, Condrieu, Ampuis et Romanèche-Thorins hors de leur région — **mineur** (données / approximation)
+- **Statut** : ✅ corrigé — commit `dc4585e`. **Changement de données à valider** : `carte-vins.json`, régions Rhône (+69) et Beaujolais (+71). Avant/après : [A-29](captures/avant-apres-A-29.png)
 - **Observé** :
   - Côte-Rôtie, Condrieu et Ampuis sont dans le Rhône (69), département rattaché au Beaujolais ; Romanèche-Thorins est en Saône-et-Loire (71), rattachée à la Bourgogne ;
   - au palier 1, « Côte-Rôtie La Mouline » placée pile au bon endroit affiche « 1 km » au lieu de « dans la région ! » (score plein grâce aux ancres) ;
@@ -399,6 +430,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : à décider avec toi. Soit des zones infra-départementales, soit accepter un département partagé dans `inRegion` (tester toutes les régions qui listent le département).
 
 ### A-30 · Accessibilité : régions live et noms des boutons — **mineur**
+- **Statut** : ✅ corrigé — commit `6f2c912`. Avant/après : [A-30](captures/avant-apres-A-30.png). Test : « Accessibilité : régions live et noms des boutons ».
 - **Observé** :
   - `#app` porte `aria-live="polite"` : un lecteur d'écran relit toute la vue à chaque `render()` ;
   - les compteurs de la barre du haut s'annoncent « 1, bouton », « 64, bouton » (le `title` n'est qu'une description) ;
@@ -410,6 +442,7 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
   - utiliser un anneau `--grape-deep` en clair.
 
 ### A-31 · Message d'erreur de chargement technique et en anglais — **cosmétique**
+- **Statut** : ✅ corrigé — commit `7c110bf`. Avant/après : [A-31](captures/avant-apres-A-31.png)
 - **Observé** :
   - « Expected property name or '}' in JSON at position 2… » pour un JSON invalide ;
   - « content/glossaire.json : 404 » pour un fichier absent ;
@@ -421,12 +454,14 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : message français (« Le fichier … est introuvable / mal formé »), détail technique replié, et bouton « Réessayer ».
 
 ### A-32 · Titres coupés sur le trait d'union — **cosmétique**
+- **Statut** : ✅ corrigé — commit `e252b84`. Avant/après : [A-32](captures/avant-apres-A-32.png)
 - **Observé** : « Que trouve-t- / on dans un grain ? » (leçon 1, carte 2) à 375 px.
 - **Capture** : [lecon1-carte2](captures/chromium-lecon1-carte2-375-clair.png).
 - **Cause** : `text-wrap:balance` + coupure autorisée après le trait d'union.
 - **Correctif proposé** : dans `rich()` et les titres, remplacer `-t-` par des traits d'union insécables (U+2011) à l'affichage, sans toucher au JSON.
 
 ### A-33 · Compteur de session figé après la réponse — **cosmétique**
+- **Statut** : ✅ corrigé — commit `fab0766`. Test : mesure du compteur et de la barre (reprises comprises).
 - **Observé** :
   - « 0/1 » et la barre de progression ne bougent qu'au clic sur Continuer ;
   - pendant les reprises d'une leçon, le compteur reste à « 2/2 » alors qu'il reste une question.
@@ -434,22 +469,26 @@ Sauf mention contraire, « tous navigateurs » veut dire Chromium **et** WebKit.
 - **Correctif proposé** : appeler `progress()` dans `verify()`, et afficher « reprise » pour les questions remises en file.
 
 ### A-34 · `<title>` et feuilles de style dans `<body>`, favicon absent — **cosmétique**
+- **Statut** : ✅ corrigé — commit `43e7c97`. Test : aucune erreur de console sur tous les parcours.
 - **Observé** :
   - `<title>`, le `<link>` Google Fonts et le CSS principal sont dans `<body>` (HTML invalide, même si les navigateurs s'en accommodent) ;
   - `GET /favicon.ico` en 404 (seule erreur de console de tout l'audit).
 - **Correctif proposé** : déplacer ces balises dans `<head>` ; ajouter un favicon SVG inline (`<link rel="icon" href="data:image/svg+xml,…">`) reprenant le logo.
 
 ### A-35 · Défi du jour à 320 px : texte écrasé — **cosmétique**
+- **Statut** : ✅ corrigé — commit `f867565`. Avant/après : [A-35](captures/avant-apres-A-35.png)
 - **Observé** : sur l'accueil, la carte « Défi du jour » laisse ~140 px au texte, qui passe sur 5 lignes, avec « Défi / du jour » sur deux lignes.
 - **Capture** : [accueil à 320 px](captures/chromium-accueil-nouveau-320-clair.png).
 - **Correctif proposé** : sous 360 px, placer le bouton « Jouer » sous le texte (`flex-wrap:wrap`).
 
 ### A-36 · Polices de repli : « Certifications » déborde de sa carte bonus — **cosmétique**
+- **Statut** : ✅ corrigé — commit `fb3017a`. Avant/après : [A-36](captures/avant-apres-A-36.png)
 - **Observé** : 128 px de contenu dans 106 px, à 320 px.
 - **Capture** : [accueil sans polices](captures/chromium-accueil-milieu-320-clair-sans-polices.png).
 - **Correctif proposé** : `overflow-wrap:anywhere` / `hyphens:auto` sur `.bonus b`.
 
 ### A-37 · Mouvement réduit : défilements animés conservés — **cosmétique**
+- **Statut** : ✅ corrigé — commit `783cb9e`. Test : « Mouvement réduit : rien ne reste invisible ».
 - **Observé** : tout reste visible avec `prefers-reduced-motion` (vérifié : opacité 1, confettis invisibles). En revanche, `scrollIntoView({behavior:"smooth"})` (révélation de la carte, glossaire) reste animé.
 - **Correctif proposé** : `behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'`.
 
@@ -551,13 +590,13 @@ Résultat : **1 erreur, 7 avertissements.**
 
 ## 5. Récapitulatif
 
-| Gravité | Nombre | Identifiants |
-|---|---:|---|
-| Bloquant | 1 | A-01 |
-| Majeur | 8 | A-02, A-03, A-04, A-05, A-06, A-07, A-08, A-10 |
-| Mineur | 20 | A-09, A-11, A-12, A-13, A-14, A-15, A-16, A-17, A-18, A-19, A-20, A-21, A-22, A-23, A-24, A-25, A-26, A-27, A-29, A-30 |
-| Cosmétique | 8 | A-28, A-31, A-32, A-33, A-34, A-35, A-36, A-37 |
-| **Total** | **37** | Plus 2 incohérences de contenu (C-01, C-02) et 10 affirmations factuelles à vérifier |
+| Gravité | Nombre | Identifiants | Statut |
+|---|---:|---|---|
+| Bloquant | 1 | A-01 | ✅ corrigé |
+| Majeur | 8 | A-02, A-03, A-04, A-05, A-06, A-07, A-08, A-10 | ✅ corrigés |
+| Mineur | 20 | A-09, A-11, A-12, A-13, A-14, A-15, A-16, A-17, A-18, A-19, A-20, A-21, A-22, A-23, A-24, A-25, A-26, A-27, A-29, A-30 | ✅ corrigés |
+| Cosmétique | 8 | A-28, A-31, A-32, A-33, A-34, A-35, A-36, A-37 | ✅ corrigés |
+| **Total** | **37** | Plus 2 incohérences de contenu (C-01, C-02) et 10 affirmations factuelles à vérifier | 37 / 37 ; contenu non modifié |
 
 Navigateurs : tous les bugs ci-dessus se reproduisent sous Chromium. Ceux qui ne dépendent que du code ou du CSS (tous sauf les variantes « polices de repli » d'A-12, A-13 et A-36) ont été retrouvés sous WebKit, voir l'annexe WebKit ci-dessous.
 
@@ -576,3 +615,49 @@ Navigateurs : tous les bugs ci-dessus se reproduisent sous Chromium. Ceux qui ne
 | **Zoom du navigateur à 200 % et grande taille de texte** | Non couvert par la matrice. |
 | **Performances, mémoire, batterie, vrais appareils** | Hors de portée d'un conteneur. |
 | **Vérification factuelle sur sources** | Les doutes de la section 4 viennent de mes connaissances, sans consultation de sources (INAO, règlements UE). À confirmer avant toute correction. |
+
+---
+
+## 7. Bilan après corrections
+
+**37 bugs sur 37 corrigés.** Un commit par bug (plus quelques compléments marqués « suite »), l'identifiant figurant dans chaque message.
+
+| Gravité | Corrigés |
+|---|---|
+| Bloquant | 1 / 1 |
+| Majeur | 8 / 8 |
+| Mineur | 20 / 20 |
+| Cosmétique | 8 / 8 |
+
+**Audit relancé en entier** (fichiers `*-final*`) :
+
+| Passe | Avant | Après |
+|---|---|---|
+| Chromium, 113 écrans × 6 largeurs × 4 thèmes (`audit/resume-final.md`) | 16 515 constats bruts | 4 341, voir le détail ci-dessous |
+| WebKit, 113 écrans × 3 largeurs × 4 thèmes (`audit/webkit/resume-final.md`) | 6 834 | 993, voir ci-dessous |
+| Polices bloquées, Chromium (`audit/resume-sans-polices-final.md`, puis `resume-sans-polices-final-c.md` après le complément `850cbe1`) | 473 | 0 hors boutons désactivés |
+| Tests fonctionnels, Chromium + WebKit (`audit/fonctionnel.json`) | 16 en échec sur 42 | **49 / 49 OK** (tests durcis ou ajoutés pour les corrections) |
+| `tools/test-parcours.py` | — | OK (quiz entier juste, 12 captures, aucune erreur) |
+| `tools/valider-contenu.py` | 1 erreur, 7 avertissements | 0 erreur, 5 avertissements attendus |
+
+**Détail des constats restants, tous expliqués**
+- **Défilement horizontal, texte coupé, élément hors écran, texte SVG coupé, contenu caché par la feuille de correction ou la barre d'onglets** : 0, dans les deux navigateurs, avec et sans Google Fonts.
+- **Contraste**
+  - Chromium : 5 constats, tous dans le scénario artificiel « toasts pendant une question », à 768 px en sombre forcé.
+  - WebKit : 332 constats.
+  - Tous mesurent des fonds intermédiaires de transition CSS juste après le changement de thème. L'audit coupe désormais les transitions pendant la mesure : relancé sous WebKit sur les écrans concernés et dans les 4 thèmes, il ne trouve **plus aucun** défaut (`audit/webkit/resume-final-sans-transition.md`).
+- **Boutons désactivés** (`contraste-desactive`) : exemptés par les WCAG (Vérifier grisé, Monde · bientôt).
+- **Zones tactiles**
+  - Les constats restants sous Chromium concernent les champs d'étiquette et les étiquettes rangées du tri, qui ne s'agrandissent qu'au doigt (`pointer: coarse`, choix de design pour ne pas changer le rendu à la souris). Mesurés dans un contexte tactile : 0 cible sous 44 px.
+  - Les liens de glossaire en ligne sont exemptés (exception « inline » des WCAG).
+- **Toasts** : ils s'affichent désormais en haut (A-11) et peuvent recouvrir quelques secondes le titre de la page, par exemple après un import. Ils laissent passer les clics. C'est le compromis retenu pour ne jamais masquer un bouton d'action ni les résultats.
+
+**Choix faits pendant les corrections, à valider**
+1. **Vert des boutons** (A-08) : `#458200` en clair, au lieu de `#58A700`. Le vert vif reste pour la barre de progression, les bordures et la mascotte. En sombre, le vert vif est conservé avec un texte foncé dessus.
+2. **Données de carte** (A-29) : dans `content/carte-vins.json`, le Rhône (69) est ajouté à la région Rhône et la Saône-et-Loire (71) au Beaujolais. Ce ne sont pas des textes pédagogiques, mais ce sont des données : ce changement est à confirmer.
+3. **Pile d'erreurs** (A-20) : les erreurs restent enregistrées quand on quitte une session ; seul le message a changé.
+4. **Ajaccio** (A-28) : le point garde ses vraies coordonnées. Il tombe à 0,2 km du contour simplifié de la côte.
+
+**Non modifié, à ta décision** : les incohérences de contenu C-01 (Meursault à 12–14 °C dans le jeu, 10–13 °C dans la leçon) et C-02, ainsi que les 10 affirmations factuelles de la section 4. La leçon 4 n'a toujours pas d'encadré Exemple.
+
+**Limites inchangées** : voir la section 6 (Firefox non testé ; iOS réel, dont le comportement du double toucher d'A-16 ; lecteurs d'écran réels).

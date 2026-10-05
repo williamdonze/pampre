@@ -135,7 +135,7 @@ def t_lexique(b):
     a.js("const k = Object.keys(D.glossaire.termes).find(k => !ST.gloss[k] && [...document.querySelectorAll('.see .gl')].some(b => b.dataset.term === k)); window.__k = k; [...document.querySelectorAll('.see .gl')].find(b => b.dataset.term === k).click();")
     n = a.p.evaluate("Object.keys(ST.gloss).length"); badge = a.p.evaluate("!!ST.badges.lexique")
     a.close()
-    return ("OK" if n >= 20 and badge else "BUG"), f"{n} définitions consultées, badge attribué : {badge} (le clic « Voir aussi » enregistre le mot mais n'appelle pas checkBadges)"
+    return ("OK" if n >= 20 and badge else "BUG"), f"{n} définitions consultées, badge attribué : {badge}"
 
 
 # ===================================================================== série
@@ -173,7 +173,7 @@ def t_serie_tz(b):
     a = App(b, etat(xp=50, streak={"count": 10, "last": "2026-10-06"}), heure="2026-10-05T20:00:00-07:00", tz="America/Los_Angeles")
     avant = a.p.evaluate("streakNow()"); a.js("gainXP(1)"); apres = a.st()["streak"]
     a.close()
-    return ("OK" if apres["count"] >= 10 else "BUG"), f"série affichée avant : {avant} ; après un gain d'XP : {apres} (la série de 10 jours retombe à 1 car le dernier jour enregistré est « dans le futur »)"
+    return ("OK" if apres["count"] >= 10 else "BUG"), f"série affichée avant : {avant} ; après un gain d'XP : {apres}"
 
 
 # ===================================================================== défi quotidien
@@ -265,19 +265,29 @@ def t_tri_ecouteurs(b):
     n0 = n(); ouvrir_tri(a); n1 = n()
     a.p.click("[data-quit]"); a.p.click(".modal [data-a=ok]"); a.p.wait_for_timeout(100); n2 = n()
     # fin normale (Vérifier → Continuer) : le nettoyage est appelé
-    ouvrir_tri(a); a.js("AUDIT.answer(true)"); a.p.click("[data-check]"); a.p.click(".sheet [data-cont]"); a.p.wait_for_timeout(100); n3 = n()
-    ov = a.p.evaluate("document.body.style.overflow")
+    ouvrir_tri(a); a.js("AUDIT.answer(true)"); a.p.click("[data-check]"); a.p.wait_for_timeout(400); a.p.click(".sheet [data-cont]"); a.p.wait_for_timeout(100); n3 = n()
     a.close()
-    return ("OK" if n2 == n0 else "BUG"), f"écouteurs pointermove/pointerup sur window : avant {n0}, pendant {n1}, après X {n2}, après une fin normale {n3 - (n2 - n0)} (+{n2-n0} restés du X)"
+    return ("OK" if n2 == n0 and n3 == n0 else "BUG"), f"écouteurs pointermove/pointerup sur window : avant {n0}, pendant {n1}, après le X {n2}, après une fin normale {n3}"
 
-@T("Tri : utilisable au clavier")
+@T("Tri : utilisable au clavier (question résolue sans souris)")
 def t_tri_clavier(b):
     a = App(b); ouvrir_tri(a)
-    a.p.focus(".pool .chip >> nth=0"); a.p.keyboard.press("Enter"); a.p.wait_for_timeout(50)
-    picked = a.p.evaluate("!!document.querySelector('.pool .chip.picked')")
-    cats_focusables = a.p.evaluate("[...document.querySelectorAll('.cat')].some(c => c.tabIndex >= 0)")
+    q = a.p.evaluate("LEVELS[1].jeux[1].questions[0]")
+    a.p.focus(".pool .chip >> nth=0")
+    for _ in range(len(q["items"])):
+        txt = a.p.evaluate("document.activeElement.textContent")
+        cat = next(c for t, c in q["items"] if t == txt)
+        a.p.keyboard.press("Enter")                                  # sélectionne → le focus passe sur la 1re colonne
+        if not a.p.evaluate("document.activeElement.classList.contains('cat')"): break
+        for _ in range(30):
+            if a.p.evaluate(f"document.activeElement.dataset.cat === '{cat}'"): break
+            a.p.keyboard.press("Tab")
+        a.p.keyboard.press("Enter")                                  # range → le focus revient sur la réserve
+    pret = a.p.evaluate("!document.querySelector('[data-check]').disabled")
+    a.p.focus("[data-check]"); a.p.keyboard.press("Enter"); a.p.wait_for_timeout(100)
+    ok = a.p.evaluate("!!document.querySelector('.sheet.ok')")
     a.close()
-    return ("OK" if picked and cats_focusables else "BUG"), f"Entrée sur une étiquette la sélectionne : {picked} ; colonnes atteignables au clavier : {cats_focusables}"
+    return ("OK" if pret and ok else "BUG"), f"toutes les étiquettes rangées au clavier : {pret} ; réponse juste : {ok}"
 
 
 # ===================================================================== association / ordre
@@ -322,7 +332,7 @@ def t_carte_clic(b):
     vb0 = a.p.evaluate("document.querySelector('.map-box svg').getAttribute('viewBox')")
     m.move(200, 400); m.down(); m.move(203, 402); m.up()                       # petit tremblement : c'est un clic
     g1 = a.p.evaluate("!document.querySelector('main .btn.leaf').disabled")
-    a.js("render()"); a.p.wait_for_timeout(100)
+    a.js("MAPGAME.guess = null; render()"); a.p.wait_for_timeout(100)   # l'épingle survit à render() (A-26) : on l'efface
     m.move(200, 400); m.down(); m.move(260, 440, steps=10); m.up()             # vrai glissé : pas d'épingle
     g2 = a.p.evaluate("!document.querySelector('main .btn.leaf').disabled"); vb2 = a.p.evaluate("document.querySelector('.map-box svg').getAttribute('viewBox')")
     a.close()
@@ -397,7 +407,7 @@ def t_carte_scores(b):
 @T("Carte : détection « dans la région » (Corse, côtes, frontière de département)")
 def t_carte_region(b):
     a = App(b, w=400, h=900); ouvrir_carte(a)
-    cas = [("corse", 42.698, 9.363, True), ("corse", 41.92, 8.74, True), ("corse", 42.0, 9.0, True), ("languedoc-roussillon", 42.483, 3.129, True),
+    cas = [("corse", 42.698, 9.363, True), ("corse", 41.76, 8.93, True), ("corse", 42.0, 9.0, True), ("languedoc-roussillon", 42.483, 3.129, True),
            ("provence", 43.215, 5.538, True), ("bordeaux", 45.55, -1.06, True), ("bordeaux", 45.2, -1.3, False), ("beaujolais", 45.764, 4.836, True),
            ("rhone", 45.489, 4.81, True), ("languedoc-roussillon", 43.84, 4.36, True), ("alsace", 48.573, 7.752, True), ("champagne", 48.857, 2.352, False)]
     lignes = []; ok = True
@@ -412,14 +422,16 @@ def t_carte_onglet(b):
     a = App(b, w=400, h=900); ouvrir_carte(a)
     e = a.p.evaluate("MAPGAME.rounds[0]"); x, y = pt_ecran(a, e["lat"], e["lon"]); a.p.mouse.click(x, y)
     a.p.click(".tab[data-go=home]"); a.p.click(".tab[data-go=carte]"); a.p.wait_for_timeout(200)
-    garde = a.p.evaluate("[MAPGAME.i, !document.querySelector('main .btn.leaf').disabled]")
-    x, y = pt_ecran(a, e["lat"], e["lon"]); a.p.mouse.click(x, y); a.p.click("text=Valider ma position"); a.p.wait_for_timeout(300)
-    a.p.click(".tab[data-go=defi]"); a.p.click(".tab[data-go=carte]"); a.p.wait_for_timeout(200)
-    apres = a.p.evaluate("[MAPGAME.i, MAPGAME.scores.length, document.querySelector('.round-meta').textContent]")
-    # onglet du navigateur masqué puis visible
-    a.p.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+    garde = a.p.evaluate("[MAPGAME.i, !document.querySelector('main .btn.leaf').disabled, document.querySelectorAll('.g-marks .pin-guess').length]")
+    a.p.click("text=Valider ma position"); a.p.wait_for_timeout(300)
+    score = a.p.evaluate("document.querySelector('.score-big').textContent")
+    a.p.click(".tab[data-go=defi]"); a.p.click(".tab[data-go=carte]"); a.p.wait_for_timeout(300)
+    apres = a.p.evaluate("[MAPGAME.i, MAPGAME.scores.length, document.querySelector('.score-big')?.textContent, document.querySelector('main .btn.block:not(.ghost)').textContent]")
+    a.shot("carte-retour-onglet")
+    a.p.click("text=Manche suivante"); a.p.wait_for_timeout(200); suiv = a.p.evaluate("[MAPGAME.i, document.querySelectorAll('.g-marks .pin-guess').length]")
     errs = a.errs; a.close()
-    return ("INFO" if not errs else "BUG"), f"après aller-retour avant validation : manche {garde[0]+1}, épingle conservée {garde[1]} ; après aller-retour pendant la révélation : manche {apres[0]+1}, {apres[1]} score(s), « {apres[2]} » (la révélation est sautée) ; erreurs {errs}"
+    ok = garde == [0, True, 1] and apres[:3] == [0, 1, score] and suiv == [1, 0] and not errs
+    return ("OK" if ok else "BUG"), f"retour avant validation : manche {garde[0]+1}, Valider actif {garde[1]}, épingle affichée {garde[2]} ; retour pendant la révélation : manche {apres[0]+1}, {apres[1]} score, « {apres[2]} » (attendu « {score} »), bouton « {apres[3]} » ; manche suivante ensuite : {suiv[0]+1}, épingles {suiv[1]} ; erreurs {errs}"
 
 
 # ===================================================================== clavier, focus
@@ -434,31 +446,58 @@ def t_clavier(b):
     a.close()
     return ("OK" if sel == "1" and sheet and nxt[0] else "BUG"), f"touche 2 → choix {sel} ; Entrée → feuille {sheet} ; Entrée → question suivante {nxt} ; 3e question « {q3} »"
 
-@T("Clavier : focus visible et piège de focus dans la session")
+@T("Clavier : piège de focus (session, modale, glossaire) et retour du focus")
 def t_focus(b):
-    a = App(b); a.js("startQuiz(1)"); a.p.wait_for_timeout(200)
-    sorties = []
-    for i in range(14):
-        a.p.keyboard.press("Tab")
-        f = a.p.evaluate("(() => { const e = document.activeElement; return [e.closest('.session') ? 'session' : (e.closest('#topbar,.tabbar,main')?.className || e.tagName), e.textContent.trim().slice(0,20), getComputedStyle(e).outlineStyle]; })()")
-        if f[0] != "session": sorties.append(f)
+    a = App(b)
+    def sorties(racine, n=16):
+        out = []
+        for _ in range(n):
+            a.p.keyboard.press("Tab")
+            f = a.p.evaluate(f"(() => {{ const e = document.activeElement; return [!!e.closest('{racine}'), e.tagName, (e.textContent || '').trim().slice(0, 20)]; }})()")
+            if not f[0] and f[1] != "BODY": out.append(f[1:])   # BODY = passage vers l'interface du navigateur, normal
+        return out
+    a.js("startQuiz(1)"); a.p.wait_for_timeout(200); s1 = sorties(".session")
+    a.p.click("[data-quit]"); s2 = sorties(".modal"); a.p.click(".modal [data-a=no]")
+    retour = a.p.evaluate("document.activeElement.matches('[data-quit]')")
+    a.p.evaluate("closeSession(); render()"); a.p.focus(".tab[data-go=glossaire]"); a.p.keyboard.press("Enter"); a.p.wait_for_timeout(200)
+    s3 = sorties(".drawer"); a.p.keyboard.press("Escape"); a.p.wait_for_timeout(100)
+    retour2 = a.p.evaluate("document.activeElement.dataset.go")
     a.close()
-    return ("OK" if not sorties else "BUG"), f"Tab quitte la session (modale) pour atteindre des éléments cachés derrière : {sorties[:4]}"
+    ok = not s1 and not s2 and not s3 and retour and retour2 == "glossaire"
+    return ("OK" if ok else "BUG"), f"éléments atteints hors du calque : session {s1[:3]}, modale {s2[:3]}, glossaire {s3[:3]} ; focus rendu au X après « Rester » : {retour} ; focus rendu à l'onglet Lexique après Échap : {retour2 == 'glossaire'}"
 
-@T("Clavier : Échap ferme le glossaire, et la modale")
+@T("Clavier : Échap ferme le glossaire et la modale, sans écouteurs qui s'accumulent")
 def t_echap(b):
-    a = App(b); a.js("openGlossary()"); a.p.wait_for_timeout(200); a.p.keyboard.press("Escape")
+    a = App(b); cdp = a.ctx.new_cdp_session(a.p)
+    def n():
+        obj = cdp.send("Runtime.evaluate", {"expression": "document"})["result"]["objectId"]
+        return sum(1 for l in cdp.send("DOMDebugger.getEventListeners", {"objectId": obj})["listeners"] if l["type"] == "keydown")
+    n0 = n()
+    for _ in range(3): a.js("openGlossary()"); a.p.click(".drawer [data-close]")      # fermé à la souris
+    n1 = n()
+    a.js("openGlossary()"); a.p.wait_for_timeout(200); a.p.keyboard.press("Escape")
     g = a.p.evaluate("!document.querySelector('.drawer')")
-    a.js("startQuiz(1)"); a.p.click("[data-quit]"); a.p.keyboard.press("Escape"); m = a.p.evaluate("!document.querySelector('.modal')")
-    a.close()
-    return ("OK" if g and m else "BUG"), f"glossaire fermé par Échap : {g} ; modale « Quitter ? » fermée par Échap : {m}"
+    a.js("startQuiz(1)"); a.p.click("[data-quit]"); a.p.keyboard.press("Escape"); a.p.wait_for_timeout(50)
+    m = a.p.evaluate("[!document.querySelector('.modal'), !!document.querySelector('.session')]")
+    n2 = n(); a.close()
+    ok = g and m == [True, True] and n1 == n0 and n2 == n0
+    return ("OK" if ok else "BUG"), f"glossaire fermé par Échap : {g} ; modale fermée par Échap (session conservée) : {m} ; écouteurs keydown sur document : {n0} au départ, {n1} après 3 glossaires fermés à la souris, {n2} à la fin"
+
 
 @T("Clavier : étiquette en mode « toucher » utilisable au clavier")
 def t_etiq_clavier(b):
     a = App(b); a.js("runSession([{kind:'q', q:LEVELS[1].lecons[2].verif[0]}], {title:'t', onEnd:() => ({})})"); a.p.wait_for_timeout(200)
     f = a.p.evaluate("[...document.querySelectorAll('.lbl .ch')].map(c => c.tabIndex)")
+    # Tab jusqu'au millésime, Entrée pour le choisir, Entrée pour vérifier
+    for _ in range(25):
+        if a.p.evaluate("document.activeElement.dataset?.champ === 'millesime'"): break
+        a.p.keyboard.press("Tab")
+    a.p.keyboard.press("Enter"); sel = a.p.evaluate("document.querySelector('.ch.sel')?.dataset.champ")
+    sheet_tot = a.p.evaluate("!!document.querySelector('.sheet')")
+    a.p.focus("[data-check]"); a.p.keyboard.press("Enter"); a.p.wait_for_timeout(100)
+    ok = a.p.evaluate("!!document.querySelector('.sheet.ok')")
     a.close()
-    return ("OK" if any(x >= 0 for x in f) else "BUG"), f"tabIndex des champs de l'étiquette : {f} (aucun n'est atteignable au clavier)"
+    return ("OK" if sel == "millesime" and not sheet_tot and ok else "BUG"), f"tabIndex des champs : {f} ; Entrée sélectionne « {sel} » sans vérifier trop tôt ({not sheet_tot}) ; réponse juste : {ok}"
 
 
 # ===================================================================== robustesse
@@ -503,11 +542,16 @@ def t_double(b):
     a.p.dblclick("[data-next]"); a.p.wait_for_timeout(100)
     titre = a.p.evaluate("document.querySelector('.lcard h2').textContent")
     a.close()
+    a = App(b, touch=True); a.js("startStep(1,'n1-l1')"); a.p.wait_for_timeout(200)
+    a.p.tap("[data-next]"); a.p.tap("[data-next]"); a.p.wait_for_timeout(100)       # double toucher au doigt
+    titre_doigt = a.p.evaluate("document.querySelector('.lcard h2').textContent")
+    a.close()
     a = App(b); a.js("startQuiz(1)"); a.p.wait_for_timeout(200); a.p.click(".choice >> nth=1")
     a.p.dblclick("[data-check]"); a.p.wait_for_timeout(400)
     etat_q = a.p.evaluate("[!!document.querySelector('.sheet'), document.querySelector('.qtitle')?.textContent]")
     a.close()
-    return ("OK" if titre == "Que trouve-t-on dans un grain ?" else "BUG"), f"double clic sur Continuer (carte 1) → carte affichée « {titre} » (attendu : carte 2 « Que trouve-t-on dans un grain ? ») ; double clic sur Vérifier → feuille visible {etat_q[0]}"
+    ok = titre == titre_doigt == "Que trouve-t-on dans un grain ?" and etat_q[0]
+    return ("OK" if ok else "BUG"), f"double clic sur Continuer (carte 1) → « {titre} » ; double toucher au doigt → « {titre_doigt} » (attendu : carte 2 « Que trouve-t-on dans un grain ? ») ; double clic sur Vérifier → feuille visible {etat_q[0]}"
 
 @T("Robustesse : défilement de la page bloqué pendant la session et rétabli après")
 def t_scroll(b):
@@ -517,14 +561,18 @@ def t_scroll(b):
     a.js("startStep(1,'n1-l1')"); a.js("return await AUDIT.playThrough(true)"); a.p.click("[data-done]"); r.append(a.p.evaluate("document.body.style.overflow"))
     a.js("openGlossary()"); a.p.mouse.move(50, 300); y0 = a.p.evaluate("scrollY"); a.p.mouse.wheel(0, 800); a.p.wait_for_timeout(200); y1 = a.p.evaluate("scrollY")
     a.close()
-    return ("OK" if r == ["hidden", "", ""] else "BUG"), f"overflow du body : pendant {r[0]!r}, après X {r[1]!r}, après fin {r[2]!r} ; glossaire ouvert : la page derrière défile ({y0} → {y1})"
+    return ("OK" if r == ["hidden", "", ""] and y1 == y0 else "BUG"), f"overflow du body : pendant {r[0]!r}, après X {r[1]!r}, après fin {r[2]!r} ; glossaire ouvert : défilement de la page derrière {y0} → {y1}"
 
-@T("Robustesse : quitter une session « ne sera pas enregistré »")
+@T("Robustesse : quitter une session, message fidèle ; X de l'écran de fin")
 def t_quitter(b):
     a = App(b); a.js("startQuiz(1)"); a.p.wait_for_timeout(100); a.js("AUDIT.answer(false)"); a.p.click("[data-check]")
-    a.p.click(".sheet [data-cont]"); a.p.click("[data-quit]"); a.p.click(".modal [data-a=ok]")
-    m = a.st()["mistakes"]; a.close()
-    return ("OK" if not m else "BUG"), f"pile d'erreurs après avoir quitté : {m} (le message promet que rien n'est enregistré)"
+    a.p.click(".sheet [data-cont]"); a.p.click("[data-quit]"); msg = a.p.evaluate("document.querySelector('.modal p').textContent")
+    a.p.click(".modal [data-a=ok]"); st = a.st()
+    a.js("startStep(1,'n1-l1')"); a.js("return await AUDIT.playThrough(true)"); a.p.click("[data-quit]"); a.p.wait_for_timeout(100)
+    fin = a.p.evaluate("[!!document.querySelector('.modal'), !!document.querySelector('.session')]")
+    a.close()
+    ok = st["mistakes"] == ["quiz1-0"] and st["xp"] == 0 and "erreurs restent" in msg and fin == [False, False]
+    return ("OK" if ok else "BUG"), f"message : « {msg} » ; après avoir quitté : XP {st['xp']}, pile {st['mistakes']} ; X sur l'écran de fin → modale {fin[0]}, session encore ouverte {fin[1]}"
 
 
 # ===================================================================== profil, glossaire, divers
@@ -548,7 +596,7 @@ def t_effacer_theme(b):
     a.p.click("[data-a=reset]"); a.p.click(".modal [data-a=ok]"); a.p.wait_for_timeout(100)
     th1 = a.p.evaluate("[document.documentElement.dataset.theme ?? null, ST.theme, document.querySelector('[data-th][aria-pressed=true]').textContent]")
     a.shot("effacer-theme"); a.close()
-    return ("OK" if th1[0] is None else "BUG"), f"avant : data-theme={th0!r} ; après « Tout effacer » : data-theme={th1[0]!r}, ST.theme={th1[1]!r}, bouton actif « {th1[2]} » (l'appli reste sombre alors que le réglage affiché est Auto)"
+    return ("OK" if th1[0] is None else "BUG"), f"avant : data-theme={th0!r} ; après « Tout effacer » : data-theme={th1[0]!r}, ST.theme={th1[1]!r}, bouton actif « {th1[2]} »"
 
 @T("Glossaire : recherche avec et sans accents, majuscules, « Voir aussi »")
 def t_glossaire(b):
@@ -585,9 +633,9 @@ def t_reduced(b):
     op = a.p.evaluate("getComputedStyle(document.querySelector('.lcard')).opacity")
     a.js("confetti()"); conf = a.p.evaluate("[...document.querySelectorAll('.confetti i')].filter(i => i.getBoundingClientRect().bottom > 0).length")
     a.js("toast(I.star,'t','s')"); t = a.p.evaluate("getComputedStyle(document.querySelector('.toast')).opacity")
-    smooth = "behavior:\"smooth\"" in (RACINE / "index.html").read_text()
+    smooth = a.p.evaluate("defilement()") == "smooth"
     a.close()
-    return ("OK" if op == "1" and t == "1" else "BUG"), f"carte de leçon opacité {op}, toast {t}, confettis visibles {conf} ; scrollIntoView smooth codé en dur (non soumis à prefers-reduced-motion) : {smooth}"
+    return ("OK" if op == "1" and t == "1" and not smooth else "BUG"), f"carte de leçon opacité {op}, toast {t}, confettis visibles {conf} ; défilement animé malgré la préférence : {smooth}"
 
 @T("Accessibilité : régions live et noms des boutons")
 def t_a11y(b):
@@ -596,7 +644,8 @@ def t_a11y(b):
     noms = a.p.evaluate("[...document.querySelectorAll('#stats button')].map(b => [b.textContent.trim(), b.getAttribute('aria-label'), b.title])")
     lang_title = a.p.evaluate("[document.title, document.querySelector('title').parentElement.tagName]")
     a.close()
-    return "INFO", f"#app aria-live={live!r} (toute l'appli est relue à chaque rendu) ; boutons de stats (texte, aria-label, title) : {noms} ; <title> placé dans {lang_title[1]}"
+    ok = live is None and all(n[1] for n in noms)
+    return ("OK" if ok else "BUG"), f"#app aria-live={live!r} ; boutons de stats (texte, aria-label, title) : {noms} ; <title> placé dans {lang_title[1]}"
 
 
 def main(args):

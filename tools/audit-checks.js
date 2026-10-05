@@ -126,7 +126,7 @@
       const cx = r.left + r.width/2, cy = r.top + r.height/2;
       let fill = null;
       const svg = t.ownerSVGElement;
-      const stack = document.elementsFromPoint(cx, cy).filter(e => e !== t && svg.contains(e) && e.tagName !== "g" && e.tagName !== "text" && e !== svg);
+      const stack = document.elementsFromPoint(cx, cy).filter(e => e !== t && !t.contains(e) && svg.contains(e) && !["g", "text", "tspan"].includes(e.tagName) && e !== svg);
       for (const s of stack) { const f = getComputedStyle(s).fill; if (f && f !== "none" && !f.startsWith("url")) { fill = parseColor(f); fill = over([fill[0],fill[1],fill[2], (+getComputedStyle(s).fillOpacity||1)*opacityOf(s)], bgOf(svg).c); break; } }
       const bg = fill || bgOf(svg).c;
       let fg = parseColor(getComputedStyle(t).fill); fg = over(fg, bg);
@@ -177,7 +177,8 @@
   async function checkBottom(out){
     const res = [];
     const root = activeRoot();
-    const frames = [root === document.body ? document.scrollingElement : null, ...root.querySelectorAll(".s-body,.drawer-body,.sheet .expl")].filter(e => e && e.scrollHeight > e.clientHeight + 1 && (e === document.scrollingElement || visible(e)));
+    // l'explication défile à l'intérieur de la feuille : seul compte ce qui reste caché sous les couches du bas
+    const frames = [root === document.body ? document.scrollingElement : null, ...root.querySelectorAll(".s-body,.drawer-body")].filter(e => e && e.scrollHeight > e.clientHeight + 1 && (e === document.scrollingElement || visible(e)));
     for (const f of frames) {
       const prev = f.scrollTop; f.scrollTop = f.scrollHeight; await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
       const tmp = []; checkLayers(tmp, { only: ".tabbar,.sheet,.s-foot,.toasts,.modal-bg,.confetti" }); tmp.forEach(t => { t.check = "masque-en-bas"; t.detail += ` (zone ${f === document.scrollingElement ? "page" : sig(f)} défilée au maximum)`; res.push(t); });
@@ -186,14 +187,18 @@
     // la feuille de correction cache-t-elle la fin de la question ?
     const sheet = document.querySelector(".sheet"), body = document.querySelector(".s-body");
     if (sheet && body) {
-      body.scrollTop = body.scrollHeight; await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-      const top = sheet.getBoundingClientRect().top; const items = [...document.querySelectorAll("#s-main *")].filter(e => visible(e) && (ownText(e) || e.matches("button,.chip,.choice")));
+      const prev = body.scrollTop; body.scrollTop = body.scrollHeight; await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      const top = sheet.getBoundingClientRect().top; const items = [...document.querySelectorAll("#s-main *")].filter(e => visible(e) && !e.closest(".map-box svg") && (ownText(e) || e.matches("button,.chip,.choice,.map-box")));
       const hidden = items.filter(e => e.getBoundingClientRect().bottom > top + 2);
+      body.scrollTop = prev;
       if (hidden.length) res.push({ check:"masque-par-feuille", sel:sig(hidden[0]), text:txt(hidden[hidden.length-1]), detail:`${hidden.length} élément(s) de la question restent sous la feuille de correction même en défilant (haut de la feuille : ${Math.round(top)} px)` });
     }
     out.push(...res);
   }
   async function run(opts = {}){
+    // on mesure des états stables : les transitions (fonds des choix, colonnes…) sont coupées pendant la mesure,
+    // sinon un changement de thème juste avant donne des couleurs intermédiaires (vu sous WebKit)
+    if (!document.getElementById("audit-sans-transition")) { const st = document.createElement("style"); st.id = "audit-sans-transition"; st.textContent = "*,*::before,*::after{transition:none!important}"; document.head.appendChild(st); }
     const out = [];
     checkScroll(out); checkOverflow(out); checkSvgText(out);
     if (opts.contrast !== false) checkContrast(out);

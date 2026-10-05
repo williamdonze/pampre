@@ -37,8 +37,8 @@
  },
  {
   "test": "Progression : badge « Lexicophile » (20 définitions) via « Voir aussi »",
-  "statut": "BUG",
-  "detail": "20 définitions consultées, badge attribué : False (le clic « Voir aussi » enregistre le mot mais n'appelle pas checkBadges)",
+  "statut": "OK",
+  "detail": "20 définitions consultées, badge attribué : True",
   "navigateur": "chromium"
  },
  {
@@ -55,14 +55,14 @@
  },
  {
   "test": "Série : voyage vers l'ouest (fuseau horaire qui recule d'un jour)",
-  "statut": "BUG",
-  "detail": "série affichée avant : 10 ; après un gain d'XP : {'count': 1, 'last': '2026-10-05'} (la série de 10 jours retombe à 1 car le dernier jour enregistré est « dans le futur »)",
+  "statut": "OK",
+  "detail": "série affichée avant : 10 ; après un gain d'XP : {'count': 10, 'last': '2026-10-06'}",
   "navigateur": "chromium"
  },
  {
   "test": "Défi : mêmes questions toute la journée",
-  "statut": "BUG",
-  "detail": "1er tirage ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-tempier', 'map-Vouvray Le Haut-Lieu, Domaine Huet'] ; 2e tirage (même jour) ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-bollinger', 'map-Vouvray Le Haut-Lieu, Domaine Huet'] ; différences : [('gen-region-tempier', 'gen-region-bollinger')]",
+  "statut": "OK",
+  "detail": "1er tirage ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-magnin', 'map-Cahors, Château du Cèdre'] ; 2e tirage (même jour) ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-magnin', 'map-Cahors, Château du Cèdre'] ; différences : []",
   "navigateur": "chromium"
  },
  {
@@ -74,7 +74,7 @@
  {
   "test": "Défi : nouveau joueur, et bonus de 30 XP une seule fois par jour",
   "statut": "OK",
-  "detail": "questions : ['n1-l1-v1', 'n1-l2-v1', 'n1-l2-v0', 'n1-l1-v0', 'gen-region-montus', 'map-Château-Chalon, Domaine Jean Macle'] ; 1er défi +54 XP (attendu 54), 2e +24 (attendu 24) ; erreurs JS : []",
+  "detail": "questions : ['n1-l1-v1', 'n1-l2-v1', 'n1-l2-v0', 'n1-l1-v0', 'gen-region-weinbach', 'map-Côte de Brouilly, Château Thivin'] ; 1er défi +54 XP (attendu 54), 2e +24 (attendu 24) ; erreurs JS : []",
   "navigateur": "chromium"
  },
  {
@@ -91,14 +91,14 @@
  },
  {
   "test": "Tri : écouteurs globaux retirés après avoir quitté par le X",
-  "statut": "BUG",
-  "detail": "écouteurs pointermove/pointerup sur window : avant 1, pendant 3, après X 3, après une fin normale 1 (+2 restés du X)",
+  "statut": "OK",
+  "detail": "écouteurs pointermove/pointerup sur window : avant 1, pendant 3, après le X 1, après une fin normale 1",
   "navigateur": "chromium"
  },
  {
-  "test": "Tri : utilisable au clavier",
-  "statut": "BUG",
-  "detail": "Entrée sur une étiquette la sélectionne : False ; colonnes atteignables au clavier : False",
+  "test": "Tri : utilisable au clavier (question résolue sans souris)",
+  "statut": "OK",
+  "detail": "toutes les étiquettes rangées au clavier : True ; réponse juste : True",
   "navigateur": "chromium"
  },
  {
@@ -145,14 +145,14 @@
  },
  {
   "test": "Carte : détection « dans la région » (Corse, côtes, frontière de département)",
-  "statut": "BUG",
-  "detail": "corse (42.698, 9.363) → True ; corse (41.92, 8.74) → False ✗ attendu True ; corse (42.0, 9.0) → True ; languedoc-roussillon (42.483, 3.129) → True ; provence (43.215, 5.538) → True ; bordeaux (45.55, -1.06) → True ; bordeaux (45.2, -1.3) → False ; beaujolais (45.764, 4.836) → True ; rhone (45.489, 4.81) → False ✗ attendu True ; languedoc-roussillon (43.84, 4.36) → True ; alsace (48.573, 7.752) → True ; champagne (48.857, 2.352) → False",
+  "statut": "OK",
+  "detail": "corse (42.698, 9.363) → True ; corse (41.76, 8.93) → True ; corse (42.0, 9.0) → True ; languedoc-roussillon (42.483, 3.129) → True ; provence (43.215, 5.538) → True ; bordeaux (45.55, -1.06) → True ; bordeaux (45.2, -1.3) → False ; beaujolais (45.764, 4.836) → True ; rhone (45.489, 4.81) → True ; languedoc-roussillon (43.84, 4.36) → True ; alsace (48.573, 7.752) → True ; champagne (48.857, 2.352) → False",
   "navigateur": "chromium"
  },
  {
   "test": "Carte : changer d'onglet en pleine partie, puis revenir",
-  "statut": "INFO",
-  "detail": "après aller-retour avant validation : manche 1, épingle conservée False ; après aller-retour pendant la révélation : manche 2, 1 score(s), « Manche 2/5 · Région5 000 pts » (la révélation est sautée) ; erreurs []",
+  "statut": "OK",
+  "detail": "retour avant validation : manche 1, Valider actif True, épingle affichée 1 ; retour pendant la révélation : manche 1, 1 score, « +5 000 » (attendu « +5 000 »), bouton « Manche suivante » ; manche suivante ensuite : 2, épingles 0 ; erreurs []",
   "navigateur": "chromium"
  },
  {
@@ -162,21 +162,21 @@
   "navigateur": "chromium"
  },
  {
-  "test": "Clavier : focus visible et piège de focus dans la session",
-  "statut": "BUG",
-  "detail": "Tab quitte la session (modale) pour atteindre des éléments cachés derrière : [['BODY', 'Pampre\\n\\n\\n\\n\\n/* Mise e', 'none'], ['topbar', 'Pampre', 'solid'], ['topbar', '0', 'solid'], ['topbar', '0', 'solid']]",
+  "test": "Clavier : piège de focus (session, modale, glossaire) et retour du focus",
+  "statut": "OK",
+  "detail": "éléments atteints hors du calque : session [], modale [], glossaire [] ; focus rendu au X après « Rester » : True ; focus rendu à l'onglet Lexique après Échap : True",
   "navigateur": "chromium"
  },
  {
-  "test": "Clavier : Échap ferme le glossaire, et la modale",
-  "statut": "BUG",
-  "detail": "glossaire fermé par Échap : True ; modale « Quitter ? » fermée par Échap : False",
+  "test": "Clavier : Échap ferme le glossaire et la modale, sans écouteurs qui s'accumulent",
+  "statut": "OK",
+  "detail": "glossaire fermé par Échap : True ; modale fermée par Échap (session conservée) : [True, True] ; écouteurs keydown sur document : 0 au départ, 0 après 3 glossaires fermés à la souris, 0 à la fin",
   "navigateur": "chromium"
  },
  {
   "test": "Clavier : étiquette en mode « toucher » utilisable au clavier",
-  "statut": "BUG",
-  "detail": "tabIndex des champs de l'étiquette : [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1] (aucun n'est atteignable au clavier)",
+  "statut": "OK",
+  "detail": "tabIndex des champs : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] ; Entrée sélectionne « millesime » sans vérifier trop tôt (True) ; réponse juste : True",
   "navigateur": "chromium"
  },
  {
@@ -187,32 +187,32 @@
  },
  {
   "test": "Robustesse : sauvegardes corrompues ou anciennes",
-  "statut": "BUG",
-  "detail": "pas du JSON → accueil True, leçon fin ; null → accueil True, leçon fin ; tableau → accueil True, leçon fin ; xp texte → accueil True, leçon fin ; streak null → accueil False, leçon exception : Page.evaluate: TypeError: Cannot read properties of null (reading 'last'), erreur : Cannot read properties of null (reading 'last') ; map sans regions (ancienne version) → accueil True, leçon exception : Page.evaluate: TypeError: Cannot read properties of undefined (reading 'bordeaux ; quiz null → accueil False, leçon exception : Page.evaluate: TypeError: Cannot convert undefined or null to object, erreur : Cannot read properties of null (reading '1') ; mistakes objet → accueil True, leçon max, erreur : ST.mistakes.indexOf is not a function",
+  "statut": "OK",
+  "detail": "pas du JSON → accueil True, leçon fin ; null → accueil True, leçon fin ; tableau → accueil True, leçon fin ; xp texte → accueil True, leçon fin ; streak null → accueil True, leçon fin ; map sans regions (ancienne version) → accueil True, leçon fin ; quiz null → accueil True, leçon fin ; mistakes objet → accueil True, leçon fin",
   "navigateur": "chromium"
  },
  {
   "test": "Robustesse : fichier de contenu manquant ou invalide",
   "statut": "INFO",
-  "detail": "404 : « Le contenu n'a pas pu être chargé content/glossaire.json : 404. Recharge la page ; si le problème continue, vérifie que le dossier content est publié avec la pa » ; JSON invalide : « Le contenu n'a pas pu être chargé Expected property name or '}' in JSON at position 2 (line 1 column 3). Recharge la page ; si le problème continue, vérifie que »",
+  "detail": "404 : « Le contenu n'a pas pu être chargé Le fichier content/glossaire.json est introuvable. Vérifie que le dossier content est publié avec la page, puis réessaie. RÉES » ; JSON invalide : « Le contenu n'a pas pu être chargé Le fichier content/glossaire.json est mal formé (JSON invalide). Vérifie que le dossier content est publié avec la page, puis  »",
   "navigateur": "chromium"
  },
  {
   "test": "Robustesse : double clic rapide sur Continuer / Vérifier",
-  "statut": "BUG",
-  "detail": "double clic sur Continuer (carte 1) → carte affichée « La fermentation, cœur du miracle » (attendu : carte 2 « Que trouve-t-on dans un grain ? ») ; double clic sur Vérifier → feuille visible True",
+  "statut": "OK",
+  "detail": "double clic sur Continuer (carte 1) → « Que trouve-t-on dans un grain ? » ; double toucher au doigt → « Que trouve-t-on dans un grain ? » (attendu : carte 2 « Que trouve-t-on dans un grain ? ») ; double clic sur Vérifier → feuille visible True",
   "navigateur": "chromium"
  },
  {
   "test": "Robustesse : défilement de la page bloqué pendant la session et rétabli après",
   "statut": "OK",
-  "detail": "overflow du body : pendant 'hidden', après X '', après fin '' ; glossaire ouvert : la page derrière défile (0 → 800)",
+  "detail": "overflow du body : pendant 'hidden', après X '', après fin '' ; glossaire ouvert : défilement de la page derrière 0 → 0",
   "navigateur": "chromium"
  },
  {
-  "test": "Robustesse : quitter une session « ne sera pas enregistré »",
-  "statut": "BUG",
-  "detail": "pile d'erreurs après avoir quitté : ['quiz1-0'] (le message promet que rien n'est enregistré)",
+  "test": "Robustesse : quitter une session, message fidèle ; X de l'écran de fin",
+  "statut": "OK",
+  "detail": "message : « Les XP et la progression de cette session seront perdus. Tes erreurs restent dans ta pile, pour les revoir dans le défi du jour. » ; après avoir quitté : XP 0, pile ['quiz1-0'] ; X sur l'écran de fin → modale False, session encore ouverte False",
   "navigateur": "chromium"
  },
  {
@@ -223,8 +223,8 @@
  },
  {
   "test": "Profil : « Tout effacer » avec un thème forcé",
-  "statut": "BUG",
-  "detail": "avant : data-theme='dark' ; après « Tout effacer » : data-theme='dark', ST.theme=None, bouton actif « Auto » (l'appli reste sombre alors que le réglage affiché est Auto)",
+  "statut": "OK",
+  "detail": "avant : data-theme='dark' ; après « Tout effacer » : data-theme=None, ST.theme=None, bouton actif « Auto »",
   "navigateur": "chromium"
  },
  {
@@ -236,25 +236,25 @@
  {
   "test": "Toasts : plusieurs à la suite",
   "statut": "INFO",
-  "detail": "un toast à la fois, 2,4 s chacun : [['Una'], ['Una'], ['Una'], ['Deuxb'], ['Deuxb'], ['Deuxb'], ['Troisc'], ['Troisc']] — 3 toasts mettent 7,2 s à s'afficher",
+  "detail": "un toast à la fois, 2,4 s chacun : [['Una'], ['Una'], ['Una'], ['Deuxb'], ['Deuxb'], ['Troisc'], ['Troisc'], ['Troisc']] — 3 toasts mettent 7,2 s à s'afficher",
   "navigateur": "chromium"
  },
  {
   "test": "Étiquettes : provenance des vins étrangers",
-  "statut": "BUG",
-  "detail": "étiquette : « Produit du Portugal » ; correction affichée : « Bonne réponse : Produit de France »",
+  "statut": "OK",
+  "detail": "étiquette : « Produit du Portugal » ; correction affichée : « Bonne réponse : Produit du Portugal »",
   "navigateur": "chromium"
  },
  {
   "test": "Mouvement réduit : rien ne reste invisible",
   "statut": "OK",
-  "detail": "carte de leçon opacité 1, toast 1, confettis visibles 0 ; scrollIntoView smooth codé en dur (non soumis à prefers-reduced-motion) : True",
+  "detail": "carte de leçon opacité 1, toast 1, confettis visibles 0 ; défilement animé malgré la préférence : False",
   "navigateur": "chromium"
  },
  {
   "test": "Accessibilité : régions live et noms des boutons",
-  "statut": "INFO",
-  "detail": "#app aria-live='polite' (toute l'appli est relue à chaque rendu) ; boutons de stats (texte, aria-label, title) : [['1', None, 'Série de jours'], ['64', None, \"Points d'expérience\"]] ; <title> placé dans BODY",
+  "statut": "OK",
+  "detail": "#app aria-live=None ; boutons de stats (texte, aria-label, title) : [['1', 'Série : 1 jour', 'Série de jours'], ['64', \"64 points d'expérience\", \"Points d'expérience\"]] ; <title> placé dans HEAD",
   "navigateur": "chromium"
  },
  {

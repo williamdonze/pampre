@@ -15,7 +15,7 @@
       "sousTitre": "Les raisins et leur caractère",
       "objectif": "Connaître les principaux raisins et leur profil.",
       "icone": "grappe",
-      "contenu": null
+      "contenu": "content/niveau-2.json"
     },
     {
       "id": 3,
@@ -70,6 +70,9 @@
     { "id": "lecteur", "nom": "Lecteur d'étiquettes", "desc": "8/10 ou plus au jeu « Lis l'étiquette »", "icone": "etiquette" },
     { "id": "gestes", "nom": "Main sûre", "desc": "Terminer le jeu « Les bons gestes » sans faute", "icone": "thermo" },
     { "id": "niveau-1", "nom": "Les bases, c'est fait", "desc": "Valider le quiz du niveau 1", "icone": "medaille" },
+    { "id": "nez-de-cepage", "nom": "Nez de cépage", "desc": "5/6 ou plus au jeu « Quel cépage ? »", "icone": "nez" },
+    { "id": "racines", "nom": "Retour aux racines", "desc": "5/6 ou plus au jeu « Le berceau des cépages »", "icone": "carte" },
+    { "id": "niveau-2", "nom": "Les cépages, c'est fait", "desc": "Valider le quiz du niveau 2", "icone": "grappe" },
     { "id": "sans-faute", "nom": "Sans faute", "desc": "100 % à un quiz de validation", "icone": "etoile" },
     { "id": "serie-3", "nom": "Trois jours de suite", "desc": "Une série de 3 jours", "icone": "flamme" },
     { "id": "serie-7", "nom": "Une semaine au chai", "desc": "Une série de 7 jours", "icone": "flamme" },

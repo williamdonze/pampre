@@ -9,7 +9,7 @@ Fonctionnel de bout en bout :
 - **Niveau 1 « Les bases » complet** : 4 leçons, jeu « Lis l'étiquette » (questions générées depuis 19 étiquettes), jeu « Les bons gestes », quiz de validation (15 questions).
 - **Carte libre** (France) : 117 vins/lieux sur 5 paliers de difficulté (région → sous-région → appellation → village → cru).
 - Motivation : XP, 7 rangs, 14 badges, série de jours, défi quotidien (révisions + erreurs récentes + une étiquette + une carte), graphique XP sur 7 jours.
-- Glossaire (54 termes) en panneau latéral ; termes cliquables dans les leçons.
+- Glossaire (53 termes) en panneau latéral ; termes cliquables dans les leçons.
 - Sauvegarde dans `localStorage`, export/import par code (base64 du JSON d'état) dans Profil.
 - Thème clair/sombre (auto ou forcé).
 
@@ -40,6 +40,10 @@ content/
 tools/
   build-carte.py           Régénère carte-france.json depuis les GeoJSON de france-geojson
   test-parcours.py         Test Playwright : quiz complet, partie de carte, défi, profil, glossaire
+  valider-contenu.py       Validation des JSON de contenu (voir « Tests »)
+  audit.py                 Audit visuel et fonctionnel multi-navigateurs (voir « Tests »)
+  audit-checks.js, audit_fonctionnel.py, audit_webkit.py, audit-cadre.html, comparer-captures.py
+audit/                     RAPPORT.md (bugs A-01…A-37 et leur statut), résumés et captures d'audit
 docs/programme.md          Programme pédagogique complet (référence pour les niveaux à venir)
 ```
 
@@ -51,9 +55,9 @@ JS vanilla, sans framework, dans un seul `<script>`. Sections dans l'ordre :
 1. **Utilitaires** : `esc`, `shuffle`, `h()` (HTML → élément), `seeded()` (aléatoire déterministe pour le défi du jour), dates.
 2. **Icônes** `I` (SVG inline) et **mascotte** `mascot(mood)` — Pépin, une grappe (`happy` / `wow` / `sad`).
 3. **Illustrations des leçons** `IL` : fonctions SVG indexées par nom (`raisin`, `fermentation`, `thermometre`…). Une carte de leçon les référence par `"illu"`. Clé inconnue → repli sur `raisin`.
-4. **Sauvegarde** : `freshState()`, `loadState()`, `save()` (clé `pampre-sauvegarde-v1`, tout en try/catch).
+4. **Sauvegarde** : `freshState()`, `normaliser()` (redonne à chaque champ son type : sauvegarde abîmée, ancienne ou importée), `loadState()`, `save()` (clé `pampre-sauvegarde-v1`, tout en try/catch).
 5. **Progression** : `gainXP()` (met aussi à jour la série), `award(badgeId)`, `checkBadges()`, `levelUnlocked()`, `rankOf()`.
-6. **Toasts** (file d'attente, un à la fois) et **modale** de confirmation maison (`confirmBox`), confettis.
+6. **Toasts** (file d'attente, un à la fois, en haut de l'écran), **modale** de confirmation maison (`confirmBox`, Échap = Rester), confettis. `majCalques()` rend inerte tout ce qui est sous le calque du dessus (session, glossaire, modale) : à appeler à chaque ouverture ou fermeture de calque.
 7. **Texte enrichi** `rich()` et **glossaire** `openGlossary(terme)`.
 8. **Étiquettes** : `renderLabel()`, gabarits `LBL_ORDER` par modèle, `genLabelQuestions(n)`.
 9. **Carte** : projection, `MapView()`, `scoreMap()`.
@@ -139,7 +143,9 @@ Puis dans `niveaux.json`, mettre `"contenu": "content/niveau-N.json"` pour ce ni
 ## Design
 
 - Direction validée : **mode Duolingo**, aux couleurs du vin. Boutons « 3D » (ombre basse pleine), nœuds ronds, feuille de correction verte/rouge qui monte du bas, mascotte.
-- Tokens CSS dans `:root` (bordeaux `--grape`, or `--gold`, vert `--leaf`, crème `--bg`…), redéfinis pour le sombre dans `@media (prefers-color-scheme: dark)` **et** `:root[data-theme="dark"]` : toute nouvelle couleur doit exister dans les trois blocs. Les étiquettes (`--lbl-*`) sont des objets « papier » identiques dans les deux thèmes.
+- Tokens CSS dans `:root` (bordeaux `--grape`, or `--gold`, vert `--leaf`, crème `--bg`…), redéfinis pour le sombre dans `@media (prefers-color-scheme: dark)` **et** `:root[data-theme="dark"]` : toute nouvelle couleur doit exister dans les trois blocs.
+- Contraste AA : les couleurs vives servent de fond ou de décor ; pour du **texte**, utiliser les jetons « encre » (`--grape-ink`, `--leaf-ink`, `--bad-ink`, `--gold-ink`, `--muted-ink`, `--flame-ink`) ; pour un **fond sous du texte**, `--grape-btn`, `--leaf-btn`, `--bad-btn` avec `--on-leaf`, `--on-bad`, `--on-gold`, `--on-plum`. Anneau de focus : `--focus`. Vérifier avec `tools/audit.py`.
+- Les toasts s'affichent en haut ; sous 360 px plusieurs blocs passent sur une colonne ; zones tactiles ≥ 44 px (champs d'étiquette agrandis au doigt via `@media (pointer:coarse)`). Les étiquettes (`--lbl-*`) sont des objets « papier » identiques dans les deux thèmes.
 - Polices : Baloo 2 (titres), Nunito (texte), Cormorant Garamond (étiquettes et noms de vins).
 - Mobile d'abord (colonne de 680 px max, testée à 400 px). Respecter `prefers-reduced-motion`.
 
@@ -152,15 +158,26 @@ Puis dans `niveaux.json`, mettre `"contenu": "content/niveau-N.json"` pour ce ni
 - Questions variées (mélanger les types) ; quiz de validation ≈ 15 questions couvrant toutes les leçons du niveau.
 - Les questions des quiz ne doivent pas pouvoir être réussies sans avoir suivi les leçons, mais restent justes et non piégeuses.
 
-## Tester
+## Tests
+
+Installation (une fois) : `pip install playwright selenium pillow && playwright install chromium`. Pour WebKit (moteur de Safari) sous Linux sans le navigateur de Playwright : `apt install webkit2gtk-driver xvfb`, l'audit lance Xvfb tout seul.
 
 ```bash
-python3 -m http.server 8765 &
-pip install playwright && playwright install chromium
-python3 tools/test-parcours.py     # captures d'écran dans captures/
+python3 tools/valider-contenu.py          # à lancer après CHAQUE modification de content/*.json
+python3 -m http.server 8765 &             # les scripts suivants le lancent eux-mêmes s'il manque
+python3 tools/test-parcours.py            # parcours rapide : quiz complet, carte, défi, profil, glossaire
+python3 tools/audit.py --fonctionnel --navigateurs chromium,webkit   # ~50 tests fonctionnels (≈ 2 min)
+python3 tools/audit.py                    # audit visuel complet Chromium (≈ 35 min)
+python3 tools/audit.py --ecrans lecon1,q-tri --largeurs 320,375 --themes clair,sombre-systeme   # ciblé
 ```
 
-Le test répond correctement à tout le quiz à partir des données : s'il affiche `WRONG`, une question ou son corrigé est incohérent. Après un ajout de contenu, vérifier aussi que tous les `[[termes]]` existent dans le glossaire et que chaque JSON est valide.
+- **`tools/valider-contenu.py`** : JSON valides et conformes aux formats ci-dessus, `[[termes]]` et « voir » du glossaire, `illu` existantes, étiquettes et `cible` présentes, index `bonne`, catégories du tri, régions, vins du palier 1 dans leur région, identifiants en double, explications manquantes. Code de sortie 1 en cas d'erreur ; les ⚠ sont à relire (approximations connues de la carte, leçon sans encadré Exemple…).
+- **`tools/test-parcours.py`** : répond juste à tout le quiz à partir des données ; s'il affiche `WRONG`, une question ou son corrigé est incohérent.
+- **`tools/audit.py`** (+ `tools/audit-checks.js`, exécuté dans la page) : parcourt 113 écrans (accueil, leçons carte par carte, chaque type de question avant / juste / faux, 19 étiquettes, fins de session, carte, défi, profil, glossaire, toasts, modale) × 6 largeurs (320 → 1920) × 4 thèmes (clair, sombre système, sombre forcé, clair forcé) × 5 états de joueur injectés dans `pampre-sauvegarde-v1`. Contrôles : défilement horizontal, texte qui déborde ou coupé, texte SVG hors du viewBox, contraste WCAG AA, contenu caché sous la barre d'onglets / la feuille de correction / un toast, zones tactiles (`--cibles-tactiles`). Sorties : `audit/resultats*.json` (bruts, non versionnés), `audit/resume*.md` (regroupés), `audit/captures/` (éléments fautifs entourés en rouge). Options utiles : `--navigateurs chromium,webkit`, `--sans-polices` (Google Fonts bloqué), `--mouvement-reduit`, `--captures toutes|cles|aucune`, `--suffixe nom` (garder une passe à côté d'une autre).
+- **`tools/audit.py --fonctionnel`** (`tools/audit_fonctionnel.py`, `tools/audit_webkit.py`) : progression et XP, seuil de 80 %, badges, série avec horloge et fuseaux simulés, défi quotidien, glisser-déposer souris et tactile, carte (clic/glissé, zoom, pincement, scores recalculés, détection de région), clavier et focus, robustesse (sauvegardes corrompues, `localStorage` indisponible, contenu manquant, double clic). Résultats dans `audit/fonctionnel.json`.
+- **`tools/comparer-captures.py AVANT APRES SORTIE`** : assemble deux captures côte à côte pour vérifier une correction.
+
+Après une correction visuelle : relancer l'audit sur l'écran concerné (`--ecrans`) avec `--suffixe apres-X`, et comparer les captures. Le rapport d'audit initial et le suivi des corrections sont dans `audit/RAPPORT.md`.
 
 ## Prochaines étapes prévues
 
@@ -176,7 +193,7 @@ Idées d'amélioration du moteur : sons optionnels, révision espacée plus fine
 
 ## Limites connues
 
-- Zones régionales de la carte = départements entiers (approximation signalée dans le jeu). Le Gard est rattaché au Rhône et au Languedoc.
+- Zones régionales de la carte = départements entiers (approximation signalée dans le jeu). Départements partagés : le Gard (Rhône et Languedoc), le Rhône (Beaujolais et Rhône, pour Côte-Rôtie et Condrieu), la Saône-et-Loire (Bourgogne et Beaujolais, pour Moulin-à-Vent). Un département partagé compte pour chaque région au clic et prend la couleur de la première qui le cite.
 - Degré et millésime des étiquettes indicatifs ; mise en page redessinée (pas les vraies étiquettes).
 - Sauvegarde locale à l'appareil (d'où l'export/import par code).
 - Fond de carte : france-geojson (Grégoire David), données IGN, Licence Ouverte Etalab — mention à conserver.

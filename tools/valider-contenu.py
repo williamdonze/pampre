@@ -30,12 +30,13 @@ def charger(nom):
 HTML = (RACINE / "index.html").read_text(encoding="utf-8")
 def bloc(debut):
     i = HTML.index(debut); j = HTML.index("\n};", i); return HTML[i:j]
-ILLUS = set(re.findall(r'^\s*"?([\w-]+)"?\s*:\s*\(\)\s*=>', bloc("const IL = {"), re.M))
+ILLUS = set(re.findall(r'^\s*"?([\w-]+)"?\s*:\s*\(\)\s*=>', bloc("const IL = {"), re.M)) | set(re.findall(r'^IL\.(\w+)\s*=', HTML, re.M))
+AXES_PROFIL = set(re.findall(r'\["(\w+)","', re.search(r"const PROFIL_AXES = (\[.*?\]);", HTML).group(1)))
 ICONES = set(re.findall(r'(\w+)\s*:\s*I\.\w+', re.search(r"const ICON_BY_NAME = \{([^}]*)\}", HTML).group(1)))
 MODELES = set(re.findall(r'^\s*(\w+)\s*:\s*\[', bloc("const LBL_ORDER = {"), re.M))
 STYLES = json.loads(re.search(r"const STYLES = (\[[^\]]*\]);", HTML).group(1))
 COULEURS_REGIONS = set(re.findall(r'"?([\w-]+)"?\s*:\s*"#', re.search(r"const REGION_COLORS = \{([^}]*)\}", HTML).group(1)))
-PAYS_PROPOSES = json.loads(re.search(r'question:"De quel pays vient ce vin \?", choix:shuffle\((\[[^\]]*\])\)', HTML).group(1))
+PAYS_PROPOSES = json.loads(re.search(r'question:"De quel pays vient ce vin \?", choix:shuffle\((\[[^\]]*\])', HTML).group(1))
 TEINTES = {"creme", "vert", "noir", "or", "bordeaux", "rose"}
 CIBLES = {"millesime", "appellation", "producteur", "degre", "volume", "classement", "embouteillage", "sucre", "cepage", "cuvee", "mention", "allergene", "provenance"}
 CHAMPS = {"producteur", "cuvee", "classement", "appellation", "mention", "cepage", "sucre", "millesime", "embouteillage", "degre", "volume"}
@@ -53,6 +54,7 @@ def verifier_texte(lieu, t, enrichi=True):
     if not isinstance(t, str) or not t.strip():
         err(lieu, "texte vide ou absent"); return
     if t.count("**") % 2: err(lieu, "nombre impair de ** (gras non fermé)")
+    if "*" in t.replace("**", ""): err(lieu, "astérisque isolé : l'italique *…* n'existe pas, il s'affichera tel quel")
     if t.count("[[") != t.count("]]"): err(lieu, "[[ et ]] déséquilibrés")
     for m in re.finditer(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]", t):
         if not enrichi: err(lieu, f"[[{m.group(1)}]] dans un champ qui n'est pas mis en forme : s'affichera tel quel"); continue
@@ -98,6 +100,13 @@ def verifier_question(lieu, q):
             elif c not in ("allergene", "provenance") and not e["champs"].get(c): err(lieu, f"la cible « {c} » n'existe pas sur l'étiquette {e['id']}")
         elif q.get("mode") != "qcm": err(lieu, f"mode inconnu : {q.get('mode')}")
     if t == "indices" and not q.get("indices"): err(lieu, "indices : liste vide")
+    if t == "carte":
+        e = q.get("entry") or {}
+        if not e.get("vin") or not e.get("detail"): err(lieu, "carte : entry sans vin ni detail")
+        if e.get("region") not in REGIONS: err(lieu, f"carte : région inconnue {e.get('region')}")
+        if e.get("palier") not in (1, 2, 3, 4, 5): err(lieu, f"carte : palier {e.get('palier')} inconnu")
+        if not (isinstance(e.get("lat"), (int, float)) and isinstance(e.get("lon"), (int, float))): err(lieu, "carte : coordonnées manquantes")
+        else: VINS_EN_LIGNE.append((lieu, e))
 
 # --- niveaux.json ---
 if niveaux:
@@ -118,13 +127,16 @@ if niveaux:
         if b["id"] in seen: err("badges", f"id en double : {b['id']}")
         seen.add(b["id"])
         if b.get("icone") not in ICONES: err(f"badge {b['id']}", f"icône inconnue : {b.get('icone')}")
+    BADGES_JEUX = {g.get("badge") for n in niveaux.get("niveaux", []) if n.get("contenu") and (RACINE / n["contenu"]).exists()
+                   for g in json.loads((RACINE / n["contenu"]).read_text(encoding="utf-8")).get("jeux", [])}
     utilises = set(re.findall(r'award\("([\w-]+)"\)', HTML)) | {"niveau-1"}
     for b in BADGES - utilises:
-        if not b.startswith("niveau-") and b not in {"lecteur", "gestes"}: avert(f"badge {b}", "jamais attribué par le code")
+        if not b.startswith("niveau-") and b not in BADGES_JEUX: avert(f"badge {b}", "jamais attribué (ni par le code ni par un jeu)")
     for b in utilises - BADGES: err(f"badge {b}", "attribué par le code mais absent de niveaux.json")
 
 # --- niveaux détaillés ---
 ids_globaux = {}
+VINS_EN_LIGNE = []   # entrées « carte » écrites dans les niveaux, vérifiées avec la carte plus bas
 def unique(id_, lieu):
     if id_ in ids_globaux: err(lieu, f"identifiant en double « {id_} » (déjà dans {ids_globaux[id_]})")
     ids_globaux[id_] = lieu
@@ -154,6 +166,12 @@ for n in (niveaux or {}).get("niveaux", []):
             lc = f"{lieu} carte {i+1}"
             if not c.get("titre"): err(lc, "titre manquant")
             if c.get("illu") not in ILLUS: err(lc, f"illustration inconnue : {c.get('illu')} (repli sur « raisin »)")
+            if c.get("illu") == "profil":
+                pr = c.get("profil") or {}
+                if set(pr) - AXES_PROFIL: err(lc, f"profil : axe(s) inconnu(s) {set(pr) - AXES_PROFIL}")
+                if not pr: err(lc, "illu « profil » sans champ profil")
+                for k, v in pr.items():
+                    if not (isinstance(v, int) and 0 <= v <= 5): err(lc, f"profil : {k}={v} (entier de 0 à 5 attendu)")
             verifier_texte(lc + ".texte", c.get("texte"))
             for k in ("astuce", "debat"):
                 if k in c: verifier_texte(f"{lc}.{k}", c[k])
@@ -171,7 +189,9 @@ for n in (niveaux or {}).get("niveaux", []):
         else:
             qs = g.get("questions") or []
             if not qs: err(lieu, "ni générateur ni questions")
-            if g.get("seuilBadge", 0) > len(qs): err(lieu, f"seuilBadge {g['seuilBadge']} > {len(qs)} questions : badge inatteignable")
+            tours = g.get("tours", len(qs))
+            if tours > len(qs): err(lieu, f"{tours} tours pour {len(qs)} questions")
+            if g.get("seuilBadge", 0) > min(tours, len(qs)): err(lieu, f"seuilBadge {g['seuilBadge']} > {min(tours, len(qs))} questions jouées : badge inatteignable")
             for i, q in enumerate(qs): verifier_question(f"{lieu} q{i}", q)
     qz = L.get("quiz", {}).get("questions", [])
     if not 12 <= len(qz) <= 18: avert(f"{nom} › quiz", f"{len(qz)} questions (≈ 15 attendues)")
@@ -207,7 +227,6 @@ if etiq:
         if e.get("region") == "hors-france":
             if not e.get("pays"): err(lieu, "hors-france sans pays")
             elif e["pays"] not in PAYS_PROPOSES: err(lieu, f"pays « {e['pays']} » absent des choix proposés par le jeu {PAYS_PROPOSES} : question insoluble")
-            elif e["pays"][0].lower() in "aeiouéèêh": avert(lieu, f"« Produit du {e['pays']} » : élision attendue (« d'{e['pays']} »)")
         elif e.get("region") not in REGIONS: err(lieu, f"région inconnue : {e.get('region')}")
         if e.get("style") not in STYLES: err(lieu, f"style hors de STYLES : {e.get('style')}")
         for k in ("cepages", "note"):
@@ -255,8 +274,15 @@ if carte and france:
             if not (41 <= a[0] <= 51.2 and -5.5 <= a[1] <= 9.7): err(f"région {r['id']}", f"ancre hors de France : {a}")
         if not r.get("fiche"): err(f"région {r['id']}", "fiche manquante")
     for d, rs in attribution.items():
-        if len(rs) > 1: avert(f"département {d}", f"partagé entre {rs} : la coloration et le clic « dans la région » le donnent à {rs[0]}")
+        if len(rs) > 1: avert(f"département {d}", f"partagé entre {rs} : il compte pour chacune au clic, mais prend la couleur de {rs[0]}")
     vus = {}
+    for lieu, e in VINS_EN_LIGNE:
+        deps = departement(e["lat"], e["lon"])
+        if not deps: err(lieu, f"carte : le point ({e['lat']}, {e['lon']}) tombe hors du fond de carte"); continue
+        reg = REGIONS.get(e["region"])
+        if reg and e["palier"] == 1 and not any(d in reg["deps"] for d in deps):
+            dmin = min(km(a, (e["lat"], e["lon"])) for a in reg["ancres"])
+            (err if dmin > 15 else avert)(lieu, f"carte : département {deps} non rattaché à {e['region']} ; ancre la plus proche à {dmin:.1f} km")
     for i, v in enumerate(carte["vins"]):
         lieu = f"carte-vins › vins[{i}] « {v.get('vin')} » (palier {v.get('palier')})"
         if v.get("region") not in REGIONS: err(lieu, f"région inconnue : {v.get('region')}"); continue
@@ -269,14 +295,22 @@ if carte and france:
         if not deps: err(lieu, f"le point ({v['lat']}, {v['lon']}) tombe hors du fond de carte (mer ?)"); continue
         reg = REGIONS[v["region"]]
         dans_deps = any(d in reg["deps"] for d in deps)
-        compte = any(attribution.get(d, [None])[0] == v["region"] for d in deps)
-        if v["palier"] == 1 and not compte:
+        if v["palier"] == 1 and not dans_deps:
             dmin = min(km(a, (v["lat"], v["lon"])) for a in reg["ancres"])
-            (err if dmin > 15 else avert)(lieu, f"hors de sa région dans le jeu : département {deps} " + ("non rattaché à la région" if not dans_deps else f"attribué à {attribution[deps[0]][0]}") + f" ; ancre la plus proche à {dmin:.1f} km (tolérance pleine : {carte['paliers'][0]['plein']} km)")
+            (err if dmin > 15 else avert)(lieu, f"hors de sa région dans le jeu : département {deps} non rattaché à la région ; ancre la plus proche à {dmin:.1f} km (tolérance pleine : {carte['paliers'][0]['plein']} km)")
         elif not dans_deps:
             avert(lieu, f"département {deps} hors des départements de la région {v['region']} {reg['deps']}")
+    def km_cote(lat, lon):
+        """distance (km) au sommet de contour le plus proche du fond de carte"""
+        x, y = proj(lat, lon); dmin = 1e9
+        for dep in france["deps"].values():
+            for pts in anneaux(dep["d"]):
+                for px, py in pts: dmin = min(dmin, math.hypot(px - x, py - y))
+        return dmin / 100 * 111   # 100 unités = 1° de latitude ≈ 111 km
     for v in carte.get("villes", []):
-        if not departement(v["lat"], v["lon"]): err(f"ville {v['nom']}", "hors du fond de carte")
+        if not departement(v["lat"], v["lon"]):
+            d = km_cote(v["lat"], v["lon"])
+            (avert if d < 5 else err)(f"ville {v['nom']}", f"le point tombe en mer, à {d:.1f} km du contour simplifié de la côte" + (" (contour simplifié : acceptable)" if d < 5 else ""))
 
 print(f"Contenu vérifié : {len(ILLUS)} illustrations, {len(TERMES)} termes, {len(ETIQ)} étiquettes, {len(REGIONS)} régions, {len((carte or {}).get('vins', []))} vins.")
 for e in erreurs: print("✗", e)
