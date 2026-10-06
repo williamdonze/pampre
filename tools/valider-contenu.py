@@ -36,7 +36,7 @@ ICONES = set(re.findall(r'(\w+)\s*:\s*I\.\w+', re.search(r"const ICON_BY_NAME = 
 MODELES = set(re.findall(r'^\s*(\w+)\s*:\s*\[', bloc("const LBL_ORDER = {"), re.M))
 STYLES = json.loads(re.search(r"const STYLES = (\[[^\]]*\]);", HTML).group(1))
 COULEURS_REGIONS = set(re.findall(r'"?([\w-]+)"?\s*:\s*"#', re.search(r"const REGION_COLORS = \{([^}]*)\}", HTML).group(1)))
-PAYS_PROPOSES = json.loads(re.search(r'question:"De quel pays vient ce vin \?", choix:shuffle\((\[[^\]]*\])', HTML).group(1))
+PAYS_PROPOSES = json.loads(re.search(r"const PAYS_VIN = (\[[^\]]*\]);", HTML).group(1))
 TEINTES = {"creme", "vert", "noir", "or", "bordeaux", "rose"}
 CIBLES = {"millesime", "appellation", "producteur", "degre", "volume", "classement", "embouteillage", "sucre", "cepage", "cuvee", "mention", "allergene", "provenance"}
 CHAMPS = {"producteur", "cuvee", "classement", "appellation", "mention", "cepage", "sucre", "millesime", "embouteillage", "degre", "volume"}
@@ -44,6 +44,9 @@ TYPES = {"qcm", "vf", "ordre", "assoc", "tri", "etiquette", "indices", "carte"}
 
 niveaux = charger("niveaux.json"); gloss = charger("glossaire.json"); etiq = charger("etiquettes.json")
 carte = charger("carte-vins.json"); france = charger("carte-france.json")
+monde = charger("carte-monde-vins.json"); mondeGeo = charger("carte-monde.json")
+REGIONS_M = {r["id"]: r for r in (monde or {}).get("regions", [])}
+VINS_MONDE = []   # entrées « carte » du fond mondial écrites dans les niveaux
 TERMES = {k.lower(): k for k in (gloss or {}).get("termes", {})}
 ETIQ = {e["id"]: e for e in (etiq or {}).get("etiquettes", [])}
 REGIONS = {r["id"]: r for r in (carte or {}).get("regions", [])}
@@ -100,7 +103,13 @@ def verifier_question(lieu, q):
             elif c not in ("allergene", "provenance") and not e["champs"].get(c): err(lieu, f"la cible « {c} » n'existe pas sur l'étiquette {e['id']}")
         elif q.get("mode") != "qcm": err(lieu, f"mode inconnu : {q.get('mode')}")
     if t == "indices" and not q.get("indices"): err(lieu, "indices : liste vide")
-    if t == "carte":
+    if t == "carte" and (q.get("entry") or {}).get("fond") == "monde":
+        e = q["entry"]
+        if e.get("region") not in REGIONS_M: err(lieu, f"carte monde : pays inconnu {e.get('region')}")
+        if e.get("palier") not in {p["id"] for p in (monde or {}).get("paliers", [])}: err(lieu, f"carte monde : palier {e.get('palier')} inconnu")
+        if not any(v["vin"] == e.get("vin") and v["palier"] == e.get("palier") and abs(v["lat"] - e.get("lat", 0)) < 1e-6 and abs(v["lon"] - e.get("lon", 0)) < 1e-6 for v in (monde or {}).get("vins", [])):
+            err(lieu, f"carte monde : « {e.get('vin')} » (palier {e.get('palier')}) absent de carte-monde-vins.json ou coordonnées différentes")
+    elif t == "carte":
         e = q.get("entry") or {}
         if not e.get("vin") or not e.get("detail"): err(lieu, "carte : entry sans vin ni detail")
         if e.get("region") not in REGIONS: err(lieu, f"carte : région inconnue {e.get('region')}")
@@ -167,8 +176,9 @@ for n in (niveaux or {}).get("niveaux", []):
             if not c.get("titre"): err(lc, "titre manquant")
             if c.get("illu") not in ILLUS: err(lc, f"illustration inconnue : {c.get('illu')} (repli sur « raisin »)")
             if c.get("illu") == "carte-region":
-                if c.get("region") not in REGIONS: err(lc, f"carte-region : région inconnue {c.get('region')}")
-                noms = {v["vin"] for v in (carte or {}).get("vins", [])} | {v["nom"] for v in (carte or {}).get("villes", [])}
+                src, regs = (monde, REGIONS_M) if c.get("fond") == "monde" else (carte, REGIONS)
+                if c.get("region") not in regs: err(lc, f"carte-region : région inconnue {c.get('region')}")
+                noms = {v["vin"] for v in (src or {}).get("vins", [])} | {v["nom"] for v in (src or {}).get("villes", [])}
                 for lx in c.get("lieux", []) + c.get("villes", []):
                     nom = lx[0] if isinstance(lx, list) else lx
                     if nom not in noms: err(lc, f"carte-region : « {nom} » absent de carte-vins.json (vins ou villes)")
@@ -329,6 +339,33 @@ if carte and france:
         if not departement(v["lat"], v["lon"]):
             d = km_cote(v["lat"], v["lon"])
             (avert if d < 5 else err)(f"ville {v['nom']}", f"le point tombe en mer, à {d:.1f} km du contour simplifié de la côte" + (" (contour simplifié : acceptable)" if d < 5 else ""))
+
+# --- carte du monde ---
+if monde and mondeGeo:
+    COSM = math.cos(math.radians(35))
+    projm = lambda lat, lon: (lon * COSM * 10, -lat * 10)
+    def pays_de(lat, lon):
+        x, y = projm(lat, lon); return [c for c, v in mondeGeo["pays"].items() if dedans(x, y, v["d"])]
+    idsm = [p["id"] for p in monde["paliers"]]
+    for p in monde["paliers"]:
+        if not (p.get("echelleKm", 0) > 0 and p.get("plein", -1) >= 0): err(f"monde › palier {p.get('id')}", "echelleKm/plein invalides")
+        if sum(1 for v in monde["vins"] if v["palier"] == p["id"]) < 5: err(f"monde › palier {p['id']}", "moins de 5 lieux : une partie compte 5 manches")
+    for r in monde["regions"]:
+        if r["id"] not in set(re.findall(r'"?([\w-]+)"?\s*:\s*"#', re.search(r"const MONDE_COLORS = \{([^}]*)\}", HTML).group(1))): avert(f"monde › {r['id']}", "pas de couleur dans MONDE_COLORS")
+        for d in r["deps"]:
+            if d not in mondeGeo["pays"]: err(f"monde › {r['id']}", f"code pays {d} absent de carte-monde.json")
+        if not r.get("fiche"): err(f"monde › {r['id']}", "fiche manquante")
+    vusm = set()
+    for v in monde["vins"]:
+        lieu = f"carte-monde-vins › « {v.get('vin')} » (palier {v.get('palier')})"
+        if v.get("region") not in REGIONS_M: err(lieu, f"pays inconnu : {v.get('region')}"); continue
+        if v.get("palier") not in idsm: err(lieu, "palier inconnu")
+        if (v["palier"], v["vin"]) in vusm: err(lieu, "lieu en double dans le même palier")
+        vusm.add((v["palier"], v["vin"]))
+        if not any(d in REGIONS_M[v["region"]]["deps"] for d in pays_de(v["lat"], v["lon"])):
+            dmin = min(km(a, (v["lat"], v["lon"])) for a in REGIONS_M[v["region"]]["ancres"])
+            if v["palier"] == 1: (err if dmin > 30 else avert)(lieu, f"hors du contour simplifié de son pays (côte ou île) ; ancre la plus proche à {dmin:.0f} km")
+            else: avert(lieu, "hors du contour simplifié de son pays (côte ou île) : sans effet, le score ne dépend que de la distance au-delà du palier 1")
 
 print(f"Contenu vérifié : {len(ILLUS)} illustrations, {len(TERMES)} termes, {len(ETIQ)} étiquettes, {len(REGIONS)} régions, {len((carte or {}).get('vins', []))} vins.")
 for e in erreurs: print("✗", e)
