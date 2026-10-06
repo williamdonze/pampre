@@ -1,0 +1,19 @@
+{
+  "name": "Pampre — apprendre le vin en jouant",
+  "short_name": "Pampre",
+  "description": "Apprendre le vin en jouant : leçons courtes, quiz, cartes des vignobles, défi du jour.",
+  "lang": "fr",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FBF5EC",
+  "theme_color": "#FBF5EC",
+  "categories": ["education", "food", "games"],
+  "icons": [
+    { "src": "icones/icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icones/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icones/icone-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

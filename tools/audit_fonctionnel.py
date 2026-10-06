@@ -92,9 +92,9 @@ def t_seuil(b):
         a.js(f"let k = 0; return await AUDIT.playThrough(() => k++ < {n_bon})")
         st = a.st(); a.p.click("[data-done]")
         lock2 = a.p.evaluate("document.querySelectorAll('.unit')[1].classList.contains('locked')")
-        note = a.p.evaluate("document.querySelectorAll('.unit')[1].textContent")
-        if n_bon == 12: a.shot("niveau2-debloque-vide")
-        out.append((n_bon, st["quiz"].get("1"), lock2, "préparation" in note))
+        noeuds = a.p.evaluate("document.querySelectorAll('.unit')[1].querySelectorAll('.node').length")   # parcours du niveau 2 affiché
+        if n_bon == 12: a.shot("niveau2-debloque")
+        out.append((n_bon, st["quiz"].get("1"), lock2, noeuds > 0))
         a.close()
     ok = out[0][1]["passed"] is False and out[0][2] and out[1][1]["passed"] is True and not out[1][2] and out[1][3]
     return ("OK" if ok else "BUG"), f"{out}"

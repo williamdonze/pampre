@@ -10,6 +10,10 @@ python3 -m http.server 8765
 
 Puis ouvrir http://localhost:8765/ dans un navigateur. (Un simple double-clic sur `index.html` ne suffit pas : le contenu est chargé depuis le dossier `content/`.)
 
+## Sur téléphone
+
+Une fois le site en ligne en HTTPS, Pampre s'ajoute à l'écran d'accueil comme une appli (plein écran, hors connexion) : voir [docs/installer.md](docs/installer.md).
+
 ## Continuer avec Claude Code
 
 Ouvre ce dossier dans Claude Code : le fichier `CLAUDE.md` lui explique tout le projet (architecture, formats de contenu, exigences de qualité, prochaines étapes). Exemple de demande :

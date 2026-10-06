@@ -517,7 +517,7 @@ Matrice WebKit : 113 écrans × 320 / 375 / 768 / 1280 px × 4 thèmes, soit 6 8
 
 - **Progression** :
   - déblocage des nœuds dans l'ordre ;
-  - seuil exact de 80 % (11/15 refusé, 12/15 accepté), niveau 2 affiché « en préparation » ([capture](captures/preuve-niveau2-debloque-vide.png)) ;
+  - seuil exact de 80 % (11/15 refusé, 12/15 accepté), niveau 2 débloqué avec son parcours ([capture](captures/preuve-niveau2-debloque.png)) ;
   - XP de leçon (19 puis 9), bonus de quiz de 40 XP une seule fois ;
   - chaque badge une seule fois ;
   - « Lecteur d'étiquettes » à 8/10 et pas à 7 ;

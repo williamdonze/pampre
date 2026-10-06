@@ -14,6 +14,7 @@ Fonctionnel de bout en bout :
 - Glossaire (138 termes) en panneau latéral ; termes cliquables dans les leçons.
 - Sauvegarde dans `localStorage`, export/import par code (base64 du JSON d'état) dans Profil.
 - Thème clair/sombre (auto ou forcé).
+- **Appli sur l'écran d'accueil** (PWA) : sur téléphone et tablette, bandeau d'invitation à l'accueil et section dans Profil ; bouton « Installer » natif sur Android (Chrome, Edge, Samsung Internet), mode d'emploi adapté au navigateur ailleurs (iOS, Firefox, applis Instagram/Facebook) ; jouable hors connexion. Doc : `docs/installer.md`.
 
 Modules bonus (histoire, économie, cave, certifications) : cartes « Bientôt ».
 
@@ -26,12 +27,15 @@ python3 -m http.server 8765
 # puis ouvrir http://localhost:8765/
 ```
 
-Aucune dépendance, aucun build. Seules ressources externes : Google Fonts (Baloo 2, Nunito, Cormorant Garamond), avec polices de repli.
+Aucune dépendance, aucun build. Seules ressources externes : Google Fonts (Baloo 2, Nunito, Cormorant Garamond), avec polices de repli. L'installation sur l'écran d'accueil et le service worker demandent HTTPS (ou `localhost`).
 
 ## Arborescence
 
 ```
 index.html                 Tout le code : CSS + JS (moteur). Aucun contenu pédagogique en dur.
+manifest.webmanifest       Manifeste de l'appli (nom, couleurs, icônes, affichage plein écran)
+sw.js                      Service worker « réseau d'abord » (hors connexion) ; changer CACHE pour vider les copies
+icones/                    Icônes de l'appli (192, 512, maskable, apple-touch-icon) — générées
 content/
   niveaux.json             Liste des 6 niveaux, modules bonus, rangs (seuils XP), badges, seuil de validation
   niveau-1.json … niveau-6.json   Leçons, jeux et quiz de chaque niveau
@@ -44,12 +48,14 @@ content/
 tools/
   build-carte.py           Régénère carte-france.json depuis les GeoJSON de france-geojson
   build-monde.py           Régénère carte-monde.json depuis Natural Earth 1:50m (domaine public)
+  build-icones.py          Régénère icones/ (Pépin sur fond crème) via Chromium
   test-parcours.py         Test Playwright : les 6 quiz, Carte libre, Carte du jour, défi, profil, glossaire
   valider-contenu.py       Validation des JSON de contenu (voir « Tests »)
   audit.py                 Audit visuel et fonctionnel multi-navigateurs (voir « Tests »)
   audit-checks.js, audit_fonctionnel.py, audit_webkit.py, audit-cadre.html, comparer-captures.py
 audit/                     RAPPORT.md (bugs A-01…A-37 et leur statut), résumés et captures d'audit
 docs/programme.md          Programme pédagogique : contenu des 6 niveaux et modules bonus
+docs/installer.md          Ajouter Pampre à l'écran d'accueil : marche à suivre par appareil, fonctionnement
 sources/                   Données brutes téléchargées pour les scripts build-* (non versionné)
 ```
 
@@ -64,6 +70,7 @@ JS vanilla, sans framework, dans un seul `<script>`. Sections dans l'ordre :
 4. **Sauvegarde** : `freshState()`, `normaliser()` (redonne à chaque champ son type : sauvegarde abîmée, ancienne ou importée), `loadState()`, `save()` (clé `pampre-sauvegarde-v1`, tout en try/catch).
 5. **Progression** : `gainXP()` (met aussi à jour la série), `award(badgeId)`, `checkBadges()`, `levelUnlocked()`, `rankOf()`.
 6. **Toasts** (file d'attente, un à la fois, en haut de l'écran), **modale** de confirmation maison (`confirmBox`, Échap = Rester), confettis. `majCalques()` rend inerte tout ce qui est sous le calque du dessus (session, glossaire, modale) : à appeler à chaque ouverture ou fermeture de calque.
+   **Appli sur l'écran d'accueil** : `appareil()` (iOS/Android, navigateur, appli intégrée, déjà installée), invite native gardée depuis `beforeinstallprompt`, `etapesInstall()` / `aideInstall()` (mode d'emploi), `installer()`, `panneauInstall()` (bandeau de l'accueil, masqué 14 jours par `ST.installPlusTard`), enregistrement de `sw.js`. Jamais proposé sur ordinateur.
 7. **Texte enrichi** `rich()` et **glossaire** `openGlossary(terme)`.
 8. **Étiquettes** : `renderLabel()`, gabarits `LBL_ORDER` par modèle, `genLabelQuestions(n)`.
 9. **Carte** : projections (`proj` France, `projMonde`), **fonds** `FONDS.france` / `FONDS.monde` (`fondDe(id)` : géométrie, projection, cadrage, bornes de zoom, zones, lieux, paliers, couleurs), `MapView(host, { fond, … })`, `scoreMap(entry, …)` (le fond vient de `entry.fond`, France par défaut), `noterZone()` (badges Tour de France / Tour du monde).
@@ -206,7 +213,7 @@ Après une correction visuelle : relancer l'audit sur l'écran concerné (`--ecr
 Les 6 niveaux du programme sont faits. Pistes :
 1. **Modules bonus** (`docs/programme.md`) : histoire, économie, cave, certifications. Chacun peut suivre le format d'un niveau (`content/bonus-*.json`) et réutiliser les mêmes types de questions.
 2. **Enrichir le contenu** : davantage de lieux sur les cartes (villages, crus, régions du monde), d'étiquettes, de vins pour « Sommelier à l'aveugle ».
-3. **Moteur** : sons optionnels, révision espacée plus fine que la pile d'erreurs actuelle (60 ids max), filtre de difficulté dans la carte par région, mise en ligne statique (GitHub Pages ou Netlify) avec aperçu de partage (balises Open Graph).
+3. **Moteur** : sons optionnels, révision espacée plus fine que la pile d'erreurs actuelle (60 ids max), filtre de difficulté dans la carte par région, mise en ligne statique en HTTPS (GitHub Pages ou Netlify, nécessaire pour l'installation sur l'écran d'accueil) avec aperçu de partage (balises Open Graph).
 4. **Classement entre joueurs** : volontairement absent (choix : classement personnel sans serveur). Il demanderait un service hébergé, des comptes ou pseudos (données personnelles, RGPD, modération) et une protection contre la triche, les scores étant calculés dans le navigateur.
 
 Note : au niveau 1, les bonnes réponses sont presque toutes en 2e position (avertissement du validateur) ; les rééquilibrer ne change ni les textes ni les identifiants.

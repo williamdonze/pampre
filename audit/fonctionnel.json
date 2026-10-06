@@ -62,7 +62,7 @@
  {
   "test": "Défi : mêmes questions toute la journée",
   "statut": "OK",
-  "detail": "1er tirage ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-magnin', 'map-Cahors, Château du Cèdre'] ; 2e tirage (même jour) ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-magnin', 'map-Cahors, Château du Cèdre'] ; différences : []",
+  "detail": "1er tirage ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-macle', 'map-Chambertin, Domaine Armand Rousseau'] ; 2e tirage (même jour) ['n1-l1-v1', 'n1-l4-v0', 'n1-l3-v0', 'n1-l4-v1', 'gen-region-macle', 'map-Chambertin, Domaine Armand Rousseau'] ; différences : []",
   "navigateur": "chromium"
  },
  {
@@ -74,7 +74,7 @@
  {
   "test": "Défi : nouveau joueur, et bonus de 30 XP une seule fois par jour",
   "statut": "OK",
-  "detail": "questions : ['n1-l1-v1', 'n1-l2-v1', 'n1-l2-v0', 'n1-l1-v0', 'gen-region-weinbach', 'map-Côte de Brouilly, Château Thivin'] ; 1er défi +54 XP (attendu 54), 2e +24 (attendu 24) ; erreurs JS : []",
+  "detail": "questions : ['n1-l1-v1', 'n1-l2-v1', 'n1-l2-v0', 'n1-l1-v0', 'gen-pays-ridge', 'map-Petrus'] ; 1er défi +54 XP (attendu 54), 2e +24 (attendu 24) ; erreurs JS : []",
   "navigateur": "chromium"
  },
  {
@@ -230,7 +230,7 @@
  {
   "test": "Glossaire : recherche avec et sans accents, majuscules, « Voir aussi »",
   "statut": "OK",
-  "detail": "résultats {'élevage': 3, 'elevage': 3, 'ELEVAGE': 3, 'aop': 2, 'moût': 2, 'mout': 2, 'œil': 1, 'zzz': 0} ; « Voir aussi » met en avant « appellation »",
+  "detail": "résultats {'élevage': 4, 'elevage': 4, 'ELEVAGE': 4, 'aop': 2, 'moût': 4, 'mout': 4, 'œil': 1, 'zzz': 0} ; « Voir aussi » met en avant « acidité »",
   "navigateur": "chromium"
  },
  {
@@ -278,7 +278,7 @@
  {
   "test": "Glossaire : recherche sans accents (\\p{Diacritic})",
   "statut": "OK",
-  "detail": "résultats élevage/elevage/mout/zzz : [3, 3, 2, 0]",
+  "detail": "résultats élevage/elevage/mout/zzz : [4, 4, 4, 0]",
   "navigateur": "webkit"
  },
  {
