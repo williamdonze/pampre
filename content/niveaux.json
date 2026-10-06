@@ -47,7 +47,7 @@
       "sousTitre": "Dégustation et accords",
       "objectif": "Savoir analyser un vin et le marier à un plat.",
       "icone": "nez",
-      "contenu": null
+      "contenu": "content/niveau-6.json"
     }
   ],
   "bonus": [
@@ -83,6 +83,9 @@
     { "id": "polyglotte", "nom": "Polyglotte du vin", "desc": "7/8 ou plus au jeu « Classifications du monde »", "icone": "etiquette" },
     { "id": "tour-du-monde", "nom": "Tour du monde", "desc": "Trouver les 14 pays du vin au niveau Pays de la carte du monde", "icone": "globe" },
     { "id": "niveau-5", "nom": "Le vin dans le monde, c'est fait", "desc": "Valider le quiz du niveau 5", "icone": "globe" },
+    { "id": "fin-gourmet", "nom": "Fin gourmet", "desc": "7/8 ou plus au jeu « Le bon accord »", "icone": "verre" },
+    { "id": "sommelier", "nom": "Sommelier à l'aveugle", "desc": "6/8 ou plus au jeu « Sommelier à l'aveugle »", "icone": "nez" },
+    { "id": "niveau-6", "nom": "Déguster et marier, c'est fait", "desc": "Valider le quiz du niveau 6, le dernier", "icone": "nez" },
     { "id": "sans-faute", "nom": "Sans faute", "desc": "100 % à un quiz de validation", "icone": "etoile" },
     { "id": "serie-3", "nom": "Trois jours de suite", "desc": "Une série de 3 jours", "icone": "flamme" },
     { "id": "serie-7", "nom": "Une semaine au chai", "desc": "Une série de 7 jours", "icone": "flamme" },
