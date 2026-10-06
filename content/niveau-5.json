@@ -1,0 +1,466 @@
+{
+  "id": 5,
+  "titre": "Le vin dans le monde",
+  "parcours": ["n5-l1", "n5-l2", "n5-l3", "jeu:tour-du-monde-vins", "n5-l4", "jeu:classifications", "n5-l5", "n5-l6", "jeu:quel-pays", "quiz"],
+  "intro": "On quitte la France pour faire le tour des grands pays du vin : l'Europe et ses classifications, puis les Amériques, l'Océanie et l'Afrique du Sud. La Carte libre passe en mode Monde.",
+  "lecons": [
+    {
+      "id": "n5-l1",
+      "titre": "Ancien et Nouveau Monde",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Le lieu ou le cépage ?",
+          "illu": "deux-etiquettes",
+          "texte": "En Europe, l'[[Ancien Monde]], on nomme le vin d'après son **lieu** : Chablis, Rioja, Barolo. Le cépage est sous-entendu par l'appellation (révision du niveau 4).\n\nDans le [[Nouveau Monde]] (Amériques, Australie, Nouvelle-Zélande, Afrique du Sud…), on met le plus souvent le **cépage** en avant : Chardonnay, Malbec, Shiraz, suivi de la région.",
+          "astuce": "La frontière s'estompe : beaucoup de vins européens affichent aujourd'hui leur cépage, et le Nouveau Monde délimite de plus en plus finement ses terroirs."
+        },
+        {
+          "titre": "Des règles plus souples",
+          "illu": "regle-85",
+          "texte": "En Europe, chaque appellation encadre les cépages, les rendements, les méthodes. Dans le Nouveau Monde, les zones géographiques ([[AVA]] aux États-Unis, GI en Australie, Wine of Origin en Afrique du Sud) délimitent un territoire, mais laissent le vigneron presque libre de planter et de vinifier ce qu'il veut.\n\nPour afficher un cépage sur l'étiquette : **85 %** au moins en Europe, en Australie ou en Nouvelle-Zélande, mais seulement **75 %** au niveau fédéral aux États-Unis, où certains États, comme l'Oregon, sont plus exigeants."
+        },
+        {
+          "titre": "Soleil et fruit… avec des exceptions",
+          "illu": "climat-cepage",
+          "texte": "Beaucoup de vignobles du Nouveau Monde sont chauds et très ensoleillés : raisins mûrs, fruit généreux, plus d'alcool (révision du niveau 3). D'où l'image de vins « fruités et puissants » face à des vins européens « plus tendus ».\n\nLa réalité est plus nuancée : la Tasmanie, Central Otago ou la côte de Sonoma ont des climats frais ; l'Espagne ou le sud de l'Italie, des climats chauds.",
+          "debat": "Ancien Monde = terroir, Nouveau Monde = cépage et technique ? Ce cliché a longtemps servi de grille de lecture. Il vieillit mal : beaucoup de vignerons du Nouveau Monde parlent aujourd'hui de terroir, et l'Europe utilise les mêmes outils modernes. Retiens-le comme une tendance, pas comme une règle."
+        },
+        {
+          "titre": "Le Jugement de Paris",
+          "illu": "verres",
+          "texte": "En **1976**, le caviste anglais Steven Spurrier organise à Paris une dégustation à l'aveugle : de grands bordeaux et bourgognes face à des vins californiens, devant un jury français.\n\nSurprise : un chardonnay et un cabernet sauvignon de Californie, tous deux de 1973, arrivent premiers. Le monde comprend que de grands vins peuvent naître hors d'Europe.",
+          "exemple": {
+            "vin": "Chateau Montelena Chardonnay, Napa Valley",
+            "detail": "Son chardonnay 1973 a remporté la dégustation des blancs ; le cabernet de Stag's Leap Wine Cellars, celle des rouges."
+          }
+        },
+        {
+          "titre": "Des cépages voyageurs",
+          "illu": "synonymes",
+          "texte": "Les cépages européens ont fait le tour du monde avec les colons et les émigrants. Certains ont trouvé ailleurs une seconde patrie : le **malbec** en Argentine (révision du niveau 2), la **carmenère** au Chili, le **chenin** en Afrique du Sud, le **zinfandel**, alias primitivo, en Californie.\n\nLe Nouveau Monde a aussi créé ses propres cépages, comme le [[pinotage]] sud-africain."
+        }
+      ],
+      "verif": [
+        { "type": "tri", "question": "Ancien ou Nouveau Monde ?", "categories": ["Ancien Monde", "Nouveau Monde"], "items": [["Rioja", 0], ["Barolo", 0], ["Tokaj", 0], ["Napa Valley", 1], ["Marlborough", 1], ["Mendoza", 1]], "explication": "L'Europe forme l'Ancien Monde (Espagne, Italie, Hongrie) ; les Amériques et l'Océanie, le Nouveau Monde (Californie, Nouvelle-Zélande, Argentine)." },
+        { "type": "qcm", "question": "Aux États-Unis, quel pourcentage minimum d'un cépage faut-il pour le nommer seul sur l'étiquette (règle fédérale) ?", "choix": ["50 %", "85 %", "75 %", "100 %"], "bonne": 2, "explication": "75 % au niveau fédéral, contre 85 % en Europe, en Australie ou en Nouvelle-Zélande. Certains États, comme l'Oregon, sont plus stricts." }
+      ]
+    },
+    {
+      "id": "n5-l2",
+      "titre": "L'Italie",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "L'Italie, mille cépages",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "italie",
+          "lieux": ["Piémont", "Vénétie", "Toscane", "Sicile"],
+          "villes": ["Rome"],
+          "texte": "L'Italie fait du vin des Alpes à la Sicile, avec plusieurs centaines de cépages autochtones : nebbiolo, sangiovese, barbera, aglianico, nero d'avola, glera… (révision du niveau 2).\n\nElle dispute chaque année à la France le titre de premier producteur mondial en volume."
+        },
+        {
+          "titre": "DOCG, DOC, IGT",
+          "illu": "etages",
+          "etages": [["DOCG", "plus de 70"], ["DOC", "contrôlée"], ["IGT", "l'équivalent de l'IGP"], ["Vino", "sans indication"]],
+          "texte": "La pyramide italienne ressemble à la française. Au sommet, la [[DOCG]] (Denominazione di Origine Controllata e Garantita), reconnaissable à la bande numérotée sur le col : Barolo, Chianti Classico, Brunello di Montalcino, Prosecco Superiore…\n\nPuis la **DOC**, l'**IGT** (Indicazione Geografica Tipica, l'équivalent de l'IGP) et le simple **Vino**."
+        },
+        {
+          "titre": "Piémont : Barolo et Barbaresco",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "italie",
+          "cadre": "lieux",
+          "lieux": ["Barolo", "Barbaresco", ["Piémont", "d", "Alba"]],
+          "texte": "Dans les collines des Langhe, autour d'Alba, le **nebbiolo** donne le **Barolo** et le **Barbaresco** : robe pâle, tanins et acidité élevés, arômes de rose et de goudron (révision du niveau 2). Le Barolo doit vieillir au moins **38 mois**, dont 18 en bois, avant d'être vendu.\n\nLe Piémont fait aussi des vins plus faciles : barbera, dolcetto, et le moscato d'Asti, doux et légèrement pétillant.",
+          "exemple": {
+            "vin": "Barolo, Bartolo Mascarello",
+            "detail": "Un domaine fidèle au Barolo traditionnel : assemblage de plusieurs parcelles, longues macérations et grands foudres."
+          }
+        },
+        {
+          "titre": "Toscane : sangiovese et super toscans",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "italie",
+          "cadre": "lieux",
+          "lieux": ["Chianti Classico", ["Brunello di Montalcino", "g", "Montalcino"], ["Vino Nobile di Montepulciano", "d", "Montepulciano"], ["Bolgheri", "g"]],
+          "texte": "Le **sangiovese** règne : **Chianti Classico** (au coq noir), **Brunello di Montalcino**, **Vino Nobile di Montepulciano**.\n\nÀ partir des années 1970, des domaines plantent des cépages bordelais, hors des règles de l'époque, et vendent leurs vins en simple vin de table : ce sont les [[super toscan|super toscans]]. Le premier d'entre eux, **Sassicaia**, a obtenu en 2013 sa propre DOC.",
+          "exemple": {
+            "vin": "Sassicaia, Tenuta San Guido",
+            "detail": "Seule DOC d'Italie réservée à un domaine, Bolgheri Sassicaia : cabernet sauvignon et cabernet franc sur la côte toscane."
+          },
+          "debat": "Leur succès a poussé l'Italie à créer l'IGT en 1992 et à assouplir certaines appellations, qui admettent désormais une petite part de cépages internationaux. Pour les uns, un enrichissement ; pour les autres, un pas vers un goût « international » au détriment des cépages locaux."
+        },
+        {
+          "titre": "Vénétie et Sud",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "italie",
+          "lieux": [["Prosecco Superiore", "d", "Prosecco"], ["Vénétie", "g"], ["Etna", "d"], ["Sicile", "g"]],
+          "texte": "En **Vénétie**, l'**Amarone della Valpolicella** naît de raisins mis à sécher plusieurs semaines avant d'être pressés, l'[[appassimento]] : un rouge puissant et chaleureux. Plus à l'est, le **Prosecco**, en cuve close (révision du niveau 3).\n\nAu sud, des cépages anciens : aglianico en Campanie, nero d'avola en Sicile, et sur les pentes de l'**Etna**, le nerello mascalese, jusque vers 1 000 m d'altitude.",
+          "exemple": {
+            "vin": "Amarone della Valpolicella, Giuseppe Quintarelli",
+            "detail": "Un domaine légendaire, dont les amarones très longuement élevés sont des vins de méditation."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Toscane", "detail": "Sangiovese : Chianti, Brunello, Vino Nobile ; super toscans", "region": "italie", "lat": 43.3182, "lon": 11.3306, "fond": "monde" }, "explication": "La Toscane est au centre de l'Italie, autour de Florence et de Sienne." },
+        { "type": "qcm", "question": "Comment fait-on l'Amarone della Valpolicella ?", "choix": ["Avec des raisins botrytisés", "Avec des raisins séchés avant le pressurage", "En cuve close", "En ajoutant de l'eau-de-vie"], "bonne": 1, "explication": "L'appassimento : les raisins sèchent plusieurs semaines, se concentrent, puis sont pressés. Le vin est puissant et chaleureux." }
+      ]
+    },
+    {
+      "id": "n5-l3",
+      "titre": "Espagne et Portugal",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "L'Espagne, le plus vaste vignoble",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "espagne",
+          "lieux": ["Rioja", ["Ribera del Duero", "g"], ["Priorat", "g"], ["Jerez", "d"], ["Rías Baixas", "d"]],
+          "villes": ["Madrid"],
+          "texte": "L'Espagne a la plus grande surface de vignes au monde, souvent sur des plateaux secs aux rendements faibles. Le **tempranillo** domine les rouges (Rioja, Ribera del Duero, Toro) ; le grenache, la garnacha, brille au Priorat ; l'**albariño** fait les blancs vifs de Galice, en Rías Baixas.\n\nAu sommet de la hiérarchie, deux appellations seulement ont le rang de [[DOCa]] : la **Rioja** et le **Priorat**."
+        },
+        {
+          "titre": "Crianza, reserva, gran reserva",
+          "illu": "etages",
+          "etages": [["Gran reserva", "5 ans, dont 2 en fût"], ["Reserva", "3 ans, dont 1 en fût"], ["Crianza", "2 ans, dont 1 en fût"], ["Joven", "peu ou pas de fût"]],
+          "texte": "En Espagne, l'étiquette indique souvent la durée d'élevage. Pour un rouge de Rioja : **crianza**, au moins 2 ans dont 1 en fût ; **reserva**, 3 ans dont 1 en fût ; **gran reserva**, 5 ans dont 2 en fût.\n\nPlus long ne veut pas dire meilleur : c'est un style, plus évolué, aux notes de vanille, de cuir et de tabac (révision du niveau 3).",
+          "exemple": {
+            "vin": "Rioja Gran Reserva 904, La Rioja Alta",
+            "detail": "Un gran reserva traditionnel, élevé longuement en barriques de chêne américain fabriquées par la maison elle-même."
+          }
+        },
+        {
+          "titre": "Le xérès, un vin sous voile",
+          "illu": "voile",
+          "texte": "En Andalousie, autour de Jerez, le **palomino** donne des vins blancs secs, renforcés en alcool après la fermentation et vieillis en [[solera]] : des rangées de fûts où l'on prélève un peu du plus vieux vin pour le remplacer par du plus jeune.\n\nLe **fino** et la **manzanilla** vieillissent sous un voile de levures, la [[flor]], comme le vin jaune (révision du niveau 3). L'**oloroso**, sans voile, au contact de l'air ; l'amontillado commence sous voile puis le perd.",
+          "exemple": {
+            "vin": "Manzanilla La Gitana, Bodegas Hidalgo",
+            "detail": "Une manzanilla de Sanlúcar de Barrameda, vive et saline, à boire très fraîche."
+          }
+        },
+        {
+          "titre": "Le Portugal : porto et Douro",
+          "illu": "mutage",
+          "texte": "Dans la vallée du **Douro**, l'une des premières régions viticoles délimitées au monde (1756), on fait le **porto** : un vin muté à l'eau-de-vie pendant la fermentation (révision du niveau 1).\n\nLes **ruby** et les **vintage** vieillissent surtout en bouteille et gardent leur fruit ; les [[tawny]], longuement en fûts, prennent des notes de noix et de caramel. Le Douro fait aussi de grands rouges secs, avec des cépages locaux comme la touriga nacional.",
+          "exemple": {
+            "vin": "Porto vintage, Taylor's",
+            "detail": "Une maison de Vila Nova de Gaia ; ses vintages, déclarés seulement les grandes années, vieillissent des décennies."
+          },
+          "debat": "Quelle fut la première région délimitée ? Le Chianti (1716), Tokaj (dès les années 1730) et le Douro (1756) se disputent le titre, selon ce qu'on entend par délimiter : tracer une frontière, classer des vignes ou contrôler la production."
+        },
+        {
+          "titre": "Vinho verde et madère",
+          "illu": "climats",
+          "texte": "Au nord du Portugal, le **vinho verde** (vin « vert », c'est-à-dire jeune) donne des blancs légers et vifs, parfois perlants, souvent d'alvarinho, le même cépage que l'albariño espagnol.\n\nSur l'île de **Madère**, le vin est muté puis chauffé, ou vieilli des années sous des toits chauds : il devient presque inaltérable, et une bouteille ouverte tient des mois.",
+          "exemple": {
+            "vin": "Madère, Blandy's",
+            "detail": "Une famille installée à Funchal depuis 1811, dont les vieux madères comptent parmi les vins les plus durables au monde."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "ordre", "question": "Range ces rouges de Rioja du plus court au plus long élevage.", "items": ["Joven", "Crianza", "Reserva", "Gran reserva"], "explication": "Joven : peu ou pas de fût. Crianza : 2 ans dont 1 en fût. Reserva : 3 ans dont 1 en fût. Gran reserva : 5 ans dont 2 en fût." },
+        { "type": "qcm", "question": "Qu'ont en commun le fino de Jerez et le vin jaune du Jura ?", "choix": ["Le même cépage", "Ils sont mutés pendant la fermentation", "Un vieillissement sous un voile de levures", "Une deuxième fermentation en bouteille"], "bonne": 2, "explication": "Tous deux vieillissent sous un voile de levures (la flor à Jerez), qui les protège de l'air et leur donne des notes de noix et d'amande." }
+      ]
+    },
+    {
+      "id": "n5-l4",
+      "titre": "Allemagne, Autriche, Hongrie, Grèce",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "L'Allemagne, royaume du riesling",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "allemagne",
+          "lieux": [["Moselle", "g"], ["Rheingau", "d"], ["Pfalz", "d"]],
+          "villes": ["Berlin"],
+          "texte": "Le **riesling** est le cépage le plus planté d'Allemagne, le long du Rhin et de ses affluents. En **Moselle**, des pentes vertigineuses d'ardoise au-dessus de la rivière ; dans le **Rheingau**, une rive exposée plein sud ; dans la **Pfalz**, un climat plus chaud, prolongement de l'Alsace.\n\nL'Allemagne fait aussi de plus en plus de pinot noir, le spätburgunder (révision du niveau 2).",
+          "exemple": {
+            "vin": "Riesling Scharzhofberger, Egon Müller",
+            "detail": "Un domaine mythique de la Sarre, affluent de la Moselle, dont les rieslings doux atteignent des prix records."
+          }
+        },
+        {
+          "titre": "Les Prädikat, une échelle de maturité",
+          "illu": "etages",
+          "etages": [["TBA", "le plus riche"], ["Beerenauslese", "baies choisies"], ["Auslese", "grappes choisies"], ["Spätlese", "vendange tardive"], ["Kabinett", "le plus léger"]],
+          "texte": "Les vins allemands du niveau [[Prädikat]] sont classés selon la **richesse en sucre du raisin à la vendange** : **Kabinett**, **Spätlese** (vendange tardive), **Auslese** (grappes choisies), **Beerenauslese** et **Trockenbeerenauslese** (TBA, baies botrytisées et passerillées). À part, l'**Eiswein**, un [[vin de glace]].\n\nPiège : l'échelle mesure la maturité du raisin, pas le sucre du vin. Un Spätlese peut être sec : cherche alors le mot [[trocken]]."
+        },
+        {
+          "titre": "Autriche : grüner veltliner et Wachau",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "autriche",
+          "lieux": [["Wachau", "g"], ["Rust", "d"]],
+          "villes": ["Vienne"],
+          "texte": "Le **grüner veltliner**, cépage national, donne des blancs secs, frais et poivrés. Dans la **Wachau**, sur les terrasses du Danube, les vignerons classent leurs vins secs en trois catégories, du plus léger au plus riche : **Steinfeder**, **Federspiel** et **Smaragd**, du nom d'un lézard vert des vignes.\n\nÀ l'est, autour du lac de Neusiedl, des liquoreux et des rouges de blaufränkisch et de zweigelt.",
+          "exemple": {
+            "vin": "Grüner Veltliner Smaragd, F.X. Pichler",
+            "detail": "L'un des domaines phares de la Wachau, à Dürnstein, réputé pour ses Smaragd puissants."
+          }
+        },
+        {
+          "titre": "Hongrie : le tokaji aszú",
+          "illu": "botrytis",
+          "texte": "À **Tokaj**, dans le nord-est de la Hongrie, le **furmint** et le hárslevelű sont touchés par la pourriture noble (révision du niveau 1). On cueille une à une les baies botrytisées, les [[aszú]], puis on les fait macérer dans un moût ou un vin.\n\nOn mesurait autrefois leur dose en **puttonyos** (des hottes). Depuis 2013, un tokaji aszú doit contenir au moins **120 g de sucre par litre**.",
+          "exemple": {
+            "vin": "Tokaji Aszú, Royal Tokaji",
+            "detail": "Une maison du village de Mád, qui a relancé les grands crus de Tokaj après la chute du communisme."
+          },
+          "astuce": "« Vin des rois, roi des vins » : la formule est attribuée, selon la légende, à Louis XIV."
+        },
+        {
+          "titre": "Grèce : Santorin",
+          "illu": "sols",
+          "texte": "L'un des plus vieux vignobles du monde. À **Santorin**, l'**assyrtiko** pousse sur des cendres volcaniques, sans phylloxéra, en vignes enroulées en corbeille au ras du sol pour les protéger du vent. Il donne des blancs secs tendus et salins, et un vin doux de raisins séchés au soleil, le vinsanto.\n\nSur le continent : xinomavro à Naoussa, agiorgitiko à Némée.",
+          "exemple": {
+            "vin": "Assyrtiko, Domaine Sigalas",
+            "detail": "Un domaine d'Oia, au nord de Santorin, pionnier des assyrtikos de garde."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "ordre", "question": "Range ces Prädikat du moins riche au plus riche en sucre (à la vendange).", "items": ["Kabinett", "Spätlese", "Auslese", "Beerenauslese", "Trockenbeerenauslese"], "explication": "Kabinett, Spätlese, Auslese, Beerenauslese, puis Trockenbeerenauslese, aux baies botrytisées et passerillées." },
+        { "type": "qcm", "question": "Dans la Wachau, quelle catégorie désigne les vins secs les plus riches ?", "choix": ["Steinfeder", "Federspiel", "Smaragd", "Kabinett"], "bonne": 2, "explication": "Smaragd, du nom d'un lézard vert. Steinfeder est la plus légère, Federspiel intermédiaire ; Kabinett est un Prädikat allemand." }
+      ]
+    },
+    {
+      "id": "n5-l5",
+      "titre": "Les Amériques",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Californie : Napa et Sonoma",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "etats-unis",
+          "cadre": "lieux",
+          "lieux": [["Napa Valley", "d"], ["Sonoma", "g"], ["Calistoga", "h"]],
+          "villes": ["San Francisco"],
+          "texte": "La Californie produit l'essentiel du vin américain. Au nord de San Francisco, la **Napa Valley** est réputée pour ses **cabernets sauvignons** puissants ; **Sonoma**, plus proche du Pacifique et de ses brouillards, pour ses chardonnays, ses pinots noirs et ses vieux **zinfandels**.",
+          "exemple": {
+            "vin": "Opus One, Napa Valley",
+            "detail": "Né en 1979 de l'association de Robert Mondavi et du baron Philippe de Rothschild (Mouton) : un assemblage bordelais californien."
+          },
+          "astuce": "La Prohibition (1920-1933) a failli tuer le vignoble américain : il lui a fallu des décennies pour s'en remettre."
+        },
+        {
+          "titre": "Oregon et Washington",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "etats-unis",
+          "cadre": "lieux",
+          "lieux": [["Willamette Valley", "d", "Oregon"], ["Napa Valley", "d", "Californie"]],
+          "villes": ["San Francisco"],
+          "texte": "Plus au nord, l'**Oregon** a fait du **pinot noir** sa spécialité, dans la fraîche Willamette Valley ; des Bourguignons s'y sont installés, comme la maison Drouhin dès 1987.\n\nL'État de **Washington**, à l'est de la chaîne des Cascades, très sec et ensoleillé, produit cabernet, merlot et syrah.",
+          "exemple": {
+            "vin": "Domaine Drouhin Oregon, Dundee Hills",
+            "detail": "La maison beaunoise Joseph Drouhin a planté ici du pinot noir dès 1987."
+          }
+        },
+        {
+          "titre": "Argentine : le malbec en altitude",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "argentine",
+          "cadre": "lieux",
+          "lieux": [["Mendoza", "d"], ["Luján de Cuyo", "d"], ["Vallée de l'Uco (Tupungato)", "g", "Vallée de l'Uco"]],
+          "villes": ["Santiago"],
+          "texte": "Au pied des Andes, **Mendoza** concentre l'essentiel des vignes argentines, de 700 à plus de 1 500 m d'altitude : soleil intense, nuits fraîches, irrigation par la fonte des neiges. Le **malbec**, venu de France au XIXe siècle (révision du niveau 2), y est devenu l'emblème national.\n\nPlus au nord, à Salta, des vignes parmi les plus hautes du monde et un blanc parfumé, le **torrontés**.",
+          "exemple": {
+            "vin": "Malbec Argentino, Catena Zapata",
+            "detail": "Une famille pionnière du malbec d'altitude, à Mendoza."
+          }
+        },
+        {
+          "titre": "Chili : entre Andes et Pacifique",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "chili",
+          "cadre": "lieux",
+          "lieux": [["Casablanca", "g"], ["Maipo", "d"], ["Colchagua", "g"]],
+          "villes": ["Santiago"],
+          "texte": "Un pays tout en longueur : à l'est les Andes, à l'ouest le Pacifique et son courant froid de **Humboldt**, qui rafraîchit les vallées côtières comme Casablanca. Le **cabernet sauvignon** brille dans le Maipo, au pied des Andes.\n\nLe Chili n'a jamais connu le phylloxéra : beaucoup de vignes y poussent [[franc de pied|franches de pied]], sans porte-greffe (révision du niveau 3).",
+          "exemple": {
+            "vin": "Almaviva, Puente Alto",
+            "detail": "Né de l'association de Concha y Toro et de la famille Rothschild de Mouton : un assemblage de cabernet sauvignon et de carmenère."
+          },
+          "astuce": "La **carmenère**, cépage bordelais presque disparu en France, a été identifiée au Chili en 1994 : on la prenait depuis longtemps pour du merlot !"
+        },
+        {
+          "titre": "Ailleurs en Amérique",
+          "illu": "raisin",
+          "texte": "L'**Uruguay** a fait du **tannat** son cépage national (révision du niveau 2). Le **Canada** est l'un des grands producteurs de **vin de glace**, fait de raisins gelés sur pied, comme l'Eiswein allemand. Le Mexique et le Brésil ont aussi des vignobles en plein essor.",
+          "astuce": "La plus ancienne cave des Amériques encore en activité, Casa Madero, a été fondée au Mexique en 1597."
+        }
+      ],
+      "verif": [
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Mendoza", "detail": "Malbec d'altitude au pied des Andes", "region": "argentine", "lat": -32.8895, "lon": -68.8458, "fond": "monde" }, "explication": "Mendoza est à l'ouest de l'Argentine, au pied des Andes, à la hauteur de Santiago du Chili." },
+        { "type": "qcm", "question": "Quel cépage bordelais a été « redécouvert » au Chili en 1994, où on le prenait pour du merlot ?", "choix": ["Le malbec", "La carmenère", "Le petit verdot", "Le cabernet franc"], "bonne": 1, "explication": "La carmenère, presque disparue de Bordeaux après le phylloxéra, est devenue un emblème du Chili." }
+      ]
+    },
+    {
+      "id": "n5-l6",
+      "titre": "Océanie et Afrique du Sud",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Australie : la shiraz et bien plus",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "australie",
+          "lieux": [["Barossa Valley", "h"], ["Coonawarra", "b"], ["Margaret River", "d"], ["Hunter Valley", "g"]],
+          "villes": ["Sydney"],
+          "texte": "L'Australie doit sa réputation à la **shiraz** (la syrah, révision du niveau 2), puissante et épicée dans la **Barossa Valley**, où survivent des vignes plantées au XIXe siècle.\n\nMais le pays est immense : cabernet sur la [[terra rossa]] de **Coonawarra**, cabernet et chardonnay à **Margaret River**, sémillon de longue garde dans la **Hunter Valley**, riesling sec et vif dans la Clare Valley.",
+          "exemple": {
+            "vin": "Penfolds Grange",
+            "detail": "Créé par Max Schubert au début des années 1950, devenu le vin le plus célèbre d'Australie."
+          }
+        },
+        {
+          "titre": "Le pays de la capsule à vis",
+          "illu": "tirebouchon",
+          "texte": "L'Australie et la Nouvelle-Zélande ont été les premières à adopter en masse la **capsule à vis**. En 2000, des vignerons de la Clare Valley l'ont choisie ensemble pour leurs rieslings, afin d'en finir avec le goût de bouchon (révision du niveau 1).\n\nAujourd'hui, la très grande majorité des vins néo-zélandais sont capsulés.",
+          "debat": "Bouchon ou capsule ? La capsule supprime le goût de bouchon et préserve le fruit ; certains craignent qu'elle freine l'évolution des vins de garde. Les essais sur plusieurs décennies montrent des vins qui vieillissent bien, mais différemment. Le débat continue chez les amateurs de grands crus."
+        },
+        {
+          "titre": "Nouvelle-Zélande : la fraîcheur",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "nouvelle-zelande",
+          "lieux": [["Hawke's Bay", "d"], ["Martinborough", "d"], ["Marlborough", "g"], ["Central Otago", "g"]],
+          "texte": "Deux îles balayées par l'océan, un climat frais et lumineux. Le **sauvignon blanc** de **Marlborough**, explosif (fruit de la passion, pamplemousse, herbe), a fait connaître le pays dans les années 1980 ; il représente aujourd'hui la grande majorité de la production.\n\nLe **pinot noir** brille à **Central Otago**, l'un des vignobles les plus au sud du monde, et à Martinborough.",
+          "exemple": {
+            "vin": "Cloudy Bay Sauvignon Blanc, Marlborough",
+            "detail": "Fondé en 1985, l'un des domaines qui ont rendu célèbre le sauvignon de Marlborough."
+          }
+        },
+        {
+          "titre": "Afrique du Sud : le Cap",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "afrique-du-sud",
+          "cadre": "lieux",
+          "lieux": [["Swartland", "d"], ["Stellenbosch", "d"], ["Franschhoek", "d"], ["Constantia", "b"]],
+          "villes": ["Le Cap"],
+          "texte": "Des vignes depuis **1659**, entre deux océans. Le **chenin blanc** est le cépage le plus planté (on l'appelait autrefois steen, révision du niveau 2). Le [[pinotage]], croisement de pinot noir et de cinsaut créé en 1925 par le professeur Abraham Perold, est l'emblème du pays.\n\nLe système **Wine of Origin** délimite régions et districts : Stellenbosch, Swartland, Constantia…",
+          "exemple": {
+            "vin": "Vin de Constance, Klein Constantia",
+            "detail": "Le vin doux de Constantia, adoré au XVIIIe siècle dans les cours d'Europe et, dit-on, par Napoléon en exil, ressuscité en 1986."
+          }
+        },
+        {
+          "titre": "La planète vin",
+          "illu": "carte-region",
+          "fond": "monde",
+          "region": "france",
+          "cadre": "lieux",
+          "lieux": [["Napa Valley", "d", "Californie"], ["Mendoza", "d"], ["Stellenbosch", "d", "Le Cap"], ["Barossa Valley", "g", "Australie"], ["Marlborough", "g", "Nouvelle-Zélande"], ["Moselle", "h", "Europe"]],
+          "texte": "On fait du vin sur tous les continents, surtout entre 30° et 50° de latitude dans chaque hémisphère, là où le climat n'est ni trop chaud ni trop froid.\n\nLe réchauffement pousse la vigne vers de nouveaux territoires : l'Angleterre produit désormais des effervescents réputés, sur la même craie que la Champagne.",
+          "debat": "Jusqu'où montera la vigne ? Le réchauffement avance les vendanges (révision du niveau 3) et rend possibles des vins plus au nord ou plus en altitude. Une chance pour de nouvelles régions, une menace pour l'équilibre des terroirs historiques : les deux visions coexistent."
+        }
+      ],
+      "verif": [
+        { "type": "qcm", "question": "Le pinotage est un croisement de…", "choix": ["Pinot noir et cinsaut", "Pinot noir et syrah", "Pinot gris et chenin", "Cabernet et merlot"], "bonne": 0, "explication": "Pinot noir et cinsaut (appelé hermitage en Afrique du Sud), par Abraham Perold en 1925." },
+        { "type": "assoc", "question": "Associe chaque région à son vin emblème.", "paires": [["Barossa Valley", "Shiraz"], ["Marlborough", "Sauvignon blanc"], ["Central Otago", "Pinot noir"], ["Hunter Valley", "Sémillon"]], "explication": "Shiraz de Barossa, sauvignon de Marlborough, pinot noir de Central Otago, sémillon de longue garde du Hunter." }
+      ]
+    }
+  ],
+  "jeux": [
+    {
+      "id": "tour-du-monde-vins",
+      "titre": "Le tour du monde des vignobles",
+      "description": "Une grande région viticole s'affiche : touche-la sur la carte du monde.",
+      "tours": 8,
+      "badge": "grand-voyageur",
+      "seuilBadge": 6,
+      "questions": [
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Piémont", "detail": "Nebbiolo (Barolo, Barbaresco), barbera, moscato", "region": "italie", "lat": 44.6999, "lon": 8.0347, "fond": "monde" }, "explication": "Le Piémont est au nord-ouest de l'Italie, au pied des Alpes, autour d'Alba et d'Asti." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Toscane", "detail": "Sangiovese : Chianti, Brunello, Vino Nobile ; super toscans", "region": "italie", "lat": 43.3182, "lon": 11.3306, "fond": "monde" }, "explication": "La Toscane est au centre de l'Italie, autour de Florence et de Sienne." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Rioja", "detail": "Tempranillo, crianza, reserva et gran reserva", "region": "espagne", "lat": 42.4661, "lon": -2.4512, "fond": "monde" }, "explication": "La Rioja est au nord de l'Espagne, le long de l'Èbre, autour de Logroño et de Haro." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Douro", "detail": "Vignes en terrasses du porto et des grands rouges secs", "region": "portugal", "lat": 41.1632, "lon": -7.789, "fond": "monde" }, "explication": "Le Douro est au nord du Portugal, en amont de Porto, le long du fleuve du même nom." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Moselle", "detail": "Riesling sur ardoise, dans des méandres très pentus", "region": "allemagne", "lat": 49.916, "lon": 7.0766, "fond": "monde" }, "explication": "La Moselle allemande serpente à l'ouest de l'Allemagne, entre Trèves et Coblence." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Wachau", "detail": "Grüner veltliner et riesling en terrasses sur le Danube", "region": "autriche", "lat": 48.3656, "lon": 15.4142, "fond": "monde" }, "explication": "La Wachau borde le Danube, à l'ouest de Vienne." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Tokaj", "detail": "Furmint et liquoreux aszú", "region": "hongrie", "lat": 48.1172, "lon": 21.4092, "fond": "monde" }, "explication": "Tokaj est au nord-est de la Hongrie, près des frontières slovaque et ukrainienne." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Napa Valley", "detail": "Le cabernet sauvignon de Californie", "region": "etats-unis", "lat": 38.2971, "lon": -122.2855, "fond": "monde" }, "explication": "La Napa Valley est en Californie, au nord de San Francisco." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Mendoza", "detail": "Malbec d'altitude au pied des Andes", "region": "argentine", "lat": -32.8895, "lon": -68.8458, "fond": "monde" }, "explication": "Mendoza est à l'ouest de l'Argentine, au pied des Andes." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Barossa Valley", "detail": "Shiraz puissante et vieilles vignes", "region": "australie", "lat": -34.5234, "lon": 138.9598, "fond": "monde" }, "explication": "La Barossa Valley est en Australie-Méridionale, au nord-est d'Adélaïde." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Marlborough", "detail": "Sauvignon blanc à la pointe nord de l'île du Sud", "region": "nouvelle-zelande", "lat": -41.516, "lon": 173.9528, "fond": "monde" }, "explication": "Marlborough est à la pointe nord-est de l'île du Sud de la Nouvelle-Zélande." },
+        { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Stellenbosch", "detail": "Cabernet, pinotage et chenin au pied des montagnes", "region": "afrique-du-sud", "lat": -33.9346, "lon": 18.8668, "fond": "monde" }, "explication": "Stellenbosch est à une cinquantaine de kilomètres à l'est du Cap." }
+      ]
+    },
+    {
+      "id": "classifications",
+      "titre": "Classifications du monde",
+      "description": "DOCG, DOCa, Prädikat, AVA, gran reserva, puttonyos : un vocabulaire à apprivoiser.",
+      "tours": 8,
+      "badge": "polyglotte",
+      "seuilBadge": 7,
+      "questions": [
+        { "type": "assoc", "question": "Associe chaque pays à son sigle ou à sa catégorie.", "paires": [["Italie", "DOCG"], ["Espagne", "DOCa"], ["Allemagne", "Prädikat"], ["États-Unis", "AVA"]], "explication": "DOCG au sommet en Italie, DOCa en Espagne (Rioja, Priorat), Prädikat pour les vins allemands classés par maturité, AVA pour les zones américaines." },
+        { "type": "ordre", "question": "Range ces Prädikat du moins riche au plus riche.", "items": ["Kabinett", "Spätlese", "Auslese", "Trockenbeerenauslese"], "explication": "Kabinett, Spätlese, Auslese… et au sommet Trockenbeerenauslese, aux baies botrytisées et passerillées." },
+        { "type": "ordre", "question": "Range ces mentions espagnoles du plus court au plus long élevage.", "items": ["Joven", "Crianza", "Reserva", "Gran reserva"], "explication": "Joven, crianza (2 ans), reserva (3 ans), gran reserva (5 ans), pour un rouge de Rioja." },
+        { "type": "vf", "question": "Un Spätlese allemand est toujours un vin doux.", "bonne": false, "explication": "Non : le Prädikat mesure la maturité du raisin à la vendange. Un Spätlese peut être sec ; il porte alors la mention trocken." },
+        { "type": "qcm", "question": "Combien d'appellations espagnoles ont le rang de DOCa ?", "choix": ["Une seule", "Deux", "Cinq", "Plus de soixante"], "bonne": 1, "explication": "Deux : la Rioja et le Priorat (DOQ en catalan). Les autres sont des DO." },
+        { "type": "qcm", "question": "Depuis 2013, combien de sucre un tokaji aszú doit-il contenir au minimum ?", "choix": ["45 g/L", "12 g/L", "200 g/L", "120 g/L"], "bonne": 3, "explication": "120 g/L, l'ancien niveau de 5 puttonyos. Les mentions 3 et 4 puttonyos ont disparu des tokaji aszú." },
+        { "type": "qcm", "question": "Dans la Wachau, quelle catégorie désigne les vins secs les plus légers ?", "choix": ["Smaragd", "Steinfeder", "Federspiel", "Auslese"], "bonne": 1, "explication": "Steinfeder est la plus légère, Federspiel l'intermédiaire, Smaragd la plus riche." },
+        { "type": "qcm", "question": "Qu'est-ce qu'une AVA aux États-Unis ?", "choix": ["Une zone géographique délimitée, sans règles de cépage", "Un label de vin bio", "Un classement de châteaux", "Une appellation qui impose les cépages et les rendements"], "bonne": 0, "explication": "Une American Viticultural Area délimite un territoire (Napa Valley, Willamette Valley…), sans imposer de cépage ni de rendement." },
+        { "type": "etiquette", "etiquette": "robert-weil", "mode": "qcm", "question": "Que signifie « trocken » sur cette étiquette ?", "choix": ["Doux", "Sec", "Effervescent", "Vendange tardive"], "bonne": 1, "explication": "Trocken veut dire sec. Grosses Gewächs désigne un vin sec issu d'une parcelle classée par l'association de domaines VDP." },
+        { "type": "etiquette", "etiquette": "royal-tokaji", "mode": "qcm", "question": "D'où vient la douceur de ce vin ?", "choix": ["D'un ajout de sucre", "D'un mutage à l'eau-de-vie", "De raisins séchés au soleil", "De baies botrytisées, les aszú"], "bonne": 3, "explication": "Les baies aszú, touchées par la pourriture noble, sont cueillies une à une et mises à macérer dans un moût ou un vin." },
+        { "type": "qcm", "question": "Que reconnaît-on à la bande numérotée sur le col d'une bouteille italienne ?", "choix": ["Une IGT", "Un vin bio", "Une DOCG", "Un vin de table"], "bonne": 2, "explication": "La bande numérotée signale une DOCG, le niveau le plus strict de la pyramide italienne." },
+        { "type": "tri", "question": "Sur l'étiquette, plutôt le lieu ou plutôt le cépage d'abord ?", "categories": ["Le lieu d'abord", "Le cépage d'abord"], "items": [["Barolo", 0], ["Rioja", 0], ["Chablis", 0], ["Malbec de Mendoza", 1], ["Shiraz de Barossa", 1], ["Sauvignon de Marlborough", 1]], "explication": "L'Ancien Monde nomme ses vins d'après le lieu ; le Nouveau Monde met souvent le cépage en avant." }
+      ]
+    },
+    {
+      "id": "quel-pays",
+      "titre": "Quel pays ?",
+      "description": "Trois indices, un pays : reconnais-le avant que tout soit dévoilé.",
+      "tours": 8,
+      "questions": [
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Nebbiolo, sangiovese, glera.", "Une bande numérotée sur le col des meilleurs vins.", "Barolo, Chianti Classico, Prosecco."], "choix": ["Espagne", "Italie", "Grèce", "Portugal"], "bonne": 1, "explication": "L'Italie et ses DOCG." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Tempranillo et garnacha.", "Crianza, reserva, gran reserva.", "Rioja, Priorat, Jerez."], "choix": ["Espagne", "Argentine", "Portugal", "Chili"], "bonne": 0, "explication": "L'Espagne, le plus vaste vignoble du monde." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Touriga nacional, alvarinho.", "Une région délimitée dès 1756.", "Porto, vinho verde, madère."], "choix": ["Espagne", "Italie", "Portugal", "Hongrie"], "bonne": 2, "explication": "Le Portugal, du Douro à Madère." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Riesling sur ardoise.", "Kabinett, Spätlese, Auslese.", "Moselle, Rheingau, Pfalz."], "choix": ["Autriche", "Allemagne", "Hongrie", "États-Unis"], "bonne": 1, "explication": "L'Allemagne et ses Prädikat." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Grüner veltliner.", "Steinfeder, Federspiel, Smaragd.", "Des terrasses sur le Danube."], "choix": ["Allemagne", "Hongrie", "Grèce", "Autriche"], "bonne": 3, "explication": "L'Autriche et la Wachau." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Furmint et hárslevelű.", "Des baies aszú botrytisées.", "Autrefois mesurées en puttonyos."], "choix": ["Hongrie", "Autriche", "Allemagne", "Italie"], "bonne": 0, "explication": "La Hongrie et le tokaji aszú." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Assyrtiko, xinomavro.", "Des vignes enroulées en corbeille sur un volcan.", "Santorin, Naoussa, Némée."], "choix": ["Italie", "Portugal", "Grèce", "Espagne"], "bonne": 2, "explication": "La Grèce, l'un des plus vieux vignobles du monde." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Cabernet sauvignon, zinfandel, pinot noir.", "Des AVA plutôt que des appellations.", "Napa, Sonoma, Willamette."], "choix": ["Australie", "États-Unis", "Chili", "Afrique du Sud"], "bonne": 1, "explication": "Les États-Unis : Californie et Oregon." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Malbec et torrontés.", "Des vignes irriguées par la fonte des neiges.", "Mendoza, Salta."], "choix": ["Chili", "Espagne", "Argentine", "États-Unis"], "bonne": 2, "explication": "L'Argentine, au pied des Andes." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Carmenère et cabernet sauvignon.", "Jamais touché par le phylloxéra.", "Maipo, Colchagua, Casablanca."], "choix": ["Argentine", "Chili", "Uruguay", "Afrique du Sud"], "bonne": 1, "explication": "Le Chili, entre Andes et Pacifique." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Shiraz, sémillon, riesling.", "Terra rossa et capsules à vis.", "Barossa, Coonawarra, Hunter."], "choix": ["Nouvelle-Zélande", "Afrique du Sud", "États-Unis", "Australie"], "bonne": 3, "explication": "L'Australie." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Sauvignon blanc explosif.", "Deux îles balayées par l'océan.", "Marlborough, Central Otago."], "choix": ["Nouvelle-Zélande", "Australie", "Chili", "Portugal"], "bonne": 0, "explication": "La Nouvelle-Zélande." },
+        { "type": "indices", "question": "Quel pays ?", "indices": ["Chenin et pinotage.", "Des vignes depuis 1659.", "Stellenbosch, Swartland, Constantia."], "choix": ["Australie", "Chili", "Afrique du Sud", "Argentine"], "bonne": 2, "explication": "L'Afrique du Sud et le vignoble du Cap." }
+      ]
+    }
+  ],
+  "quiz": {
+    "titre": "Quiz de validation · Niveau 5",
+    "questions": [
+      { "type": "tri", "question": "Ancien ou Nouveau Monde ?", "categories": ["Ancien Monde", "Nouveau Monde"], "items": [["Douro", 0], ["Wachau", 0], ["Stellenbosch", 1], ["Barossa Valley", 1]], "explication": "Le Douro (Portugal) et la Wachau (Autriche) sont européens ; Stellenbosch (Afrique du Sud) et la Barossa (Australie) appartiennent au Nouveau Monde." },
+      { "type": "qcm", "question": "Quel sigle désigne le sommet de la pyramide italienne ?", "choix": ["IGT", "DOC", "DOCG", "DOCa"], "bonne": 2, "explication": "La DOCG (Controllata e Garantita). DOCa est le sommet espagnol." },
+      { "type": "qcm", "question": "Qu'est-ce qu'un « super toscan » ?", "choix": ["Un Chianti de plus de 10 ans", "Un vin toscan fait hors des règles des appellations, souvent avec des cépages bordelais", "Un Brunello de grand cru", "Un vin doux de raisins séchés"], "bonne": 1, "explication": "Des vins comme Sassicaia, nés hors des règles dans les années 1970, souvent avec du cabernet et du merlot." },
+      { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Piémont", "detail": "Nebbiolo (Barolo, Barbaresco), barbera, moscato", "region": "italie", "lat": 44.6999, "lon": 8.0347, "fond": "monde" }, "explication": "Le Piémont est au nord-ouest de l'Italie, au pied des Alpes." },
+      { "type": "ordre", "question": "Range ces rouges de Rioja du plus court au plus long élevage.", "items": ["Joven", "Crianza", "Reserva", "Gran reserva"], "explication": "Joven, crianza (2 ans dont 1 en fût), reserva (3 ans dont 1 en fût), gran reserva (5 ans dont 2 en fût)." },
+      { "type": "qcm", "question": "Comment vieillissent le fino et la manzanilla ?", "choix": ["En bouteille, sur lies", "Sous un voile de levures, la flor", "En amphore enterrée", "En cuve inox réfrigérée"], "bonne": 1, "explication": "Sous la flor, comme le vin jaune sous son voile, dans un système de solera." },
+      { "type": "etiquette", "etiquette": "vega-sicilia", "mode": "qcm", "question": "Quel est le cépage principal de ce vin ?", "choix": ["Le grenache", "Le tinto fino, c'est-à-dire le tempranillo", "Le nebbiolo", "Le malbec"], "bonne": 1, "explication": "En Ribera del Duero, le tempranillo s'appelle tinto fino. Vega Sicilia l'assemble avec un peu de cabernet sauvignon." },
+      { "type": "qcm", "question": "Quel porto vieillit longuement en fût et prend des notes de noix et de caramel ?", "choix": ["Le vintage", "Le ruby", "Le tawny", "Le blanc"], "bonne": 2, "explication": "Le tawny. Ruby et vintage vieillissent surtout en bouteille et gardent leur fruit." },
+      { "type": "ordre", "question": "Range ces Prädikat du moins riche au plus riche en sucre à la vendange.", "items": ["Kabinett", "Spätlese", "Auslese", "Beerenauslese"], "explication": "Kabinett, Spätlese, Auslese, Beerenauslese (et au-delà, Trockenbeerenauslese)." },
+      { "type": "etiquette", "etiquette": "robert-weil", "mode": "qcm", "question": "Ce riesling allemand est-il sec ?", "choix": ["Non, Grosses Gewächs veut dire liquoreux", "On ne peut pas le savoir", "Non, c'est un vin de glace", "Oui, c'est écrit « trocken »"], "bonne": 3, "explication": "Trocken signifie sec. Les Grosses Gewächs sont des vins secs de parcelles classées." },
+      { "type": "qcm", "question": "Qu'est-ce qui fait la douceur du tokaji aszú ?", "choix": ["Des baies botrytisées macérées dans un moût ou un vin", "Un mutage à l'eau-de-vie", "Des raisins gelés sur pied", "Un ajout de miel"], "bonne": 0, "explication": "Les baies aszú, touchées par la pourriture noble, cueillies une à une." },
+      { "type": "qcm", "question": "Quel cépage pousse en corbeille sur les cendres volcaniques de Santorin ?", "choix": ["Le furmint", "L'albariño", "Le grüner veltliner", "L'assyrtiko"], "bonne": 3, "explication": "L'assyrtiko, qui donne des blancs secs tendus et salins." },
+      { "type": "carte", "question": "Touche l'emplacement de cette région.", "entry": { "palier": 2, "vin": "Mendoza", "detail": "Malbec d'altitude au pied des Andes", "region": "argentine", "lat": -32.8895, "lon": -68.8458, "fond": "monde" }, "explication": "Mendoza est à l'ouest de l'Argentine, au pied des Andes." },
+      { "type": "qcm", "question": "Pourquoi beaucoup de vignes chiliennes n'ont-elles pas de porte-greffe ?", "choix": ["Le phylloxéra n'a jamais atteint le Chili", "La loi l'interdit", "Le sol est trop sableux pour greffer", "Les cépages chiliens sont des hybrides"], "bonne": 0, "explication": "Isolé par les Andes, le désert et l'océan, le Chili n'a jamais connu le phylloxéra : ses vignes peuvent rester franches de pied." },
+      { "type": "qcm", "question": "De quoi est né le pinotage sud-africain ?", "choix": ["D'une mutation du pinot noir", "D'un croisement entre pinot noir et cinsaut", "D'un croisement entre chenin et pinot gris", "D'un cépage sauvage local"], "bonne": 1, "explication": "Abraham Perold a croisé pinot noir et cinsaut en 1925." },
+      { "type": "qcm", "question": "Révision : sur quelle rive de Bordeaux le merlot domine-t-il ?", "choix": ["La rive gauche", "La rive droite", "Dans l'Entre-Deux-Mers seulement", "Nulle part"], "bonne": 1, "explication": "Révision du niveau 4 : la rive droite (Saint-Émilion, Pomerol)." },
+      { "type": "qcm", "question": "Révision : quelle méthode d'effervescence utilise le Prosecco ?", "choix": ["La méthode traditionnelle", "La méthode ancestrale", "La cuve close", "L'ajout de gaz"], "bonne": 2, "explication": "Révision du niveau 3 : la deuxième fermentation a lieu en grande cuve fermée." },
+      { "type": "qcm", "question": "Révision : sous quel nom la syrah est-elle connue en Australie ?", "choix": ["Shiraz", "Garnacha", "Monastrell", "Zinfandel"], "bonne": 0, "explication": "Révision du niveau 2 : shiraz, la syrah australienne." }
+    ]
+  }
+}

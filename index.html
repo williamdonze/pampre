@@ -402,6 +402,14 @@ main{padding-block:20px 110px}
 .kpi svg{width:30px;height:30px;flex:none}
 .kpi b{display:block;font-family:var(--f-display);font-size:22px;line-height:1;font-variant-numeric:tabular-nums}
 .kpi span{font-size:12px;color:var(--muted);font-weight:700}
+/* classement personnel (vue Défi) */
+.podium{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.podium li{display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:14px;padding:8px 12px;background:var(--paper)}
+.podium li[aria-current="true"]{border-color:var(--gold);background:var(--gold-soft)}
+.podium .pos{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--grape-btn);color:var(--on-plum);font-family:var(--f-display);font-weight:800}
+.podium .qd{flex:1;min-width:0;font-weight:700}
+.podium b{font-variant-numeric:tabular-nums;color:var(--grape-ink)}
+.copie{width:100%;font:inherit;border:2px solid var(--line);border-radius:12px;padding:8px;background:var(--paper);color:var(--ink);resize:none}
 .rankbar{margin-bottom:26px}
 .rankbar .row{display:flex;justify-content:space-between;font-weight:800;font-size:14px;margin-bottom:6px}
 .badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:12px 0 26px}
@@ -449,7 +457,9 @@ const CONTENT = {
   glossaire: "content/glossaire.json",
   etiquettes: "content/etiquettes.json",
   carteVins: "content/carte-vins.json",
-  carteFrance: "content/carte-france.json"
+  carteFrance: "content/carte-france.json",
+  carteMonde: "content/carte-monde.json",
+  carteMondeVins: "content/carte-monde-vins.json"
 };
 const SAVE_KEY = "pampre-sauvegarde-v1";
 const D = {};          // données chargées
@@ -591,6 +601,35 @@ const IL = {
     return `<svg viewBox="0 0 250 166">${et.map(([x,r,t,s,e],i)=>b(x,r,e)+svgT(x,128+(i%2)*22,t,{a:"middle",s:10})+svgT(x,140+(i%2)*22,s,{a:"middle",s:8,w:700,c:"var(--muted-ink)"})).join("")}<circle cx="174" cy="114" r="4" fill="#C9B79C"/><path d="M174 108v-4" stroke="#C9B79C" stroke-width="2"/></svg>`},
   "duree-lies":()=>{const b=[["Crémant",9,"9 mois sur lies","var(--gold)"],["Champagne",15,"15 mois en cave","var(--grape-btn)"],["Champagne millésimé",36,"3 ans","var(--plum)"]];const X=m=>14+m*6;return `<svg viewBox="0 0 250 156">${b.map(([n,m,t,c],i)=>`${svgT(14,20+i*40,n,{s:12})}<rect x="14" y="${27+i*40}" width="${X(m)-14}" height="14" rx="7" fill="${c}"/>${svgT(X(m)+(m>30?-6:6),38+i*40,t,{a:m>30?"end":"start",s:10,w:800,c:m>30?"#fff":"var(--muted-ink)"})}`).join("")}<path d="M14 136H236" stroke="var(--line)" stroke-width="2"/>${[0,12,24,36].map(m=>`<path d="M${X(m)} 132v8" stroke="var(--muted-ink)" stroke-width="1.5"/>${svgT(X(m),150,m?m+" mois":"tirage",{a:m?"middle":"start",s:9,w:700,c:"var(--muted-ink)"})}`).join("")}</svg>`},
   "alsace-vosges":()=>`<svg viewBox="0 0 250 150"><rect width="250" height="150" rx="12" fill="var(--sea)"/><path d="M0 130L40 46Q60 20 82 46L118 98Q150 118 250 122V150H0z" fill="#8FA3B3"/><path d="M82 46L118 98Q150 118 250 122V150H96z" fill="var(--leaf-soft)"/>${[0,1,2,3,4].map(i=>`<path d="M${100+i*9} ${76+i*7.4}v-8" stroke="var(--leaf-deep)" stroke-width="2.5" stroke-linecap="round"/><circle cx="${100+i*9}" cy="${66+i*7.4}" r="3.5" fill="var(--leaf)"/>`).join("")}<path d="M8 36a12 12 0 0 1 6-22a16 16 0 0 1 30-2a12 12 0 0 1 10 24z" fill="#9CB8CC"/>${[14,24,34,44].map(x=>`<path d="M${x} 42l-3 10" stroke="#5B9BC8" stroke-width="2" stroke-linecap="round"/>`).join("")}<circle cx="206" cy="30" r="12" fill="var(--gold)"/><path d="M200 136q10-4 20 0t20 0" stroke="#5B9BC8" stroke-width="3" fill="none"/>${svgT(52,112,"Vosges",{a:"middle",s:11,c:"#fff"})}${svgT(132,66,"vignes",{s:11,c:"var(--leaf-ink)"})}${svgT(162,112,"plaine",{s:10,w:700,c:"var(--muted-ink)"})}${svgT(244,132,"Rhin",{a:"end",s:10,c:"#3D7AA8"})}${svgT(56,14,"pluie à l'ouest",{s:9,w:700,c:"var(--muted-ink)"})}${svgT(244,54,"sec et ensoleillé",{a:"end",s:10,c:"var(--gold-ink)"})}</svg>`,
+  "deux-etiquettes":()=>{const e=(x,grand,petit,leg)=>`<rect x="${x}" y="10" width="110" height="104" rx="6" fill="var(--lbl-creme)" stroke="#C9B79C" stroke-width="1.5"/><text x="${x+55}" y="34" text-anchor="middle" font-family="var(--f-label)" font-weight="700" font-size="9" fill="var(--lbl-ink)">Domaine X</text><text x="${x+55}" y="62" text-anchor="middle" font-family="var(--f-label)" font-weight="700" font-size="17" fill="var(--lbl-ink)">${grand}</text><text x="${x+55}" y="80" text-anchor="middle" font-family="var(--f-label)" font-style="italic" font-size="9" fill="var(--lbl-ink)">${petit}</text><text x="${x+55}" y="102" text-anchor="middle" font-family="var(--f-label)" font-size="8" fill="var(--lbl-ink)">2022 · 13 % vol</text>${svgT(x+55,134,leg,{a:"middle",s:11,c:"var(--grape-ink)"})}`;return `<svg viewBox="0 0 250 142">${e(8,"CHABLIS","Appellation Chablis Contrôlée","le lieu d'abord")}${e(132,"Chardonnay","Sonoma Coast","le cépage d'abord")}</svg>`},
+  /* ---- niveau 6 : déguster et marier ---- */
+  "degustation-etapes":()=>{const c=(x,t,s,ic)=>`<circle cx="${x}" cy="52" r="32" fill="var(--paper)" stroke="var(--grape-btn)" stroke-width="2.5"/>${ic(x)}${svgT(x,106,t,{a:"middle",s:13})}${svgT(x,121,s,{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}`;
+    const oeil=x=>`<path d="M${x-20} 52q20-18 40 0q-20 18-40 0z" fill="#fff" stroke="var(--ink)" stroke-width="2"/><circle cx="${x}" cy="52" r="7" fill="var(--grape-btn)"/><circle cx="${x+2}" cy="50" r="2" fill="#fff"/>`;
+    const nez=x=>`<path d="M${x-4} 30c-2 10-12 22-12 30 0 5 6 6 10 3 2 3 8 3 10 0" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>${[0,1,2].map(i=>`<path d="M${x+10+i*6} ${44-i*4}q4-4 0-8" stroke="var(--gold)" stroke-width="2" fill="none"/>`).join("")}`;
+    const bouche=x=>`<path d="M${x-18} 48q18 18 36 0q-18 6-36 0z" fill="var(--grape-btn)"/><path d="M${x-18} 48q18-8 36 0" stroke="var(--ink)" stroke-width="2" fill="none"/>`;
+    return `<svg viewBox="0 0 250 130">${c(42,"L'œil","la robe",oeil)}${c(125,"Le nez","les arômes",nez)}${c(208,"La bouche","la structure",bouche)}<path d="M78 52h10M161 52h10" stroke="var(--ink)" stroke-width="2"/><path d="M85 47l5 5-5 5M168 47l5 5-5 5" stroke="var(--ink)" stroke-width="2" fill="none"/></svg>`},
+  "robe-nuancier":()=>{const b=["#E9EBB0","#EDDC7E","#E1B43F","#C7862A","#8E5A24"],r=["#5B1A4A","#7E1530","#7A1E22","#9A4A2A","#6E4430"],nb=["vert pâle","paille","or","ambré","brun"],nr=["violacé","rubis","grenat","tuilé","brun"];
+    const ligne=(y,cs,ns,t)=>`${svgT(6,y-6,t,{s:11})}${cs.map((c,i)=>`<rect x="${8+i*48}" y="${y}" width="42" height="28" rx="8" fill="${c}" stroke="var(--line)"/>${svgT(29+i*48,y+42,ns[i],{a:"middle",s:9,w:700,c:"var(--muted-ink)"})}`).join("")}`;
+    return `<svg viewBox="0 0 250 156">${ligne(22,b,nb,"Blanc")}${ligne(86,r,nr,"Rouge")}<path d="M10 146H238" stroke="var(--muted-ink)" stroke-width="1.5"/><path d="M232 141l6 5-6 5" stroke="var(--muted-ink)" stroke-width="1.5" fill="none"/>${svgT(124,142,"jeune → évolué",{a:"middle",s:10,c:"var(--muted-ink)"})}</svg>`},
+  "deux-nez":()=>{const verre=(x,tourne)=>`<path d="M${x-22} 12h44l-4 40q-2 18-18 20q-16-2-18-20z" fill="none" stroke="var(--ink)" stroke-width="2"/><path d="M${x-19} 36h38l-2 16q-2 14-17 16q-15-2-17-16z" fill="var(--grape)" opacity=".85"/><path d="M${x} 72v24M${x-16} 98h32" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>${tourne?`<path d="M${x-30} 52a30 12 0 1 0 8-14" stroke="var(--gold-deep)" stroke-width="2.5" fill="none"/><path d="M${x-26} 34l4 5-6 2" stroke="var(--gold-deep)" stroke-width="2.5" fill="none"/>`:""}`;
+    return `<svg viewBox="0 0 250 140">${verre(62,false)}${verre(188,true)}${svgT(62,118,"Premier nez",{a:"middle",s:12})}${svgT(62,132,"verre immobile",{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}${svgT(188,118,"Second nez",{a:"middle",s:12})}${svgT(188,132,"après l'avoir fait tourner",{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}</svg>`},
+  "bouche-temps":()=>`<svg viewBox="0 0 250 140">${[["Attaque","premier contact",6,62,"var(--gold)"],["Milieu de bouche","acidité, tanins, corps",74,100,"var(--grape-btn)"],["Finale","ce qui persiste",180,64,"var(--plum)"]].map(([t,s,x,w,c])=>`<rect x="${x}" y="14" width="${w}" height="30" rx="10" fill="${c}"/>${svgT(x+w/2,34,t,{a:"middle",s:10,c:"#fff"})}${svgT(x+w/2,58,s,{a:"middle",s:9,w:700,c:"var(--muted-ink)"})}`).join("")}<path d="M8 90H242" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/><path d="M180 90H236" stroke="var(--plum)" stroke-width="10" stroke-linecap="round"/>${[0,1,2,3,4,5].map(i=>`<path d="M${186+i*9} 82v16" stroke="#fff" stroke-width="1.5"/>`).join("")}${svgT(125,118,"Longueur : en caudalies (1 caudalie = 1 seconde)",{a:"middle",s:10,c:"var(--ink)"})}</svg>`,
+  "roue-aromes":()=>{const f=[["Fruité","#C2577F"],["Floral","#E58FA0"],["Végétal","#6E9E4A"],["Épicé","#B4553A"],["Boisé","#8A6236"],["Grillé","#5A4A3A"],["Animal","#8E6BB0"],["Minéral","#4F8FA6"]];const cx=125,cy=74,R=66,r0=24;
+    return `<svg viewBox="0 0 250 150">${f.map(([n,c],i)=>{const a0=-Math.PI/2+i*2*Math.PI/8,a1=a0+2*Math.PI/8,am=(a0+a1)/2;const P=(rr,a)=>`${(cx+rr*Math.cos(a)).toFixed(1)} ${(cy+rr*Math.sin(a)).toFixed(1)}`;return `<path d="M${P(r0,a0)}L${P(R,a0)}A${R} ${R} 0 0 1 ${P(R,a1)}L${P(r0,a1)}A${r0} ${r0} 0 0 0 ${P(r0,a0)}z" fill="${c}" stroke="var(--paper)" stroke-width="2"/><text x="${(cx+46*Math.cos(am)).toFixed(1)}" y="${(cy+46*Math.sin(am)+3.5).toFixed(1)}" text-anchor="middle" font-family="var(--f-body)" font-weight="800" font-size="9" fill="#fff">${n}</text>`}).join("")}<circle cx="${cx}" cy="${cy}" r="${r0-2}" fill="var(--paper)"/>${svgT(cx,cy+4,"nez",{a:"middle",s:11,c:"var(--grape-ink)"})}</svg>`},
+  defauts:()=>{const c=(x,y,t,s,ic)=>`<rect x="${x}" y="${y}" width="114" height="62" rx="12" fill="var(--paper)" stroke="var(--line)" stroke-width="2"/>${ic(x+26,y+31)}${svgT(x+48,y+28,t,{s:11})}${svgT(x+48,y+42,s,{s:9,w:700,c:"var(--muted-ink)"})}`;
+    const bouchon=(x,y)=>`<rect x="${x-9}" y="${y-14}" width="18" height="28" rx="4" fill="#C9A26B"/><path d="M${x-14} ${y-14}l28 28M${x+14} ${y-14}l-28 28" stroke="var(--bad-btn)" stroke-width="3"/>`;
+    const pomme=(x,y)=>`<circle cx="${x}" cy="${y+2}" r="13" fill="#B98A57"/><path d="M${x} ${y-11}c0-5 3-8 6-9" stroke="var(--leaf-deep)" stroke-width="2.5" fill="none"/>`;
+    const allumette=(x,y)=>`<path d="M${x-12} ${y+12}l20-20" stroke="#C9A26B" stroke-width="4" stroke-linecap="round"/><circle cx="${x+10}" cy="${y-10}" r="5" fill="#5A4A3A"/><path d="M${x+12} ${y-18}q4-4 0-8" stroke="var(--muted-ink)" stroke-width="2" fill="none"/>`;
+    const fer=(x,y)=>`<path d="M${x-12} ${y+12}v-10a12 12 0 0 1 24 0v10" stroke="#8A6236" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+    return `<svg viewBox="0 0 250 146">${c(6,6,"Bouchonné","carton mouillé",bouchon)}${c(130,6,"Oxydé","pomme, noix",pomme)}${c(6,78,"Réduit","œuf, allumette",allumette)}${c(130,78,"Brett","écurie, sueur",fer)}</svg>`},
+  "courbe-garde":()=>{const X=a=>22+a*7.2,Y=v=>118-v;
+    const courbe=(pic,fin,h,c)=>{const x0=X(0),y0=Y(18),xp=X(pic),yp=Y(h),xe=X(fin),ye=Y(10);return `<path d="M${x0} ${y0}C${x0+(xp-x0)*.45} ${y0} ${xp-(xp-x0)*.45} ${yp} ${xp} ${yp}C${xp+(xe-xp)*.4} ${yp} ${xe-(xe-xp)*.35} ${ye} ${xe} ${ye}" stroke="${c}" stroke-width="3" fill="none"/>`};
+    const leg=[["rosé, blanc léger","var(--leaf-ink)"],["rouge moyen","var(--gold-ink)"],["grand vin de garde","var(--grape-ink)"]];
+    return `<svg viewBox="0 0 250 186"><path d="M22 118H244M22 118V10" stroke="var(--ink)" stroke-width="1.5"/>${courbe(1,4,40,"var(--leaf-ink)")}${courbe(5,13,62,"var(--gold-ink)")}${courbe(15,30,90,"var(--grape-ink)")}${leg.map(([n,c],i)=>`<path d="M${[22,118,22][i]} ${[162,162,176][i]}h14" stroke="${c}" stroke-width="3"/>${svgT([40,136,40][i],[166,166,180][i],n,{s:9,c})}`).join("")}${svgT(26,14,"plaisir",{s:10,c:"var(--muted-ink)"})}${svgT(244,134,"années →",{a:"end",s:10,c:"var(--muted-ink)"})}${[0,10,20,30].map(a=>`${svgT(X(a),146,a,{a:"middle",s:9,w:700,c:"var(--muted-ink)"})}`).join("")}</svg>`},
+  "balance-accord":()=>`<svg viewBox="0 0 250 140"><path d="M125 26v92M95 122h60" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/><path d="M45 34H205" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/><circle cx="125" cy="26" r="6" fill="var(--gold)"/><path d="M45 34l-22 36h44zM205 34l-22 36h44z" fill="none" stroke="var(--muted-ink)" stroke-width="1.5"/><path d="M19 70h52q-4 10-26 10t-26-10z" fill="var(--line)"/><ellipse cx="45" cy="64" rx="18" ry="6" fill="#B98A57"/><path d="M196 44h18l-2 14q-2 6-7 6t-7-6z" fill="var(--grape)"/><path d="M205 64v6" stroke="var(--ink)" stroke-width="2"/>${svgT(45,98,"le plat",{a:"middle",s:12})}${svgT(205,98,"le vin",{a:"middle",s:12})}${svgT(125,136,"d'abord, des poids qui s'équilibrent",{a:"middle",s:11,c:"var(--grape-ink)"})}</svg>`,
+  "accords-types":()=>{const col=(x,t,a,b,s,sym)=>`<rect x="${x}" y="6" width="78" height="128" rx="12" fill="var(--paper)" stroke="var(--line)" stroke-width="2"/>${svgT(x+39,26,t,{a:"middle",s:11,c:"var(--grape-ink)"})}${svgT(x+39,52,a,{a:"middle",s:10})}${svgT(x+39,72,sym,{a:"middle",s:16,c:"var(--gold-ink)"})}${svgT(x+39,92,b,{a:"middle",s:10})}${svgT(x+39,120,s,{a:"middle",s:9,w:700,c:"var(--muted-ink)"})}`;
+    return `<svg viewBox="0 0 250 140">${col(4,"Région","Vin jaune","Comté","même terroir","+")}${col(86,"Ressemblance","Chardonnay","Sauce crème","même texture","=")}${col(168,"Contraste","Sauternes","Roquefort","sucré / salé","↔")}</svg>`},
+  aveugle:()=>`<svg viewBox="0 0 250 140"><path d="M20 14h40l-4 36q-2 16-16 18q-14-2-16-18z" fill="#1E1A1B"/><path d="M40 68v22M26 92h28" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>${svgT(40,44,"?",{a:"middle",s:22,c:"#fff"})}${[["Robe","couleur, âge"],["Nez","cépage, climat, bois"],["Bouche","structure"],["Conclusion","cépage, région, âge"]].map(([t,s],i)=>`<rect x="78" y="${6+i*33}" width="166" height="27" rx="9" fill="${i===3?"var(--grape-btn)":"var(--paper)"}" stroke="var(--line)" stroke-width="2"/>${svgT(88,24+i*33,t,{s:11,c:i===3?"#fff":"var(--ink)"})}${svgT(236,24+i*33,s,{a:"end",s:9,w:700,c:i===3?"#fff":"var(--muted-ink)"})}`).join("")}</svg>`,
   "cuve-close":()=>`<svg viewBox="0 0 250 140"><rect x="16" y="12" width="96" height="106" rx="14" fill="#C9D3DA" stroke="var(--ink)" stroke-width="2"/><rect x="18" y="40" width="92" height="76" rx="12" fill="#F3E9B5"/>${[[34,100],[50,80],[66,96],[82,70],[94,92],[42,60],[74,52]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="#fff" stroke="#D8C77A"/>`).join("")}<path d="M112 80h36" stroke="var(--ink)" stroke-width="2"/><path d="M142 74l8 6-8 6" stroke="var(--ink)" stroke-width="2" fill="none"/>${[164,192,220].map(x=>`<path d="M${x-4} 44h8v12c6 4 8 9 8 15v38h-24V71c0-6 2-11 8-15z" fill="#4E7A3A"/>`).join("")}${svgT(64,134,"2e fermentation en cuve",{a:"middle",s:11})}${svgT(192,134,"mise sous pression",{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}${svgT(64,30,"cuve close",{a:"middle",s:12,c:"var(--grape-ink)"})}</svg>`,
   ancestrale:()=>`<svg viewBox="0 0 250 148"><rect x="16" y="30" width="70" height="80" rx="8" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><rect x="18" y="56" width="66" height="52" rx="6" fill="#F3E9B5"/>${svgT(51,128,"fermentation",{a:"middle",s:11})}${svgT(51,22,"elle commence…",{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}<path d="M90 70h50" stroke="var(--ink)" stroke-width="2"/><path d="M134 64l8 6-8 6" stroke="var(--ink)" stroke-width="2" fill="none"/>${svgT(115,60,"on met en",{a:"middle",s:9,w:700,c:"var(--muted-ink)"})}${svgT(115,92,"bouteille",{a:"middle",s:9,w:700,c:"var(--muted-ink)"})}<path d="M180 14h12v20c12 8 14 16 14 26v52h-40V60c0-10 2-18 14-26z" fill="#4E7A3A" stroke="var(--ink)" stroke-width="1"/>${[[178,90],[190,78],[184,66],[194,98],[180,104]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="#F3E9B5"/>`).join("")}${svgT(186,128,"…et finit ici",{a:"middle",s:11})}${svgT(186,140,"une seule fermentation",{a:"middle",s:9,w:700,c:"var(--grape-ink)"})}</svg>`,
   "fut-chene":()=>`<svg viewBox="0 0 250 140"><ellipse cx="70" cy="66" rx="56" ry="48" fill="#B98A57"/><path d="M14 66h112" stroke="#8A6236" stroke-width="1.5"/>${[-30,-14,14,30].map(d=>`<path d="M${70+d} 19q${d*.5} 47 0 94" stroke="#8A6236" stroke-width="1.5" fill="none"/>`).join("")}${[26,114].map(x=>`<path d="M${x} 24q${x<70?-14:14} 42 0 84" stroke="#3A2A1A" stroke-width="5" fill="none"/>`).join("")}<circle cx="70" cy="44" r="5" fill="#3A2A1A"/>${svgT(70,72,"225 L",{a:"middle",s:15,c:"#fff"})}${svgT(70,132,"barrique bordelaise",{a:"middle",s:10,w:700,c:"var(--muted-ink)"})}${svgT(140,26,"Fût neuf",{s:12,c:"var(--grape-ink)"})}${svgT(140,40,"vanille, toasté, épices",{s:10,w:700,c:"var(--muted-ink)"})}${svgT(140,62,"Fût ancien",{s:12,c:"var(--grape-ink)"})}${svgT(140,76,"oxygène, peu de goût",{s:10,w:700,c:"var(--muted-ink)"})}${svgT(140,98,"Chêne américain",{s:12,c:"var(--grape-ink)"})}${svgT(140,112,"vanille, noix de coco",{s:10,w:700,c:"var(--muted-ink)"})}</svg>`,
@@ -617,13 +656,14 @@ IL.profil = c => {
    un lieu : nom dans carte-vins.json (vin ou ville), côté de l'étiquette ("d" droite par défaut, "g" gauche, "h" haut, "b" bas), nom affiché facultatif.
    Cadre : toute la région, ou les lieux et villes si cadre:"lieux". */
 IL["carte-region"] = c => {
-  const reg = D.carteVins.regions.find(r => r.id === c.region); if (!reg) return IL.raisin();
-  const F = D.carteFrance, W = 250, H = 180, M = 8;
+  const monde = c.fond === "monde", CV = monde ? D.carteMondeVins : D.carteVins, pj = monde ? projMonde : proj;
+  const reg = CV.regions.find(r => r.id === c.region); if (!reg) return IL.raisin();
+  const F = { deps: monde ? D.carteMonde.pays : D.carteFrance.deps }, W = 250, H = 180, M = 8;
   const pts = d => [...d.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)].map(m => [+m[1], +m[2]]);
   const boite = ps => ps.reduce((b, [x, y]) => [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)], [1e9, 1e9, -1e9, -1e9]);
-  const trouve = nom => D.carteVins.vins.find(v => v.vin === nom) || D.carteVins.villes.find(v => v.nom === nom);
-  const lieux = (c.lieux || []).map(l => { const [nom, cote = "d", affiche = nom] = Array.isArray(l) ? l : [l]; const v = trouve(nom); return v && { nom: affiche, cote, p: proj(v.lat, v.lon) }; }).filter(Boolean);
-  const villes = (c.villes || []).map(nom => { const v = trouve(nom); return v && { nom, cote: "d", p: proj(v.lat, v.lon), ville: true }; }).filter(Boolean);
+  const trouve = nom => CV.vins.find(v => v.vin === nom) || CV.villes.find(v => v.nom === nom);
+  const lieux = (c.lieux || []).map(l => { const [nom, cote = "d", affiche = nom] = Array.isArray(l) ? l : [l]; const v = trouve(nom); return v && { nom: affiche, cote, p: pj(v.lat, v.lon) }; }).filter(Boolean);
+  const villes = (c.villes || []).map(nom => { const v = trouve(nom); return v && { nom, cote: "d", p: pj(v.lat, v.lon), ville: true }; }).filter(Boolean);
   let b;
   if (c.cadre === "lieux" && lieux.length) { b = boite([...lieux, ...villes].map(l => l.p)); const m = Math.max(4, .18 * Math.max(b[2] - b[0], b[3] - b[1])); b = [b[0] - m, b[1] - m, b[2] + m, b[3] + m]; }
   else { b = boite(reg.deps.flatMap(d => pts(F.deps[d].d))); b = [b[0] - 4, b[1] - 4, b[2] + 4, b[3] + 4]; }
@@ -665,7 +705,7 @@ const illu = (k, carte) => (IL[k] || IL.raisin)(carte);
 
 /* ---------------- sauvegarde ---------------- */
 function freshState(){
-  return { v:1, xp:0, streak:{count:0,last:null}, days:{}, done:{}, quiz:{}, games:{}, badges:{}, mistakes:[], daily:{}, map:{games:0, best:{}, regions:{}}, gloss:{}, theme:null };
+  return { v:1, xp:0, streak:{count:0,last:null}, days:{}, done:{}, quiz:{}, games:{}, badges:{}, mistakes:[], daily:{}, carteJour:{}, map:{games:0, best:{}, regions:{}, pays:{}}, gloss:{}, theme:null };
 }
 // Répare une sauvegarde abîmée, d'une ancienne version ou mal importée : chaque champ retrouve le type attendu.
 function normaliser(o){
@@ -675,10 +715,10 @@ function normaliser(o){
   if (!obj(o)) return s;
   s.xp = Math.max(0, num(o.xp, 0));
   if (obj(o.streak)) s.streak = { count:Math.max(0, num(o.streak.count, 0)), last:typeof o.streak.last === "string" ? o.streak.last : null };
-  for (const k of ["days", "done", "games", "badges", "daily", "gloss"]) if (obj(o[k])) s[k] = o[k];
+  for (const k of ["days", "done", "games", "badges", "daily", "carteJour", "gloss"]) if (obj(o[k])) s[k] = o[k];
   if (obj(o.quiz)) s.quiz = Object.fromEntries(Object.entries(o.quiz).filter(([, q]) => obj(q)));
   if (Array.isArray(o.mistakes)) s.mistakes = o.mistakes.filter(x => typeof x === "string").slice(-60);
-  if (obj(o.map)) s.map = { ...o.map, games:num(o.map.games, 0), best:obj(o.map.best) ? o.map.best : {}, regions:obj(o.map.regions) ? o.map.regions : {} };
+  if (obj(o.map)) s.map = { ...o.map, games:num(o.map.games, 0), best:obj(o.map.best) ? o.map.best : {}, regions:obj(o.map.regions) ? o.map.regions : {}, pays:obj(o.map.pays) ? o.map.pays : {} };
   if (o.theme === "light" || o.theme === "dark") s.theme = o.theme;
   return s;
 }
@@ -717,6 +757,7 @@ function checkBadges(){
   if (Object.keys(ST.gloss).length >= 20) award("lexique");
   if (ST.map.games >= 3) award("explorateur");
   if (D.carteVins && D.carteVins.regions.every(r => ST.map.regions[r.id])) award("tour-de-france");
+  if (D.carteMondeVins && D.carteMondeVins.regions.every(r => ST.map.pays[r.id])) award("tour-du-monde");
 }
 function levelUnlocked(id){ return id === 1 || !!(ST.quiz[id-1] && ST.quiz[id-1].passed); }
 function nodeKey(level, step){ return step === "quiz" ? `quiz:${level}` : step; }
@@ -850,6 +891,7 @@ const CHAMP_PROMPT = {
 };
 const STYLES = ["rouge","blanc sec","rosé","effervescent","moelleux / liquoreux","muté","vin jaune (oxydatif)"];
 
+const PAYS_VIN = ["France","Italie","Espagne","Portugal","Allemagne","Autriche","Hongrie","Grèce","États-Unis","Argentine","Chili","Australie","Nouvelle-Zélande","Afrique du Sud"];   /* choix proposés pour « De quel pays vient ce vin ? » */
 function genLabelQuestions(n, rnd = Math.random){   // rnd : tirage déterministe pour le défi du jour
   const regionsNom = Object.fromEntries(D.carteVins.regions.map(r => [r.id, r.nom]));
   const labels = shuffle(D.etiquettes.etiquettes, rnd).slice(0, n);
@@ -858,7 +900,7 @@ function genLabelQuestions(n, rnd = Math.random){   // rnd : tirage déterminist
     const kind = kinds[i % 3];
     if (kind === "region") {
       if (l.region === "hors-france") {
-        return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"De quel pays vient ce vin ?", choix:shuffle(["Portugal","Espagne","Italie","France"], rnd), bonneTexte:l.pays, explication:l.note, id:`gen-pays-${l.id}` };
+        return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"De quel pays vient ce vin ?", choix:shuffle([l.pays, ...shuffle(PAYS_VIN.filter(p => p !== l.pays), rnd).slice(0, 3)], rnd), bonneTexte:l.pays, explication:l.note, id:`gen-pays-${l.id}` };
       }
       const others = shuffle(Object.keys(regionsNom).filter(r => r !== l.region), rnd).slice(0, 3).map(r => regionsNom[r]);
       return { type:"etiquette", etiquette:l.id, mode:"qcm", question:"De quelle région vient ce vin ?", choix:shuffle([regionsNom[l.region], ...others], rnd), bonneTexte:regionsNom[l.region], explication:l.note, id:`gen-region-${l.id}` };
@@ -882,16 +924,28 @@ const unproj = (x, y) => [PROJ.lat0 - y / PROJ.k, x / (PROJ.cos * PROJ.k) + PROJ
 function km(a, b){ const R = 6371, r = Math.PI/180; const dLa = (b[0]-a[0])*r, dLo = (b[1]-a[1])*r; const x = Math.sin(dLa/2)**2 + Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(x)); }
 const REGION_COLORS = { bordeaux:"#9B2C4B", bourgogne:"#B5475E", beaujolais:"#C2577F", champagne:"#D9B44A", alsace:"#6E9E4A", loire:"#4F8FA6", rhone:"#B4553A", "languedoc-roussillon":"#C98536", provence:"#E58FA0", "sud-ouest":"#8E6BB0", jura:"#C9A23A", savoie:"#5E9C8C", corse:"#7A8F3A" };
 const FRANCE_VB = { x:-560, y:-500, w:1100, h:1100 };
+/* fond mondial : équirectangulaire, x = lon · cos(35°) · 10, y = -lat · 10 (identique à tools/build-monde.py) */
+const PROJ_MONDE = { k:10, cos:Math.cos(35*Math.PI/180) };
+const projMonde = (lat, lon) => [lon * PROJ_MONDE.cos * PROJ_MONDE.k, -lat * PROJ_MONDE.k];
+const unprojMonde = (x, y) => [-y / PROJ_MONDE.k, x / (PROJ_MONDE.cos * PROJ_MONDE.k)];
+const MONDE_COLORS = { italie:"#9B2C4B", espagne:"#C98536", portugal:"#B4553A", allemagne:"#D9B44A", autriche:"#6E9E4A", hongrie:"#C2577F", grece:"#4F8FA6", "etats-unis":"#8E6BB0", argentine:"#5E9C8C", chili:"#B5475E", australie:"#E58FA0", "nouvelle-zelande":"#7A8F3A", "afrique-du-sud":"#C9A23A", france:"#5E0F28" };
+/* un « fond » réunit tout ce qu'il faut à la carte : géométrie, projection, cadrage, zones (régions ou pays), lieux, paliers */
+const FONDS = {};
+function initFonds(){
+  FONDS.france = { id:"france", nom:"France", formes:D.carteFrance.deps, contour:D.carteFrance.outline, proj, unproj, VB:FRANCE_VB, zoom:[6, 1500], bornes:[-900, 700, -900, 800], cv:D.carteVins, couleurs:REGION_COLORS, source:D.carteFrance.source, label:"Carte de France des vignobles" };
+  if (D.carteMonde && D.carteMondeVins) FONDS.monde = { id:"monde", nom:"Monde", formes:D.carteMonde.pays, contour:null, proj:projMonde, unproj:unprojMonde, VB:{ x:-1286, y:-1600, w:2900, h:2900 }, zoom:[20, 3200], bornes:[-1800, 1700, -1800, 1100], cv:D.carteMondeVins, couleurs:MONDE_COLORS, source:D.carteMonde.source, label:"Carte du monde des vignobles" };
+}
+const fondDe = id => FONDS[id || "france"] || FONDS.france;
 
 function MapView(host, opts = {}){
-  const F = D.carteFrance;
+  const FD = fondDe(opts.fond), proj = FD.proj, unproj = FD.unproj, VB0 = FD.VB;
   const depRegion = {};
-  D.carteVins.regions.forEach(r => r.deps.forEach(d => { if (!depRegion[d]) depRegion[d] = r.id; }));
-  let vb = {...FRANCE_VB};
+  FD.cv.regions.forEach(r => r.deps.forEach(d => { if (!depRegion[d]) depRegion[d] = r.id; }));
+  let vb = {...VB0};
   const box = h(`<div class="map-box">
-    <svg viewBox="${vb.x} ${vb.y} ${vb.w} ${vb.h}" role="img" aria-label="Carte de France des vignobles">
-      <g class="g-deps">${Object.entries(F.deps).map(([c, d]) => `<path class="dep" data-dep="${c}" d="${d.d}"/>`).join("")}</g>
-      <path class="outline" d="${F.outline}"/>
+    <svg viewBox="${vb.x} ${vb.y} ${vb.w} ${vb.h}" role="img" aria-label="${FD.label}">
+      <g class="g-deps">${Object.entries(FD.formes).map(([c, d]) => `<path class="dep" data-dep="${c}" d="${d.d}"/>`).join("")}</g>
+      ${FD.contour ? `<path class="outline" d="${FD.contour}"/>` : ""}
       <g class="g-cities"></g><g class="g-marks"></g>
     </svg>
     <div class="map-zoom"><button type="button" data-z="in" aria-label="Zoomer">${I.plus}</button><button type="button" data-z="out" aria-label="Dézoomer">${I.minus}</button><button type="button" data-z="fit" aria-label="Recentrer">${I.fit}</button></div>
@@ -902,23 +956,23 @@ function MapView(host, opts = {}){
   const state = { cities: opts.cities ?? true, regions: opts.regions ?? false, guess:null, truth:null, enabled:true, highlight:null };
 
   const scale = () => vb.w / (svg.getBoundingClientRect().width || 360);
-  function setVB(n){ const w = Math.max(6, Math.min(1500, n.w)); const hh = w * (FRANCE_VB.h / FRANCE_VB.w); const cx = n.x + n.w/2, cy = n.y + n.h/2; vb = { x: Math.max(-900, Math.min(700, cx - w/2)), y: Math.max(-900, Math.min(800, cy - hh/2)), w, h: hh }; svg.setAttribute("viewBox", `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); drawOverlays(); }
+  function setVB(n){ const w = Math.max(FD.zoom[0], Math.min(FD.zoom[1], n.w)); const hh = w * (VB0.h / VB0.w); const cx = n.x + n.w/2, cy = n.y + n.h/2; const [x0, x1, y0, y1] = FD.bornes; vb = { x: Math.max(x0, Math.min(x1, cx - w/2)), y: Math.max(y0, Math.min(y1, cy - hh/2)), w, h: hh }; svg.setAttribute("viewBox", `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); drawOverlays(); }
   function zoomAt(f, px, py){ const nw = vb.w * f, nh = vb.h * f; setVB({ x: px - (px - vb.x) * f, y: py - (py - vb.y) * f, w: nw, h: nh }); }
   function toSvg(cx, cy){ const pt = svg.createSVGPoint(); pt.x = cx; pt.y = cy; const p = pt.matrixTransform(svg.getScreenCTM().inverse()); return [p.x, p.y]; }
-  function fitTo(points, pad = 60){ if (!points.length) return setVB({...FRANCE_VB}); const xs = points.map(p => p[0]), ys = points.map(p => p[1]); const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys); const w = Math.max(x1 - x0, y1 - y0) + pad * 2; setVB({ x:(x0+x1)/2 - w/2, y:(y0+y1)/2 - w/2, w, h:w }); }
+  function fitTo(points, pad = 60){ if (!points.length) return setVB({...VB0}); const xs = points.map(p => p[0]), ys = points.map(p => p[1]); const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys); const w = Math.max(x1 - x0, y1 - y0) + pad * 2; setVB({ x:(x0+x1)/2 - w/2, y:(y0+y1)/2 - w/2, w, h:w }); }
 
   function paintDeps(){
     for (const [c, el] of Object.entries(depEls)) {
       const r = depRegion[c];
       let fill = "";
       if (state.highlight && state.highlight.includes(c)) fill = "var(--gold)";
-      else if (state.regions && r) fill = `color-mix(in srgb, ${REGION_COLORS[r]} 32%, var(--land))`;
+      else if (state.regions && r) fill = `color-mix(in srgb, ${FD.couleurs[r] || "var(--gold)"} 32%, var(--land))`;
       el.style.fill = fill;
     }
   }
   function drawOverlays(){
     const s = scale();
-    gC.innerHTML = state.cities ? D.carteVins.villes.map(v => {
+    gC.innerHTML = state.cities ? FD.cv.villes.map(v => {
       const [x, y] = proj(v.lat, v.lon);
       // libellé à gauche du point quand il sortirait du cadre à droite (Strasbourg, Ajaccio…)
       const gauche = x + 5*s + v.nom.length * 6.5 * s > vb.x + vb.w - 4*s;
@@ -955,28 +1009,33 @@ function MapView(host, opts = {}){
   };
   svg.addEventListener("pointerup", end); svg.addEventListener("pointercancel", end);
   svg.addEventListener("wheel", e => { e.preventDefault(); const [x, y] = toSvg(e.clientX, e.clientY); zoomAt(e.deltaY > 0 ? 1.2 : 1/1.2, x, y); }, { passive:false });
-  box.querySelector(".map-zoom").addEventListener("click", e => { const z = e.target.closest("[data-z]")?.dataset.z; if (!z) return; const cx = vb.x + vb.w/2, cy = vb.y + vb.h/2; if (z === "in") zoomAt(1/1.5, cx, cy); else if (z === "out") zoomAt(1.5, cx, cy); else setVB({...FRANCE_VB}); });
+  box.querySelector(".map-zoom").addEventListener("click", e => { const z = e.target.closest("[data-z]")?.dataset.z; if (!z) return; const cx = vb.x + vb.w/2, cy = vb.y + vb.h/2; if (z === "in") zoomAt(1/1.5, cx, cy); else if (z === "out") zoomAt(1.5, cx, cy); else setVB({...VB0}); });
 
   paintDeps(); drawOverlays();
   try { new ResizeObserver(() => drawOverlays()).observe(svg); } catch(e) { requestAnimationFrame(drawOverlays); }
   return {
     set(o){ Object.assign(state, o); paintDeps(); drawOverlays(); },
-    reset(){ state.guess = null; state.truth = null; state.highlight = null; state.distLabel = null; state.enabled = true; paintDeps(); setVB({...FRANCE_VB}); },
+    reset(){ state.guess = null; state.truth = null; state.highlight = null; state.distLabel = null; state.enabled = true; paintDeps(); setVB({...VB0}); },
     reveal(truthLatLon, guessLatLon, distLabel, highlight){ state.truth = proj(...truthLatLon); state.guess = proj(...guessLatLon); state.distLabel = distLabel; state.enabled = false; state.highlight = highlight || null; paintDeps();
       /* région surlignée : on cadre toute la région (et pas seulement les deux points, sinon le zoom la rend méconnaissable) */
       const pts = [state.truth, state.guess];
       for (const c of state.highlight || []) { try { const b = depEls[c]?.getBBox(); if (b && b.width) pts.push([b.x, b.y], [b.x + b.width, b.y + b.height]); } catch(e) {} }
       fitTo(pts, state.highlight ? 25 : 50); },
-    inRegion(latlon, regionId){ const reg = D.carteVins.regions.find(r => r.id === regionId); if (!reg) return false; const [x, y] = proj(...latlon); const pt = svg.createSVGPoint(); pt.x = x; pt.y = y; return reg.deps.some(d => { const p = depEls[d]; try { return p && p.isPointInFill(pt); } catch(e) { return false; } }); },
+    inRegion(latlon, regionId){ const reg = FD.cv.regions.find(r => r.id === regionId); if (!reg) return false; const [x, y] = proj(...latlon); const pt = svg.createSVGPoint(); pt.x = x; pt.y = y; return reg.deps.some(d => { const p = depEls[d]; try { return p && p.isPointInFill(pt); } catch(e) { return false; } }); },
     get guessed(){ return !!state.guess; }
   };
 }
+const dansLaZone = FD => FD.id === "monde" ? "dans le pays !" : "dans la région !";
+const distTexte = d => d < 1 ? `${Math.round(d * 1000)} m` : `${fmt(Math.round(d))} km`;
+/* zone trouvée au palier 1 (≥ 4 000 points) : badges « Tour de France » et « Tour du monde » */
+function noterZone(entry, score){ if (entry.palier !== 1 || score < 4000) return; if ((entry.fond || "france") === "monde") ST.map.pays[entry.region] = 1; else ST.map.regions[entry.region] = 1; }
 function scoreMap(entry, guess, map){
-  const palier = D.carteVins.paliers.find(p => p.id === entry.palier);
+  const CV = fondDe(entry.fond).cv;
+  const palier = CV.paliers.find(p => p.id === entry.palier);
   let d = km([entry.lat, entry.lon], guess);
   let inside = false;
   if (entry.palier === 1) {
-    const reg = D.carteVins.regions.find(r => r.id === entry.region);
+    const reg = CV.regions.find(r => r.id === entry.region);
     inside = map.inRegion(guess, entry.region);
     const dAnch = Math.min(...reg.ancres.map(a => km(a, guess)));
     d = Math.min(d, dAnch);
@@ -1109,9 +1168,10 @@ Q.indices = (q, onChange) => {
 Q.carte = (q, onChange) => {
   const el = h(`<div><div class="round-card">${I.bottle.replace("<svg",'<svg class="bottle" style="color:var(--grape-ink)"')}<div><div class="vin">${esc(q.entry.vin)}</div><div class="det">${esc(q.entry.detail)}</div></div></div><div class="mapholder"></div></div>`);
   let guess = null;
-  const mv = MapView(el.querySelector(".mapholder"), { cities:true, onPick:g => { guess = g; onChange(); } });
+  const FD = fondDe(q.entry.fond);
+  const mv = MapView(el.querySelector(".mapholder"), { fond:FD.id, cities:true, onPick:g => { guess = g; onChange(); } });
   return { el, ready:() => !!guess,
-    check(){ const r = scoreMap(q.entry, guess, mv); const reg = D.carteVins.regions.find(x => x.id === q.entry.region); const p1 = q.entry.palier === 1; mv.reveal([q.entry.lat, q.entry.lon], guess, r.inside ? "dans la région !" : r.d < 1 ? `${Math.round(r.d * 1000)} m` : `${Math.round(r.d)} km`, p1 ? reg.deps : null); const ok = r.score >= 3000;   /* comme la Carte libre : région surlignée au seul palier 1 */ if (q.entry.palier === 1 && r.score >= 4000) { ST.map.regions[q.entry.region] = 1; } return { ok, answer:`${p1 ? reg.nom : `${q.entry.vin} (${reg.nom})`} — ${fmt(r.score)} points`, extra:r }; } };
+    check(){ const r = scoreMap(q.entry, guess, mv); const reg = FD.cv.regions.find(x => x.id === q.entry.region); const p1 = q.entry.palier === 1; mv.reveal([q.entry.lat, q.entry.lon], guess, r.inside ? dansLaZone(FD) : distTexte(r.d), p1 ? reg.deps : null); const ok = r.score >= 3000;   /* comme la Carte libre : zone surlignée au seul palier 1 */ noterZone(q.entry, r.score); return { ok, answer:`${p1 ? reg.nom : `${q.entry.vin} (${reg.nom})`} — ${fmt(r.score)} points`, extra:r }; } };
 };
 
 /* ---------------- runner de session ---------------- */
@@ -1179,7 +1239,7 @@ function runSession(steps, opts){
     if (!r.ok && opts.requeue && !retried.has(q)) { retried.add(q); queue.push({ kind:"q", q, retry:true }); }
     const good = ["Bien joué !","Excellent !","Parfait !","Santé !","Tu as le nez !","Bravo !"];
     sheet = h(`<div class="sheet ${r.ok?"ok":"ko"}"><div class="wrap"><h3>${r.ok?I.check:I.cross}${r.ok ? pick(good) : "Pas tout à fait"}</h3>
-      <div class="expl">${!r.ok && r.answer ? `<p class="answer">Bonne réponse : ${esc(r.answer)}</p>` : ""}${r.ok && r.answer && q.type === "carte" ? `<p><b>${esc(r.answer)}</b></p>` : ""}${r.bonus ? `<p><b>+${r.bonus} point${r.bonus>1?"s":""} bonus d'indices</b></p>` : ""}${q.explication ? `<p>${esc(q.explication)}</p>` : ""}${q.type==="carte" ? `<p>${esc(D.carteVins.regions.find(x=>x.id===q.entry.region).fiche)}</p>` : ""}</div>
+      <div class="expl">${!r.ok && r.answer ? `<p class="answer">Bonne réponse : ${esc(r.answer)}</p>` : ""}${r.ok && r.answer && q.type === "carte" ? `<p><b>${esc(r.answer)}</b></p>` : ""}${r.bonus ? `<p><b>+${r.bonus} point${r.bonus>1?"s":""} bonus d'indices</b></p>` : ""}${q.explication ? `<p>${esc(q.explication)}</p>` : ""}${q.type==="carte" ? `<p>${esc(fondDe(q.entry.fond).cv.regions.find(x=>x.id===q.entry.region).fiche)}</p>` : ""}</div>
       <button class="btn ${r.ok?"leaf":"bad"} block" data-cont>Continuer</button></div></div>`);
     foot.innerHTML = ""; ses.appendChild(sheet);
     // la feuille recouvre le bas de la question : on réserve sa hauteur pour pouvoir tout faire défiler
@@ -1275,7 +1335,8 @@ function buildDaily(){
   const fresh = shuffle(pool, rnd).filter((q, i, a) => a.indexOf(q) === i).slice(0, 4 - review.length);
   const qs = [...review, ...fresh];
   const lbl = genLabelQuestions(1, rnd)[0];
-  const ent = pick(D.carteVins.vins.filter(v => v.palier === 1), rnd);
+  const monde = FONDS.monde && LEVELS[5] && levelUnlocked(5) && rnd() < 1/3;   /* une fois le niveau 5 ouvert, un jour sur trois, le vin vient du monde */
+  const ent = monde ? { ...pick(D.carteMondeVins.vins.filter(v => v.palier === 1), rnd), fond:"monde" } : pick(D.carteVins.vins.filter(v => v.palier === 1), rnd);
   const mapQ = { type:"carte", id:`map-${ent.vin}`, question:"Où est produit ce vin ? Touche la carte.", entry:ent, explication:"" };
   return [...qs, lbl, mapQ];
 }
@@ -1367,56 +1428,78 @@ function viewCarte(){
   if (!MAPGAME || MAPGAME.over) return mapSetup(el);
   return mapRound(el);
 }
+/* records de la Carte libre : clé = palier pour la France (historique), "m" + palier pour le monde */
+const cleRecord = (fond, t) => fond === "monde" ? `m${t}` : t;
+/* Carte du jour : 5 lieux tirés d'après la date seule, donc les mêmes pour tous les joueurs (France : région, sous-région,
+   appellation ; monde : pays, région). Seul le premier essai compte pour le classement personnel. */
+function carteDuJour(t = todayStr()){
+  const rnd = seeded("carte-du-jour-" + t);
+  const tire = (fond, p) => { const v = pick(fondDe(fond).cv.vins.filter(x => x.palier === p), rnd); return fond === "monde" ? { ...v, fond } : v; };
+  const r = [tire("france", 1), tire("france", 2), tire("france", 3)];
+  if (FONDS.monde) r.push(tire("monde", 1), tire("monde", 2)); else r.push(tire("france", 4), tire("france", 1));
+  return r;
+}
+const nouvelleCarteDuJour = () => ({ jour:todayStr(), fond:"france", tier:0, rounds:carteDuJour(), i:0, scores:[], over:false, revealed:false });
+const nouvellePartie = (fond, t, prec = {}) => { const pool = fondDe(fond).cv.vins.filter(v => v.palier === t).map(v => fond === "monde" ? { ...v, fond } : v);
+  return { fond, tier:t, rounds:shuffle(pool).slice(0, 5), i:0, scores:[], over:false, revealed:false, showCities:prec.showCities, showRegions:prec.showRegions }; };
 function mapSetup(el){
-  const P = D.carteVins.paliers;
-  const sel = ST.map.lastTier || 1;
+  let fond = FONDS[ST.map.lastFond] ? ST.map.lastFond : "france";
   el.appendChild(h(`<div><div class="eyebrow">Mode libre · toujours accessible</div><h1 style="font-size:32px">Carte libre</h1><p style="color:var(--muted);margin-top:4px">On te montre un vin, tu le places sur la carte. Plus tu es proche, plus tu marques : 5 000 points maximum par manche, 5 manches par partie.</p></div>`));
-  el.appendChild(h(`<div style="margin-top:14px" class="seg" role="group" aria-label="Zone"><button aria-pressed="true">France</button><button disabled title="Arrive avec le niveau 5">Monde · bientôt</button></div>`));
-  const tiers = h(`<div class="tiers" role="group" aria-label="Difficulté">${P.map(p => `<button class="tier" data-t="${p.id}" aria-pressed="${p.id===sel}"><span class="lv">${p.id}</span>${esc(p.nom)}</button>`).join("")}</div>`);
+  const seg = h(`<div style="margin-top:14px" class="seg" role="group" aria-label="Zone">${["france", "monde"].map(f => FONDS[f] ? `<button data-f="${f}" aria-pressed="${f === fond}">${FONDS[f].nom}</button>` : "").join("")}</div>`);
+  const tiers = h(`<div class="tiers" role="group" aria-label="Difficulté"></div>`);
   const desc = h(`<p style="font-weight:700;min-height:24px"></p>`);
   const best = h(`<p style="color:var(--muted);font-size:14px;margin-bottom:14px"></p>`);
-  let t = sel;
-  const upd = () => { const p = P.find(x => x.id === t); desc.textContent = `${p.nom} : ${p.desc}`; best.textContent = ST.map.best[t] ? `Ton record à ce niveau : ${fmt(ST.map.best[t])} / 25 000` : "Pas encore de record à ce niveau."; tiers.querySelectorAll(".tier").forEach(b => b.setAttribute("aria-pressed", +b.dataset.t === t)); };
+  const aide = h(`<div class="panel" style="margin-top:22px"></div>`);
+  let t = 1;
+  const upd = () => {
+    const FD = fondDe(fond), P = FD.cv.paliers, k = cleRecord(fond, t), monde = fond === "monde";
+    seg.querySelectorAll("[data-f]").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === fond));
+    tiers.innerHTML = P.map(p => `<button class="tier" data-t="${p.id}" aria-pressed="${p.id === t}"><span class="lv">${p.id}</span>${esc(p.nom)}</button>`).join("");
+    const p = P.find(x => x.id === t); desc.textContent = `${p.nom} : ${p.desc}`;
+    best.textContent = ST.map.best[k] ? `Ton record à ce niveau : ${fmt(ST.map.best[k])} / 25 000` : "Pas encore de record à ce niveau.";
+    aide.innerHTML = `<div class="eyebrow">Comment ça marche</div><p style="margin-top:6px;font-size:15px">${monde ? "Au niveau <b>Pays</b>, toucher n'importe où dans le bon pays rapporte le maximum. Ensuite, c'est la distance au point exact qui compte, avec une tolérance qui se resserre à chaque niveau." : "Au niveau <b>Région</b>, toucher n'importe où dans la région rapporte le maximum. Ensuite, c'est la distance au point exact qui compte, avec une tolérance qui se resserre à chaque niveau : quelques kilomètres pour une appellation, quelques centaines de mètres pour un cru."}</p><p class="lbl-note" style="text-align:left;margin-inline:0">${esc(FD.cv.note || "")} ${esc(FD.source)}.</p>`;
+  };
+  const choisirFond = f => { fond = f; const P = fondDe(f).cv.paliers; t = (f === "monde" ? ST.map.lastTierMonde : ST.map.lastTier) || 1; if (!P.some(p => p.id === t)) t = 1; upd(); };
+  seg.onclick = e => { const b = e.target.closest("[data-f]"); if (b) choisirFond(b.dataset.f); };
   tiers.onclick = e => { const b = e.target.closest(".tier"); if (b) { t = +b.dataset.t; upd(); } };
-  upd();
+  choisirFond(fond);
   const startBtn = h(`<button class="btn block">Lancer une partie</button>`);
-  startBtn.onclick = () => { ST.map.lastTier = t; save(); const pool = D.carteVins.vins.filter(v => v.palier === t); MAPGAME = { tier:t, rounds:shuffle(pool).slice(0, 5), i:0, scores:[], over:false, revealed:false }; render(); };
-  el.append(tiers, desc, best, startBtn);
-  el.appendChild(h(`<div class="panel" style="margin-top:22px"><div class="eyebrow">Comment ça marche</div><p style="margin-top:6px;font-size:15px">Au niveau <b>Région</b>, toucher n'importe où dans la région rapporte le maximum. Ensuite, c'est la distance au point exact qui compte, avec une tolérance qui se resserre à chaque niveau : quelques kilomètres pour une appellation, quelques centaines de mètres pour un cru.</p><p class="lbl-note" style="text-align:left;margin-inline:0">${esc(D.carteVins.note)} ${esc(D.carteFrance.source)}.</p></div>`));
+  startBtn.onclick = () => { ST.map.lastFond = fond; if (fond === "monde") ST.map.lastTierMonde = t; else ST.map.lastTier = t; save(); MAPGAME = nouvellePartie(fond, t); render(); };
+  el.append(seg, tiers, desc, best, startBtn, aide);
   return el;
 }
 function mapRound(el){
   const G = MAPGAME;
-  const e = G.rounds[G.i], P = D.carteVins.paliers.find(p => p.id === G.tier);   // l'épingle (G.guess) et le résultat (G.result) survivent à un changement d'onglet const P = D.carteVins.paliers.find(p => p.id === G.tier);
+  const e = G.rounds[G.i], FD = fondDe(e.fond || G.fond), P = FD.cv.paliers.find(p => p.id === e.palier);   // l'épingle (G.guess) et le résultat (G.result) survivent à un changement d'onglet
   const total = G.scores.reduce((a, b) => a + b, 0);
-  el.appendChild(h(`<div class="round-meta"><span>Manche ${G.i+1}/${G.rounds.length} · ${esc(P.nom)}</span><span>${fmt(total)} pts</span></div>`));
+  el.appendChild(h(`<div class="round-meta"><span>${G.jour ? "Carte du jour · " : ""}Manche ${G.i+1}/${G.rounds.length} · ${FD.id === "monde" ? "Monde · " : ""}${esc(P.nom)}</span><span>${fmt(total)} pts</span></div>`));
   el.appendChild(h(`<div class="round-card">${I.bottle.replace("<svg",'<svg class="bottle" style="color:var(--grape-ink)"')}<div><div class="eyebrow">Où se trouve…</div><div class="vin">${esc(e.vin)}</div><div class="det">${esc(e.detail)}</div></div></div>`));
   const holder = h(`<div></div>`); el.appendChild(holder);
   let guess = G.guess || null;
-  const showRegions = G.showRegions ?? G.tier >= 2;
-  const mv = MapView(holder, { cities: G.showCities ?? true, regions: showRegions, onPick:g => { guess = g; G.guess = g; btn.disabled = false; } });
-  const tog = h(`<div class="toggles"><label><input id="tg-cities" type="checkbox" ${(G.showCities ?? true)?"checked":""}> Villes repères</label><label><input id="tg-regions" type="checkbox" ${showRegions?"checked":""}> Couleurs des régions</label></div>`);
+  const showRegions = G.showRegions ?? e.palier >= 2;
+  const mv = MapView(holder, { fond:FD.id, cities: G.showCities ?? true, regions: showRegions, onPick:g => { guess = g; G.guess = g; btn.disabled = false; } });
+  const tog = h(`<div class="toggles"><label><input id="tg-cities" type="checkbox" ${(G.showCities ?? true)?"checked":""}> Villes repères</label><label><input id="tg-regions" type="checkbox" ${showRegions?"checked":""}> ${FD.id === "monde" ? "Couleurs des pays" : "Couleurs des régions"}</label></div>`);
   tog.querySelector("#tg-cities").onchange = ev => { G.showCities = ev.target.checked; mv.set({ cities:ev.target.checked }); };
   tog.querySelector("#tg-regions").onchange = ev => { G.showRegions = ev.target.checked; mv.set({ regions:ev.target.checked }); };
   el.appendChild(tog);
   const res = h(`<div class="reveal"></div>`); el.appendChild(res);
   const btn = h(`<button class="btn leaf block" style="margin-top:14px" disabled>Valider ma position</button>`); el.appendChild(btn);
-  const reg = D.carteVins.regions.find(x => x.id === e.region);
+  const reg = FD.cv.regions.find(x => x.id === e.region);
   const afficher = (r, anime) => {
-    mv.reveal([e.lat, e.lon], guess, r.inside ? "dans la région !" : r.d < 1 ? `${Math.round(r.d*1000)} m` : `${Math.round(r.d)} km`, e.palier === 1 ? reg.deps : null);
-    res.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:end;gap:10px"><div><div class="eyebrow">${r.inside ? "En plein dans la région" : `À ${r.d < 1 ? Math.round(r.d*1000) + " m" : fmt(Math.round(r.d)) + " km"}`}</div><div class="score-big">+${fmt(r.score)}</div></div><div class="eyebrow" style="text-align:right">${esc(reg.nom)}</div></div><div class="meter"><i style="width:0"></i></div><p style="font-size:15px"><b>${esc(e.vin)}</b> — ${esc(e.detail)}.</p><p style="font-size:15px;color:var(--muted)">${esc(reg.fiche)}</p>${reg.debat?`<div class="aside deb">${I.scale.replace("<svg",'<svg style="color:var(--plum)"')}<div><b>Débat d'experts</b>${esc(reg.debat)}</div></div>`:""}`;
+    mv.reveal([e.lat, e.lon], guess, r.inside ? dansLaZone(FD) : distTexte(r.d), e.palier === 1 ? reg.deps : null);
+    res.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:end;gap:10px"><div><div class="eyebrow">${r.inside ? (FD.id === "monde" ? "En plein dans le pays" : "En plein dans la région") : `À ${distTexte(r.d)}`}</div><div class="score-big">+${fmt(r.score)}</div></div><div class="eyebrow" style="text-align:right">${esc(reg.nom)}</div></div><div class="meter"><i style="width:0"></i></div><p style="font-size:15px"><b>${esc(e.vin)}</b> — ${esc(e.detail)}.</p><p style="font-size:15px;color:var(--muted)">${esc(reg.fiche)}</p>${reg.debat?`<div class="aside deb">${I.scale.replace("<svg",'<svg style="color:var(--plum)"')}<div><b>Débat d'experts</b>${esc(reg.debat)}</div></div>`:""}`;
     const barre = res.querySelector(".meter i");
     if (anime) requestAnimationFrame(() => barre.style.width = (r.score / 50) + "%"); else barre.style.width = (r.score / 50) + "%";
     btn.disabled = false; btn.textContent = G.i + 1 >= G.rounds.length ? "Voir le bilan" : "Manche suivante"; btn.classList.remove("leaf");
   };
   if (G.revealed) afficher(G.result, false);
-  else if (guess) { mv.set({ guess:proj(...guess) }); btn.disabled = false; }
+  else if (guess) { mv.set({ guess:FD.proj(...guess) }); btn.disabled = false; }
   btn.onclick = () => {
     if (G.revealed) { G.revealed = false; G.guess = G.result = null; G.i++; if (G.i >= G.rounds.length) { $app.replaceChildren(endMap()); window.scrollTo(0,0); return; } render(); window.scrollTo(0,0); return; }
     if (!guess) return;
     const r = scoreMap(e, guess, mv);
     G.scores.push(r.score); G.revealed = true; G.result = r;
-    if (e.palier === 1 && r.score >= 4000) ST.map.regions[e.region] = 1;
+    noterZone(e, r.score);
     if (r.score >= 4900) award("oeil-de-lynx");
     afficher(r, true);
     save(); res.scrollIntoView({ behavior:defilement(), block:"nearest" });
@@ -1428,18 +1511,55 @@ function mapRound(el){
 }
 function endMap(){
   const G = MAPGAME; G.over = true;
-  const total = G.scores.reduce((a, b) => a + b, 0);
-  ST.map.games++; const rec = total > (ST.map.best[G.tier] || 0); if (rec) ST.map.best[G.tier] = total;
-  if (G.tier === 5) award("expert-carte");
+  const total = G.scores.reduce((a, b) => a + b, 0), k = cleRecord(G.fond, G.tier);
+  if (G.jour) return finCarteDuJour(G, total);
+  ST.map.games++; const rec = total > (ST.map.best[k] || 0); if (rec) ST.map.best[k] = total;
+  if (G.tier === 5 && G.fond !== "monde") award("expert-carte");
   const xp = Math.round(total / 250); gainXP(xp); checkBadges(); save();
   const el = document.createElement("main"); el.className = "wrap";
   const verdict = total >= 22000 ? "Un vrai GPS à vin !" : total >= 15000 ? "Très belle partie !" : total >= 8000 ? "Pas mal du tout !" : "La carte se mérite. Rejoue !";
-  el.appendChild(h(`<div class="endcard">${mascot(total >= 15000 ? "wow" : "happy")}<h2>${verdict}</h2><div class="end-stats"><div class="es" style="--c:var(--grape-btn);--t:var(--grape-ink)"><b>Score</b><span>${fmt(total)}</span></div><div class="es" style="--c:var(--gold);--on:var(--on-gold);--t:var(--gold-ink)"><b>XP gagnés</b><span>+${xp}</span></div><div class="es" style="--c:var(--leaf-btn);--on:var(--on-leaf);--t:var(--leaf-ink)"><b>${rec ? "Record !" : "Record"}</b><span>${fmt(ST.map.best[G.tier])}</span></div></div>
+  el.appendChild(h(`<div class="endcard">${mascot(total >= 15000 ? "wow" : "happy")}<h2>${verdict}</h2><div class="end-stats"><div class="es" style="--c:var(--grape-btn);--t:var(--grape-ink)"><b>Score</b><span>${fmt(total)}</span></div><div class="es" style="--c:var(--gold);--on:var(--on-gold);--t:var(--gold-ink)"><b>XP gagnés</b><span>+${xp}</span></div><div class="es" style="--c:var(--leaf-btn);--on:var(--on-leaf);--t:var(--leaf-ink)"><b>${rec ? "Record !" : "Record"}</b><span>${fmt(ST.map.best[k])}</span></div></div>
     <div style="width:100%;text-align:left">${G.rounds.map((r, i) => `<div style="display:flex;justify-content:space-between;gap:10px;border-bottom:2px solid var(--line);padding:8px 0"><span style="min-width:0"><b>${esc(r.vin)}</b></span><span style="font-variant-numeric:tabular-nums;font-weight:800;color:var(--grape-ink)">${fmt(G.scores[i])}</span></div>`).join("")}</div>
     <div class="row-btns" style="width:100%"><button class="btn ghost" data-a="menu" style="flex:1">Changer de niveau</button><button class="btn" data-a="again" style="flex:1">Rejouer</button></div></div>`));
-  el.addEventListener("click", e => { const a = e.target.closest("[data-a]")?.dataset.a; if (a === "again") { const pool = D.carteVins.vins.filter(v => v.palier === G.tier); MAPGAME = { tier:G.tier, rounds:shuffle(pool).slice(0, 5), i:0, scores:[], over:false, revealed:false, showCities:G.showCities, showRegions:G.showRegions }; render(); } else if (a === "menu") { MAPGAME = null; render(); } });
+  el.addEventListener("click", e => { const a = e.target.closest("[data-a]")?.dataset.a; if (a === "again") { MAPGAME = nouvellePartie(G.fond, G.tier, G); render(); } else if (a === "menu") { MAPGAME = null; render(); } });
   if (rec && total >= 15000) confetti();
   return el;
+}
+
+/* fin de la Carte du jour : premier essai = score du classement personnel */
+const dateFr = k => new Date(k + "T12:00:00").toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+const carres = sc => sc.map(x => x >= 4500 ? "🟩" : x >= 2500 ? "🟨" : "🟥").join("");
+function rangCarteJour(k){ const s = ST.carteJour[k]?.s; if (s === undefined) return null; const tous = Object.values(ST.carteJour).map(x => x.s); return { rang: 1 + tous.filter(x => x > s).length, sur: tous.length }; }
+function texteResultat(k){ const c = ST.carteJour[k]; return `Pampre · Carte du jour du ${dateFr(k)}\n${fmt(c.s)} / 25 000 ${carres(c.r || [])}`; }
+function copier(texte, bouton){
+  const ok = () => { bouton.textContent = "Copié !"; setTimeout(() => bouton.textContent = "Copier mon résultat", 1800); };
+  const repli = () => { const t = h(`<textarea readonly class="copie" rows="2" aria-label="Ton résultat, à copier">${esc(texte)}</textarea>`); bouton.replaceWith(t); t.select(); };
+  try { navigator.clipboard.writeText(texte).then(ok, repli); } catch(e) { repli(); }
+}
+function finCarteDuJour(G, total){
+  const k = G.jour, prem = !ST.carteJour[k];
+  if (prem) ST.carteJour[k] = { s:total, m:total, r:G.scores.slice() }; else ST.carteJour[k].m = Math.max(ST.carteJour[k].m || 0, total);
+  ST.map.games++;
+  const xp = Math.round(total / 250) + (prem ? 20 : 0); gainXP(xp); checkBadges(); save();
+  const { rang, sur } = rangCarteJour(k);
+  const el = document.createElement("main"); el.className = "wrap";
+  el.appendChild(h(`<div class="endcard">${mascot(total >= 15000 ? "wow" : "happy")}<h2>${prem ? "Carte du jour bouclée !" : "Carte du jour rejouée"}</h2>
+    <div class="end-stats"><div class="es" style="--c:var(--grape-btn);--t:var(--grape-ink)"><b>Score</b><span>${fmt(total)}</span></div><div class="es" style="--c:var(--gold);--on:var(--on-gold);--t:var(--gold-ink)"><b>XP gagnés</b><span>+${xp}</span></div><div class="es" style="--c:var(--leaf-btn);--on:var(--on-leaf);--t:var(--leaf-ink)"><b>Ton rang</b><span>${rang}<small style="font-size:.5em">/${sur}</small></span></div></div>
+    <p style="color:var(--muted)">${prem ? (sur > 1 ? `Ta ${rang === 1 ? "meilleure" : `${rang}e meilleure`} carte du jour sur ${sur}.` : "Ta première carte du jour : elle ouvre ton classement.") : `Seul ton premier essai compte au classement (${fmt(ST.carteJour[k].s)} points).`}</p>
+    <div style="width:100%;text-align:left">${G.rounds.map((r, i) => `<div style="display:flex;justify-content:space-between;gap:10px;border-bottom:2px solid var(--line);padding:8px 0"><span style="min-width:0"><b>${esc(r.vin)}</b></span><span style="font-variant-numeric:tabular-nums;font-weight:800;color:var(--grape-ink)">${fmt(G.scores[i])}</span></div>`).join("")}</div>
+    <div class="row-btns" style="width:100%"><button class="btn ghost" data-a="copier" style="flex:1">Copier mon résultat</button><button class="btn" data-a="defi" style="flex:1">Retour au défi</button></div></div>`));
+  el.addEventListener("click", e => { const a = e.target.closest("[data-a]"); if (!a) return; if (a.dataset.a === "copier") copier(texteResultat(k), a); else { MAPGAME = null; go("defi"); } });
+  if (prem && rang === 1 && sur > 1) confetti();
+  return el;
+}
+/* statistiques du défi quotidien (tout reste sur l'appareil) */
+function statsDefi(){
+  const jours = Object.keys(ST.daily).sort();
+  let serie = 0, meilleure = 0, prec = null;
+  for (const k of jours) { const d = new Date(k + "T12:00:00"); serie = prec && (d - prec) / 864e5 < 1.5 ? serie + 1 : 1; meilleure = Math.max(meilleure, serie); prec = d; }
+  const depuis = todayStr(new Date(Date.now() - 6 * 864e5));
+  const recents = jours.filter(k => k >= depuis).map(k => ST.daily[k]);
+  return { n: jours.length, parfaits: jours.filter(k => ST.daily[k] >= 6).length, meilleure, moy7: recents.length ? recents.reduce((a, b) => a + b, 0) / recents.length : null };
 }
 
 /* ---------------- vue : défi ---------------- */
@@ -1453,7 +1573,30 @@ function viewDefi(){
   card.querySelector("button").onclick = startDaily;
   el.appendChild(card);
   el.appendChild(h(`<div class="panel" style="margin-top:16px"><div class="eyebrow">XP des 7 derniers jours</div><svg viewBox="0 0 350 150" style="width:100%;height:auto;margin-top:8px" role="img" aria-label="XP gagnés par jour">${last7.map((d, i) => { const hgt = Math.round(d.xp / max * 90); /* 90 et non 100 : la valeur au-dessus de la plus haute barre reste dans le cadre */ const x = 12 + i * 48; return `<rect x="${x}" y="${115 - Math.max(hgt, 3)}" width="34" height="${Math.max(hgt, 3)}" rx="6" fill="${d.k === t ? "var(--gold)" : d.xp ? "var(--grape)" : "var(--line)"}"/><text x="${x+17}" y="${108 - Math.max(hgt,3)}" text-anchor="middle" font-size="11" font-weight="800" fill="var(--muted)" font-family="var(--f-body)">${d.xp || ""}</text><text x="${x+17}" y="134" text-anchor="middle" font-size="12" font-weight="700" fill="var(--muted)" font-family="var(--f-body)">${esc(d.day)}</text>`; }).join("")}</svg></div>`));
-  el.appendChild(h(`<p class="lbl-note">Le classement entre joueurs arrivera avec le niveau 5. Pour l'instant, tu joues contre toi-même (le plus coriace des adversaires).</p>`));
+  /* Carte du jour : les mêmes 5 lieux pour tout le monde */
+  const cj = ST.carteJour[t], rg = rangCarteJour(t);
+  const carte = h(`<div class="panel" style="margin-top:16px;display:grid;gap:10px"><div class="eyebrow">Carte du jour</div>
+    <p style="margin:0">${cj ? `<b style="font-size:22px;color:var(--grape-ink)">${fmt(cj.s)}</b> / 25 000 <span aria-hidden="true">${carres(cj.r || [])}</span><br><span style="color:var(--muted)">${rg.sur > 1 ? `Ta ${rg.rang === 1 ? "meilleure" : `${rg.rang}e meilleure`} carte du jour sur ${rg.sur}.` : "Ta première carte du jour."}</span>` : "Cinq lieux à placer, en France et dans le monde. <b>Les mêmes pour tous les joueurs aujourd'hui</b> : compare ton score avec tes amis."}</p>
+    <div class="row-btns">${cj ? `<button class="btn ghost" data-a="copier" style="flex:1">Copier mon résultat</button><button class="btn ghost" data-a="jouer" style="flex:1">Rejouer (hors classement)</button>` : `<button class="btn block" data-a="jouer">Jouer la carte du jour</button>`}</div></div>`);
+  carte.addEventListener("click", e => { const a = e.target.closest("[data-a]"); if (!a) return;
+    if (a.dataset.a === "copier") return copier(texteResultat(t), a);
+    const lancer = () => { MAPGAME = nouvelleCarteDuJour(); go("carte"); };
+    if (MAPGAME && !MAPGAME.over && !MAPGAME.jour) confirmBox("Abandonner ta partie ?", "Une partie de Carte libre est en cours. Elle ne sera pas comptée.", "Jouer la carte du jour", lancer); else lancer(); });
+  el.appendChild(carte);
+  /* classement personnel */
+  const sd = statsDefi();
+  const top = Object.entries(ST.carteJour).sort((a, b) => b[1].s - a[1].s).slice(0, 5);
+  const depuis = todayStr(new Date(Date.now() - 6 * 864e5)), sem = Object.entries(ST.carteJour).filter(([k]) => k >= depuis).map(([, v]) => v.s);
+  el.appendChild(h(`<div class="panel" style="margin-top:16px"><div class="eyebrow">Ton classement</div>
+    <div class="kpis" style="margin-top:10px">
+      <div class="kpi" style="color:var(--gold-ink)">${I.star}<div><b style="color:var(--ink)">${sd.n}</b><span>défi${sd.n > 1 ? "s" : ""} relevé${sd.n > 1 ? "s" : ""}</span></div></div>
+      <div class="kpi" style="color:var(--leaf-ink)">${I.check}<div><b style="color:var(--ink)">${sd.parfaits}</b><span>sans faute</span></div></div>
+      <div class="kpi" style="color:var(--flame-ink)">${I.flame}<div><b style="color:var(--ink)">${sd.meilleure}</b><span>jours de suite au mieux</span></div></div>
+      <div class="kpi" style="color:var(--grape-ink)">${I.target}<div><b style="color:var(--ink)">${sem.length ? fmt(Math.round(sem.reduce((a, b) => a + b, 0) / sem.length)) : "–"}</b><span>moyenne carte du jour, 7 jours</span></div></div>
+    </div>
+    ${top.length ? `<h3 style="margin:16px 0 6px;font-size:16px">Tes meilleures cartes du jour</h3><ol class="podium">${top.map(([k, v], i) => `<li ${k === t ? 'aria-current="true"' : ""}><span class="pos">${i + 1}</span><span class="qd">${esc(dateFr(k))}${k === t ? " · aujourd'hui" : ""}</span><b>${fmt(v.s)}</b></li>`).join("")}</ol>` : ""}
+  </div>`));
+  el.appendChild(h(`<p class="lbl-note">Pas de serveur : ton classement reste sur cet appareil (garde-le avec le code de sauvegarde du Profil). Pour te mesurer à des amis, partagez vos résultats de la Carte du jour : vous avez tous les mêmes lieux.</p>`));
   return el;
 }
 
@@ -1473,7 +1616,7 @@ function viewProfil(){
     <div class="kpi" style="color:var(--gold-deep)">${I.trophy}<div><b style="color:var(--ink)">${Object.values(ST.quiz).filter(q => q.passed).length}/6</b><span>niveaux validés</span></div></div>
     <div class="kpi" style="color:var(--plum)">${I.book}<div><b style="color:var(--ink)">${Object.keys(ST.gloss).length}</b><span>mots consultés</span></div></div></div>`));
   const regFound = D.carteVins.regions.filter(r => ST.map.regions[r.id]).length;
-  el.appendChild(h(`<div><h2 class="sec-title">Badges</h2><p style="color:var(--muted);font-size:14px">${Object.keys(ST.badges).length} sur ${D.niveaux.badges.length} · Tour de France : ${regFound}/13 régions trouvées</p></div>`));
+  el.appendChild(h(`<div><h2 class="sec-title">Badges</h2><p style="color:var(--muted);font-size:14px">${Object.keys(ST.badges).length} sur ${D.niveaux.badges.length} · Tour de France : ${regFound}/${D.carteVins.regions.length} régions trouvées${D.carteMondeVins ? ` · Tour du monde : ${D.carteMondeVins.regions.filter(r => ST.map.pays[r.id]).length}/${D.carteMondeVins.regions.length} pays` : ""}</p></div>`));
   el.appendChild(h(`<div class="badges">${D.niveaux.badges.map(b => `<div class="badge ${ST.badges[b.id]?"":"off"}"><div class="bi">${ICON_BY_NAME[b.icone] || I.medal}</div><b>${esc(b.nom)}</b><span>${esc(b.desc)}</span></div>`).join("")}</div>`));
 
   const theme = h(`<div style="margin-bottom:26px"><h2 class="sec-title">Apparence</h2><div class="seg" role="group" aria-label="Thème">${[["auto","Auto"],["light","Clair"],["dark","Sombre"]].map(([k, n]) => `<button data-th="${k}" aria-pressed="${(ST.theme||"auto")===k}">${n}</button>`).join("")}</div></div>`);
@@ -1527,6 +1670,7 @@ async function boot(){
     L.jeux.forEach(g => (g.questions || []).forEach((q, i) => q.id = `${g.id}-${i}`));
     L.quiz.questions.forEach((q, i) => q.id = `quiz${lid}-${i}`);
   }
+  initFonds();
   GL_INDEX = Object.fromEntries(Object.keys(D.glossaire.termes).map(k => [k.toLowerCase(), k]));
   ST = loadState(); applyTheme();
   try { render(); }

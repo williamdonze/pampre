@@ -6,3 +6,5 @@ audit/resultats*.json
 # captures de tools/test-parcours.py
 captures/
 __pycache__/
+# données brutes téléchargées (voir tools/build-carte.py et tools/build-monde.py)
+sources/

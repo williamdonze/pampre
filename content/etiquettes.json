@@ -383,6 +383,146 @@
       "style": "effervescent",
       "cepages": "Chenin blanc, chardonnay et cabernet franc",
       "note": "Un crémant est élaboré en méthode traditionnelle, comme le champagne : deuxième fermentation en bouteille, puis au moins 9 mois sur lies. Le Crémant de Loire est produit surtout en Anjou-Saumur et en Touraine. « Brut » : moins de 12 g de sucre par litre."
+    },
+    {
+      "id": "sassicaia",
+      "modele": "moderne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Tenuta San Guido",
+        "cuvee": "Sassicaia",
+        "appellation": "Bolgheri Sassicaia",
+        "mention": "Denominazione di Origine Controllata",
+        "millesime": "2019",
+        "embouteillage": "Imbottigliato all'origine da Tenuta San Guido, Bolgheri",
+        "degre": "14 % vol",
+        "volume": "750 ml"
+      },
+      "region": "hors-france",
+      "pays": "Italie",
+      "style": "rouge",
+      "cepages": "Cabernet sauvignon majoritaire, cabernet franc",
+      "note": "Le premier « super toscan » : un assemblage bordelais planté sur la côte toscane, longtemps vendu en simple vin de table. Depuis 2013, Bolgheri Sassicaia est la seule DOC italienne réservée à un seul domaine. « Imbottigliato all'origine » : mis en bouteille à la propriété."
+    },
+    {
+      "id": "vega-sicilia",
+      "modele": "chateau",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Bodegas Vega Sicilia",
+        "cuvee": "Único",
+        "appellation": "Ribera del Duero",
+        "mention": "Denominación de Origen",
+        "millesime": "2012",
+        "embouteillage": "Embotellado en la propiedad, Valbuena de Duero",
+        "degre": "14 % vol",
+        "volume": "750 ml"
+      },
+      "region": "hors-france",
+      "pays": "Espagne",
+      "style": "rouge",
+      "cepages": "Tinto fino (tempranillo) majoritaire, cabernet sauvignon",
+      "note": "Le rouge le plus célèbre d'Espagne, sur le plateau de la Ribera del Duero. Único n'est mis en vente qu'après un très long élevage, une dizaine d'années après la vendange. Tinto fino est le nom local du tempranillo."
+    },
+    {
+      "id": "robert-weil",
+      "modele": "alsace",
+      "teinte": "vert",
+      "champs": {
+        "producteur": "Weingut Robert Weil",
+        "cepage": "Riesling",
+        "appellation": "Rheingau",
+        "mention": "Kiedrich Gräfenberg · Grosses Gewächs · trocken",
+        "millesime": "2021",
+        "embouteillage": "Gutsabfüllung, Kiedrich",
+        "degre": "13 % vol",
+        "volume": "750 ml"
+      },
+      "region": "hors-france",
+      "pays": "Allemagne",
+      "style": "blanc sec",
+      "cepages": "Riesling",
+      "note": "« Grosses Gewächs » (GG) désigne un vin sec issu d'une Grosse Lage, une parcelle classée « grand cru » par l'association de domaines VDP. « Trocken » : sec. « Gutsabfüllung » : mis en bouteille au domaine."
+    },
+    {
+      "id": "royal-tokaji",
+      "modele": "porto",
+      "teinte": "or",
+      "champs": {
+        "producteur": "Royal Tokaji",
+        "cuvee": "Aszú",
+        "appellation": "Tokaji",
+        "mention": "Tokaji Aszú · 5 Puttonyos",
+        "millesime": "2017",
+        "embouteillage": "Bottled by The Royal Tokaji Wine Company, Mád",
+        "degre": "11 % vol",
+        "volume": "500 ml"
+      },
+      "region": "hors-france",
+      "pays": "Hongrie",
+      "style": "moelleux / liquoreux",
+      "cepages": "Furmint majoritaire, hárslevelű",
+      "note": "Le tokaji aszú naît de baies botrytisées (aszú) mises à macérer dans un moût ou un vin de base. Depuis 2013, il doit contenir au moins 120 g de sucre par litre, ce qui correspond à l'ancien niveau de 5 puttonyos. Bouteille traditionnelle de 50 cl."
+    },
+    {
+      "id": "cloudy-bay",
+      "modele": "alsace",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Cloudy Bay",
+        "cepage": "Sauvignon Blanc",
+        "appellation": "Marlborough",
+        "mention": "Wine of New Zealand",
+        "millesime": "2023",
+        "embouteillage": "Produced and bottled by Cloudy Bay Vineyards, Blenheim",
+        "degre": "13,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "hors-france",
+      "pays": "Nouvelle-Zélande",
+      "style": "blanc sec",
+      "cepages": "Sauvignon blanc",
+      "note": "Le sauvignon de Marlborough, à la pointe nord de l'île du Sud, a fait connaître la Nouvelle-Zélande dans les années 1980 : fruit de la passion, pamplemousse, acidité vive. Comme en Europe, un cépage nommé seul doit représenter au moins 85 % du vin."
+    },
+    {
+      "id": "penfolds-grange",
+      "modele": "moderne",
+      "teinte": "creme",
+      "champs": {
+        "producteur": "Penfolds",
+        "cuvee": "Grange",
+        "appellation": "South Australia",
+        "mention": "Shiraz · Bin 95",
+        "millesime": "2018",
+        "embouteillage": "Penfolds Wines, Magill, South Australia",
+        "degre": "14,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "hors-france",
+      "pays": "Australie",
+      "style": "rouge",
+      "cepages": "Shiraz très majoritaire, un peu de cabernet sauvignon",
+      "note": "Créé par Max Schubert au début des années 1950, Grange assemble des raisins de plusieurs régions d'Australie-Méridionale : d'où l'indication large « South Australia ». Bin 95 est son numéro de cuvée historique."
+    },
+    {
+      "id": "ridge",
+      "modele": "moderne",
+      "teinte": "noir",
+      "champs": {
+        "producteur": "Ridge Vineyards",
+        "cuvee": "Monte Bello",
+        "appellation": "Santa Cruz Mountains",
+        "mention": "Cabernet sauvignon, merlot, petit verdot, cabernet franc",
+        "millesime": "2019",
+        "embouteillage": "Grown, produced and bottled by Ridge Vineyards, Cupertino, California",
+        "degre": "13,5 % vol",
+        "volume": "750 ml"
+      },
+      "region": "hors-france",
+      "pays": "États-Unis",
+      "style": "rouge",
+      "cepages": "Cabernet sauvignon majoritaire, merlot, petit verdot, cabernet franc",
+      "note": "Santa Cruz Mountains est une AVA (American Viticultural Area), une zone géographique délimitée, sans règles de cépage ni de rendement. Ridge détaille sur l'étiquette la composition de l'assemblage. Monte Bello a participé au Jugement de Paris en 1976."
     }
   ]
 }

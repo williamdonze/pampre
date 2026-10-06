@@ -1,0 +1,330 @@
+{
+  "id": 6,
+  "titre": "Déguster et marier",
+  "parcours": ["n6-l1", "n6-l2", "n6-l3", "jeu:chasse-defauts", "n6-l4", "n6-l5", "jeu:accords", "n6-l6", "jeu:sommelier-aveugle", "quiz"],
+  "intro": "Le niveau final rassemble tout ce que tu as appris : une méthode pour déguster, les arômes et les défauts, l'évolution d'un vin dans le temps, l'art de le marier à un plat, et enfin la dégustation à l'aveugle.",
+  "lecons": [
+    {
+      "id": "n6-l1",
+      "titre": "Une méthode pour déguster",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Regarder, sentir, goûter",
+          "illu": "degustation-etapes",
+          "texte": "Déguster, c'est prendre le temps de décrire ce qu'on perçoit, toujours dans le même ordre : **l'œil**, **le nez**, **la bouche**, puis une **conclusion**.\n\nConditions de base : un verre à pied, rempli au tiers, un vin à la bonne température (révision du niveau 1), une pièce sans odeur forte. Et pas de parfum ni de café juste avant !",
+          "astuce": "Une méthode n'est pas un examen : elle sert à mettre des mots sur ce que tu ressens, pour t'en souvenir et comparer."
+        },
+        {
+          "titre": "L'œil : la robe",
+          "illu": "robe-nuancier",
+          "texte": "Incline le verre au-dessus d'une feuille blanche. On observe la **couleur**, son **intensité** et ses reflets au bord du disque.\n\nAvec l'âge, les blancs foncent (vert pâle, paille, or, ambré) et les rouges s'éclaircissent en prenant des teintes orangées (violacé, rubis, grenat, tuilé). La [[robe]] dit donc quelque chose de l'âge, du cépage (peau fine ou épaisse, révision du niveau 2) et de l'élevage.",
+          "debat": "Et les « larmes » (ou jambes) qui coulent sur la paroi ? Elles témoignent surtout de l'alcool et du sucre, par un phénomène physique appelé effet Marangoni. Elles ne disent rien de la qualité du vin, contrairement à une idée répandue."
+        },
+        {
+          "titre": "Le nez en deux temps",
+          "illu": "deux-nez",
+          "texte": "Le **premier nez**, verre immobile, capte les arômes les plus légers. Puis on fait tourner le vin pour l'aérer : le [[second nez]] est plus intense et révèle d'autres arômes.\n\nOn note l'**intensité** (discret, ouvert, puissant), puis on cherche des familles d'arômes : fruits, fleurs, épices, bois… et leur origine : primaires, secondaires, tertiaires (révision du niveau 2).",
+          "exemple": {
+            "vin": "Gewurztraminer, Domaine Zind-Humbrecht",
+            "detail": "Un bon vin d'entraînement : son nez de litchi et de rose est si expressif qu'on le reconnaît dès le premier nez."
+          }
+        },
+        {
+          "titre": "La bouche : du début à la fin",
+          "illu": "bouche-temps",
+          "texte": "L'[[attaque]] est la première impression. Le **milieu de bouche** révèle la structure : sucre, [[acidité]], [[tanins]], alcool (une sensation de chaleur), [[corps]]. Enfin, la **finale** : combien de temps les arômes persistent-ils après avoir avalé ou recraché ?\n\nCette longueur se compte en [[caudalie|caudalies]] : une caudalie, c'est une seconde. Un grand vin dépasse souvent dix caudalies.",
+          "debat": "Tu as peut-être appris à l'école une « carte de la langue », avec le sucré sur la pointe et l'amer au fond. C'est un mythe, né d'une mauvaise lecture d'une étude allemande de 1901 : toute la langue perçoit toutes les saveurs, avec de légères différences de sensibilité."
+        },
+        {
+          "titre": "Conclure",
+          "illu": "balance-accord",
+          "texte": "Pour conclure, on se pose trois questions. Le vin est-il **équilibré** (aucun élément ne domine : ni l'acidité, ni l'alcool, ni le bois) ? Est-il **complexe** et **long** ? Va-t-il **évoluer** ?\n\nLa qualité n'est pas une affaire de goût personnel : un vin peut être grand sans être ton style. L'inverse est vrai aussi, et c'est très bien ainsi.",
+          "astuce": "Une phrase de conclusion suffit, par exemple : « Rouge jeune, fruité, tanins encore fermes, à attendre deux ou trois ans. »"
+        }
+      ],
+      "verif": [
+        { "type": "ordre", "question": "Remets les étapes de la dégustation dans l'ordre.", "items": ["Observer la robe", "Premier nez, verre immobile", "Second nez, après aération", "Mettre en bouche", "Mesurer la longueur"], "explication": "L'œil, puis le nez en deux temps, puis la bouche, jusqu'à la finale, dont on mesure la longueur." },
+        { "type": "qcm", "question": "Que mesure une caudalie ?", "choix": ["Le degré d'alcool", "La quantité de tanins", "Une seconde de persistance des arômes", "L'âge du vin"], "bonne": 2, "explication": "Une caudalie est une seconde de persistance aromatique en finale. Plus il y en a, plus le vin est long." }
+      ]
+    },
+    {
+      "id": "n6-l2",
+      "titre": "Les mots du vin",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "La roue des arômes",
+          "illu": "roue-aromes",
+          "texte": "Pour ne pas rester sans voix, on range les arômes par familles : **fruité**, **floral**, **végétal**, **épicé**, **boisé**, **grillé** (on dit aussi empyreumatique), **animal**, **minéral**… Puis on affine : fruité, oui, mais fruits rouges ou noirs ? frais, cuits, confits ?\n\nLa célèbre roue des arômes a été conçue en 1984 par la chercheuse américaine Ann Noble, à l'université de Californie à Davis.",
+          "astuce": "Entraîne ton nez au quotidien : sens les fruits, les épices, les fleurs que tu croises. La mémoire olfactive se travaille comme un muscle."
+        },
+        {
+          "titre": "Le nez dans la bouche",
+          "illu": "deux-nez",
+          "texte": "La langue ne perçoit que des saveurs : sucré, salé, acide, amer, umami. Tout le reste, ce sont des arômes, perçus par le nez… y compris quand le vin est en bouche, par l'arrière de la gorge. C'est la [[rétro-olfaction]].\n\nC'est pour cela qu'on aspire un peu d'air en goûtant, avec ce petit bruit qui surprend les non-initiés : il fait remonter les arômes.",
+          "astuce": "Pince-toi le nez en goûtant un vin : il ne reste presque que l'acidité, le sucre et l'amertume. Tout le parfum a disparu."
+        },
+        {
+          "titre": "Les mots de la structure",
+          "illu": "carte-rouges",
+          "texte": "Pour la structure, quelques paires de mots suffisent :\n\n**Acidité** : plat, frais, vif, tranchant.\n**Tanins** : souples, fondus, fermes, astringents (ils assèchent).\n**Corps** : léger, moyen, ample, puissant.\n**Alcool** : discret ou chaleureux.\n\nUn vin « souple » a peu de tanins ; un vin « nerveux » a une acidité marquée (révision du niveau 2).",
+          "exemple": {
+            "vin": "Madiran, Château Montus",
+            "detail": "Jeune, le tannat donne un exemple parfait de tanins fermes, presque astringents, qui demandent de la patience."
+          }
+        },
+        {
+          "titre": "Décrire sans juger",
+          "illu": "liste",
+          "texte": "Un bon commentaire de dégustation décrit avant de juger : « nez de cerise et de poivre, tanins fins, finale moyenne » plutôt que « délicieux » ou « bof ».\n\nLe vocabulaire du vin est parfois poétique (« soyeux », « minéral », « tendu ») : il sert surtout à partager une impression, pas à mesurer.",
+          "debat": "Les mots de la dégustation sont-ils objectifs ? Les études montrent que les dégustateurs entraînés s'accordent bien sur la structure (acidité, tanins) mais beaucoup moins sur les arômes, et que le contexte (prix, étiquette, couleur) influence fortement leur jugement. D'où l'intérêt de la dégustation à l'aveugle."
+        }
+      ],
+      "verif": [
+        { "type": "tri", "question": "Saveur perçue par la langue ou arôme perçu par le nez ?", "categories": ["Saveur (langue)", "Arôme (nez)"], "items": [["Acide", 0], ["Sucré", 0], ["Amer", 0], ["Cerise", 1], ["Vanille", 1], ["Poivre", 1]], "explication": "La langue ne perçoit que les saveurs (sucré, salé, acide, amer, umami). Cerise, vanille ou poivre sont des arômes, perçus par le nez, y compris par rétro-olfaction." },
+        { "type": "qcm", "question": "Un vin aux tanins qui assèchent fortement la bouche est dit…", "choix": ["Astringent", "Souple", "Plat", "Chaleureux"], "bonne": 0, "explication": "Astringent. Souple désigne au contraire des tanins doux ; plat, un manque d'acidité ; chaleureux, une présence marquée de l'alcool." }
+      ]
+    },
+    {
+      "id": "n6-l3",
+      "titre": "Reconnaître les défauts",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Le goût de bouchon",
+          "illu": "defauts",
+          "texte": "Un vin [[bouchonné]] sent le carton mouillé, la cave humide, le champignon, et son fruit semble éteint. Le coupable principal est une molécule, le [[TCA]] (trichloroanisole), perceptible dès quelques nanogrammes par litre.\n\nIl provient le plus souvent du bouchon en liège. Un vin bouchonné n'est pas dangereux, mais il est gâché : au restaurant, on peut le refuser.",
+          "debat": "Combien de bouteilles sont bouchonnées ? Les estimations vont de moins de 1 % à plusieurs pour cent, selon les époques, les études et les bouchons. Les bouchonniers affirment que leurs contrôles l'ont fortement réduit ; c'est aussi ce qui a poussé l'Australie et la Nouvelle-Zélande vers la capsule à vis (révision du niveau 5)."
+        },
+        {
+          "titre": "Oxydé ou réduit",
+          "illu": "carafe",
+          "texte": "Trop d'air : le vin est [[oxydation|oxydé]]. Il sent la pomme blette, la noix, le madère ; sa robe brunit, son fruit disparaît. Attention : pour un vin jaune, un xérès ou un tawny, ces notes sont voulues (révision des niveaux 3 et 5) !\n\nPas assez d'air : le vin est [[réduction|réduit]]. Il sent l'œuf, l'allumette, le chou. Bonne nouvelle : souvent, une bonne aération, en carafe, suffit à le faire disparaître (révision du niveau 1)."
+        },
+        {
+          "titre": "Brett, volatile et souris",
+          "illu": "fermentation",
+          "texte": "Les [[brettanomyces]] (« brett »), des levures indésirables, donnent des odeurs d'écurie, de sueur de cheval, de pansement.\n\nL'[[acidité volatile]], trop élevée, rappelle le vinaigre ou le vernis à ongles. Le goût de souris, lui, n'apparaît qu'en bouche, longtemps après avoir avalé : il touche surtout des vins sans sulfites (révision du niveau 3).",
+          "debat": "Un soupçon de brett, défaut ou complexité ? Certains amateurs apprécient la touche de cuir et d'écurie de vieux vins réputés ; la plupart des œnologues y voient un défaut qui masque le fruit et le terroir. Tout est question de dose… et de tolérance personnelle."
+        },
+        {
+          "titre": "Les faux défauts",
+          "illu": "loupe",
+          "texte": "Certaines choses inquiètent à tort :\n\n**Les cristaux** au fond de la bouteille ou sous le bouchon : du [[tartre]], parfaitement naturel, qui se forme au froid.\n**Le dépôt** des vieux rouges : des tanins et des pigments, qu'on évite en carafant (révision du niveau 1).\n**Un léger perlant** dans un blanc jeune : souvent du gaz carbonique gardé volontairement pour la fraîcheur.",
+          "exemple": {
+            "vin": "Muscadet Sèvre et Maine sur lie, Domaine de la Pépière",
+            "detail": "Un exemple de blanc parfois légèrement perlant, souvenir de son élevage sur lies : ce n'est pas un défaut."
+          }
+        }
+      ],
+      "verif": [
+        { "type": "assoc", "question": "Associe chaque défaut à son odeur typique.", "paires": [["Bouchonné", "Carton mouillé"], ["Oxydé", "Pomme blette"], ["Réduit", "Œuf, allumette"], ["Brett", "Écurie"]], "explication": "Carton mouillé pour le TCA, pomme blette pour l'oxydation, œuf et allumette pour la réduction, écurie pour les brettanomyces." },
+        { "type": "vf", "question": "Les petits cristaux trouvés sous un bouchon de vin blanc sont un défaut grave.", "bonne": false, "explication": "Ce sont des cristaux de tartre, naturels et sans danger, qui se forment quand le vin a eu froid." }
+      ]
+    },
+    {
+      "id": "n6-l4",
+      "titre": "Le vin dans le temps",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Jeunesse, apogée, déclin",
+          "illu": "courbe-garde",
+          "texte": "Un vin évolue en bouteille : il s'épanouit, atteint son [[apogée]], puis décline. La durée de ce voyage dépend de son [[potentiel de garde]] (révision du niveau 2).\n\nLa plupart des vins sont faits pour être bus jeunes, dans les deux ou trois ans. Seule une petite partie gagne vraiment à vieillir longtemps."
+        },
+        {
+          "titre": "Ce qui fait durer un vin",
+          "illu": "peaux",
+          "texte": "Les « conservateurs naturels » : une **acidité** élevée, des **tanins** abondants, du **sucre**, et surtout de la **concentration**, de la matière.\n\nC'est pourquoi un Sauternes, un riesling vif, un porto vintage ou un grand Pauillac peuvent traverser des décennies, quand un rosé léger ou un beaujolais nouveau se boivent dans l'année.",
+          "exemple": {
+            "vin": "Château d'Yquem, Sauternes",
+            "detail": "Sucre et acidité lui permettent de vieillir plus d'un siècle : des millésimes du XIXe siècle se boivent encore."
+          }
+        },
+        {
+          "titre": "Ce qui change avec le temps",
+          "illu": "aromes-familles",
+          "texte": "**La robe** : les rouges s'éclaircissent et tuilent, les blancs dorent.\n**Le nez** : les arômes primaires de fruit frais laissent place aux arômes tertiaires : sous-bois, cuir, truffe, champignon pour les rouges ; miel, fruits secs, cire pour les blancs.\n**La bouche** : les tanins s'assouplissent et se fondent ; le vin gagne en harmonie, puis finit par s'amenuiser.",
+          "astuce": "Pour suivre l'évolution d'un vin, achète-en plusieurs bouteilles et ouvre-les à quelques années d'intervalle : c'est la meilleure école."
+        },
+        {
+          "titre": "Bien garder ses bouteilles",
+          "illu": "conservation",
+          "texte": "Révision du niveau 1 : une cave sombre, fraîche (autour de 12 °C) et stable, une humidité suffisante, des bouteilles bouchées couchées, loin des vibrations et des odeurs.\n\nLes variations de température usent un vin plus vite qu'une température un peu trop haute mais constante.",
+          "debat": "Faut-il aimer les vieux vins ? Pour certains, les arômes tertiaires sont le sommet du plaisir ; d'autres préfèrent l'éclat du fruit jeune. Les Anglais ont longtemps bu leurs bordeaux bien plus vieux que les Français : le « bon moment » est aussi une affaire de culture et de goût."
+        }
+      ],
+      "verif": [
+        { "type": "tri", "question": "Plutôt à boire jeune ou plutôt de garde ?", "categories": ["À boire jeune", "De garde"], "items": [["Beaujolais nouveau", 0], ["Rosé de Provence", 0], ["Muscadet", 0], ["Sauternes", 1], ["Porto vintage", 1], ["Grand cru de Pauillac", 1]], "explication": "Les vins légers et peu tanniques se boivent jeunes ; le sucre, l'acidité, les tanins et la concentration permettent aux grands liquoreux, aux portos vintage et aux grands bordeaux de vieillir longtemps." },
+        { "type": "qcm", "question": "Avec l'âge, comment évolue la robe d'un vin rouge ?", "choix": ["Elle devient plus violacée", "Elle devient verte", "Elle ne change jamais", "Elle s'éclaircit et prend des teintes orangées"], "bonne": 3, "explication": "Un rouge passe du violacé au rubis, puis au grenat et au tuilé, en s'éclaircissant." }
+      ]
+    },
+    {
+      "id": "n6-l5",
+      "titre": "Marier les mets et les vins",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "D'abord, l'équilibre des poids",
+          "illu": "balance-accord",
+          "texte": "La première règle : que ni le plat ni le vin n'écrase l'autre. Un plat délicat (poisson vapeur, salade) appelle un vin léger ; un plat riche (gibier, daube) un vin puissant.\n\nEnsuite, regarde la **sauce** et le **mode de cuisson**, souvent plus importants que l'ingrédient principal : un poulet à la crème ne demande pas le même vin qu'un poulet rôti aux herbes."
+        },
+        {
+          "titre": "Trois façons de s'accorder",
+          "illu": "accords-types",
+          "texte": "**L'accord régional** : ce qui pousse ensemble va ensemble. Vin jaune et comté dans le Jura, Sancerre et crottin de Chavignol, bœuf bourguignon et pinot noir.\n\n**L'accord par ressemblance** : un chardonnay beurré avec une sauce à la crème, un rouge épicé avec un plat épicé.\n\n**L'accord par contraste** : le sucré-salé d'un Sauternes avec un roquefort, l'acidité d'un vin blanc vif qui tranche le gras.",
+          "exemple": {
+            "vin": "Château-Chalon, Domaine Jean Macle",
+            "detail": "Le vin jaune et le comté vieux : l'exemple parfait de l'accord régional, notes de noix contre notes de noix."
+          }
+        },
+        {
+          "titre": "Quelques règles qui marchent",
+          "illu": "liste",
+          "texte": "**Le gras** aime l'acidité ou les tanins, qui le « nettoient ».\n**Le sucré** : le vin doit être au moins aussi sucré que le dessert, sinon il paraît aigre.\n**Le piment** exalte la brûlure de l'alcool : préfère un vin peu alcoolisé, fruité, voire légèrement doux.\n**Le sel** adoucit l'impression de tanins et d'acidité.\n**L'umami** (champignons, parmesan) durcit les tanins."
+        },
+        {
+          "titre": "Poisson et vin rouge, vraiment interdit ?",
+          "illu": "verres",
+          "texte": "La vieille règle « vin blanc avec le poisson » a une base scientifique : en 2009, des chercheurs japonais ont montré que le **fer** de certains vins, surtout rouges, réagit avec les graisses des fruits de mer et crée un arrière-goût de poisson désagréable.\n\nMais un rouge léger, peu tannique et pauvre en fer (un pinot noir, un gamay) peut très bien accompagner un thon ou un saumon grillé.",
+          "debat": "Vin rouge ou vin blanc avec le fromage ? La tradition française sert du rouge, mais beaucoup de sommeliers défendent le blanc, dont l'acidité répond au gras du fromage, alors que le fromage peut adoucir et masquer le fruit des rouges. Les accords régionaux mettent souvent tout le monde d'accord."
+        },
+        {
+          "titre": "Les grands classiques",
+          "illu": "raisin",
+          "texte": "Quelques mariages célèbres à tester :\n\nHuîtres et Muscadet ou Chablis.\nFoie gras et Sauternes, ou un Jurançon moelleux.\nAgneau et Pauillac.\nChocolat noir et Banyuls ou porto.\nCuisine thaïe et riesling demi-sec.\nMunster et gewurztraminer.",
+          "astuce": "Les règles sont des points de départ. Le meilleur accord reste celui qui te plaît : note tes réussites et tes ratés."
+        }
+      ],
+      "verif": [
+        { "type": "qcm", "question": "Avec un dessert très sucré, il faut un vin…", "choix": ["Sec et très acide", "Rouge et tannique", "Au moins aussi sucré que le dessert", "Effervescent brut nature"], "bonne": 2, "explication": "Face à un dessert plus sucré que lui, un vin paraît aigre et maigre : il doit être au moins aussi sucré." },
+        { "type": "assoc", "question": "Associe chaque accord à sa logique.", "paires": [["Vin jaune et comté", "Accord régional"], ["Sauternes et roquefort", "Accord par contraste"], ["Chardonnay beurré et sauce crème", "Accord par ressemblance"]], "explication": "Le Jura avec le Jura ; le sucré qui répond au salé ; le gras qui répond au gras." }
+      ]
+    },
+    {
+      "id": "n6-l6",
+      "titre": "La dégustation à l'aveugle",
+      "duree": 5,
+      "cartes": [
+        {
+          "titre": "Raisonner, pas deviner",
+          "illu": "aveugle",
+          "texte": "À l'[[dégustation à l'aveugle|aveugle]], on ne voit pas l'étiquette. Le but n'est pas de deviner au hasard, mais de **raisonner** à partir de ce qu'on perçoit, comme un détective : chaque indice élimine des hypothèses.\n\nTout ce que tu as appris dans les niveaux précédents sert ici : cépages, climats, vinifications, élevage, régions.",
+          "astuce": "Même les meilleurs sommeliers se trompent souvent. La qualité du raisonnement compte plus que la bonne réponse."
+        },
+        {
+          "titre": "L'œil donne des pistes",
+          "illu": "robe-nuancier",
+          "texte": "Une robe **pâle** en rouge oriente vers un cépage à peau fine (pinot noir, gamay, nebbiolo) ; une robe **noire**, vers une peau épaisse (syrah, cabernet sauvignon, malbec, tannat).\n\nDes reflets **violacés** signalent un vin jeune ; **orangés**, un vin évolué. Un blanc **or soutenu** peut être âgé, élevé en fût, ou sucré.",
+          "exemple": {
+            "vin": "Barolo Monfortino, Giacomo Conterno",
+            "detail": "Le piège classique : une robe pâle de nebbiolo, mais des tanins puissants en bouche. L'œil ne suffit jamais."
+          }
+        },
+        {
+          "titre": "Le nez trahit le cépage et le climat",
+          "illu": "climat-cepage",
+          "texte": "Le nez donne souvent les meilleurs indices. Les **marqueurs de cépage** (révision du niveau 2) : poivre de la syrah, cassis et poivron du cabernet, litchi du gewurztraminer, herbe et pamplemousse du sauvignon, pétrole du vieux riesling.\n\nLe **climat** (révision du niveau 3) : fruits frais et acidulés au frais, fruits mûrs ou confits au chaud. **L'élevage** : vanille et toasté signent le fût neuf."
+        },
+        {
+          "titre": "La bouche confirme, puis on conclut",
+          "illu": "bouche-temps",
+          "texte": "La bouche vérifie les hypothèses : acidité vive (climat frais, riesling, chenin, sauvignon), tanins puissants (cabernet, nebbiolo, tannat), alcool chaleureux (climat chaud, grenache).\n\nOn conclut par une proposition : cépage, région, âge approximatif. « Sauvignon de climat frais, sans bois, jeune : peut-être un Sancerre de deux ans. »",
+          "debat": "La dégustation à l'aveugle est la base des concours de sommellerie et des examens comme le Master Sommelier. Mais certains critiques rappellent que le vin se boit aussi avec son histoire : connaître le domaine, le millésime, le lieu fait partie du plaisir. Les deux approches se complètent."
+        }
+      ],
+      "verif": [
+        { "type": "qcm", "question": "Un rouge à la robe très pâle, mais aux tanins puissants et à l'acidité élevée, avec des notes de rose et de goudron. Ton hypothèse ?", "choix": ["Un pinot noir", "Un gamay", "Une syrah", "Un nebbiolo"], "bonne": 3, "explication": "Robe pâle mais tanins puissants, rose et goudron : le nebbiolo. Pinot noir et gamay sont pâles mais souples ; la syrah est sombre." },
+        { "type": "ordre", "question": "Remets le raisonnement de la dégustation à l'aveugle dans l'ordre.", "items": ["Observer la robe", "Chercher les marqueurs au nez", "Vérifier la structure en bouche", "Proposer cépage, région et âge"], "explication": "L'œil oriente, le nez donne les marqueurs de cépage et de climat, la bouche confirme, et on conclut par une proposition argumentée." }
+      ]
+    }
+  ],
+  "jeux": [
+    {
+      "id": "chasse-defauts",
+      "titre": "Chasse aux défauts",
+      "description": "Un vin te paraît bizarre : défaut ou pas ? Trouve le coupable.",
+      "tours": 8,
+      "questions": [
+        { "type": "indices", "question": "Quel défaut ?", "indices": ["Le fruit semble éteint.", "Odeur de carton mouillé et de cave humide.", "Le défaut s'accentue à l'aération."], "choix": ["Bouchonné", "Oxydé", "Réduit", "Aucun défaut"], "bonne": 0, "explication": "Carton mouillé, fruit éteint : le goût de bouchon, dû au TCA. Il ne disparaît pas à l'aération." },
+        { "type": "indices", "question": "Quel défaut ?", "indices": ["Un blanc jeune à la robe brunie.", "Nez de pomme blette et de noix.", "Fruit absent, finale plate."], "choix": ["Oxydé", "Bouchonné", "Brett", "Aucun défaut"], "bonne": 0, "explication": "Robe brunie, pomme blette, noix sur un blanc jeune : un vin oxydé, qui a pris trop d'air." },
+        { "type": "indices", "question": "Défaut ou pas ?", "indices": ["Un vin jaune du Jura.", "Nez de noix, de curry et de pomme.", "Bouche sèche et très longue."], "choix": ["Oxydé, donc défectueux", "Bouchonné", "Aucun défaut : c'est son style", "Réduit"], "bonne": 2, "explication": "Ces notes de noix sont la signature du vin jaune, élevé sous voile : un style voulu, pas un défaut." },
+        { "type": "indices", "question": "Quel défaut ?", "indices": ["À l'ouverture, odeur d'œuf et d'allumette.", "Fruit masqué.", "Après une heure en carafe, tout a disparu."], "choix": ["Bouchonné", "Acidité volatile", "Oxydé", "Réduit"], "bonne": 3, "explication": "Œuf, allumette, et une aération qui règle le problème : la réduction, un manque d'air." },
+        { "type": "indices", "question": "Quel défaut ?", "indices": ["Un rouge de quelques années.", "Odeur d'écurie, de sueur de cheval, de pansement.", "Le fruit est masqué."], "choix": ["Brett", "Bouchonné", "Réduit", "Oxydé"], "bonne": 0, "explication": "Écurie et pansement : les brettanomyces, des levures indésirables." },
+        { "type": "indices", "question": "Quel défaut ?", "indices": ["Nez piquant.", "Odeur de vinaigre et de vernis à ongles.", "Finale aigre."], "choix": ["Oxydé", "Réduit", "Acidité volatile", "Aucun défaut"], "bonne": 2, "explication": "Vinaigre et vernis à ongles : une acidité volatile trop élevée." },
+        { "type": "indices", "question": "Défaut ou pas ?", "indices": ["Un blanc d'Alsace sorti du réfrigérateur.", "Petits cristaux sous le bouchon.", "Le vin est parfait au nez et en bouche."], "choix": ["Bouchonné", "Oxydé", "Aucun défaut : du tartre", "Brett"], "bonne": 2, "explication": "Des cristaux de tartre, formés au froid : naturels et sans danger." },
+        { "type": "vf", "question": "Un vin bouchonné peut se « réparer » en le carafant longuement.", "bonne": false, "explication": "Non : le TCA ne s'en va pas à l'aération. C'est la réduction, elle, qui disparaît souvent en carafe." },
+        { "type": "vf", "question": "Le goût de souris se perçoit surtout en bouche, longtemps après avoir avalé.", "bonne": true, "explication": "Oui, il n'apparaît presque pas au nez : il surgit en fin de bouche. Il touche surtout des vins sans sulfites." },
+        { "type": "tri", "question": "Défaut ou caractère voulu ?", "categories": ["Défaut", "Caractère voulu"], "items": [["Odeur de carton mouillé", 0], ["Vinaigre et vernis", 0], ["Noix dans un vin jaune", 1], ["Notes de noix et de caramel dans un tawny", 1]], "explication": "Le carton mouillé et le vinaigre sont des défauts ; les notes oxydatives du vin jaune et du tawny viennent de leur élevage." }
+      ]
+    },
+    {
+      "id": "accords",
+      "titre": "Le bon accord",
+      "description": "Un plat, plusieurs vins : choisis celui qui le sublime, et comprends pourquoi.",
+      "tours": 8,
+      "badge": "fin-gourmet",
+      "seuilBadge": 7,
+      "questions": [
+        { "type": "qcm", "question": "Des huîtres nature. Quel vin ?", "choix": ["Un Muscadet sur lie", "Un Madiran", "Un porto tawny", "Un Sauternes"], "bonne": 0, "explication": "La vivacité saline d'un Muscadet (ou d'un Chablis) répond à l'iode. Un rouge tannique donnerait un goût métallique." },
+        { "type": "qcm", "question": "Un roquefort. Quel accord par contraste ?", "choix": ["Un Beaujolais nouveau", "Un Muscadet", "Un Champagne brut nature", "Un Sauternes"], "bonne": 3, "explication": "Le sucré du Sauternes et le salé du roquefort se répondent : un accord par contraste célèbre." },
+        { "type": "qcm", "question": "Un comté vieux. Quel accord régional ?", "choix": ["Un vin jaune du Jura", "Un Bordeaux rouge", "Un Prosecco", "Un rosé de Provence"], "bonne": 0, "explication": "Le vin jaune et le comté, tous deux du Jura, partagent des notes de noix." },
+        { "type": "qcm", "question": "Un curry thaï bien relevé. Quel vin ?", "choix": ["Un rouge très tannique à 15 %", "Un Barolo", "Un riesling demi-sec, peu alcoolisé", "Un vin jaune"], "bonne": 2, "explication": "Le piment exalte l'alcool et les tanins. Un riesling demi-sec, frais et peu alcoolisé, apaise le feu." },
+        { "type": "qcm", "question": "Une tarte au chocolat noir. Quel vin ?", "choix": ["Un Banyuls", "Un Sancerre", "Un Chablis", "Un Muscadet"], "bonne": 0, "explication": "Un vin doux naturel comme le Banyuls a la douceur et la puissance pour tenir face au chocolat." },
+        { "type": "qcm", "question": "Un gigot d'agneau rôti. Quel vin ?", "choix": ["Un Muscadet", "Un moscato d'Asti", "Un Pauillac", "Un Picpoul de Pinet"], "bonne": 2, "explication": "Le cabernet sauvignon de Pauillac et l'agneau forment un classique : les tanins répondent à la chair." },
+        { "type": "vf", "question": "Avec un dessert, le vin doit être au moins aussi sucré que le plat.", "bonne": true, "explication": "Sinon, le vin paraît aigre et maigre. C'est l'une des règles les plus fiables." },
+        { "type": "vf", "question": "Le piment adoucit la sensation de l'alcool.", "bonne": false, "explication": "C'est l'inverse : le piment exalte la brûlure de l'alcool. Choisis un vin peu alcoolisé." },
+        { "type": "qcm", "question": "Pourquoi certains vins rouges et les fruits de mer donnent-ils un goût de poisson désagréable ?", "choix": ["À cause du sucre du vin", "À cause des bulles", "À cause du bouchon", "À cause du fer du vin, qui réagit avec les graisses"], "bonne": 3, "explication": "Une étude japonaise de 2009 a montré le rôle du fer, qui oxyde les acides gras des fruits de mer." },
+        { "type": "assoc", "question": "Associe chaque plat à son vin.", "paires": [["Munster", "Gewurztraminer"], ["Foie gras", "Jurançon moelleux"], ["Crottin de Chavignol", "Sancerre"], ["Bœuf bourguignon", "Pinot noir de Bourgogne"]], "explication": "Des accords régionaux et des classiques : Alsace avec Alsace, foie gras et moelleux, Sancerre et chèvre du même terroir, Bourgogne avec Bourgogne." },
+        { "type": "tri", "question": "Quel vin pour quel plat ?", "categories": ["Vin blanc vif", "Vin rouge tannique"], "items": [["Sole meunière", 0], ["Huîtres", 0], ["Côte de bœuf", 1], ["Daube de sanglier", 1]], "explication": "Poissons et fruits de mer avec un blanc vif ; viandes rouges et gibier avec un rouge charpenté." },
+        { "type": "qcm", "question": "Quelle est la première règle d'un bon accord ?", "choix": ["Équilibrer la puissance du plat et celle du vin", "Toujours servir du vin rouge", "Choisir le vin le plus cher", "Servir le vin très froid"], "bonne": 0, "explication": "D'abord, qu'aucun des deux n'écrase l'autre : un plat délicat avec un vin léger, un plat riche avec un vin puissant." }
+      ]
+    },
+    {
+      "id": "sommelier-aveugle",
+      "titre": "Sommelier à l'aveugle",
+      "description": "La robe, le nez, la bouche, puis un dernier indice : identifie le vin. Moins tu demandes d'indices, plus tu gagnes.",
+      "tours": 8,
+      "badge": "sommelier",
+      "seuilBadge": 6,
+      "questions": [
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe rubis pâle.", "Nez de cerise, de framboise et de sous-bois.", "Tanins fins, belle acidité, longueur moyenne.", "Une côte de calcaire, au sud de Dijon."], "choix": ["Bourgogne rouge (pinot noir)", "Côte-Rôtie (syrah)", "Pauillac (cabernet sauvignon)", "Cahors (côt)"], "bonne": 0, "explication": "Robe pâle, fruits rouges, sous-bois, tanins fins : un pinot noir de Bourgogne." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe très sombre.", "Nez de cassis, de cèdre et de tabac.", "Tanins fermes, acidité fraîche, grande longueur.", "Sur les graves, au bord d'un estuaire."], "choix": ["Châteauneuf-du-Pape", "Beaujolais", "Pauillac", "Barolo"], "bonne": 2, "explication": "Cassis, cèdre, tanins fermes, graves de l'estuaire : un cabernet sauvignon de Pauillac." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe violacée, presque noire.", "Nez de mûre, de violette et de poivre noir.", "Tanins fins mais fermes, fraîcheur.", "Des coteaux de granite très raides au-dessus du Rhône."], "choix": ["Côte-Rôtie", "Chinon", "Rioja", "Madiran"], "bonne": 0, "explication": "Poivre, violette, coteaux de granite du Rhône nord : une syrah de Côte-Rôtie." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe grenat, déjà légèrement tuilée.", "Nez de fraise confite, de garrigue et d'épices.", "Chaleureux, tanins souples, alcool élevé.", "Des galets roulés au nord d'Avignon."], "choix": ["Sancerre rouge", "Bourgogne", "Châteauneuf-du-Pape", "Muscadet"], "bonne": 2, "explication": "Grenache solaire, garrigue, galets roulés : Châteauneuf-du-Pape." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe pâle, presque orangée sur le bord.", "Nez de rose, de cerise et de goudron.", "Tanins très puissants, acidité élevée.", "Les collines des Langhe, en Italie."], "choix": ["Chianti Classico", "Valpolicella", "Etna", "Barolo"], "bonne": 3, "explication": "Robe pâle mais tanins puissants, rose et goudron : le nebbiolo du Barolo." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe très pâle, reflets verts.", "Nez de pamplemousse, de buis et de pierre à fusil.", "Acidité vive, sans bois, finale saline.", "Un piton au-dessus de la Loire."], "choix": ["Condrieu", "Meursault", "Sancerre", "Vouvray"], "bonne": 2, "explication": "Sauvignon de climat frais, sans bois : Sancerre." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe or pâle.", "Nez de beurre, de noisette, de pain grillé.", "Ample, acidité équilibrée, élevé en fût.", "La Côte de Beaune."], "choix": ["Sancerre", "Meursault", "Riesling d'Alsace", "Muscadet"], "bonne": 1, "explication": "Chardonnay beurré, noisette, élevage en fût : un Meursault." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe or vert.", "Nez de citron vert, de fleurs blanches et une pointe de pétrole.", "Acidité tranchante, sec, très long.", "Entre Vosges et Rhin."], "choix": ["Gewurztraminer d'Alsace", "Riesling d'Alsace", "Chablis", "Pouilly-Fumé"], "bonne": 1, "explication": "Citron vert, pétrole, acidité tranchante : un riesling d'Alsace." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe or soutenu, presque ambré.", "Nez d'abricot confit, de miel, de safran.", "Liquoreux, mais une acidité qui équilibre le sucre.", "Les brumes du Ciron, au sud de Bordeaux."], "choix": ["Sauternes", "Porto tawny", "Banyuls", "Vin jaune"], "bonne": 0, "explication": "Abricot confit, miel, pourriture noble, brumes du Ciron : Sauternes." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe rubis clair, violacée.", "Nez de framboise, de bonbon, de banane.", "Très peu de tanins, à boire frais.", "Des collines de granite au nord de Lyon."], "choix": ["Beaujolais", "Bordeaux", "Bandol", "Madiran"], "bonne": 0, "explication": "Gamay en macération carbonique : un Beaujolais." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe noire, opaque.", "Nez de prune, de mûre, de violette.", "Tanins fermes, fruit généreux, alcool marqué.", "Des vignes d'altitude au pied des Andes."], "choix": ["Malbec de Mendoza", "Pinot noir d'Oregon", "Sauvignon de Marlborough", "Chenin de Stellenbosch"], "bonne": 0, "explication": "Robe noire, prune, violette, altitude andine : un malbec de Mendoza." },
+        { "type": "indices", "question": "Quel vin ?", "indices": ["Robe très pâle, reflets verts.", "Nez explosif de fruit de la passion et de pamplemousse.", "Acidité vive, sans bois.", "Une île, de l'autre côté du monde."], "choix": ["Sancerre", "Sauvignon de Marlborough", "Riesling de Moselle", "Albariño de Rías Baixas"], "bonne": 1, "explication": "Fruit de la passion explosif, île lointaine : le sauvignon blanc de Marlborough, en Nouvelle-Zélande." }
+      ]
+    }
+  ],
+  "quiz": {
+    "titre": "Quiz de validation · Niveau 6",
+    "questions": [
+      { "type": "ordre", "question": "Remets les étapes de la dégustation dans l'ordre.", "items": ["L'œil", "Le premier nez", "Le second nez", "La bouche", "La conclusion"], "explication": "On regarde, on sent verre immobile puis après aération, on goûte, et on conclut." },
+      { "type": "qcm", "question": "Que révèlent les « larmes » qui coulent sur la paroi du verre ?", "choix": ["La qualité du vin", "Surtout l'alcool et le sucre", "L'âge du vin", "La présence de sulfites"], "bonne": 1, "explication": "Les larmes témoignent surtout de l'alcool et du sucre. Elles ne disent rien de la qualité." },
+      { "type": "qcm", "question": "Comment s'appelle la perception des arômes par l'arrière de la gorge, vin en bouche ?", "choix": ["La macération", "La rétro-olfaction", "Le second nez", "L'attaque"], "bonne": 1, "explication": "La rétro-olfaction : les arômes remontent vers le nez par l'arrière de la gorge." },
+      { "type": "vf", "question": "La pointe de la langue perçoit seule le sucré, et le fond seul l'amer.", "bonne": false, "explication": "C'est le mythe de la « carte de la langue ». Toute la langue perçoit toutes les saveurs." },
+      { "type": "qcm", "question": "Un vin dont la finale dure 12 secondes a une longueur de…", "choix": ["12 caudalies", "1,2 caudalie", "120 caudalies", "On ne mesure pas la longueur"], "bonne": 0, "explication": "Une caudalie = une seconde de persistance aromatique." },
+      { "type": "assoc", "question": "Associe chaque défaut à sa cause.", "paires": [["Bouchonné", "Le TCA, souvent venu du liège"], ["Oxydé", "Trop d'air"], ["Réduit", "Pas assez d'air"], ["Brett", "Des levures indésirables"]], "explication": "TCA pour le bouchon, excès d'air pour l'oxydation, manque d'air pour la réduction, brettanomyces pour la brett." },
+      { "type": "qcm", "question": "Ton vin sent l'œuf et l'allumette à l'ouverture. Que fais-tu ?", "choix": ["Je le jette", "Je le carafe : c'est sans doute une réduction", "Je le refroidis au congélateur", "J'ajoute du sucre"], "bonne": 1, "explication": "La réduction disparaît souvent à l'aération : une carafe suffit en général." },
+      { "type": "qcm", "question": "Qu'est-ce qui permet à un vin de vieillir longtemps ?", "choix": ["Une robe très pâle", "L'acidité, les tanins, le sucre et la concentration", "Un degré d'alcool faible", "Une bouteille transparente"], "bonne": 1, "explication": "Ce sont les « conservateurs naturels » du vin." },
+      { "type": "qcm", "question": "Quels arômes apparaissent dans un vieux vin rouge ?", "choix": ["Fruits frais et bonbon", "Sous-bois, cuir, truffe", "Banane et fruits exotiques", "Herbe coupée et buis"], "bonne": 1, "explication": "Des arômes tertiaires, nés du vieillissement : sous-bois, cuir, truffe, champignon." },
+      { "type": "assoc", "question": "Associe chaque accord à sa logique.", "paires": [["Sancerre et crottin de Chavignol", "Accord régional"], ["Sauternes et roquefort", "Accord par contraste"], ["Chardonnay beurré et sauce crème", "Accord par ressemblance"]], "explication": "Même terroir, sucré-salé, gras avec gras." },
+      { "type": "qcm", "question": "Quel vin pour un plat épicé et pimenté ?", "choix": ["Un rouge tannique et très alcoolisé", "Un blanc fruité, peu alcoolisé, voire légèrement doux", "Un vin jaune", "Un porto vintage"], "bonne": 1, "explication": "Le piment exalte l'alcool et les tanins : mieux vaut un vin frais, fruité, peu alcoolisé." },
+      { "type": "qcm", "question": "Quelle règle vaut pour les desserts ?", "choix": ["Un vin sec et tannique", "Un vin au moins aussi sucré que le dessert", "Toujours un champagne brut", "Aucun vin avec un dessert"], "bonne": 1, "explication": "Sinon, le vin paraît aigre et maigre face au sucre." },
+      { "type": "indices", "question": "À l'aveugle : quel cépage ?", "indices": ["Robe pâle.", "Nez de rose fanée, de cerise et de goudron.", "Tanins très puissants, acidité élevée."], "choix": ["Pinot noir", "Gamay", "Nebbiolo", "Grenache"], "bonne": 2, "explication": "La robe pâle trompe : les tanins et le goudron signent le nebbiolo." },
+      { "type": "indices", "question": "À l'aveugle : quelle région ?", "indices": ["Blanc très pâle, reflets verts.", "Pamplemousse, buis, pierre à fusil.", "Vif, sans bois."], "choix": ["Condrieu", "Sancerre", "Sauternes", "Meursault"], "bonne": 1, "explication": "Un sauvignon de climat frais, sans bois : Sancerre." },
+      { "type": "qcm", "question": "Révision : quelle méthode donne au Beaujolais ses arômes de banane ?", "choix": ["La macération carbonique", "Le bâtonnage", "Le mutage", "La saignée"], "bonne": 0, "explication": "Révision du niveau 3 : les grappes entières fermentent de l'intérieur, sous gaz carbonique." },
+      { "type": "qcm", "question": "Révision : quel cépage donne des notes de pétrole en vieillissant ?", "choix": ["Le sauvignon", "Le riesling", "Le viognier", "Le chardonnay"], "bonne": 1, "explication": "Révision du niveau 2 : le riesling, avec l'âge." },
+      { "type": "qcm", "question": "Révision : le vin jaune vieillit sous un voile de levures. Comme quel vin espagnol ?", "choix": ["Le cava", "Le rioja", "Le fino de Jerez", "Le priorat"], "bonne": 2, "explication": "Révision du niveau 5 : le fino et la manzanilla vieillissent sous la flor." },
+      { "type": "qcm", "question": "Révision : que signifie le code « RM » sur une étiquette de champagne ?", "choix": ["Une coopérative", "Un vigneron qui vinifie ses propres raisins", "Une maison de négoce", "Un rosé millésimé"], "bonne": 1, "explication": "Révision du niveau 4 : récoltant-manipulant." }
+    ]
+  }
+}

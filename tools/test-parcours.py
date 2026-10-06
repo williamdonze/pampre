@@ -34,7 +34,7 @@ with sync_playwright() as p:
                     pg.locator('.pool .chip', has_text=exact(txt)).first.click(); pg.locator('.cat').nth(c).click(position={'x':8,'y':8})
             elif t=='carte':
                 # toucher la carte à la position réelle du lieu
-                x,y=pg.evaluate("([la,lo])=>{const [x,y]=proj(la,lo);const s=document.querySelector('.session .map-box > svg');const pt=s.createSVGPoint();pt.x=x;pt.y=y;const q=pt.matrixTransform(s.getScreenCTM());return [q.x,q.y]}", [q['entry']['lat'],q['entry']['lon']])
+                x,y=pg.evaluate("([la,lo,f])=>{const [x,y]=fondDe(f).proj(la,lo);const s=document.querySelector('.session .map-box > svg');const pt=s.createSVGPoint();pt.x=x;pt.y=y;const q=pt.matrixTransform(s.getScreenCTM());return [q.x,q.y]}", [q['entry']['lat'],q['entry']['lon'],q['entry'].get('fond')])
                 pg.mouse.click(x,y); pg.wait_for_timeout(100)
             pg.click('[data-check]'); pg.wait_for_timeout(100)
             ok=pg.locator('.sheet.ok').count()
@@ -59,6 +59,16 @@ with sync_playwright() as p:
     pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend4.png')
     pg.click('[data-done]'); pg.wait_for_timeout(300)
     if not pg.evaluate("ST.quiz[4] && ST.quiz[4].passed && !!ST.badges['niveau-4']"): print('WRONG niveau 4 non validé')
+    # niveau 5, débloqué par le quiz du niveau 4
+    faire_quiz(5)
+    pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend5.png')
+    pg.click('[data-done]'); pg.wait_for_timeout(300)
+    if not pg.evaluate("ST.quiz[5] && ST.quiz[5].passed && !!ST.badges['niveau-5']"): print('WRONG niveau 5 non validé')
+    # niveau 6, le dernier
+    faire_quiz(6)
+    pg.wait_for_timeout(500); pg.screenshot(path=SP+'quizend6.png')
+    pg.click('[data-done]'); pg.wait_for_timeout(300)
+    if not pg.evaluate("ST.quiz[6] && ST.quiz[6].passed && !!ST.badges['niveau-6']"): print('WRONG niveau 6 non validé')
     # map game tier 1
     pg.click('.tab[data-go="carte"]'); pg.wait_for_timeout(300); pg.screenshot(path=SP+'mapsetup.png')
     pg.click('text=Lancer une partie'); pg.wait_for_timeout(400)
@@ -82,6 +92,18 @@ with sync_playwright() as p:
     x,y=pg.evaluate("([la,lo])=>{const [x,y]=proj(la,lo);const s=document.querySelector('.map-box > svg');const pt=s.createSVGPoint();pt.x=x;pt.y=y;const q=pt.matrixTransform(s.getScreenCTM());return [q.x,q.y]}", [e['lat'],e['lon']])
     pg.mouse.click(x+3,y+2); pg.click('text=Valider ma position'); pg.wait_for_timeout(700)
     pg.screenshot(path=SP+'map5.png', full_page=True)
+    # carte du jour (France et monde, mêmes lieux pour tous) : on clique au bon endroit, le score entre au classement
+    pg.evaluate("MAPGAME = nouvelleCarteDuJour(); go('carte')"); pg.wait_for_timeout(400)
+    for r in range(5):
+        e=pg.evaluate("MAPGAME.rounds[MAPGAME.i]")
+        x,y=pg.evaluate("e=>{const [x,y]=fondDe(e.fond).proj(e.lat,e.lon);const s=document.querySelector('.map-box > svg');const pt=s.createSVGPoint();pt.x=x;pt.y=y;const q=pt.matrixTransform(s.getScreenCTM());return [q.x,q.y]}", e)
+        pg.mouse.click(x,y); pg.wait_for_timeout(100); pg.click('text=Valider ma position'); pg.wait_for_timeout(500)
+        if r==3: pg.screenshot(path=SP+'cartejour-monde.png', full_page=True)
+        pg.locator('.reveal ~ button.btn').click(); pg.wait_for_timeout(300)
+    s=pg.evaluate("ST.carteJour[todayStr()] && ST.carteJour[todayStr()].s")
+    if not s or s < 24000: print('WRONG carte du jour', s)
+    pg.screenshot(path=SP+'cartejour-fin.png', full_page=True)
+    pg.click('[data-a="defi"]'); pg.wait_for_timeout(300)
     # daily
     pg.click('.tab[data-go="defi"]'); pg.wait_for_timeout(300); pg.screenshot(path=SP+'defi.png', full_page=True)
     pg.click('.tab[data-go="profil"]'); pg.wait_for_timeout(300); pg.screenshot(path=SP+'profil.png', full_page=True)
