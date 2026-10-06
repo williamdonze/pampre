@@ -8,3 +8,4 @@ captures/
 __pycache__/
 # données brutes téléchargées (voir tools/build-carte.py et tools/build-monde.py)
 sources/
+dist/

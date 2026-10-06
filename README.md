@@ -14,6 +14,10 @@ Puis ouvrir http://localhost:8765/ dans un navigateur. (Un simple double-clic su
 
 Une fois le site en ligne en HTTPS, Pampre s'ajoute à l'écran d'accueil comme une appli (plein écran, hors connexion) : voir [docs/installer.md](docs/installer.md).
 
+## Dans un LMS (SCORM)
+
+`python3 tools/build-scorm.py` fabrique `dist/pampre-scorm2004.zip`, à importer dans 360Learning ou un autre LMS : voir [docs/scorm-360learning.md](docs/scorm-360learning.md).
+
 ## Continuer avec Claude Code
 
 Ouvre ce dossier dans Claude Code : le fichier `CLAUDE.md` lui explique tout le projet (architecture, formats de contenu, exigences de qualité, prochaines étapes). Exemple de demande :

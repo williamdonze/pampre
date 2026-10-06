@@ -15,6 +15,7 @@ Fonctionnel de bout en bout :
 - Sauvegarde dans `localStorage`, export/import par code (base64 du JSON d'état) dans Profil.
 - Thème clair/sombre (auto ou forcé).
 - **Appli sur l'écran d'accueil** (PWA) : sur téléphone et tablette, bandeau d'invitation à l'accueil et section dans Profil ; bouton « Installer » natif sur Android (Chrome, Edge, Samsung Internet), mode d'emploi adapté au navigateur ailleurs (iOS, Firefox, applis Instagram/Facebook) ; jouable hors connexion. Doc : `docs/installer.md`.
+- **Paquet SCORM 2004** pour un LMS (360Learning) : `tools/build-scorm.py` → `dist/pampre-scorm2004.zip` ; progression dans `cmi.suspend_data`, score, statut « terminé + réussi » quand les niveaux requis sont validés. Doc : `docs/scorm-360learning.md`.
 
 Modules bonus (histoire, économie, cave, certifications) : cartes « Bientôt ».
 
@@ -36,6 +37,7 @@ index.html                 Tout le code : CSS + JS (moteur). Aucun contenu péda
 manifest.webmanifest       Manifeste de l'appli (nom, couleurs, icônes, affichage plein écran)
 sw.js                      Service worker « réseau d'abord » (hors connexion) ; changer CACHE pour vider les copies
 icones/                    Icônes de l'appli (192, 512, maskable, apple-touch-icon) — générées
+scorm/scorm.js             Adaptateur SCORM 2004 (inclus seulement dans le paquet LMS ; définit window.LMS)
 content/
   niveaux.json             Liste des 6 niveaux, modules bonus, rangs (seuils XP), badges, seuil de validation
   niveau-1.json … niveau-6.json   Leçons, jeux et quiz de chaque niveau
@@ -49,6 +51,8 @@ tools/
   build-carte.py           Régénère carte-france.json depuis les GeoJSON de france-geojson
   build-monde.py           Régénère carte-monde.json depuis Natural Earth 1:50m (domaine public)
   build-icones.py          Régénère icones/ (Pépin sur fond crème) via Chromium
+  build-scorm.py           Fabrique dist/pampre-scorm2004.zip (--niveaux N : niveaux à valider pour réussir)
+  test-scorm.py            Teste le paquet SCORM dans un faux LMS
   test-parcours.py         Test Playwright : les 6 quiz, Carte libre, Carte du jour, défi, profil, glossaire
   valider-contenu.py       Validation des JSON de contenu (voir « Tests »)
   audit.py                 Audit visuel et fonctionnel multi-navigateurs (voir « Tests »)
@@ -56,6 +60,8 @@ tools/
 audit/                     RAPPORT.md (bugs A-01…A-37 et leur statut), résumés et captures d'audit
 docs/programme.md          Programme pédagogique : contenu des 6 niveaux et modules bonus
 docs/installer.md          Ajouter Pampre à l'écran d'accueil : marche à suivre par appareil, fonctionnement
+docs/scorm-360learning.md  Paquet SCORM : fabrication, import dans 360Learning, données envoyées, mises à jour
+dist/                      Paquets générés (non versionné)
 sources/                   Données brutes téléchargées pour les scripts build-* (non versionné)
 ```
 
@@ -67,7 +73,7 @@ JS vanilla, sans framework, dans un seul `<script>`. Sections dans l'ordre :
 1. **Utilitaires** : `esc`, `shuffle`, `h()` (HTML → élément), `seeded()` (aléatoire déterministe pour le défi du jour), dates.
 2. **Icônes** `I` (SVG inline) et **mascotte** `mascot(mood)` — Pépin, une grappe (`happy` / `wow` / `sad`).
 3. **Illustrations des leçons** `IL` : fonctions SVG indexées par nom (`raisin`, `fermentation`, `thermometre`…). Une carte de leçon les référence par `"illu"` ; la fonction reçoit la carte entière, ce qui permet des illustrations pilotées par le contenu (voir « Illustrations pilotées par la carte »). Clé inconnue → repli sur `raisin`. Aide `svgT(x, y, texte, {s, w, f, c, a})` pour les textes. Couleurs : variables CSS (`var(--ink)`, `var(--grape-btn)`…), jamais de couleur de texte en dur sur un fond de thème.
-4. **Sauvegarde** : `freshState()`, `normaliser()` (redonne à chaque champ son type : sauvegarde abîmée, ancienne ou importée), `loadState()`, `save()` (clé `pampre-sauvegarde-v1`, tout en try/catch).
+4. **Sauvegarde** : `freshState()`, `normaliser()` (redonne à chaque champ son type : sauvegarde abîmée, ancienne ou importée), `loadState()`, `save()` (clé `pampre-sauvegarde-v1`, tout en try/catch). Dans le paquet SCORM, `LMS` (= `window.LMS` défini par `scorm.js`, sinon `null`) : `loadState()` lit d'abord `LMS.charger()`, `save()` appelle `LMS.enregistrer(ST, LEVELS)` ; installation et service worker désactivés. Toute sauvegarde passe par `save()`.
 5. **Progression** : `gainXP()` (met aussi à jour la série), `award(badgeId)`, `checkBadges()`, `levelUnlocked()`, `rankOf()`.
 6. **Toasts** (file d'attente, un à la fois, en haut de l'écran), **modale** de confirmation maison (`confirmBox`, Échap = Rester), confettis. `majCalques()` rend inerte tout ce qui est sous le calque du dessus (session, glossaire, modale) : à appeler à chaque ouverture ou fermeture de calque.
    **Appli sur l'écran d'accueil** : `appareil()` (iOS/Android, navigateur, appli intégrée, déjà installée), invite native gardée depuis `beforeinstallprompt`, `etapesInstall()` / `aideInstall()` (mode d'emploi), `installer()`, `panneauInstall()` (bandeau de l'accueil, masqué 14 jours par `ST.installPlusTard`), enregistrement de `sw.js`. Jamais proposé sur ordinateur.
@@ -204,6 +210,7 @@ python3 tools/audit.py --ecrans lecon1,q-tri --largeurs 320,375 --themes clair,s
 - **`tools/test-parcours.py`** : répond juste aux six quiz à partir des données (y compris les questions carte, touchées à la position réelle, et les étiquettes), puis joue la Carte libre et la Carte du jour ; s'il affiche `WRONG`, une question ou son corrigé est incohérent.
 - **`tools/audit.py`** (+ `tools/audit-checks.js`, exécuté dans la page) : parcourt 113 écrans (accueil, leçons carte par carte, chaque type de question avant / juste / faux, 19 étiquettes, fins de session, carte, défi, profil, glossaire, toasts, modale) × 6 largeurs (320 → 1920) × 4 thèmes (clair, sombre système, sombre forcé, clair forcé) × 5 états de joueur injectés dans `pampre-sauvegarde-v1`. Contrôles : défilement horizontal, texte qui déborde ou coupé, texte SVG hors du viewBox, contraste WCAG AA, contenu caché sous la barre d'onglets / la feuille de correction / un toast, zones tactiles (`--cibles-tactiles`). Sorties : `audit/resultats*.json` (bruts, non versionnés), `audit/resume*.md` (regroupés), `audit/captures/` (éléments fautifs entourés en rouge). Options utiles : `--navigateurs chromium,webkit`, `--sans-polices` (Google Fonts bloqué), `--mouvement-reduit`, `--captures toutes|cles|aucune`, `--suffixe nom` (garder une passe à côté d'une autre).
 - **`tools/audit.py --fonctionnel`** (`tools/audit_fonctionnel.py`, `tools/audit_webkit.py`) : progression et XP, seuil de 80 %, badges, série avec horloge et fuseaux simulés, défi quotidien, glisser-déposer souris et tactile, carte (clic/glissé, zoom, pincement, scores recalculés, détection de région), clavier et focus, robustesse (sauvegardes corrompues, `localStorage` indisponible, contenu manquant, double clic). Résultats dans `audit/fonctionnel.json`.
+- **`tools/test-scorm.py`** : construit le paquet SCORM et le joue dans un faux LMS (API `API_1484_11` simulée) : initialisation, reprise, terminaison, statut, score, objectifs, taille de `cmi.suspend_data`, `--niveaux`, aucune ressource externe. À lancer après toute modification de `save()`, `loadState()` ou `scorm/scorm.js`.
 - **`tools/comparer-captures.py AVANT APRES SORTIE`** : assemble deux captures côte à côte pour vérifier une correction.
 
 Après une correction visuelle : relancer l'audit sur l'écran concerné (`--ecrans`) avec `--suffixe apres-X`, et comparer les captures. Le rapport d'audit initial et le suivi des corrections sont dans `audit/RAPPORT.md`.
@@ -222,6 +229,6 @@ Note : au niveau 1, les bonnes réponses sont presque toutes en 2e position (ave
 
 - Zones régionales de la carte = départements entiers (approximation signalée dans le jeu). Départements partagés : le Gard (Rhône et Languedoc), le Rhône (Beaujolais et Rhône, pour Côte-Rôtie et Condrieu), la Saône-et-Loire (Bourgogne et Beaujolais, pour Moulin-à-Vent). Un département partagé compte pour chaque région au clic et prend la couleur de la première qui le cite.
 - Degré et millésime des étiquettes indicatifs ; mise en page redessinée (pas les vraies étiquettes).
-- Sauvegarde et classement locaux à l'appareil (d'où l'export/import par code).
+- Sauvegarde et classement locaux à l'appareil (d'où l'export/import par code). Dans un LMS, la progression suit l'apprenant, mais 360Learning l'efface pour les apprenants non terminés quand on remplace le paquet (copie locale de secours sur le même navigateur).
 - Carte du monde simplifiée : quelques lieux côtiers ou insulaires (Oia à Santorin, Rías Baixas) tombent juste hors du contour ; sans effet au-delà du palier 1, où seul compte la distance.
 - Fond de carte France : france-geojson (Grégoire David), données IGN, Licence Ouverte Etalab — mention à conserver. Fond Monde : Natural Earth (domaine public) ; localités : GeoNames (CC BY 4.0).

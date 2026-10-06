@@ -487,6 +487,8 @@ const CONTENT = {
   carteMondeVins: "content/carte-monde-vins.json"
 };
 const SAVE_KEY = "pampre-sauvegarde-v1";
+// paquet SCORM (360Learning…) : scorm.js, chargé avant ce script, définit window.LMS (voir tools/build-scorm.py) ; absent sur le site public
+const LMS = window.LMS || null;
 const D = {};          // données chargées
 const LEVELS = {};     // contenu par niveau
 let ST;                // état du joueur
@@ -755,10 +757,11 @@ function normaliser(o){
   return s;
 }
 function loadState(){
-  try { const raw = localStorage.getItem(SAVE_KEY); if (raw) return normaliser(JSON.parse(raw)); } catch(e) {}
+  if (LMS) { const s = LMS.charger(); if (s) return normaliser(s); }   // dans le LMS, la progression suit l'apprenant (cmi.suspend_data)
+  try { const raw = localStorage.getItem(LMS?.cle || SAVE_KEY); if (raw) return normaliser(JSON.parse(raw)); } catch(e) {}
   return freshState();
 }
-function save(){ try { localStorage.setItem(SAVE_KEY, JSON.stringify(ST)); } catch(e) {} }
+function save(){ try { localStorage.setItem(LMS?.cle || SAVE_KEY, JSON.stringify(ST)); } catch(e) {} LMS?.enregistrer(ST, LEVELS); }
 
 /* ---------------- progression ---------------- */
 function rankOf(xp){ const r = D.niveaux.rangs; let cur = r[0], next = null; for (let i = 0; i < r.length; i++) { if (xp >= r[i].xp) { cur = r[i]; next = r[i+1] || null; } } return {cur, next}; }
@@ -858,7 +861,7 @@ function appareil(){
     ancienIOS: ios && versionIOS < 16.04   // avant iOS 16.4, seul Safari sait ajouter à l'écran d'accueil
   };
 }
-const installPossible = () => { const a = appareil(); return a.mobile && !a.installe; };
+const installPossible = () => { const a = appareil(); return !LMS && a.mobile && !a.installe; };   // jamais dans un LMS
 function proposerInstall(){   // bandeau de l'accueil : après la première leçon, puis 14 jours après un « plus tard »
   return installPossible() && ST.xp > 0 && !(ST.installPlusTard && dayDiff(ST.installPlusTard, todayStr()) < 14);
 }
@@ -914,7 +917,7 @@ function panneauInstall(){
   p.querySelector("[data-plus-tard]").onclick = () => { ST.installPlusTard = todayStr(); save(); p.remove(); toast(I.phone, "D'accord, plus tard", "Tu le retrouveras dans Profil."); };
   return p;
 }
-if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+if (!LMS && "serviceWorker" in navigator && /^https?:$/.test(location.protocol)) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 
 /* ---------------- texte enrichi + glossaire ---------------- */
 let GL_INDEX = {};
@@ -1742,7 +1745,7 @@ function viewProfil(){
   theme.onclick = e => { const b = e.target.closest("[data-th]"); if (!b) return; ST.theme = b.dataset.th === "auto" ? null : b.dataset.th; applyTheme(); save(); render(); };
   el.appendChild(theme);
   const ap = appareil();
-  if (ap.mobile) {
+  if (ap.mobile && !LMS) {
     const inst = h(`<div style="margin-bottom:26px"><h2 class="sec-title">Appli sur l'écran d'accueil</h2>${ap.installe
       ? `<p style="color:var(--muted);font-size:14px">C'est fait : tu utilises Pampre comme une appli.</p>`
       : `<p style="color:var(--muted);font-size:14px;margin-bottom:10px">Une icône sur ton écran d'accueil, Pampre en plein écran, même hors connexion.</p><button class="btn small" data-installer data-aide="Comment faire ?">${INVITE_INSTALL ? "Installer" : "Comment faire ?"}</button>`}</div>`);
@@ -1799,7 +1802,7 @@ async function boot(){
   }
   initFonds();
   GL_INDEX = Object.fromEntries(Object.keys(D.glossaire.termes).map(k => [k.toLowerCase(), k]));
-  ST = loadState(); applyTheme();
+  ST = loadState(); applyTheme(); if (LMS) save();   // premier état remonté au LMS (progression, score)
   try { render(); }
   catch(err) {
     // dernier filet : on ne laisse jamais le joueur bloqué sur l'écran de chargement
