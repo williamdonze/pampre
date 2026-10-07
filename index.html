@@ -6,6 +6,14 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Pampre</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 5c3-3 9-3 11 0-4 0-7 2-9 5' fill='%2358A700'/%3E%3Ccircle cx='14' cy='15' r='4.6' fill='%238B1E3F'/%3E%3Ccircle cx='20' cy='15' r='4.6' fill='%238B1E3F'/%3E%3Ccircle cx='26' cy='15' r='4.6' fill='%238B1E3F'/%3E%3Ccircle cx='17' cy='21' r='4.6' fill='%238B1E3F'/%3E%3Ccircle cx='23' cy='21' r='4.6' fill='%238B1E3F'/%3E%3Ccircle cx='20' cy='27' r='4.6' fill='%238B1E3F'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icones/apple-touch-icon.png">
+<meta name="theme-color" content="#FBF5EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1013" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pampre">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap">
@@ -436,6 +444,23 @@ textarea.save{width:100%;min-height:110px;border:2px solid var(--line);border-ra
 @media (min-width:640px){.modal-bg{place-items:center}.modal{border-radius:24px}}
 .modal h3{font-size:22px}
 .modal .row-btns .btn{flex:1}
+/* appli sur l'écran d'accueil : bandeau de l'accueil et mode d'emploi */
+.daily.installer .ico{background:var(--grape-soft);color:var(--grape-ink)}
+.daily.installer{align-items:flex-start}
+.daily.installer .txt .btn{margin-top:10px}
+.daily.installer .iconbtn{margin:-10px -10px 0 -6px}
+@media (max-width:360px){.daily.installer{flex-wrap:nowrap}.daily.installer .txt{flex:1}.daily.installer .ico{display:none}}   /* petit écran : place au texte et au bouton */
+.modal.installer{max-height:calc(100dvh - 24px);overflow:auto}
+.etapes{list-style:none;padding:0;margin:0;display:grid;gap:12px;counter-reset:etape}
+.etapes li{counter-increment:etape;display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start;line-height:1.45}
+.etapes li::before{content:counter(etape);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--grape-btn);color:var(--on-plum);font-weight:800}
+.pic{display:inline-grid;place-items:center;width:26px;height:26px;margin:0 2px;vertical-align:-7px;border:1.5px solid var(--line);border-radius:7px;background:var(--paper);color:var(--grape-ink)}
+.pic svg{width:17px;height:17px}
+.autres{font-size:14px;color:var(--muted)}
+.autres summary{font-weight:800;color:var(--ink);cursor:pointer;min-height:44px;display:flex;align-items:center}
+.autres dl{margin:4px 0 0;display:grid;gap:8px}
+.autres dt{font-weight:800;color:var(--ink)}
+.autres dd{margin:0}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
@@ -462,6 +487,8 @@ const CONTENT = {
   carteMondeVins: "content/carte-monde-vins.json"
 };
 const SAVE_KEY = "pampre-sauvegarde-v1";
+// paquet SCORM (360Learning…) : scorm.js, chargé avant ce script, définit window.LMS (voir tools/build-scorm.py) ; absent sur le site public
+const LMS = window.LMS || null;
 const D = {};          // données chargées
 const LEVELS = {};     // contenu par niveau
 let ST;                // état du joueur
@@ -513,6 +540,12 @@ const I = {
   globe:`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>`,
   nose:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14c0 7-2 10-7 10S5 10 5 3z" fill="currentColor"/><path d="M8 7c2 1 6 1 8 0" stroke="#fff" stroke-width="1.6" fill="none" opacity=".6"/><path d="M12 13v7M8 21h8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`,
   vine:`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 22V10c0-3 2-5 5-6M12 13c-2-2-5-2-7-1M12 17c2-1 4-1 6 0"/><circle cx="17" cy="4" r="1.5" fill="currentColor"/></svg>`,
+  phone:`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10.5 18.5h3"/><path d="M12 7v6M9 10h6" stroke-width="2.6"/></svg>`,
+  partager:`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9H6v12h12V9h-2M12 3v12M8 7l4-4 4 4"/></svg>`,
+  ajouter:`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/></svg>`,
+  points:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.2" fill="currentColor"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><circle cx="12" cy="19" r="2.2" fill="currentColor"/></svg>`,
+  pointsH:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2.2" fill="currentColor"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><circle cx="19" cy="12" r="2.2" fill="currentColor"/></svg>`,
+  menu:`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`,
   shuffle:`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/></svg>`
 };
 const ICON_BY_NAME = { verre:I.glass, grappe:I.grape, cep:I.vine, carte:I.map, globe:I.globe, nez:I.nose, etiquette:I.label, thermo:I.thermo, medaille:I.medal, etoile:I.star, flamme:I.flame, cible:I.target, livre:I.book };
@@ -705,7 +738,7 @@ const illu = (k, carte) => (IL[k] || IL.raisin)(carte);
 
 /* ---------------- sauvegarde ---------------- */
 function freshState(){
-  return { v:1, xp:0, streak:{count:0,last:null}, days:{}, done:{}, quiz:{}, games:{}, badges:{}, mistakes:[], daily:{}, carteJour:{}, map:{games:0, best:{}, regions:{}, pays:{}}, gloss:{}, theme:null };
+  return { v:1, xp:0, streak:{count:0,last:null}, days:{}, done:{}, quiz:{}, games:{}, badges:{}, mistakes:[], daily:{}, carteJour:{}, map:{games:0, best:{}, regions:{}, pays:{}}, gloss:{}, theme:null, installPlusTard:null };
 }
 // Répare une sauvegarde abîmée, d'une ancienne version ou mal importée : chaque champ retrouve le type attendu.
 function normaliser(o){
@@ -720,13 +753,15 @@ function normaliser(o){
   if (Array.isArray(o.mistakes)) s.mistakes = o.mistakes.filter(x => typeof x === "string").slice(-60);
   if (obj(o.map)) s.map = { ...o.map, games:num(o.map.games, 0), best:obj(o.map.best) ? o.map.best : {}, regions:obj(o.map.regions) ? o.map.regions : {}, pays:obj(o.map.pays) ? o.map.pays : {} };
   if (o.theme === "light" || o.theme === "dark") s.theme = o.theme;
+  if (typeof o.installPlusTard === "string") s.installPlusTard = o.installPlusTard;
   return s;
 }
 function loadState(){
-  try { const raw = localStorage.getItem(SAVE_KEY); if (raw) return normaliser(JSON.parse(raw)); } catch(e) {}
+  if (LMS) { const s = LMS.charger(); if (s) return normaliser(s); }   // dans le LMS, la progression suit l'apprenant (cmi.suspend_data)
+  try { const raw = localStorage.getItem(LMS?.cle || SAVE_KEY); if (raw) return normaliser(JSON.parse(raw)); } catch(e) {}
   return freshState();
 }
-function save(){ try { localStorage.setItem(SAVE_KEY, JSON.stringify(ST)); } catch(e) {} }
+function save(){ try { localStorage.setItem(LMS?.cle || SAVE_KEY, JSON.stringify(ST)); } catch(e) {} LMS?.enregistrer(ST, LEVELS); }
 
 /* ---------------- progression ---------------- */
 function rankOf(xp){ const r = D.niveaux.rangs; let cur = r[0], next = null; for (let i = 0; i < r.length; i++) { if (xp >= r[i].xp) { cur = r[i]; next = r[i+1] || null; } } return {cur, next}; }
@@ -797,6 +832,92 @@ function confetti(){
   for (let i = 0; i < 60; i++) { const c = document.createElement("i"); c.style.left = Math.random()*100 + "%"; c.style.background = cols[i % cols.length]; c.style.animationDelay = (Math.random()*.8) + "s"; c.style.animationDuration = (1.8 + Math.random()*1.4) + "s"; box.appendChild(c); }
   document.body.appendChild(box); setTimeout(() => box.remove(), 3800);
 }
+
+/* ---------------- appli sur l'écran d'accueil ---------------- */
+// Android (Chrome, Edge, Samsung Internet) : invite native, reçue par « beforeinstallprompt ».
+// iOS et les autres navigateurs : pas d'invite programmable, on affiche le mode d'emploi du navigateur détecté.
+// Proposé uniquement sur téléphone et tablette (iOS, Android), jamais sur ordinateur ni dans l'appli déjà installée.
+let INVITE_INSTALL = null;
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault(); INVITE_INSTALL = e;
+  document.querySelectorAll("[data-installer]").forEach(b => b.textContent = "Installer");
+});
+window.addEventListener("appinstalled", () => {
+  INVITE_INSTALL = null; document.querySelectorAll(".daily.installer").forEach(p => p.remove());
+  toast(I.check, "Pampre est installé", "Retrouve Pépin sur ton écran d'accueil.");
+});
+function appareil(){
+  const ua = navigator.userAgent;
+  const ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);   // iPadOS se présente comme un Mac
+  const android = !ios && /Android/.test(ua);
+  const v = ua.match(/OS (\d+)_(\d+)/); const versionIOS = v ? +v[1] + +v[2] / 100 : 99;
+  return {
+    ios, android, mobile: ios || android,
+    installe: matchMedia("(display-mode: standalone)").matches || matchMedia("(display-mode: fullscreen)").matches || navigator.standalone === true,
+    // navigateurs intégrés aux applis (Instagram, Facebook, Messenger, TikTok…) : pas d'ajout à l'écran d'accueil
+    integre: /FBAN|FBAV|FB_IAB|FBIOS|Instagram|Messenger|Snapchat|TikTok|musical_ly|Bytedance|LinkedInApp|Pinterest|Line\//.test(ua),
+    nav: ios ? (/CriOS/.test(ua) ? "chrome" : /FxiOS/.test(ua) ? "firefox" : /EdgiOS/.test(ua) ? "edge" : "safari")
+      : /SamsungBrowser/.test(ua) ? "samsung" : /Firefox/.test(ua) ? "firefox" : /OPR\//.test(ua) ? "opera" : /EdgA/.test(ua) ? "edge" : "chrome",
+    ancienIOS: ios && versionIOS < 16.04   // avant iOS 16.4, seul Safari sait ajouter à l'écran d'accueil
+  };
+}
+const installPossible = () => { const a = appareil(); return !LMS && a.mobile && !a.installe; };   // jamais dans un LMS
+function proposerInstall(){   // bandeau de l'accueil : après la première leçon, puis 14 jours après un « plus tard »
+  return installPossible() && ST.xp > 0 && !(ST.installPlusTard && dayDiff(ST.installPlusTard, todayStr()) < 14);
+}
+const pic = n => `<span class="pic">${I[n]}</span>`;
+// mode d'emploi : liste d'étapes (HTML) selon l'appareil
+function etapesInstall(a){
+  if (a.integre) return [`Cette page est ouverte dans une appli (Instagram, Facebook…), qui ne permet pas l'ajout à l'écran d'accueil.`,
+    `Touche ${pic("pointsH")} ou ${pic("points")} puis « Ouvrir dans ${a.ios ? "Safari" : "le navigateur"} ».`, `Reviens ici : le mode d'emploi s'adaptera à ton navigateur.`];
+  if (a.ios && a.nav !== "safari" && a.ancienIOS) return [`Sur ta version d'iOS, seul Safari sait ajouter un site à l'écran d'accueil.`, `Ouvre cette page dans Safari, puis reviens ici.`];
+  if (a.ios && a.nav === "safari") return [
+    `Touche le bouton Partager ${pic("partager")} de Safari : en bas de l'écran sur iPhone, en haut sur iPad. S'il n'apparaît pas, il est dans le menu ${pic("pointsH")} à côté de l'adresse.`,
+    `Fais défiler et choisis « Sur l'écran d'accueil » ${pic("ajouter")} (selon la version : « Ajouter à l'écran d'accueil », parfois sous « Plus »).`,
+    `Touche « Ajouter » en haut à droite. Pépin rejoint tes applis.`];
+  if (a.ios) return [
+    a.nav === "chrome" ? `Touche le bouton Partager ${pic("partager")} à droite de la barre d'adresse.` : `Ouvre le menu ${pic("menu")} ou ${pic("pointsH")} du navigateur, puis « Partager » ${pic("partager")}.`,
+    `Choisis « Sur l'écran d'accueil » (ou « Ajouter à l'écran d'accueil ») ${pic("ajouter")}.`,
+    `Touche « Ajouter ». Pépin rejoint tes applis.`];
+  if (a.nav === "samsung") return [`Touche le menu ${pic("menu")} en bas à droite.`, `Choisis « Ajouter la page à », puis « Écran d'accueil ».`, `Confirme avec « Ajouter ».`];
+  if (a.nav === "firefox") return [`Touche le menu ${pic("points")} (en haut ou en bas à droite).`, `Choisis « Ajouter à l'écran d'accueil » (ou « Installer »).`, `Confirme : l'icône apparaît avec tes applis.`];
+  if (a.nav === "opera") return [`Touche le menu ${pic("points")} en haut à droite.`, `Choisis « Ajouter à… », puis « Écran d'accueil ».`, `Confirme avec « Ajouter ».`];
+  if (a.nav === "edge") return [`Touche le menu ${pic("menu")} en bas de l'écran.`, `Choisis « Ajouter au téléphone » (ou « Ajouter à l'écran d'accueil »).`, `Confirme avec « Installer ».`];
+  return [`Touche le menu ${pic("points")} en haut à droite de Chrome.`, `Choisis « Ajouter à l'écran d'accueil » ou « Installer l'application ».`, `Confirme avec « Installer ».`];
+}
+function aideInstall(){
+  const a = appareil();
+  const autres = `<details class="autres"><summary>Sur un autre appareil</summary><dl>
+    <dt>iPhone, iPad (Safari)</dt><dd>Partager ${pic("partager")} → « Sur l'écran d'accueil » → Ajouter.</dd>
+    <dt>iPhone, iPad (Chrome, Edge, Firefox ; iOS 16.4 ou plus)</dt><dd>Partager ${pic("partager")} → « Sur l'écran d'accueil ».</dd>
+    <dt>Android (Chrome, Edge)</dt><dd>Bouton « Installer » de Pampre, ou menu ${pic("points")} → « Ajouter à l'écran d'accueil ».</dd>
+    <dt>Android (Samsung Internet)</dt><dd>Menu ${pic("menu")} → « Ajouter la page à » → « Écran d'accueil ».</dd>
+    <dt>Android (Firefox)</dt><dd>Menu ${pic("points")} → « Ajouter à l'écran d'accueil ».</dd></dl></details>`;
+  const m = h(`<div class="modal-bg"><div class="modal installer" role="dialog" aria-modal="true" aria-labelledby="inst-titre">
+    <h3 id="inst-titre">Pampre sur ton écran d'accueil</h3>
+    <p style="color:var(--muted)">Une icône comme une vraie appli : Pampre s'ouvre en plein écran, sans barre d'adresse, et tes révisions sont à un geste. Rien à télécharger depuis un store, ta progression reste la même.</p>
+    <ol class="etapes">${etapesInstall(a).map(e => `<li><span>${e}</span></li>`).join("")}</ol>${autres}
+    <div class="row-btns"><button class="btn" data-a="ok">Compris</button></div></div></div>`);
+  const avant = document.activeElement;
+  const fermer = () => { document.removeEventListener("keydown", echap, true); m.remove(); majCalques(); if (avant?.isConnected) avant.focus({preventScroll:true}); };
+  const echap = e => { if (e.key === "Escape") { e.stopPropagation(); fermer(); } };
+  document.addEventListener("keydown", echap, true);
+  m.addEventListener("click", e => { if (e.target === m || e.target.closest('[data-a="ok"]')) fermer(); });
+  document.body.appendChild(m); majCalques(); m.querySelector('[data-a="ok"]').focus();
+}
+async function installer(){
+  if (!INVITE_INSTALL) return aideInstall();
+  const invite = INVITE_INSTALL; INVITE_INSTALL = null;   // une invite ne sert qu'une fois
+  try { await invite.prompt(); const { outcome } = await invite.userChoice; if (outcome !== "accepted") document.querySelectorAll("[data-installer]").forEach(b => b.textContent = b.dataset.aide); }
+  catch(e) { aideInstall(); }
+}
+function panneauInstall(){
+  const p = h(`<div class="panel daily installer"><div class="ico">${I.phone}</div><div class="txt"><h3>Pampre comme une appli</h3><p>Ajoute Pépin à ton écran d'accueil : une icône, le plein écran, ta série à portée de pouce.</p><button class="btn small" data-installer data-aide="Comment faire ?">${INVITE_INSTALL ? "Installer" : "Comment faire ?"}</button></div><button class="iconbtn" data-plus-tard aria-label="Plus tard">${I.x}</button></div>`);
+  p.querySelector("[data-installer]").onclick = installer;
+  p.querySelector("[data-plus-tard]").onclick = () => { ST.installPlusTard = todayStr(); save(); p.remove(); toast(I.phone, "D'accord, plus tard", "Tu le retrouveras dans Profil."); };
+  return p;
+}
+if (!LMS && "serviceWorker" in navigator && /^https?:$/.test(location.protocol)) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 
 /* ---------------- texte enrichi + glossaire ---------------- */
 let GL_INDEX = {};
@@ -1388,6 +1509,7 @@ function viewHome(){
   const daily = h(`<div class="panel daily ${done?"done":""}"><div class="ico">${done?I.check:I.star}</div><div class="txt"><h3>Défi du jour</h3><p>${done ? "Relevé ! Reviens demain pour un nouveau défi." : "6 questions de révision, dont une étiquette et une carte. +30 XP."}</p></div><button class="btn ${done?"ghost":"gold"} small" data-daily>${done?"Rejouer":"Jouer"}</button></div>`);
   daily.querySelector("[data-daily]").onclick = startDaily;
   el.appendChild(daily);
+  if (proposerInstall()) el.appendChild(panneauInstall());
 
   const unitColors = [["var(--grape-btn)","var(--grape-deep)"],["#2E7D8C","#1D5864"],["#3F7A00","#2B5500"],["#A7660F","#7A4A06"],["#6B4FA0","#4A3474"],["#B5475E","#83283E"]];
   let currentFound = false;
@@ -1622,6 +1744,14 @@ function viewProfil(){
   const theme = h(`<div style="margin-bottom:26px"><h2 class="sec-title">Apparence</h2><div class="seg" role="group" aria-label="Thème">${[["auto","Auto"],["light","Clair"],["dark","Sombre"]].map(([k, n]) => `<button data-th="${k}" aria-pressed="${(ST.theme||"auto")===k}">${n}</button>`).join("")}</div></div>`);
   theme.onclick = e => { const b = e.target.closest("[data-th]"); if (!b) return; ST.theme = b.dataset.th === "auto" ? null : b.dataset.th; applyTheme(); save(); render(); };
   el.appendChild(theme);
+  const ap = appareil();
+  if (ap.mobile && !LMS) {
+    const inst = h(`<div style="margin-bottom:26px"><h2 class="sec-title">Appli sur l'écran d'accueil</h2>${ap.installe
+      ? `<p style="color:var(--muted);font-size:14px">C'est fait : tu utilises Pampre comme une appli.</p>`
+      : `<p style="color:var(--muted);font-size:14px;margin-bottom:10px">Une icône sur ton écran d'accueil, Pampre en plein écran, même hors connexion.</p><button class="btn small" data-installer data-aide="Comment faire ?">${INVITE_INSTALL ? "Installer" : "Comment faire ?"}</button>`}</div>`);
+    inst.querySelector("[data-installer]")?.addEventListener("click", installer);
+    el.appendChild(inst);
+  }
 
   const sv = h(`<div class="panel"><h2 class="sec-title">Ta sauvegarde</h2><p style="font-size:14px;color:var(--muted)">Ta progression est enregistrée dans ce navigateur, sur cet appareil. Pour la transférer sur un autre appareil, copie ce code puis colle-le là-bas dans le champ ci-dessous.</p>
     <textarea class="save" id="save-out" readonly aria-label="Code de sauvegarde"></textarea>
@@ -1672,7 +1802,7 @@ async function boot(){
   }
   initFonds();
   GL_INDEX = Object.fromEntries(Object.keys(D.glossaire.termes).map(k => [k.toLowerCase(), k]));
-  ST = loadState(); applyTheme();
+  ST = loadState(); applyTheme(); if (LMS) save();   // premier état remonté au LMS (progression, score)
   try { render(); }
   catch(err) {
     // dernier filet : on ne laisse jamais le joueur bloqué sur l'écran de chargement
